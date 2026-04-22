@@ -1,4 +1,6 @@
 import { notFound } from 'next/navigation';
+
+import { ComingSoon } from '@/components/ComingSoon';
 import { isLocale } from '@/lib/i18n';
 
 export default async function HomePage({
@@ -8,9 +10,5 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  return (
-    <main>
-      <h1>Home — {locale}</h1>
-    </main>
-  );
+  return <ComingSoon locale={locale} />;
 }
