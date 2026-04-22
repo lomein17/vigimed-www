@@ -32,3 +32,9 @@ export const localeConfig: Record<Locale, {
 export function isLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }
+
+const localeShapePattern = /^[a-z]{2}(-[a-z]{2,3})?$/i;
+
+export function isLocaleShaped(value: string): boolean {
+  return localeShapePattern.test(value);
+}
