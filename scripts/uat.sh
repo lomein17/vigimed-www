@@ -98,5 +98,37 @@ section "Non-locale paths preserve path, end in 404"
 check_followed "/about"          "404" "/about preserved → 404"
 check_followed "/blog/some-post" "404" "/blog/some-post preserved → 404"
 
+section "Cookie persistence"
+
+COOKIE_JAR=/tmp/vm-cookies.txt
+rm -f "$COOKIE_JAR"
+
+# Visit us-en, should set cookie
+curl -s -o /dev/null -c "$COOKIE_JAR" "${CURL_HEADERS[@]}" "$BASE/us-en"
+if grep -q "vm-locale.*us-en" "$COOKIE_JAR" 2>/dev/null; then
+  ok "cookie set to us-en after /us-en visit"
+else
+  bad "cookie NOT set after /us-en visit"
+fi
+
+# Visit root with cookie, should redirect to /us-en (overrides any geolocation)
+loc=$(curl -s -o /dev/null -w "%{redirect_url}" -b "$COOKIE_JAR" "${CURL_HEADERS[@]}" "$BASE/")
+if [[ "$loc" == *"/us-en"* ]]; then
+  ok "root redirects to /us-en when cookie=us-en  [$loc]"
+else
+  bad "root redirected to $loc (expected /us-en)"
+fi
+
+# Wipe cookies, visit root fresh — should fall back to geolocation default
+rm -f "$COOKIE_JAR"
+code=$(curl -s -o /dev/null -w "%{http_code}" "${CURL_HEADERS[@]}" "$BASE/")
+if [[ "$code" == "308" ]]; then
+  ok "fresh root (no cookie) returns 308 redirect"
+else
+  bad "fresh root returned $code (expected 308)"
+fi
+
+rm -f "$COOKIE_JAR"
+
 printf "\npassed: %d, failed: %d\n" "$pass" "$fail"
 exit $(( fail > 0 ? 1 : 0 ))
