@@ -8,7 +8,7 @@
 # Env vars:
 #   BASE    Base URL of the target deployment. Defaults to http://localhost:3000.
 #   BYPASS  Optional Vercel protection bypass secret. When set, sent as
-#           x-vercel-protection-bypass alongside x-vercel-set-bypass-cookie=true.
+#           x-vercel-protection-bypass on every request.
 
 set -u
 
@@ -18,7 +18,6 @@ BYPASS="${BYPASS:-}"
 CURL_HEADERS=()
 if [[ -n "$BYPASS" ]]; then
   CURL_HEADERS+=(-H "x-vercel-protection-bypass: $BYPASS")
-  CURL_HEADERS+=(-H "x-vercel-set-bypass-cookie: true")
 fi
 
 pass=0
