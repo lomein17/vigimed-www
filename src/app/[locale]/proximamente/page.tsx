@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
 
+import { ComingSoon } from '@/components/ComingSoon';
+
 export default async function ProximamentePage({
   params,
 }: {
@@ -7,9 +9,5 @@ export default async function ProximamentePage({
 }) {
   const { locale } = await params;
   if (locale !== 'mx-es') notFound();
-  return (
-    <main>
-      <h1>Próximamente (mx-es)</h1>
-    </main>
-  );
+  return <ComingSoon locale="mx-es" />;
 }
