@@ -28,11 +28,34 @@ bad()  { printf "  \033[31m✗\033[0m %s\n" "$1"; fail=$((fail+1)); }
 
 section() { printf "\n\033[1m%s\033[0m\n" "$1"; }
 
+# Local pre-flight: runs regardless of curl target. The whole point of the
+# gate is to block pushes with broken builds or lint findings before they
+# reach either localhost or a preview. Fails fast; does not consume the
+# curl pass/fail counters so the final "passed: N, failed: N" summary
+# continues to report the 20-check contract.
+section "Pre-flight (build + lint)"
+
+if npm run build >/tmp/vm-uat-build.log 2>&1; then
+  printf "  \033[32m✓\033[0m npm run build\n"
+else
+  printf "  \033[31m✗\033[0m npm run build (see /tmp/vm-uat-build.log)\n"
+  tail -20 /tmp/vm-uat-build.log
+  exit 1
+fi
+
+if npm run lint >/tmp/vm-uat-lint.log 2>&1; then
+  printf "  \033[32m✓\033[0m npm run lint\n"
+else
+  printf "  \033[31m✗\033[0m npm run lint (see /tmp/vm-uat-lint.log)\n"
+  tail -20 /tmp/vm-uat-lint.log
+  exit 1
+fi
+
 # check_status <path> <expected_status> <description>
 check_status() {
   local path="$1" expected="$2" desc="$3"
   local status
-  status=$(curl -s -o /dev/null -w "%{http_code}" "${CURL_HEADERS[@]}" "$BASE$path")
+  status=$(curl -s -o /dev/null -w "%{http_code}" ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE$path")
   if [[ "$status" == "$expected" ]]; then
     ok "$desc  [$path]  $status"
   else
@@ -44,7 +67,7 @@ check_status() {
 check_redirect() {
   local path="$1" loc_re="$2" desc="$3"
   local response status location
-  response=$(curl -sI "${CURL_HEADERS[@]}" "$BASE$path")
+  response=$(curl -sI ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE$path")
   status=$(printf "%s" "$response" | awk 'NR==1 {print $2}' | tr -d '\r')
   location=$(printf "%s" "$response" | awk 'tolower($1)=="location:" {print $2}' | tr -d '\r')
   if [[ ( "$status" == "308" || "$status" == "307" ) && "$location" =~ $loc_re ]]; then
@@ -58,7 +81,7 @@ check_redirect() {
 check_followed() {
   local path="$1" expected="$2" desc="$3"
   local status
-  status=$(curl -s -L -o /dev/null -w "%{http_code}" "${CURL_HEADERS[@]}" "$BASE$path")
+  status=$(curl -s -L -o /dev/null -w "%{http_code}" ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE$path")
   if [[ "$status" == "$expected" ]]; then
     ok "$desc  [$path]  final $status"
   else
@@ -103,7 +126,7 @@ COOKIE_JAR=/tmp/vm-cookies.txt
 rm -f "$COOKIE_JAR"
 
 # Visit us-en, should set cookie
-curl -s -o /dev/null -c "$COOKIE_JAR" "${CURL_HEADERS[@]}" "$BASE/us-en"
+curl -s -o /dev/null -c "$COOKIE_JAR" ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE/us-en"
 if grep -q "vm-locale.*us-en" "$COOKIE_JAR" 2>/dev/null; then
   ok "cookie set to us-en after /us-en visit"
 else
@@ -111,7 +134,7 @@ else
 fi
 
 # Visit root with cookie, should redirect to /us-en (overrides any geolocation)
-loc=$(curl -s -o /dev/null -w "%{redirect_url}" -b "$COOKIE_JAR" "${CURL_HEADERS[@]}" "$BASE/")
+loc=$(curl -s -o /dev/null -w "%{redirect_url}" -b "$COOKIE_JAR" ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE/")
 if [[ "$loc" == *"/us-en"* ]]; then
   ok "root redirects to /us-en when cookie=us-en  [$loc]"
 else
@@ -120,7 +143,7 @@ fi
 
 # Wipe cookies, visit root fresh — should fall back to geolocation default
 rm -f "$COOKIE_JAR"
-code=$(curl -s -o /dev/null -w "%{http_code}" "${CURL_HEADERS[@]}" "$BASE/")
+code=$(curl -s -o /dev/null -w "%{http_code}" ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE/")
 if [[ "$code" == "308" ]]; then
   ok "fresh root (no cookie) returns 308 redirect"
 else
