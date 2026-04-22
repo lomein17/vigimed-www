@@ -29,7 +29,7 @@ export function ComingSoon({ locale }: { locale: Locale }) {
       <main className="flex-1 min-w-0 bg-white flex items-center justify-center px-6 md:px-12 py-16 md:py-24">
         <div className="w-full min-w-0 max-w-[680px] text-center">
           <h2 className="text-h2 font-display text-text-primary break-words">{comingSoon.heading}</h2>
-          <div className="h-[3px] w-16 mx-auto my-6 bg-amber-gradient" />
+          <div className="h-[3px] w-16 mx-auto my-6 bg-brand-gradient" />
         </div>
       </main>
 
