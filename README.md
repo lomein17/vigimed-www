@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# vigimed-www
 
-## Getting Started
+Marketing site for [vigimed.ai](https://vigimed.ai). Next.js (App Router), custom path-based i18n (`mx-es`, `us-en`), Tailwind CSS.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Dev server runs at http://localhost:3000. The root path redirects to `/us-en` by default; set the `vm-locale` cookie or visit `/mx-es` directly to see the Mexican locale.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Hosted on Vercel as project `vigimed-www`.
+- Every pull request gets an auto-generated preview URL.
+- The `main` branch deploys to production at `vigimed.ai`.
 
-## Learn More
+## Repo layout
 
-To learn more about Next.js, take a look at the following resources:
+- `proxy.ts` — root request handler (locale detection and redirects). Next 16 renamed `middleware` to `proxy`; same functionality.
+- `src/app/[locale]/` — locale-scoped routes. Pages enforce locale-slug pairing via `notFound()`.
+- `src/content/{locale}/` — typed copy modules per section.
+- `src/lib/i18n.ts` — single source of truth for locales, default locale, and per-locale config.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Spec and project tracking
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Implementation spec: Linear doc slug `c3ea98927c84` (Website project).
+- Issues: Linear team VM, project Website.
 
-## Deploy on Vercel
+## Conventions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [CLAUDE.md](./CLAUDE.md) for the full set of behavioral rules (Spanish/English usage, currency defaults, no em dashes, link conventions, etc.).

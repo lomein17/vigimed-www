@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Cowork session artifacts (machine-local, do not commit)
+.claude/
+vm-engineering-cowork-instructions.md
