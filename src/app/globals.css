@@ -12,9 +12,9 @@
   --color-navy-700: #0F1D35;
 
   /* ---------- Colors: amber accent (§4.1) ---------- */
-  --color-amber-500: #D4940A;
-  --color-amber-400: #E8A912;
-  --color-amber-300: #F5C842;
+  --color-amber-500: #20A2E2;
+  --color-amber-400: #28AFED;
+  --color-amber-300: #2FBBF7;
 
   /* ---------- Colors: neutrals (§4.1) ---------- */
   --color-gray-50: #F5F5F7;
@@ -111,8 +111,8 @@
 
 :root {
   /* Brand gradients (§4.1, verbatim) */
-  --amber-gradient: linear-gradient(90deg, #D4940A 0%, #F5C842 50%, #D4940A 100%);
-  --amber-pulse: linear-gradient(90deg, transparent 0%, #D4940A 20%, #F5C842 50%, #D4940A 80%, transparent 100%);
+  --amber-gradient: linear-gradient(90deg, #20A2E2 0%, #2FBBF7 50%, #20A2E2 100%);
+  --amber-pulse: linear-gradient(90deg, transparent 0%, #20A2E2 20%, #2FBBF7 50%, #20A2E2 80%, transparent 100%);
 
   /* Responsive spacing (§4.4), mobile baseline */
   --site-gutter: 1rem;
