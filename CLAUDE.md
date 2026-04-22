@@ -29,9 +29,10 @@ Marketing site for vigimed.ai. Next.js, App Router, custom path-based i18n, depl
 
 ## Git
 
-- `main` is production. Branch naming: `vm-XXX-short-description`. PRs are required; pushing direct to `main` is forbidden.
-- Vercel auto-creates a preview deployment per PR. `main` deploys to production.
-- Merge promptly. A PR that passes UAT must be merged same-day. Do not stack dependent work on an unmerged branch.
+- `main` is production. Trunk-based: push direct to `main` once local checks pass (TSC clean, lint clean, intended UAT run locally or against a branch preview).
+- PRs are optional. Use a feature branch named `vm-XXX-short-description` and open a PR when you want a Vercel preview URL for visual UAT on risky or visually-significant changes. Otherwise, commit direct to `main`.
+- Vercel auto-creates a preview deployment per branch and promotes `main` to production.
+- Same-day discipline still applies. A branch that passes UAT must be merged same-day; do not stack dependent work on an unmerged branch.
 
 ## Do not
 
@@ -40,7 +41,7 @@ Marketing site for vigimed.ai. Next.js, App Router, custom path-based i18n, depl
 - Hardcode country lists, currency lists, or locale codes anywhere outside `src/lib/i18n.ts`. Always import from `locales` / `localeConfig`.
 - Create an `APP_VERSION` file or constant; this repo intentionally has no version tracking.
 - Move Linear issues. Cowork owns Linear state.
-- Let a Done Linear issue sit with an open PR overnight. Either merge or reopen the issue.
+- Let a Done Linear issue sit with an open PR or unmerged branch overnight. Either land it or reopen the issue.
 
 ## Linear
 
