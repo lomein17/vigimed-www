@@ -31,6 +31,7 @@ Marketing site for vigimed.ai. Next.js, App Router, custom path-based i18n, depl
 
 - `main` is production. Branch naming: `vm-XXX-short-description`. PRs are required; pushing direct to `main` is forbidden.
 - Vercel auto-creates a preview deployment per PR. `main` deploys to production.
+- Merge promptly. A PR that passes UAT must be merged same-day. Do not stack dependent work on an unmerged branch.
 
 ## Do not
 
@@ -39,6 +40,7 @@ Marketing site for vigimed.ai. Next.js, App Router, custom path-based i18n, depl
 - Hardcode country lists, currency lists, or locale codes anywhere outside `src/lib/i18n.ts`. Always import from `locales` / `localeConfig`.
 - Create an `APP_VERSION` file or constant; this repo intentionally has no version tracking.
 - Move Linear issues. Cowork owns Linear state.
+- Let a Done Linear issue sit with an open PR overnight. Either merge or reopen the issue.
 
 ## Linear
 
