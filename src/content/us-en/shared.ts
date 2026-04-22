@@ -4,8 +4,6 @@ export interface SharedContent {
   tagline: string;
   comingSoon: {
     heading: string;
-    body: string;
-    cta: string;
   };
 }
 
@@ -15,7 +13,5 @@ export const sharedContent: SharedContent = {
   tagline: 'Compliance you can see.',
   comingSoon: {
     heading: 'Coming Soon',
-    body: "In development. Request a demo to see what's live today.",
-    cta: 'Back to home',
   },
 };

@@ -4,8 +4,6 @@ export interface SharedContent {
   tagline: string;
   comingSoon: {
     heading: string;
-    body: string;
-    cta: string;
   };
 }
 
@@ -15,7 +13,5 @@ export const sharedContent: SharedContent = {
   tagline: 'Cumplimiento que se ve.',
   comingSoon: {
     heading: 'Próximamente',
-    body: 'En desarrollo. Solicita una demo para ver lo que ya está disponible.',
-    cta: 'Volver al inicio',
   },
 };
