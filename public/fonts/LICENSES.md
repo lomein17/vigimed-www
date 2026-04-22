@@ -1,49 +1,39 @@
 # Font Licenses
 
-Fonts in this directory are self-hosted candidates for the vigimed.ai marketing
-site (spec c3ea98927c84 §4.2). Pre-pruning bundle is three families; after
-selection, two will be removed. Licenses and sources are recorded here so the
-decision is auditable.
+Fonts in this directory are the self-hosted production typography for the
+vigimed.ai marketing site (spec c3ea98927c84 §4.2). Ship is Fraunces
+(display) + Inter (body / UI). Both are SIL OFL 1.1 and bundled as Latin
+subset variable WOFF2.
 
-## DM Sans
+## Fraunces
 
-- Files: `dm-sans/dm-sans-variable.woff2`
+- Files: `fraunces/fraunces-variable.woff2`
+- Role: Display family. Drives h1 through h3, hero headlines, and large
+  numeric data callouts. Bound to `--font-display` in `globals.css`.
 - License: SIL Open Font License 1.1
 - License URL: https://openfontlicense.org
-- Source: Google Fonts (fonts.googleapis.com CSS2 endpoint, served from
-  fonts.gstatic.com). Specifically the `latin` subset WOFF2 of DM Sans v17.
-- Notes: This file is a variable-weight font covering the 100 to 1000 weight
-  axis. We declare it as weight range `400 700` in next/font/local. The `latin`
-  subset includes Latin-1 Supplement (U+0000-00FF), which covers the Spanish
-  accented characters used on this site (ñ, á, é, í, ó, ú). Latin Extended
-  (U+0100+) is not required for Spanish or US English.
+- Source: Google Fonts CSS2 endpoint (fonts.googleapis.com), `latin`
+  subset WOFF2 of Fraunces v38 (variable weight + optical size axes).
+- Publisher: Undercase Type (Phaedra Charles, Flavia Zimbardi).
+- Notes: Selected as a free proxy for Tiempos Headline (a paid Klim Type
+  Foundry font). Fraunces is NOT a drop-in equivalent for Tiempos; it was
+  chosen for aesthetic similarity and OFL redistribution rights. If the
+  decision flips to license Tiempos Headline before v1 launch, the
+  licensed WOFF2 replaces this file and the `--font-display` binding in
+  `globals.css` changes accordingly.
 - Commercial use: permitted under OFL.
 
-## General Sans
+## Inter
 
-- Files: `general-sans/general-sans-400.woff2`, `general-sans/general-sans-700.woff2`
-- License: Fontshare Free Font EULA (FFL)
-- License URL: https://www.fontshare.com/terms
-- Source: Fontshare API (api.fontshare.com/v2/fonts/download/general-sans), ZIP
-  extracted, static Regular and Bold WOFF2 files copied.
-- Publisher: Indian Type Foundry (ITF).
-- Commercial use: permitted under FFL for web embedding, unlimited duration,
-  unlimited scale, any location. Redistribution of the font files as standalone
-  assets is prohibited; embedding them in a deployed website is the intended
-  use.
-
-## Satoshi
-
-- Files: `satoshi/satoshi-400.woff2`, `satoshi/satoshi-700.woff2`
-- License: Fontshare Free Font EULA (FFL)
-- License URL: https://www.fontshare.com/terms
-- Source: Fontshare API (api.fontshare.com/v2/fonts/download/satoshi), ZIP
-  extracted, static Regular and Bold WOFF2 files copied.
-- Publisher: Indian Type Foundry (ITF).
-- Commercial use: permitted under FFL. Same embedding-allowed / standalone
-  redistribution-prohibited terms as General Sans.
-
-## After font selection
-
-Once the winning family is chosen, delete the two losing directories and
-prune this file to the surviving license entry.
+- Files: `inter/inter-variable.woff2`
+- Role: Body / UI family. Drives body copy, buttons, nav, eyebrows, form
+  fields, footer, tabular numerals. Bound to `--font-body` and
+  `--font-ui` in `globals.css`.
+- License: SIL Open Font License 1.1
+- License URL: https://openfontlicense.org
+- Source: Google Fonts CSS2 endpoint (fonts.googleapis.com), `latin`
+  subset WOFF2 of Inter v20 (variable axis).
+- Publisher: Rasmus Andersson (rsms.me).
+- Notes: Variable-weight font file. Declared as weight range `400 700`
+  in `next/font/local`.
+- Commercial use: permitted under OFL.

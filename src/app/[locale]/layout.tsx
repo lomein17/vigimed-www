@@ -3,53 +3,36 @@ import localFont from 'next/font/local';
 import { isLocale, locales, localeConfig, type Locale } from '@/lib/i18n';
 import '../globals.css';
 
-const dmSans = localFont({
+// Site typography (spec c3ea98927c84 §4.2).
+// Fraunces drives display (h1 through h3, hero headlines, large numeric callouts).
+// Inter drives body, UI, eyebrows, buttons, nav, footer, tabular numerals.
+// Both are self-hosted variable WOFF2 (Latin subset), SIL OFL 1.1.
+// next/font/local preloads by default when the font is used in the root
+// layout; `display: 'swap'` avoids FOIT on slow connections.
+
+const fraunces = localFont({
   src: [
     {
-      path: '../../../public/fonts/dm-sans/dm-sans-variable.woff2',
+      path: '../../../public/fonts/fraunces/fraunces-variable.woff2',
       weight: '400 700',
       style: 'normal',
     },
   ],
-  variable: '--font-dm-sans-variable',
+  variable: '--font-fraunces-variable',
   display: 'swap',
-  fallback: ['system-ui', 'sans-serif'],
-  adjustFontFallback: 'Arial',
+  fallback: ['Georgia', 'serif'],
+  adjustFontFallback: 'Times New Roman',
 });
 
-const generalSans = localFont({
+const inter = localFont({
   src: [
     {
-      path: '../../../public/fonts/general-sans/general-sans-400.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../../public/fonts/general-sans/general-sans-700.woff2',
-      weight: '700',
+      path: '../../../public/fonts/inter/inter-variable.woff2',
+      weight: '400 700',
       style: 'normal',
     },
   ],
-  variable: '--font-general-sans-variable',
-  display: 'swap',
-  fallback: ['system-ui', 'sans-serif'],
-  adjustFontFallback: 'Arial',
-});
-
-const satoshi = localFont({
-  src: [
-    {
-      path: '../../../public/fonts/satoshi/satoshi-400.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../../public/fonts/satoshi/satoshi-700.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-satoshi-variable',
+  variable: '--font-inter-variable',
   display: 'swap',
   fallback: ['system-ui', 'sans-serif'],
   adjustFontFallback: 'Arial',
@@ -71,7 +54,7 @@ export default async function LocaleLayout({
     notFound();
   }
   const cfg = localeConfig[locale as Locale];
-  const fontVariables = `${dmSans.variable} ${generalSans.variable} ${satoshi.variable}`;
+  const fontVariables = `${fraunces.variable} ${inter.variable}`;
   return (
     <html lang={cfg.hreflang} className={fontVariables}>
       <body>{children}</body>

@@ -85,13 +85,24 @@
   --container-content: 1200px;
 }
 
-/* next/font/local variables are set on <body>; bind them into the Tailwind
- * font-family namespace via @theme inline so `font-dm-sans`, `font-general-sans`,
- * and `font-satoshi` utilities compile to the right stack. */
+/* next/font/local variables are set on <html> via the locale layout; bind them
+ * into the Tailwind font-family namespace via @theme inline.
+ *
+ * Semantic tokens used throughout the site:
+ *   --font-display : Fraunces   (h1-h3, hero, large data callouts)
+ *   --font-body    : Inter      (body copy, long-form text)
+ *   --font-ui      : Inter      (buttons, nav, eyebrows, form fields, tabular numerals)
+ *
+ * The raw family names (--font-fraunces, --font-inter) are also exposed so
+ * `font-fraunces` and `font-inter` utility classes remain available for
+ * edge cases, but prefer the semantic utilities (`font-display`,
+ * `font-body`, `font-ui`) everywhere else so the intent is obvious. */
 @theme inline {
-  --font-dm-sans: var(--font-dm-sans-variable);
-  --font-general-sans: var(--font-general-sans-variable);
-  --font-satoshi: var(--font-satoshi-variable);
+  --font-display: var(--font-fraunces-variable);
+  --font-body: var(--font-inter-variable);
+  --font-ui: var(--font-inter-variable);
+  --font-fraunces: var(--font-fraunces-variable);
+  --font-inter: var(--font-inter-variable);
 }
 
 /* =======================================================================
@@ -99,7 +110,7 @@
  * ======================================================================= */
 
 :root {
-  /* Brand gradients (§4.1) — verbatim */
+  /* Brand gradients (§4.1, verbatim) */
   --amber-gradient: linear-gradient(90deg, #D4940A 0%, #F5C842 50%, #D4940A 100%);
   --amber-pulse: linear-gradient(90deg, transparent 0%, #D4940A 20%, #F5C842 50%, #D4940A 80%, transparent 100%);
 
@@ -168,7 +179,25 @@
 }
 
 /* =======================================================================
- * Amber pulse animation (§4.3 — verbatim)
+ * Base typography defaults
+ * -----------------------------------------------------------------------
+ * Body copy defaults to Inter. Native heading tags default to Fraunces so
+ * markup written against plain h1-h6 lands on the display family without
+ * having to add `font-display` everywhere. Components that need a
+ * different family (e.g. a sans-serif hero subhead inside an otherwise
+ * serif section) override with the `font-body` / `font-ui` utility. */
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--color-text-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+/* =======================================================================
+ * Amber pulse animation (§4.3, verbatim)
  * ======================================================================= */
 
 @keyframes amberPulse {
