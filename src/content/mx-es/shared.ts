@@ -49,7 +49,6 @@ export const sharedContent: SharedContent = {
     copyright: '© VigiMed 2026',
     privacyLabel: 'Política de Privacidad',
   },
-  tagline: 'Cumplimiento que se ve.',
   comingSoon: {
     heading: 'Próximamente',
   },

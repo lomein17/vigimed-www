@@ -20,7 +20,6 @@ export interface SharedContent {
     copyright: string;
     privacyLabel: string;
   };
-  tagline: string;
   comingSoon: {
     heading: string;
   };
@@ -75,7 +74,6 @@ export const sharedContent: SharedContent = {
     copyright: '© VigiMed 2026',
     privacyLabel: 'Privacy Policy',
   },
-  tagline: 'Compliance you can see.',
   comingSoon: {
     heading: 'Coming Soon',
   },

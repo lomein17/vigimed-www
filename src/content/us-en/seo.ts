@@ -7,14 +7,12 @@ export interface PageSeo {
 
 export interface SeoContent {
   siteName: string;
-  tagline: string;
   organization: { name: string; url: string; logo: string };
   pages: Record<PageKey, PageSeo>;
 }
 
 export const seoContent: SeoContent = {
   siteName: 'VigiMed',
-  tagline: 'Compliance you can see.',
   organization: {
     name: 'VigiMed',
     url: SITE_URL,

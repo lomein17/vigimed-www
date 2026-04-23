@@ -75,7 +75,6 @@ export async function GET(req: Request) {
 
   const content = seoByLocale[localeParam];
   const title = content.pages[pageParam].title;
-  const tagline = content.tagline;
 
   const [fonts, logoDataUrl] = await Promise.all([loadFonts(origin), loadLogo(origin)]);
 
@@ -118,17 +117,6 @@ export async function GET(req: Request) {
             }}
           >
             {title}
-          </div>
-          <div
-            style={{
-              color: '#A0A8B8',
-              fontSize: 24,
-              lineHeight: 1.3,
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: 400,
-            }}
-          >
-            {tagline}
           </div>
         </div>
         <div

@@ -3,7 +3,6 @@ import type { SeoContent } from '@/content/us-en/seo';
 
 export const seoContent: SeoContent = {
   siteName: 'VigiMed',
-  tagline: 'Cumplimiento que se ve.',
   organization: {
     name: 'VigiMed',
     url: SITE_URL,
