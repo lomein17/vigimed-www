@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { ComingSoon } from '@/components/ComingSoon';
-import { isLocale } from '@/lib/i18n';
+import { Hero } from '@/components/sections/Hero';
+import { ProblemStatement } from '@/components/sections/ProblemStatement';
+import { SolutionOverview } from '@/components/sections/SolutionOverview';
+import { isLocale, type Locale } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/seo/constants';
 import { getPageMetadata } from '@/lib/seo/metadata';
 
@@ -37,7 +39,11 @@ export default async function HomePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
-      <ComingSoon locale={locale} />
+      <main>
+        <Hero locale={locale as Locale} />
+        <ProblemStatement locale={locale as Locale} />
+        <SolutionOverview locale={locale as Locale} />
+      </main>
     </>
   );
 }
