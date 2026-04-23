@@ -1,9 +1,15 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import localFont from 'next/font/local';
 import { isLocale, locales, localeConfig, type Locale } from '@/lib/i18n';
 import { Footer } from '@/components/layout/Footer';
 import { StickyNav } from '@/components/layout/StickyNav';
+import { SITE_URL } from '@/lib/seo/constants';
 import '../globals.css';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+};
 
 // Site typography (spec c3ea98927c84 §4.2).
 // Fraunces drives display (h1 through h3, hero headlines, large numeric callouts).

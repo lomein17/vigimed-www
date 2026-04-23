@@ -1,4 +1,18 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+
+import { isLocale } from '@/lib/i18n';
+import { getPageMetadata } from '@/lib/seo/metadata';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale) || locale !== 'mx-es') return {};
+  return getPageMetadata(locale, 'contact');
+}
 
 export default async function ContactoPage({
   params,

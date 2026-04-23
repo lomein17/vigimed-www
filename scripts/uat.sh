@@ -32,7 +32,7 @@ section() { printf "\n\033[1m%s\033[0m\n" "$1"; }
 # gate is to block pushes with broken builds or lint findings before they
 # reach either localhost or a preview. Fails fast; does not consume the
 # curl pass/fail counters so the final "passed: N, failed: N" summary
-# continues to report the 20-check contract.
+# continues to report the 23-check contract.
 section "Pre-flight (build + lint)"
 
 if npm run build >/tmp/vm-uat-build.log 2>&1; then
@@ -151,6 +151,36 @@ else
 fi
 
 rm -f "$COOKIE_JAR"
+
+section "SEO surfaces"
+
+# /sitemap.xml returns 200 and includes both locale prefixes
+sitemap_body=$(curl -s ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE/sitemap.xml")
+sitemap_status=$(curl -s -o /dev/null -w "%{http_code}" ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE/sitemap.xml")
+if [[ "$sitemap_status" == "200" ]] && printf "%s" "$sitemap_body" | grep -q "mx-es" && printf "%s" "$sitemap_body" | grep -q "us-en"; then
+  ok "sitemap.xml 200 and contains both locales"
+else
+  bad "sitemap.xml expected 200 + mx-es + us-en, got status $sitemap_status"
+fi
+
+# /robots.txt returns 200 and mentions the sitemap
+robots_body=$(curl -s ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE/robots.txt")
+robots_status=$(curl -s -o /dev/null -w "%{http_code}" ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE/robots.txt")
+if [[ "$robots_status" == "200" ]] && printf "%s" "$robots_body" | grep -qi "sitemap:"; then
+  ok "robots.txt 200 and advertises Sitemap:"
+else
+  bad "robots.txt expected 200 + Sitemap: line, got status $robots_status"
+fi
+
+# /api/og?locale=us-en&page=home returns image/png
+og_headers=$(curl -sI ${CURL_HEADERS[@]+"${CURL_HEADERS[@]}"} "$BASE/api/og?locale=us-en&page=home")
+og_status=$(printf "%s" "$og_headers" | awk 'NR==1 {print $2}' | tr -d '\r')
+og_ctype=$(printf "%s" "$og_headers" | awk 'tolower($1)=="content-type:" {print $2}' | tr -d '\r')
+if [[ "$og_status" == "200" && "$og_ctype" == image/png* ]]; then
+  ok "/api/og us-en home returns image/png  [$og_ctype]"
+else
+  bad "/api/og expected 200 + image/png, got status $og_status content-type $og_ctype"
+fi
 
 printf "\npassed: %d, failed: %d\n" "$pass" "$fail"
 exit $(( fail > 0 ? 1 : 0 ))

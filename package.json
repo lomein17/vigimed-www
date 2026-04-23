@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "og:fallbacks": "node scripts/og-fallbacks.mjs"
   },
   "dependencies": {
     "next": "16.2.4",
@@ -15,6 +16,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -24,6 +26,7 @@
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.4",
     "globals": "^17.5.0",
+    "satori": "^0.26.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
