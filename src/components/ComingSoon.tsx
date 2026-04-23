@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import { sharedContent as mxShared } from '@/content/mx-es/shared';
 import { sharedContent as usShared } from '@/content/us-en/shared';
 import { type Locale } from '@/lib/i18n';
@@ -15,17 +13,6 @@ export function ComingSoon({ locale }: { locale: Locale }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="h-[72px] bg-navy-800 flex items-center justify-start px-6 md:px-12">
-        <Image
-          src="/brand/vigimed-wordmark-on-dark.png"
-          alt="VigiMed"
-          width={400}
-          height={132}
-          priority
-          className="w-[144px] h-auto"
-        />
-      </header>
-
       <main className="flex-1 min-w-0 bg-white flex items-center justify-center px-6 md:px-12 py-16 md:py-24">
         <div className="w-full min-w-0 max-w-[680px] text-center">
           <h2 className="text-h2 font-display text-text-primary break-words">{comingSoon.heading}</h2>

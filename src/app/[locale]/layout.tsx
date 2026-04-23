@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import localFont from 'next/font/local';
 import { isLocale, locales, localeConfig, type Locale } from '@/lib/i18n';
+import { StickyNav } from '@/components/layout/StickyNav';
 import '../globals.css';
 
 // Site typography (spec c3ea98927c84 §4.2).
@@ -57,7 +58,10 @@ export default async function LocaleLayout({
   const fontVariables = `${fraunces.variable} ${inter.variable}`;
   return (
     <html lang={cfg.hreflang} className={fontVariables}>
-      <body>{children}</body>
+      <body>
+        <StickyNav locale={locale as Locale} />
+        {children}
+      </body>
     </html>
   );
 }
