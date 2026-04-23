@@ -1,22 +1,4 @@
-import type { Locale, RouteKey } from '@/lib/i18n';
-
-export interface SharedContent {
-  nav: {
-    primary: Array<{ label: string; route: RouteKey }>;
-    drawer: Array<{ label: string; route: RouteKey }>;
-    cta: { label: string; route: 'contact' };
-  };
-  localeSelector: {
-    currentLabel: string;
-    otherLabel: string;
-    otherLocale: Locale;
-  };
-  footer: { columns: Array<{ heading: string; links: Array<{ label: string; href: string }> }>; copyright: string };
-  tagline: string;
-  comingSoon: {
-    heading: string;
-  };
-}
+import type { SharedContent } from '@/content/us-en/shared';
 
 export const sharedContent: SharedContent = {
   nav: {
@@ -40,7 +22,33 @@ export const sharedContent: SharedContent = {
     otherLabel: 'Estados Unidos',
     otherLocale: 'us-en',
   },
-  footer: { columns: [], copyright: '' },
+  footer: {
+    columns: [
+      {
+        heading: 'Plataforma',
+        links: [
+          { label: 'Inicio', route: 'home' },
+          { label: 'Plataforma', route: 'platform' },
+          { label: 'Casos de Uso', route: 'useCases' },
+          { label: 'Por qué VigiMed', route: 'whyVigimed' },
+          { label: 'Cómo Funciona', route: 'howItWorks' },
+          { label: 'Contacto', route: 'contact' },
+        ],
+      },
+      {
+        heading: 'Empresa',
+        links: [{ label: 'Contacto', route: 'contact' }],
+      },
+      {
+        heading: 'Contacto',
+        links: [
+          { label: 'contacto@vigimed.ai', href: 'mailto:contacto@vigimed.ai' },
+        ],
+      },
+    ],
+    copyright: '© VigiMed 2026',
+    privacyLabel: 'Política de Privacidad',
+  },
   tagline: 'Cumplimiento que se ve.',
   comingSoon: {
     heading: 'Próximamente',

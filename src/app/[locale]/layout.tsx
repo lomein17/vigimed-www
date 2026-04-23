@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import localFont from 'next/font/local';
 import { isLocale, locales, localeConfig, type Locale } from '@/lib/i18n';
+import { Footer } from '@/components/layout/Footer';
 import { StickyNav } from '@/components/layout/StickyNav';
 import '../globals.css';
 
@@ -61,6 +62,7 @@ export default async function LocaleLayout({
       <body>
         <StickyNav locale={locale as Locale} />
         {children}
+        <Footer locale={locale as Locale} />
       </body>
     </html>
   );

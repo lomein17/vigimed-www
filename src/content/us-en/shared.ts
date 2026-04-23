@@ -1,5 +1,9 @@
 import type { Locale, RouteKey } from '@/lib/i18n';
 
+export type FooterLink =
+  | { label: string; href: string; external?: boolean }
+  | { label: string; route: RouteKey };
+
 export interface SharedContent {
   nav: {
     primary: Array<{ label: string; route: RouteKey }>;
@@ -11,7 +15,11 @@ export interface SharedContent {
     otherLabel: string;
     otherLocale: Locale;
   };
-  footer: { columns: Array<{ heading: string; links: Array<{ label: string; href: string }> }>; copyright: string };
+  footer: {
+    columns: Array<{ heading: string; links: FooterLink[] }>;
+    copyright: string;
+    privacyLabel: string;
+  };
   tagline: string;
   comingSoon: {
     heading: string;
@@ -40,7 +48,33 @@ export const sharedContent: SharedContent = {
     otherLabel: 'Mexico',
     otherLocale: 'mx-es',
   },
-  footer: { columns: [], copyright: '' },
+  footer: {
+    columns: [
+      {
+        heading: 'Platform',
+        links: [
+          { label: 'Home', route: 'home' },
+          { label: 'Platform', route: 'platform' },
+          { label: 'Use Cases', route: 'useCases' },
+          { label: 'Why VigiMed', route: 'whyVigimed' },
+          { label: 'How It Works', route: 'howItWorks' },
+          { label: 'Contact', route: 'contact' },
+        ],
+      },
+      {
+        heading: 'Company',
+        links: [{ label: 'Contact', route: 'contact' }],
+      },
+      {
+        heading: 'Contact',
+        links: [
+          { label: 'contact@vigimed.ai', href: 'mailto:contact@vigimed.ai' },
+        ],
+      },
+    ],
+    copyright: '© VigiMed 2026',
+    privacyLabel: 'Privacy Policy',
+  },
   tagline: 'Compliance you can see.',
   comingSoon: {
     heading: 'Coming Soon',
