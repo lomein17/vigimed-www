@@ -21,6 +21,18 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const PUBLIC_DIR = join(ROOT, 'public');
 
+/**
+ * Contract with `src/content/{locale}/seo.ts`:
+ * This is a plain Node .mjs script with no TS runtime, so copy is extracted
+ * by regex rather than by importing the module. The regexes assume the
+ * canonical shape: `tagline: '<single-quoted string>'` and
+ * `home: { title: '<single-quoted string>' ... }`. If `seo.ts` ever moves to
+ * template literals, double quotes, a computed tagline, or a differently
+ * nested structure, update the regexes below — or add a TS loader and switch
+ * to a real import. A miss throws so failures are loud; after editing either
+ * this script or `seo.ts`, re-run `npm run og:fallbacks` and confirm
+ * `public/og-default-*.png` regenerated as expected.
+ */
 async function loadSeo(locale) {
   const file = join(ROOT, 'src', 'content', locale, 'seo.ts');
   const text = await readFile(file, 'utf8');

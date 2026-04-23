@@ -37,3 +37,39 @@ subset variable WOFF2.
 - Notes: Variable-weight font file. Declared as weight range `400 700`
   in `next/font/local`.
 - Commercial use: permitted under OFL.
+
+## Fraunces (OG subset)
+
+- Files: `og-fonts/fraunces-600.woff`
+- Role: Static subset used only by the dynamic OG image route
+  (`src/app/api/og/route.tsx`) and the fallback PNG generator
+  (`scripts/og-fallbacks.mjs`). Not served to site visitors; satori
+  cannot parse variable WOFF2, so this .woff subset exists specifically
+  for the OG pipeline.
+- License: SIL Open Font License 1.1
+- License URL: https://openfontlicense.org
+- Source: `@fontsource/fraunces` static subset (Latin, weight 600 normal).
+- Publisher: Undercase Type (Phaedra Charles, Flavia Zimbardi).
+- Notes: The variable WOFF2 under `fraunces/` is the site-wide display
+  file; satori / opentype.js cannot parse its fvar table or WOFF2
+  compression, so a static single-weight .woff subset is the pragmatic
+  equivalent for OG rendering.
+- Commercial use: permitted under OFL.
+
+## Inter (OG subset)
+
+- Files: `og-fonts/inter-400.woff`
+- Role: Static subset used only by the dynamic OG image route
+  (`src/app/api/og/route.tsx`) and the fallback PNG generator
+  (`scripts/og-fallbacks.mjs`). Not served to site visitors; satori
+  cannot parse variable WOFF2, so this .woff subset exists specifically
+  for the OG pipeline.
+- License: SIL Open Font License 1.1
+- License URL: https://openfontlicense.org
+- Source: `@fontsource/inter` static subset (Latin, weight 400 normal).
+- Publisher: Rasmus Andersson (rsms.me).
+- Notes: The variable WOFF2 under `inter/` is the site-wide body file;
+  satori / opentype.js cannot parse its fvar table or WOFF2 compression,
+  so a static single-weight .woff subset is the pragmatic equivalent for
+  OG rendering.
+- Commercial use: permitted under OFL.
