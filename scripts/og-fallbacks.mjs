@@ -28,7 +28,7 @@ const PUBLIC_DIR = join(ROOT, 'public');
  * canonical shape: `tagline: '<single-quoted string>'` and
  * `home: { title: '<single-quoted string>' ... }`. If `seo.ts` ever moves to
  * template literals, double quotes, a computed tagline, or a differently
- * nested structure, update the regexes below — or add a TS loader and switch
+ * nested structure, update the regexes below, or add a TS loader and switch
  * to a real import. A miss throws so failures are loud; after editing either
  * this script or `seo.ts`, re-run `npm run og:fallbacks` and confirm
  * `public/og-default-*.png` regenerated as expected.
