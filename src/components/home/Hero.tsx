@@ -40,7 +40,7 @@ export function Hero({ locale }: { locale: Locale }) {
         }}
       />
 
-      <div className="relative z-10 max-w-content mx-auto px-gutter py-section">
+      <div className="relative z-10 w-full px-gutter py-section">
         <div className="flex flex-col gap-6 justify-center items-start">
           <p
             className="font-ui"
@@ -56,7 +56,7 @@ export function Hero({ locale }: { locale: Locale }) {
             {hero.eyebrow}
           </p>
 
-          <div className="max-w-[1000px]">
+          <div className="max-w-[1100px]">
             <h1
               id="hero-headline"
               className="text-text-on-dark text-[2.5rem] md:text-[3rem] lg:text-[3.75rem]"
@@ -72,7 +72,7 @@ export function Hero({ locale }: { locale: Locale }) {
             </h1>
           </div>
 
-          <div className="max-w-[580px]">
+          <div className="max-w-[640px]">
             <p
               className="font-body"
               style={{ color: '#D8DCE4', lineHeight: 1.6, fontSize: '1.0625rem' }}
