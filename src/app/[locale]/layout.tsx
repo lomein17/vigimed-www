@@ -9,25 +9,32 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 };
 
-// Site typography (spec c3ea98927c84 §4.2).
-// Fraunces drives display (h1 through h3, hero headlines, large numeric callouts).
+// Site typography (spec c3ea98927c84 §4.2, post-repositioning).
+// General Sans drives display (h1 through h3, hero headlines, large numeric
+// callouts) in operational-tech register; the prior editorial-authority
+// choice (Fraunces) has been retired.
 // Inter drives body, UI, eyebrows, buttons, nav, footer, tabular numerals.
-// Both are self-hosted variable WOFF2 (Latin subset), SIL OFL 1.1.
+// Both are self-hosted WOFF2 (Latin + Latin Extended), SIL OFL 1.1.
 // next/font/local preloads by default when the font is used in the root
 // layout; `display: 'swap'` avoids FOIT on slow connections.
 
-const fraunces = localFont({
+const generalSans = localFont({
   src: [
     {
-      path: '../../../public/fonts/fraunces/fraunces-variable.woff2',
-      weight: '400 700',
+      path: '../../../public/fonts/general-sans/general-sans-400.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/general-sans/general-sans-700.woff2',
+      weight: '700',
       style: 'normal',
     },
   ],
-  variable: '--font-fraunces-variable',
+  variable: '--font-general-sans',
   display: 'swap',
-  fallback: ['Georgia', 'serif'],
-  adjustFontFallback: 'Times New Roman',
+  fallback: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+  adjustFontFallback: 'Arial',
 });
 
 const inter = localFont({
@@ -60,7 +67,7 @@ export default async function LocaleLayout({
     notFound();
   }
   const cfg = localeConfig[locale as Locale];
-  const fontVariables = `${fraunces.variable} ${inter.variable}`;
+  const fontVariables = `${generalSans.variable} ${inter.variable}`;
   return (
     <html lang={cfg.hreflang} className={fontVariables}>
       <body>{children}</body>

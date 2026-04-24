@@ -1,27 +1,22 @@
 # Font Licenses
 
 Fonts in this directory are the self-hosted production typography for the
-vigimed.ai marketing site (spec c3ea98927c84 §4.2). Ship is Fraunces
+vigimed.ai marketing site (spec c3ea98927c84 §4.2). Ship is General Sans
 (display) + Inter (body / UI). Both are SIL OFL 1.1 and bundled as Latin
-subset variable WOFF2.
++ Latin Extended WOFF2 files.
 
-## Fraunces
+Full attribution lives in `/LICENSES.md` at the repo root. This file is
+a short local reference.
 
-- Files: `fraunces/fraunces-variable.woff2`
+## General Sans
+
+- Files: `general-sans/general-sans-400.woff2`,
+  `general-sans/general-sans-700.woff2`
 - Role: Display family. Drives h1 through h3, hero headlines, and large
   numeric data callouts. Bound to `--font-display` in `globals.css`.
 - License: SIL Open Font License 1.1
-- License URL: https://openfontlicense.org
-- Source: Google Fonts CSS2 endpoint (fonts.googleapis.com), `latin`
-  subset WOFF2 of Fraunces v38 (variable weight + optical size axes).
-- Publisher: Undercase Type (Phaedra Charles, Flavia Zimbardi).
-- Notes: Selected as a free proxy for Tiempos Headline (a paid Klim Type
-  Foundry font). Fraunces is NOT a drop-in equivalent for Tiempos; it was
-  chosen for aesthetic similarity and OFL redistribution rights. If the
-  decision flips to license Tiempos Headline before v1 launch, the
-  licensed WOFF2 replaces this file and the `--font-display` binding in
-  `globals.css` changes accordingly.
-- Commercial use: permitted under OFL.
+- Publisher: Indian Type Foundry, via Fontshare
+  (https://www.fontshare.com/fonts/general-sans).
 
 ## Inter
 
@@ -30,46 +25,4 @@ subset variable WOFF2.
   fields, footer, tabular numerals. Bound to `--font-body` and
   `--font-ui` in `globals.css`.
 - License: SIL Open Font License 1.1
-- License URL: https://openfontlicense.org
-- Source: Google Fonts CSS2 endpoint (fonts.googleapis.com), `latin`
-  subset WOFF2 of Inter v20 (variable axis).
-- Publisher: Rasmus Andersson (rsms.me).
-- Notes: Variable-weight font file. Declared as weight range `400 700`
-  in `next/font/local`.
-- Commercial use: permitted under OFL.
-
-## Fraunces (OG subset)
-
-- Files: `og-fonts/fraunces-600.woff`
-- Role: Static subset used only by the dynamic OG image route
-  (`src/app/api/og/route.tsx`) and the fallback PNG generator
-  (`scripts/og-fallbacks.mjs`). Not served to site visitors; satori
-  cannot parse variable WOFF2, so this .woff subset exists specifically
-  for the OG pipeline.
-- License: SIL Open Font License 1.1
-- License URL: https://openfontlicense.org
-- Source: `@fontsource/fraunces` static subset (Latin, weight 600 normal).
-- Publisher: Undercase Type (Phaedra Charles, Flavia Zimbardi).
-- Notes: The variable WOFF2 under `fraunces/` is the site-wide display
-  file; satori / opentype.js cannot parse its fvar table or WOFF2
-  compression, so a static single-weight .woff subset is the pragmatic
-  equivalent for OG rendering.
-- Commercial use: permitted under OFL.
-
-## Inter (OG subset)
-
-- Files: `og-fonts/inter-400.woff`
-- Role: Static subset used only by the dynamic OG image route
-  (`src/app/api/og/route.tsx`) and the fallback PNG generator
-  (`scripts/og-fallbacks.mjs`). Not served to site visitors; satori
-  cannot parse variable WOFF2, so this .woff subset exists specifically
-  for the OG pipeline.
-- License: SIL Open Font License 1.1
-- License URL: https://openfontlicense.org
-- Source: `@fontsource/inter` static subset (Latin, weight 400 normal).
-- Publisher: Rasmus Andersson (rsms.me).
-- Notes: The variable WOFF2 under `inter/` is the site-wide body file;
-  satori / opentype.js cannot parse its fvar table or WOFF2 compression,
-  so a static single-weight .woff subset is the pragmatic equivalent for
-  OG rendering.
-- Commercial use: permitted under OFL.
+- Publisher: Rasmus Andersson (rsms.me), distributed via Google Fonts.

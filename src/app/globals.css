@@ -89,20 +89,14 @@
  * into the Tailwind font-family namespace via @theme inline.
  *
  * Semantic tokens used throughout the site:
- *   --font-display : Fraunces   (h1-h3, hero, large data callouts)
- *   --font-body    : Inter      (body copy, long-form text)
- *   --font-ui      : Inter      (buttons, nav, eyebrows, form fields, tabular numerals)
- *
- * The raw family names (--font-fraunces, --font-inter) are also exposed so
- * `font-fraunces` and `font-inter` utility classes remain available for
- * edge cases, but prefer the semantic utilities (`font-display`,
- * `font-body`, `font-ui`) everywhere else so the intent is obvious. */
+ *   --font-display : General Sans (h1-h3, hero, large data callouts)
+ *   --font-body    : Inter        (body copy, long-form text)
+ *   --font-ui      : Inter        (buttons, nav, eyebrows, form fields, tabular numerals)
+ */
 @theme inline {
-  --font-display: var(--font-fraunces-variable);
+  --font-display: var(--font-general-sans);
   --font-body: var(--font-inter-variable);
   --font-ui: var(--font-inter-variable);
-  --font-fraunces: var(--font-fraunces-variable);
-  --font-inter: var(--font-inter-variable);
 }
 
 /* =======================================================================
@@ -181,11 +175,10 @@
 /* =======================================================================
  * Base typography defaults
  * -----------------------------------------------------------------------
- * Body copy defaults to Inter. Native heading tags default to Fraunces so
- * markup written against plain h1-h6 lands on the display family without
- * having to add `font-display` everywhere. Components that need a
- * different family (e.g. a sans-serif hero subhead inside an otherwise
- * serif section) override with the `font-body` / `font-ui` utility. */
+ * Body copy defaults to Inter. Native heading tags default to General Sans
+ * so markup written against plain h1-h6 lands on the display family
+ * without having to add `font-display` everywhere. Components that need a
+ * different family override with the `font-body` / `font-ui` utility. */
 
 body {
   font-family: var(--font-body), system-ui, sans-serif;
@@ -193,7 +186,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* =======================================================================
