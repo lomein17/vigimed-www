@@ -18,12 +18,9 @@ export function Hero({ locale }: { locale: Locale }) {
   return (
     <section
       aria-labelledby="hero-headline"
+      className="relative w-full overflow-hidden flex items-center md:min-h-[640px] lg:min-h-screen"
       style={{
-        position: 'relative',
-        minHeight: 520,
-        width: '100%',
         background: 'var(--color-navy-800)',
-        overflow: 'hidden',
       }}
     >
       <div aria-hidden="true" className="absolute inset-0 bg-navy-800">
