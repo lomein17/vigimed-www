@@ -31,6 +31,22 @@ export interface ProblemInMotionContent {
   banners: Record<BreachState, string>;
 }
 
+export interface MoatClaim {
+  subEyebrow: string;
+  heading: string;
+  // Optional second designed line. MX Claim B renders the heading as
+  // two lines to avoid wrapping after "herramientas"; US claims omit it.
+  headingLine2?: string;
+  body: string;
+}
+
+export interface MoatContent {
+  eyebrow: string;
+  h2Line1: string;
+  h2Line2: string;
+  claims: MoatClaim[];
+}
+
 export interface HomeContent {
   hero: {
     eyebrow: string;
@@ -41,6 +57,7 @@ export interface HomeContent {
   };
   capabilities: CapabilitiesContent;
   problemInMotion: ProblemInMotionContent;
+  moat: MoatContent;
   placeholderLabel: string;
 }
 
@@ -109,6 +126,23 @@ export const homeContent: HomeContent = {
         'OR 1 · Contamination risk detected · Non-sterile personnel in zone',
       red: 'OR 1 · Sterile field breach',
     },
+  },
+  moat: {
+    eyebrow: 'WHY ONLY VIGIMED',
+    h2Line1: 'Accuracy at the detection layer.',
+    h2Line2: 'One architecture at the platform layer.',
+    claims: [
+      {
+        subEyebrow: 'THE ACCURACY LAYER',
+        heading: 'Every detection is confirmed by a human.',
+        body: 'A trained analyst in our Compliance Review Center reviews every detection before any alert fires. False positives stop here. When your team is notified, the event is verified. You never act on noise.',
+      },
+      {
+        subEyebrow: 'THE ARCHITECTURE LAYER',
+        heading: 'One platform, not a stack to assemble.',
+        body: 'Detection, confirmation, coordination, documentation, and analysis run on a single architecture. VigiMed installs and operates the cameras, the analytics, the Compliance Review Center, and the reporting layer. No hospital IT integration required to begin.',
+      },
+    ],
   },
   placeholderLabel: '[asset pending]',
 };

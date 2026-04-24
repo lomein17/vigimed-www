@@ -3,6 +3,7 @@ import { notFound, redirect } from 'next/navigation';
 
 import { Hero } from '@/components/home/Hero';
 import { Capabilities } from '@/components/home/capabilities/Capabilities';
+import { Moat } from '@/components/home/moat/Moat';
 import { ProblemInMotion } from '@/components/home/problem-in-motion/ProblemInMotion';
 import { isLocale, type Locale } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/seo/constants';
@@ -55,6 +56,7 @@ export default async function HomePage({
       <Hero locale={typedLocale} />
       <Capabilities locale={typedLocale} />
       <ProblemInMotion locale={typedLocale} />
+      <Moat locale={typedLocale} />
     </>
   );
 }

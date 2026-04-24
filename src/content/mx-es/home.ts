@@ -67,5 +67,23 @@ export const homeContent: HomeContent = {
       red: 'Q1 · Ruptura de campo estéril',
     },
   },
+  moat: {
+    eyebrow: 'POR QUÉ SOLO VIGIMED',
+    h2Line1: 'Precisión en la capa de detección.',
+    h2Line2: 'Una arquitectura en la capa de plataforma.',
+    claims: [
+      {
+        subEyebrow: 'LA CAPA DE PRECISIÓN',
+        heading: 'Cada detección es confirmada por un humano.',
+        body: 'Un analista capacitado en nuestro Centro de Revisión revisa cada detección antes de que se emita una alerta. Los falsos positivos se detienen ahí. Cuando su equipo recibe una notificación, el evento ya está verificado. Usted nunca actúa sobre ruido.',
+      },
+      {
+        subEyebrow: 'LA CAPA DE ARQUITECTURA',
+        heading: 'Una plataforma, no un conjunto de herramientas',
+        headingLine2: 'por integrar.',
+        body: 'Detección, confirmación, coordinación, documentación y análisis operan sobre una sola arquitectura. VigiMed instala y opera las cámaras, la analítica, el Centro de Revisión y la capa de reportes. Sin integración con el área de TI del hospital para comenzar.',
+      },
+    ],
+  },
   placeholderLabel: '[asset pendiente]',
 };
