@@ -21,7 +21,9 @@ export interface SharedContent {
     privacyLabel: string;
   };
   comingSoon: {
-    heading: string;
+    positioning: string;
+    ctaLabel: string;
+    ctaMailtoSubject: string;
   };
 }
 
@@ -75,6 +77,9 @@ export const sharedContent: SharedContent = {
     privacyLabel: 'Privacy Policy',
   },
   comingSoon: {
-    heading: 'Coming Soon',
+    positioning:
+      'VigiMed is the real-time critical-event response platform for hospitals.',
+    ctaLabel: 'Contact us',
+    ctaMailtoSubject: 'Request for information',
   },
 };

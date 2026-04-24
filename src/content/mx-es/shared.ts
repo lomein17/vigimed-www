@@ -50,6 +50,9 @@ export const sharedContent: SharedContent = {
     privacyLabel: 'Política de Privacidad',
   },
   comingSoon: {
-    heading: 'Próximamente',
+    positioning:
+      'VigiMed es la plataforma de respuesta a eventos críticos en tiempo real para hospitales.',
+    ctaLabel: 'Contáctenos',
+    ctaMailtoSubject: 'Solicitud de información',
   },
 };
