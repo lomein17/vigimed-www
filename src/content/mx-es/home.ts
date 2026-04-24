@@ -8,7 +8,6 @@ export const homeContent: HomeContent = {
     subhead:
       'Cámaras dedicadas en sus áreas críticas detectan eventos adversos de seguridad del paciente y calidad de la atención en el momento en que ocurren. Cada detección es confirmada por un analista humano antes de emitir una alerta, para que usted actúe sobre eventos verificados, no sobre falsas alarmas. Después, identificamos los patrones para que el siguiente evento no ocurra.',
     ctaLabel: 'Solicite una consulta',
-    ctaShowArrow: false,
   },
   capabilities: {
     eyebrow: 'DE LA DETECCIÓN A LA PREVENCIÓN',

@@ -25,7 +25,6 @@ export interface HomeContent {
     headlineLine2: string;
     subhead: string;
     ctaLabel: string;
-    ctaShowArrow: boolean;
   };
   capabilities: CapabilitiesContent | null;
   placeholderLabel: string;
@@ -39,8 +38,7 @@ export const homeContent: HomeContent = {
     headlineLine2: 'Respond in under 60 seconds.',
     subhead:
       "Dedicated cameras in your critical care areas detect life-safety and quality-of-care events the moment they happen. Every detection is confirmed by a human analyst before it dispatches, so you act on verified events, not false alarms. Then we surface the patterns, so the next event doesn't happen at all.",
-    ctaLabel: 'Request consultation',
-    ctaShowArrow: true,
+    ctaLabel: 'Request a consultation',
   },
   capabilities: null,
   placeholderLabel: '[asset pending]',

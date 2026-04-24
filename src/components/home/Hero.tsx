@@ -84,24 +84,9 @@ export function Hero({ locale }: { locale: Locale }) {
           <div>
             <Link
               href={ctaHref}
-              className="inline-flex items-center gap-2 h-[44px] px-6 rounded-md bg-brand-500 hover:bg-brand-400 text-text-on-dark font-ui text-button transition-colors"
+              className="inline-flex items-center h-[44px] px-6 rounded-md bg-brand-500 hover:bg-brand-400 text-text-on-dark font-ui text-button transition-colors"
             >
-              <span>{hero.ctaLabel}</span>
-              {hero.ctaShowArrow && (
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 16 16"
-                  width={16}
-                  height={16}
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.75}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M3 8h10M9 4l4 4-4 4" />
-                </svg>
-              )}
+              {hero.ctaLabel}
             </Link>
           </div>
         </div>
