@@ -59,27 +59,31 @@ export function Hero({ locale }: { locale: Locale }) {
             {hero.eyebrow}
           </p>
 
-          <h1
-            id="hero-headline"
-            className="text-text-on-dark"
-            style={{
-              fontSize: 'var(--text-h1)',
-              letterSpacing: '-0.015em',
-              lineHeight: 1.08,
-              fontWeight: 500,
-            }}
-          >
-            {hero.headlineLine1}
-            <br />
-            {hero.headlineLine2}
-          </h1>
+          <div className="max-w-[820px]">
+            <h1
+              id="hero-headline"
+              className="text-text-on-dark"
+              style={{
+                fontSize: 'var(--text-h1)',
+                letterSpacing: '-0.015em',
+                lineHeight: 1.08,
+                fontWeight: 500,
+              }}
+            >
+              {hero.headlineLine1}
+              <br />
+              {hero.headlineLine2}
+            </h1>
+          </div>
 
-          <p
-            className="font-body"
-            style={{ color: '#D8DCE4', lineHeight: 1.6, fontSize: '1.0625rem' }}
-          >
-            {hero.subhead}
-          </p>
+          <div className="max-w-[580px]">
+            <p
+              className="font-body"
+              style={{ color: '#D8DCE4', lineHeight: 1.6, fontSize: '1.0625rem' }}
+            >
+              {hero.subhead}
+            </p>
+          </div>
 
           <div>
             <Link

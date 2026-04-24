@@ -192,6 +192,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
 }
 
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
 /* =======================================================================
  * Brand pulse animation (§4.3, with cyan palette per VM-298)
  * ======================================================================= */
@@ -356,13 +360,13 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
   color: #FFFFFF;
   text-align: center;
-  max-width: 720px;
+  max-width: 860px;
   margin: 0 auto 18px;
 }
 
 @media (min-width: 768px) {
   .vm-pim-headline {
-    font-size: 56px;
+    font-size: 48px;
   }
 }
 
@@ -373,7 +377,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.5;
   color: #9AA3B2;
   text-align: center;
-  max-width: 520px;
+  max-width: 620px;
   margin: 0 auto 40px;
 }
 

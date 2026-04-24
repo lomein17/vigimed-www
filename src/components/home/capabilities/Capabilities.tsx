@@ -49,7 +49,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
       </svg>
 
       <div className="relative z-10 max-w-content mx-auto">
-        <header className="max-w-[720px] mx-auto text-center flex flex-col gap-4 mb-12">
+        <header className="mx-auto text-center flex flex-col gap-4 mb-12">
           <p
             className="font-ui"
             style={{
@@ -63,24 +63,28 @@ export function Capabilities({ locale }: { locale: Locale }) {
           >
             {capabilities.eyebrow}
           </p>
-          <h2
-            id="capabilities-heading"
-            style={{
-              fontSize: 'var(--text-h2)',
-              letterSpacing: '-0.01em',
-              lineHeight: 1.15,
-              fontWeight: 500,
-              color: '#0A1628',
-            }}
-          >
-            {capabilities.heading}
-          </h2>
-          <p
-            className="font-body"
-            style={{ color: '#2B2B2B', lineHeight: 1.6, fontSize: '1.0625rem' }}
-          >
-            {capabilities.subhead}
-          </p>
+          <div className="max-w-[720px] mx-auto">
+            <h2
+              id="capabilities-heading"
+              style={{
+                fontSize: 'var(--text-h2)',
+                letterSpacing: '-0.01em',
+                lineHeight: 1.15,
+                fontWeight: 500,
+                color: '#0A1628',
+              }}
+            >
+              {capabilities.heading}
+            </h2>
+          </div>
+          <div className="max-w-[760px] mx-auto">
+            <p
+              className="font-body"
+              style={{ color: '#2B2B2B', lineHeight: 1.6, fontSize: '1.0625rem' }}
+            >
+              {capabilities.subhead}
+            </p>
+          </div>
         </header>
 
         <div
