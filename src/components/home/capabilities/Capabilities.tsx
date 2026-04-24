@@ -1,10 +1,16 @@
 import { homeContent as mxHome } from '@/content/mx-es/home';
+import { homeContent as usHome } from '@/content/us-en/home';
+import type { Locale } from '@/lib/i18n';
 
 import { CapabilityCard } from './CapabilityCard';
 
-export function CapabilitiesMx() {
-  const { capabilities, placeholderLabel } = mxHome;
-  if (!capabilities) return null;
+const contentByLocale = {
+  'mx-es': mxHome,
+  'us-en': usHome,
+} as const;
+
+export function Capabilities({ locale }: { locale: Locale }) {
+  const { capabilities, placeholderLabel } = contentByLocale[locale];
   const isDev = process.env.NODE_ENV === 'development';
 
   return (

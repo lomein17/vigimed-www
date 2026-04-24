@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 
 import { Hero } from '@/components/home/Hero';
-import { CapabilitiesMx } from '@/components/home/capabilities/CapabilitiesMx';
-import { UsCapabilitiesDeferPlaceholder } from '@/components/home/UsCapabilitiesDeferPlaceholder';
+import { Capabilities } from '@/components/home/capabilities/Capabilities';
 import { isLocale, type Locale } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/seo/constants';
 import { getPageMetadata } from '@/lib/seo/metadata';
@@ -53,11 +52,7 @@ export default async function HomePage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
       <Hero locale={typedLocale} />
-      {typedLocale === 'mx-es' ? (
-        <CapabilitiesMx />
-      ) : (
-        <UsCapabilitiesDeferPlaceholder />
-      )}
+      <Capabilities locale={typedLocale} />
     </>
   );
 }
