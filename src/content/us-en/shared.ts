@@ -4,11 +4,14 @@ export type FooterLink =
   | { label: string; href: string; external?: boolean }
   | { label: string; route: RouteKey };
 
+export type MarketSegmentIcon = 'hospital' | 'clinic' | 'lab';
+
 export interface SharedContent {
   nav: {
-    primary: Array<{ label: string; route: RouteKey }>;
+    marketSegments: Array<{ label: string; route: RouteKey; icon: MarketSegmentIcon }>;
+    contactCta: { label: string; route: 'contact' };
+    demoCta: { label: string; route: 'contact' };
     drawer: Array<{ label: string; route: RouteKey }>;
-    cta: { label: string; route: 'contact' };
   };
   localeSelector: {
     currentLabel: string;
@@ -29,11 +32,12 @@ export interface SharedContent {
 
 export const sharedContent: SharedContent = {
   nav: {
-    primary: [
-      { label: 'Platform', route: 'platform' },
-      { label: 'Use Cases', route: 'useCases' },
-      { label: 'Contact', route: 'contact' },
+    marketSegments: [
+      { label: 'Hospitals', route: 'platform', icon: 'hospital' },
+      { label: 'Labs', route: 'platform', icon: 'lab' },
     ],
+    contactCta: { label: 'Contact us', route: 'contact' },
+    demoCta: { label: 'Book a demo', route: 'contact' },
     drawer: [
       { label: 'Home', route: 'home' },
       { label: 'Platform', route: 'platform' },
@@ -42,7 +46,6 @@ export const sharedContent: SharedContent = {
       { label: 'How It Works', route: 'howItWorks' },
       { label: 'Contact', route: 'contact' },
     ],
-    cta: { label: 'Request a demo', route: 'contact' },
   },
   localeSelector: {
     currentLabel: 'United States',

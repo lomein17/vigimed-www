@@ -10,9 +10,9 @@ export const seoContent: SeoContent = {
   },
   pages: {
     home: {
-      title: 'VigiMed: Vigilancia continua para hospitales',
+      title: 'VigiMed: La plataforma de respuesta a eventos críticos para hospitales',
       description:
-        'Sistema de visión por computadora que detecta, verifica y reporta cumplimiento NOM en hospitales mexicanos, sin interrumpir el flujo clínico ni agregar papeleo.',
+        'VigiMed detecta eventos críticos en áreas hospitalarias en menos de 60 segundos, confirma cada detección con un analista humano y orquesta la respuesta.',
     },
     platform: {
       title: 'Plataforma VigiMed: Visión por computadora para hospitales',

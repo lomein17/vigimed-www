@@ -2,11 +2,13 @@ import type { SharedContent } from '@/content/us-en/shared';
 
 export const sharedContent: SharedContent = {
   nav: {
-    primary: [
-      { label: 'Plataforma', route: 'platform' },
-      { label: 'Casos de Uso', route: 'useCases' },
-      { label: 'Contacto', route: 'contact' },
+    marketSegments: [
+      { label: 'Hospitales', route: 'platform', icon: 'hospital' },
+      { label: 'Clínicas', route: 'platform', icon: 'clinic' },
+      { label: 'Laboratorios', route: 'platform', icon: 'lab' },
     ],
+    contactCta: { label: 'Contáctenos', route: 'contact' },
+    demoCta: { label: 'Agende una demo', route: 'contact' },
     drawer: [
       { label: 'Inicio', route: 'home' },
       { label: 'Plataforma', route: 'platform' },
@@ -15,7 +17,6 @@ export const sharedContent: SharedContent = {
       { label: 'Cómo Funciona', route: 'howItWorks' },
       { label: 'Contacto', route: 'contact' },
     ],
-    cta: { label: 'Solicitar demostración', route: 'contact' },
   },
   localeSelector: {
     currentLabel: 'México',

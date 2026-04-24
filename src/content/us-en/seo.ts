@@ -20,9 +20,9 @@ export const seoContent: SeoContent = {
   },
   pages: {
     home: {
-      title: 'VigiMed: Continuous Monitoring for Hospitals',
+      title: 'VigiMed: The Critical-Event Response Platform for Hospitals',
       description:
-        'Computer vision that detects, verifies, and reports hospital compliance in real time. Aligned with Joint Commission and CMS Conditions of Participation.',
+        'VigiMed detects life-safety and quality-of-care events in hospitals in under 60 seconds, confirms each one with a human analyst, and drives the response.',
     },
     platform: {
       title: 'VigiMed Platform: Computer Vision for Hospital Compliance',

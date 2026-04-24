@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { ComingSoon } from '@/components/ComingSoon';
-import { isLocale } from '@/lib/i18n';
+import { Hero } from '@/components/home/Hero';
+import { CapabilitiesMx } from '@/components/home/capabilities/CapabilitiesMx';
+import { UsCapabilitiesDeferPlaceholder } from '@/components/home/UsCapabilitiesDeferPlaceholder';
+import { isLocale, type Locale } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/seo/constants';
 import { getPageMetadata } from '@/lib/seo/metadata';
 
@@ -31,13 +33,19 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+  const typedLocale = locale as Locale;
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
-      <ComingSoon locale={locale} />
+      <Hero locale={typedLocale} />
+      {typedLocale === 'mx-es' ? (
+        <CapabilitiesMx />
+      ) : (
+        <UsCapabilitiesDeferPlaceholder />
+      )}
     </>
   );
 }
