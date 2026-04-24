@@ -3,17 +3,22 @@ import type { HomeContent } from '@/content/us-en/home';
 export const homeContent: HomeContent = {
   hero: {
     eyebrow: 'LA PLATAFORMA DE RESPUESTA A EVENTOS CRÍTICOS',
-    headlineLine1: 'Vea cada evento cuando ocurre.',
-    headlineLine2: 'Responda en menos de 60 segundos.',
-    subhead:
-      'Cámaras dedicadas en sus áreas críticas detectan eventos adversos de seguridad del paciente y calidad de la atención en el momento en que ocurren. Cada detección es confirmada por un analista humano antes de emitir una alerta, para que usted actúe sobre eventos verificados, no sobre falsas alarmas. Después, identificamos los patrones para que el siguiente evento no ocurra.',
+    headlineLine1: 'Incidentes, detectados en tiempo real.',
+    headlineLine2: 'Soluciones, coordinadas al cierre.',
+    subhead: [
+      { text: 'Cámaras dedicadas en sus áreas críticas detectan eventos que comprometen la ' },
+      { text: 'seguridad del paciente', emphasis: 'bold-amber' },
+      { text: ' y la ' },
+      { text: 'calidad de la atención', emphasis: 'bold-amber' },
+      { text: ', en el momento en que ocurren. Cada detección es confirmada por un analista humano en nuestro Centro de Revisión, para que usted actúe sobre eventos verificados. Cada incidente se documenta a detalle, y los patrones que emergen entre eventos llegan a su equipo para mejorar procesos y la operación.' },
+    ],
     ctaLabel: 'Solicite una consulta',
   },
   capabilities: {
     eyebrow: 'DE LA DETECCIÓN A LA PREVENCIÓN',
     heading: 'Cinco capacidades, un ciclo completo.',
     subhead:
-      'Cada evento crítico recorre el mismo ciclo: detectado en tiempo real, confirmado por un humano, respondido en menos de 60 segundos, documentado de forma defensible, y analizado para prevenir su repetición.',
+      'Cada evento crítico recorre el mismo ciclo: detectado en el momento en que ocurre, confirmado por un humano, coordinado hasta la respuesta, documentado de forma defensible, y analizado para mejorar el siguiente.',
     cards: [
       {
         title: 'Detecta.',
@@ -61,15 +66,6 @@ export const homeContent: HomeContent = {
         'Q1 · Riesgo de contaminación detectado · Personal no estéril en zona',
       red: 'Q1 · Ruptura de campo estéril',
     },
-    timeline: [
-      { timestamp: '00:02', event: 'Ruptura detectada' },
-      { timestamp: '00:08', event: 'Confirmada por analista del CRC' },
-      { timestamp: '00:14', event: 'Cirujano y equipo notificados' },
-      {
-        timestamp: '00:42',
-        event: 'Campo reestablecido, acción documentada',
-      },
-    ],
   },
   placeholderLabel: '[asset pendiente]',
 };

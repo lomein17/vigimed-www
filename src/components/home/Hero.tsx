@@ -87,7 +87,15 @@ export function Hero({ locale }: { locale: Locale }) {
               className="font-body"
               style={{ color: '#D8DCE4', lineHeight: 1.6, fontSize: '1.0625rem' }}
             >
-              {hero.subhead}
+              {hero.subhead.map((segment, i) =>
+                segment.emphasis === 'bold-amber' ? (
+                  <strong key={i} className="font-semibold text-brand-amber">
+                    {segment.text}
+                  </strong>
+                ) : (
+                  <span key={i}>{segment.text}</span>
+                )
+              )}
             </p>
           </div>
 

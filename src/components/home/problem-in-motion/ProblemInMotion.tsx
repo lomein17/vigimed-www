@@ -53,18 +53,12 @@ function stateAtElapsed(elapsedMs: number): BreachState {
   return 'green';
 }
 
-function formatTimestamp(elapsedMs: number): string {
-  const seconds = Math.min(12, Math.floor(elapsedMs / 1000));
-  return `00:${seconds.toString().padStart(2, '0')}`;
-}
-
 export function ProblemInMotion({ locale }: { locale: Locale }) {
   const home = contentByLocale[locale];
   const content = home.problemInMotion;
   const placeholderLabel = home.placeholderLabel;
 
   const [state, setState] = useState<BreachState>('green');
-  const [elapsedMs, setElapsedMs] = useState(0);
   const startRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -74,7 +68,6 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
       const elapsed = (now - startRef.current) % LOOP_MS;
       const nextState = stateAtElapsed(elapsed);
       setState((prev) => (prev === nextState ? prev : nextState));
-      setElapsedMs(elapsed);
       rafId = requestAnimationFrame(tick);
     };
     rafId = requestAnimationFrame(tick);
@@ -130,23 +123,9 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
           >
             {content.banners[state]}
           </div>
-
-          <div className="vm-pim-stamp">{formatTimestamp(elapsedMs)}</div>
         </div>
 
         <p className="vm-pim-caption">{content.sceneCaption}</p>
-
-        <ol className="vm-pim-timeline">
-          {content.timeline.map((node) => (
-            <li key={node.timestamp} className="vm-pim-timeline-node">
-              <span className="vm-pim-timeline-dot" aria-hidden="true" />
-              <span className="vm-pim-timeline-timestamp">
-                {node.timestamp}
-              </span>
-              <span className="vm-pim-timeline-event">{node.event}</span>
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
   );

@@ -15,6 +15,7 @@
   --color-brand-500: #20A2E2;
   --color-brand-400: #28AFED;
   --color-brand-300: #2FBBF7;
+  --color-brand-amber: #FBBF24;
 
   /* ---------- Colors: neutrals (§4.1) ---------- */
   --color-gray-50: #F5F5F7;
@@ -310,11 +311,10 @@ h1, h2, h3 {
 /* =======================================================================
  * Problem-in-motion section (VM-359)
  * -----------------------------------------------------------------------
- * Navy full-bleed section with a 16:9 scene container and three
- * synchronized overlays (filter, banner, timestamp) driven from the
- * component's state machine. Timeline below runs horizontal on desktop
- * and rotates to vertical at narrow widths. Tokens per Website v1 Plan
- * session 9 (slug ec8d41d1047e).
+ * Navy full-bleed section with a 16:9 scene container and two
+ * synchronized overlays (filter, banner) driven from the component's
+ * state machine. Tokens per Website v1 Plan session 9 (slug
+ * ec8d41d1047e).
  * ======================================================================= */
 
 .vm-pim-section {
@@ -448,17 +448,6 @@ h1, h2, h3 {
   text-overflow: ellipsis;
 }
 
-.vm-pim-stamp {
-  position: absolute;
-  bottom: 8px;
-  right: 12px;
-  font-family: var(--font-display);
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.5);
-  font-variant-numeric: tabular-nums;
-}
-
 .vm-pim-caption {
   font-family: var(--font-body);
   font-size: 13px;
@@ -467,107 +456,5 @@ h1, h2, h3 {
   color: #6B7588;
   text-align: center;
   margin: 16px auto 40px;
-}
-
-.vm-pim-timeline {
-  position: relative;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.vm-pim-timeline::before {
-  content: '';
-  position: absolute;
-  top: 7px;
-  left: 12%;
-  right: 12%;
-  height: 1px;
-  background: #2FBBF7;
-  opacity: 0.4;
-  z-index: 0;
-}
-
-.vm-pim-timeline-node {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.vm-pim-timeline-dot {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: #2FBBF7;
-  border: 2px solid #0A1628;
-  box-shadow: 0 0 0 1px #2FBBF7;
-  margin-bottom: 10px;
-}
-
-.vm-pim-timeline-timestamp {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: #2FBBF7;
-  margin-bottom: 4px;
-  font-variant-numeric: tabular-nums;
-}
-
-@media (min-width: 768px) {
-  .vm-pim-timeline-timestamp {
-    font-size: 18px;
-  }
-}
-
-.vm-pim-timeline-event {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.4;
-  color: #B8C0CC;
-}
-
-@media (max-width: 767.98px) {
-  .vm-pim-timeline {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    padding-left: 4px;
-  }
-  .vm-pim-timeline::before {
-    top: 4px;
-    bottom: 4px;
-    left: 7px;
-    right: auto;
-    width: 1px;
-    height: auto;
-  }
-  .vm-pim-timeline-node {
-    display: grid;
-    grid-template-columns: 15px 1fr;
-    column-gap: 14px;
-    row-gap: 2px;
-    align-items: start;
-    text-align: left;
-  }
-  .vm-pim-timeline-dot {
-    grid-row: 1 / span 2;
-    grid-column: 1;
-    margin-bottom: 0;
-    margin-top: 2px;
-  }
-  .vm-pim-timeline-timestamp {
-    grid-column: 2;
-    margin-bottom: 0;
-  }
-  .vm-pim-timeline-event {
-    grid-column: 2;
-  }
 }
 

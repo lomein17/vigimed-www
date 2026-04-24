@@ -11,6 +11,8 @@ export interface CapabilityCard {
   icon: CapabilityIcon;
 }
 
+export type SubheadSegment = { text: string; emphasis?: 'bold-amber' };
+
 export interface CapabilitiesContent {
   eyebrow: string;
   heading: string;
@@ -20,11 +22,6 @@ export interface CapabilitiesContent {
 
 export type BreachState = 'green' | 'amber' | 'red';
 
-export interface TimelineNode {
-  timestamp: string;
-  event: string;
-}
-
 export interface ProblemInMotionContent {
   eyebrow: string;
   headlineLine1: string;
@@ -32,7 +29,6 @@ export interface ProblemInMotionContent {
   frame: string;
   sceneCaption: string;
   banners: Record<BreachState, string>;
-  timeline: TimelineNode[];
 }
 
 export interface HomeContent {
@@ -40,7 +36,7 @@ export interface HomeContent {
     eyebrow: string;
     headlineLine1: string;
     headlineLine2: string;
-    subhead: string;
+    subhead: SubheadSegment[];
     ctaLabel: string;
   };
   capabilities: CapabilitiesContent;
@@ -51,17 +47,22 @@ export interface HomeContent {
 export const homeContent: HomeContent = {
   hero: {
     eyebrow: 'THE CRITICAL-EVENT RESPONSE PLATFORM',
-    headlineLine1: 'See each event as it happens.',
-    headlineLine2: 'Respond in under 60 seconds.',
-    subhead:
-      "Dedicated cameras in your critical care areas detect life-safety and quality-of-care events the moment they happen. Every detection is confirmed by a human analyst before it dispatches, so you act on verified events, not false alarms. Then we surface the patterns, so the next event doesn't happen at all.",
+    headlineLine1: 'Incidents, detected in real time.',
+    headlineLine2: 'Solutions, coordinated to closure.',
+    subhead: [
+      { text: 'Dedicated cameras in your critical care areas detect events that compromise ' },
+      { text: 'patient safety', emphasis: 'bold-amber' },
+      { text: ' and ' },
+      { text: 'quality of care', emphasis: 'bold-amber' },
+      { text: ', as they happen. Every detection is confirmed by a human analyst in our Compliance Review Center, so you act on verified events. Each incident is documented in detail, and the patterns that emerge across events reach your team to improve processes and operations.' },
+    ],
     ctaLabel: 'Request a consultation',
   },
   capabilities: {
     eyebrow: 'FROM DETECTION TO PREVENTION',
     heading: 'Five capabilities, one complete loop.',
     subhead:
-      "Every critical event runs the same loop: detected in real time, confirmed by a human, responded to in under 60 seconds, documented defensibly, and analyzed so the next one doesn't happen.",
+      'Every critical event runs the same loop: detected as it happens, confirmed by a human, coordinated through to response, documented defensibly, and analyzed to improve the next one.',
     cards: [
       {
         title: 'Detects.',
@@ -108,12 +109,6 @@ export const homeContent: HomeContent = {
         'OR 1 · Contamination risk detected · Non-sterile personnel in zone',
       red: 'OR 1 · Sterile field breach',
     },
-    timeline: [
-      { timestamp: '00:02', event: 'Breach detected' },
-      { timestamp: '00:08', event: 'Confirmed by CRC analyst' },
-      { timestamp: '00:14', event: 'Surgeon and team notified' },
-      { timestamp: '00:42', event: 'Field re-established, action documented' },
-    ],
   },
   placeholderLabel: '[asset pending]',
 };
