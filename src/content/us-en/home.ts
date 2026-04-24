@@ -18,6 +18,23 @@ export interface CapabilitiesContent {
   cards: CapabilityCard[];
 }
 
+export type BreachState = 'green' | 'amber' | 'red';
+
+export interface TimelineNode {
+  timestamp: string;
+  event: string;
+}
+
+export interface ProblemInMotionContent {
+  eyebrow: string;
+  headlineLine1: string;
+  headlineLine2: string;
+  frame: string;
+  sceneCaption: string;
+  banners: Record<BreachState, string>;
+  timeline: TimelineNode[];
+}
+
 export interface HomeContent {
   hero: {
     eyebrow: string;
@@ -27,6 +44,7 @@ export interface HomeContent {
     ctaLabel: string;
   };
   capabilities: CapabilitiesContent;
+  problemInMotion: ProblemInMotionContent;
   placeholderLabel: string;
 }
 
@@ -75,6 +93,26 @@ export const homeContent: HomeContent = {
           'Patterns across events reach whoever can act on them, before the next critical event happens.',
         icon: 'TrendingUp',
       },
+    ],
+  },
+  problemInMotion: {
+    eyebrow: 'WHAT HAPPENS WHEN NO ONE SEES',
+    headlineLine1: 'A sterile field breach takes three seconds.',
+    headlineLine2: 'The harm, months.',
+    frame: 'It happens in well-run ORs, without anyone noticing in time.',
+    sceneCaption:
+      'Dedicated camera in OR 1. Continuous sterile field monitoring.',
+    banners: {
+      green: 'OR 1 · Sterile field · OK',
+      amber:
+        'OR 1 · Contamination risk detected · Non-sterile personnel in zone',
+      red: 'OR 1 · Sterile field breach',
+    },
+    timeline: [
+      { timestamp: '00:02', event: 'Breach detected' },
+      { timestamp: '00:08', event: 'Confirmed by CRC analyst' },
+      { timestamp: '00:14', event: 'Surgeon and team notified' },
+      { timestamp: '00:42', event: 'Field re-established, action documented' },
     ],
   },
   placeholderLabel: '[asset pending]',

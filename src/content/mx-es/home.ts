@@ -47,5 +47,29 @@ export const homeContent: HomeContent = {
       },
     ],
   },
+  problemInMotion: {
+    eyebrow: 'LO QUE OCURRE CUANDO NADIE VE',
+    headlineLine1: 'La ruptura de un campo estéril dura tres segundos.',
+    headlineLine2: 'El daño, meses.',
+    frame:
+      'Ocurre en quirófanos bien gestionados, sin que nadie se entere a tiempo.',
+    sceneCaption:
+      'Cámara dedicada en Quirófano 1. Detección continua del campo estéril.',
+    banners: {
+      green: 'Q1 · Campo estéril · OK',
+      amber:
+        'Q1 · Riesgo de contaminación detectado · Personal no estéril en zona',
+      red: 'Q1 · Ruptura de campo estéril',
+    },
+    timeline: [
+      { timestamp: '00:02', event: 'Ruptura detectada' },
+      { timestamp: '00:08', event: 'Confirmada por analista del CRC' },
+      { timestamp: '00:14', event: 'Cirujano y equipo notificados' },
+      {
+        timestamp: '00:42',
+        event: 'Campo reestablecido, acción documentada',
+      },
+    ],
+  },
   placeholderLabel: '[asset pendiente]',
 };

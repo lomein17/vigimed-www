@@ -302,3 +302,268 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
   }
 }
+
+/* =======================================================================
+ * Problem-in-motion section (VM-359)
+ * -----------------------------------------------------------------------
+ * Navy full-bleed section with a 16:9 scene container and three
+ * synchronized overlays (filter, banner, timestamp) driven from the
+ * component's state machine. Timeline below runs horizontal on desktop
+ * and rotates to vertical at narrow widths. Tokens per Website v1 Plan
+ * session 9 (slug ec8d41d1047e).
+ * ======================================================================= */
+
+.vm-pim-section {
+  position: relative;
+  width: 100%;
+  background: #0A1628;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  padding-left: var(--site-gutter);
+  padding-right: var(--site-gutter);
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .vm-pim-section {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+
+.vm-pim-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.vm-pim-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #2FBBF7;
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+.vm-pim-headline {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 18px;
+}
+
+@media (min-width: 768px) {
+  .vm-pim-headline {
+    font-size: 56px;
+  }
+}
+
+.vm-pim-frame {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #9AA3B2;
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto 40px;
+}
+
+@media (min-width: 768px) {
+  .vm-pim-frame {
+    font-size: 20px;
+  }
+}
+
+.vm-pim-scene {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-width: 1280px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.vm-pim-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vm-pim-placeholder {
+  position: absolute;
+  inset: 0;
+  background: #0A1628;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vm-pim-placeholder-label {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  font-variant-numeric: tabular-nums;
+}
+
+.vm-pim-filter {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: background 250ms ease-out;
+}
+
+.vm-pim-banner {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 12px;
+  border-radius: 3px;
+  background: rgba(10, 22, 40, 0.86);
+  border: 0.5px solid transparent;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  white-space: nowrap;
+  max-width: calc(100% - 28px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vm-pim-stamp {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+.vm-pim-caption {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #6B7588;
+  text-align: center;
+  margin: 16px auto 40px;
+}
+
+.vm-pim-timeline {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.vm-pim-timeline::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: #2FBBF7;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.vm-pim-timeline-node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.vm-pim-timeline-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #2FBBF7;
+  border: 2px solid #0A1628;
+  box-shadow: 0 0 0 1px #2FBBF7;
+  margin-bottom: 10px;
+}
+
+.vm-pim-timeline-timestamp {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #2FBBF7;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 768px) {
+  .vm-pim-timeline-timestamp {
+    font-size: 18px;
+  }
+}
+
+.vm-pim-timeline-event {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #B8C0CC;
+}
+
+@media (max-width: 767.98px) {
+  .vm-pim-timeline {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-left: 4px;
+  }
+  .vm-pim-timeline::before {
+    top: 4px;
+    bottom: 4px;
+    left: 7px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+  .vm-pim-timeline-node {
+    display: grid;
+    grid-template-columns: 15px 1fr;
+    column-gap: 14px;
+    row-gap: 2px;
+    align-items: start;
+    text-align: left;
+  }
+  .vm-pim-timeline-dot {
+    grid-row: 1 / span 2;
+    grid-column: 1;
+    margin-bottom: 0;
+    margin-top: 2px;
+  }
+  .vm-pim-timeline-timestamp {
+    grid-column: 2;
+    margin-bottom: 0;
+  }
+  .vm-pim-timeline-event {
+    grid-column: 2;
+  }
+}
+
