@@ -63,7 +63,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
           >
             {capabilities.eyebrow}
           </p>
-          <div className="max-w-[720px] mx-auto">
+          <div className="max-w-[780px] mx-auto">
             <h2
               id="capabilities-heading"
               style={{
