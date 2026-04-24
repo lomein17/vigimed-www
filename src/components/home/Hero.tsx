@@ -40,7 +40,17 @@ export function Hero({ locale }: { locale: Locale }) {
         }}
       />
 
-      <div className="relative z-10 w-full px-gutter py-section">
+      <div
+        className="relative z-10 w-full py-section"
+        style={{
+          // VM-364: Hero-specific horizontal anchor. Left edge sits in the
+          // left third of the composition on desktop (clamped to 240px at
+          // wide viewports), scales down to the standard gutter floor on
+          // narrow ones. Right padding stays on the global gutter.
+          paddingLeft: 'clamp(var(--site-gutter), 15vw, 240px)',
+          paddingRight: 'var(--site-gutter)',
+        }}
+      >
         <div className="flex flex-col gap-6 justify-center items-start">
           <p
             className="font-ui"
