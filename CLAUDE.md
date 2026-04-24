@@ -31,7 +31,7 @@ Marketing site for vigimed.ai. Next.js, App Router, custom path-based i18n, depl
 
 - `main` is production. Trunk-based: push direct to `main` once local checks pass (TSC clean, lint clean, intended UAT run locally or against a branch preview).
 - PRs are optional. Use a feature branch named `vm-XXX-short-description` and open a PR when you want a Vercel preview URL for visual UAT on risky or visually-significant changes. Otherwise, commit direct to `main`.
-- Vercel auto-creates a preview deployment per branch and promotes `main` to production.
+- Pushes to `main` deploy to both Production (`www.vigimed.ai`, public) and the `staging` Custom Environment (`staging.vigimed.ai`, Vercel Auth gated). Each environment scopes its own env vars. Feature branches still receive auto-generated preview URLs when pushed.
 - Same-day discipline still applies. A branch that passes UAT must be merged same-day; do not stack dependent work on an unmerged branch.
 
 ## Do not
