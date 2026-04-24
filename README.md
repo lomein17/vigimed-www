@@ -24,6 +24,29 @@ Dev server runs at http://localhost:3000. The root path redirects to `/us-en` by
 - `src/content/{locale}/` — typed copy modules per section.
 - `src/lib/i18n.ts` — single source of truth for locales, default locale, and per-locale config.
 
+## Feature flags
+
+### `NEXT_PUBLIC_SHOW_HOME`
+
+Gates the post-repositioning Home (Hero + MX Capabilities) at `/{locale}/`. When the
+value is the literal string `"true"`, the locale root renders the new Home. Any
+other value (including unset) redirects to the chromeless ComingSoon
+(`/{locale}/coming-soon` for US, `/{locale}/proximamente` for MX).
+
+Vercel scoping:
+
+| Environment | Value | Effect |
+| --- | --- | --- |
+| Production | `false` | `/` redirects to ComingSoon. Pre-launch landing preserved. |
+| Preview | `true` | New Home renders on the main preview URL for UAT. |
+| Development | `true` | New Home renders under `next dev`. |
+
+**Release action:** flipping production to `"true"` ships the new Home to
+`www.vigimed.ai`. Vercel does not auto-redeploy when you change environment
+variables, so after editing the production value in the Vercel dashboard you
+must trigger a redeploy (either push a commit or use "Redeploy" on the latest
+production deployment). Preview values take effect on the next git push.
+
 ## Spec and project tracking
 
 - Implementation spec: Linear doc slug `c3ea98927c84` (Website project).
