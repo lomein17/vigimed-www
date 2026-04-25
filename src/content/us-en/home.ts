@@ -47,6 +47,61 @@ export interface MoatContent {
   claims: MoatClaim[];
 }
 
+export type OrgTypeValue =
+  | 'hospital_200_plus'
+  | 'hospital_100_199'
+  | 'hospital_50_99'
+  | 'hospital_under_50'
+  | 'maternity_clinic'
+  | 'system_or_group'
+  | 'clinical_lab'
+  | 'public_government'
+  | 'other';
+
+export interface OrgTypeOption {
+  value: OrgTypeValue;
+  label: string;
+}
+
+export interface FinalCtaContent {
+  eyebrow: string;
+  h2: string;
+  frame: string;
+  steps: ReadonlyArray<{ heading: string; body: string }>;
+  form: {
+    labels: {
+      name: string;
+      jobTitle: string;
+      organizationName: string;
+      organizationType: string;
+      workEmail: string;
+      phone: string;
+      phoneOptional: string;
+    };
+    placeholders: {
+      organizationType: string;
+    };
+    options: ReadonlyArray<OrgTypeOption>;
+    submit: string;
+    submitting: string;
+    consentNote: string;
+    errors: {
+      required: string;
+      invalidEmail: string;
+    };
+  };
+  confirmation: string;
+}
+
+export interface FinalCtaPayload {
+  name: string;
+  jobTitle: string;
+  organizationName: string;
+  organizationType: OrgTypeValue;
+  workEmail: string;
+  phone: string;
+}
+
 export interface HomeContent {
   hero: {
     eyebrow: string;
@@ -58,6 +113,7 @@ export interface HomeContent {
   capabilities: CapabilitiesContent;
   problemInMotion: ProblemInMotionContent;
   moat: MoatContent;
+  finalCta: FinalCtaContent;
   placeholderLabel: string;
 }
 
@@ -73,7 +129,7 @@ export const homeContent: HomeContent = {
       { text: 'quality of care', emphasis: 'bold-amber' },
       { text: ', as they happen. Every detection is confirmed by a human analyst in our Compliance Review Center, so you act on verified events. Each incident is documented in detail, and the patterns that emerge across events reach your team to improve processes and operations.' },
     ],
-    ctaLabel: 'Request a consultation',
+    ctaLabel: 'Request a demo',
   },
   capabilities: {
     eyebrow: 'FROM DETECTION TO PREVENTION',
@@ -143,6 +199,61 @@ export const homeContent: HomeContent = {
         body: 'Detection, confirmation, coordination, documentation, and analysis run on a single architecture. VigiMed installs and operates the cameras, the analytics, the Compliance Review Center, and the reporting layer. No hospital IT integration required to begin.',
       },
     ],
+  },
+  finalCta: {
+    eyebrow: 'GET STARTED',
+    h2: 'Talk to our team',
+    frame:
+      'Speak with our team to understand scope, cost, integrations, and what a deployment actually looks like.',
+    steps: [
+      {
+        heading: 'Reach Out',
+        body: 'A team member at VigiMed will reply by email within one business day to confirm receipt and propose call times.',
+      },
+      {
+        heading: 'Discuss Fit',
+        body: "A conversation about your operation, your critical service areas, and where the pain is, alongside a walk-through of the platform.",
+      },
+      {
+        heading: 'Tailored Solution',
+        body: "We will provide a comprehensive proposal based on your operation's characteristics, and a roadmap.",
+      },
+    ],
+    form: {
+      labels: {
+        name: 'Name',
+        jobTitle: 'Job Title',
+        organizationName: 'Organization Name',
+        organizationType: 'Organization Type',
+        workEmail: 'Work Email',
+        phone: 'Phone',
+        phoneOptional: '(optional)',
+      },
+      placeholders: {
+        organizationType: 'Select one',
+      },
+      options: [
+        { value: 'hospital_200_plus', label: 'Hospital, over 200 beds' },
+        { value: 'hospital_100_199', label: 'Hospital, 100-199 beds' },
+        { value: 'hospital_50_99', label: 'Hospital, 50-99 beds' },
+        { value: 'hospital_under_50', label: 'Hospital, under 50 beds' },
+        { value: 'maternity_clinic', label: 'Maternity clinic' },
+        { value: 'system_or_group', label: 'Hospital system or group' },
+        { value: 'clinical_lab', label: 'Clinical laboratory' },
+        { value: 'public_government', label: 'Public or government facility' },
+        { value: 'other', label: 'Other' },
+      ],
+      submit: 'Request a demo',
+      submitting: 'Submitting...',
+      consentNote:
+        'By submitting this form with my contact information, I agree the information may be used to receive occasional communications from VigiMed about its products and services. I may unsubscribe at any time.',
+      errors: {
+        required: 'Required field',
+        invalidEmail: 'Please enter a valid email address',
+      },
+    },
+    confirmation:
+      'Thank you. A team member will reply by email within one business day.',
   },
   placeholderLabel: '[asset pending]',
 };

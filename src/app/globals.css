@@ -603,3 +603,294 @@ h1, h2, h3 {
   }
 }
 
+/* =======================================================================
+ * Final CTA section (VM-371)
+ * -----------------------------------------------------------------------
+ * Navy full-bleed Home-arc section at position 6 (after Moat). Two-column
+ * layout: text + reassurance ladder on the left, form card on the right.
+ * The 96px scroll-margin-top on the #final-cta anchor offsets the
+ * 1000ms smooth-scroll target so the eyebrow lands ~24px below the
+ * bottom edge of the 72px sticky nav (72 + 24 = 96).
+ * Spec source: issue VM-371 (Render spec); content lock VM-369.
+ * ======================================================================= */
+
+#final-cta {
+  scroll-margin-top: 96px;
+}
+
+.vm-final-cta-section {
+  position: relative;
+  width: 100%;
+  background: #0A1628;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  padding-left: var(--site-gutter);
+  padding-right: var(--site-gutter);
+}
+
+@media (min-width: 1024px) {
+  .vm-final-cta-section {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+
+.vm-final-cta-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.vm-final-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+@media (min-width: 768px) {
+  .vm-final-cta-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+}
+
+.vm-final-cta-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #2FBBF7;
+  margin: 0 0 16px;
+}
+
+.vm-final-cta-h2 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  max-width: 520px;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .vm-final-cta-h2 {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vm-final-cta-h2 {
+    font-size: 48px;
+  }
+}
+
+.vm-final-cta-frame {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 520px;
+  margin: 16px 0 32px;
+}
+
+@media (min-width: 768px) {
+  .vm-final-cta-frame {
+    font-size: 17px;
+  }
+}
+
+.vm-final-cta-ladder {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .vm-final-cta-ladder {
+    gap: 32px;
+  }
+}
+
+.vm-final-cta-step {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.vm-final-cta-step-badge {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--color-brand-500);
+  color: #FFFFFF;
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vm-final-cta-step-h {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #FFFFFF;
+  margin: 2px 0 4px;
+}
+
+@media (min-width: 768px) {
+  .vm-final-cta-step-h {
+    font-size: 20px;
+  }
+}
+
+.vm-final-cta-step-b {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .vm-final-cta-step-b {
+    font-size: 15px;
+  }
+}
+
+.vm-final-cta-card {
+  background: var(--color-surface-warm);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+@media (min-width: 768px) {
+  .vm-final-cta-card {
+    padding: 32px;
+  }
+}
+
+.vm-final-cta-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vm-final-cta-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vm-final-cta-label {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  color: #0A1628;
+}
+
+.vm-final-cta-label-opt {
+  font-weight: 400;
+  color: #6B7280;
+}
+
+.vm-final-cta-input,
+.vm-final-cta-select {
+  height: 40px;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  padding: 0 12px;
+  background: #FFFFFF;
+  font-family: inherit;
+  font-size: 14px;
+  color: #0A1628;
+}
+
+.vm-final-cta-input:focus,
+.vm-final-cta-select:focus {
+  outline: 0;
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 2px rgba(32, 162, 226, 0.2);
+}
+
+.vm-final-cta-error {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-alert-red);
+  margin: 4px 0 0;
+}
+
+.vm-final-cta-submit {
+  width: 100%;
+  height: 38px;
+  border-radius: 6px;
+  background: var(--color-brand-500);
+  color: #FFFFFF;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border: 0;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: background-color 150ms ease-out;
+}
+
+.vm-final-cta-submit:hover:not(:disabled) {
+  background: var(--color-brand-400);
+}
+
+.vm-final-cta-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.vm-final-cta-consent {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  line-height: 1.5;
+  color: #6B7280;
+  margin: 14px 0 0;
+}
+
+.vm-final-cta-confirmation {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 0;
+}
+
+.vm-final-cta-confirmation-check {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--color-brand-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.vm-final-cta-confirmation-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #0A1628;
+  margin: 0;
+}

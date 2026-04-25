@@ -12,7 +12,7 @@ export const homeContent: HomeContent = {
       { text: 'calidad de la atención', emphasis: 'bold-amber' },
       { text: ', en el momento en que ocurren. Cada detección es confirmada por un analista humano en nuestro Centro de Revisión, para que usted actúe sobre eventos verificados. Cada incidente se documenta a detalle, y los patrones que emergen entre eventos llegan a su equipo para mejorar procesos y la operación.' },
     ],
-    ctaLabel: 'Solicite una consulta',
+    ctaLabel: 'Solicite una demo',
   },
   capabilities: {
     eyebrow: 'DE LA DETECCIÓN A LA PREVENCIÓN',
@@ -84,6 +84,61 @@ export const homeContent: HomeContent = {
         body: 'Detección, confirmación, coordinación, documentación y análisis operan sobre una sola arquitectura. VigiMed instala y opera las cámaras, la analítica, el Centro de Revisión y la capa de reportes. Sin integración con el área de TI del hospital para comenzar.',
       },
     ],
+  },
+  finalCta: {
+    eyebrow: 'EMPIECE',
+    h2: 'Hable con nuestro equipo',
+    frame:
+      'Hable con nuestro equipo para entender alcance, costo, integraciones, y cómo funciona realmente una implementación.',
+    steps: [
+      {
+        heading: 'Contáctenos',
+        body: 'Una persona del equipo de VigiMed responderá por correo en un día hábil para confirmar la recepción y proponer horarios de llamada.',
+      },
+      {
+        heading: 'Evaluemos el Ajuste',
+        body: 'Una conversación sobre su operación, sus áreas críticas y sus áreas de oportunidad, junto con un recorrido de la plataforma.',
+      },
+      {
+        heading: 'Solución a la Medida',
+        body: 'Le entregaremos una propuesta integral adaptada a su operación, y una hoja de ruta.',
+      },
+    ],
+    form: {
+      labels: {
+        name: 'Nombre',
+        jobTitle: 'Cargo',
+        organizationName: 'Nombre de la Organización',
+        organizationType: 'Tipo de Organización',
+        workEmail: 'Correo Corporativo',
+        phone: 'Teléfono',
+        phoneOptional: '(opcional)',
+      },
+      placeholders: {
+        organizationType: 'Seleccione una opción',
+      },
+      options: [
+        { value: 'hospital_200_plus', label: 'Hospital, más de 200 camas' },
+        { value: 'hospital_100_199', label: 'Hospital, 100 a 199 camas' },
+        { value: 'hospital_50_99', label: 'Hospital, 50 a 99 camas' },
+        { value: 'hospital_under_50', label: 'Hospital, menos de 50 camas' },
+        { value: 'maternity_clinic', label: 'Clínica de Maternidad' },
+        { value: 'system_or_group', label: 'Grupo u operador hospitalario' },
+        { value: 'clinical_lab', label: 'Laboratorio clínico' },
+        { value: 'public_government', label: 'Institución pública o gubernamental' },
+        { value: 'other', label: 'Otra' },
+      ],
+      submit: 'Solicite una demo',
+      submitting: 'Enviando...',
+      consentNote:
+        'Al enviar este formulario con mis datos de contacto, acepto que dicha información pueda utilizarse para recibir comunicaciones ocasionales de VigiMed sobre sus productos y servicios. Puedo darme de baja en cualquier momento.',
+      errors: {
+        required: 'Campo obligatorio',
+        invalidEmail: 'Ingrese un correo electrónico válido',
+      },
+    },
+    confirmation:
+      'Gracias. Una persona del equipo le responderá por correo en un día hábil.',
   },
   placeholderLabel: '[asset pendiente]',
 };

@@ -1,8 +1,8 @@
-import Link from 'next/link';
-
 import { homeContent as mxHome } from '@/content/mx-es/home';
 import { homeContent as usHome } from '@/content/us-en/home';
-import { hrefFor, type Locale } from '@/lib/i18n';
+import { type Locale } from '@/lib/i18n';
+
+import { HeroCta } from './HeroCta';
 
 const contentByLocale = {
   'mx-es': mxHome,
@@ -12,7 +12,6 @@ const contentByLocale = {
 export function Hero({ locale }: { locale: Locale }) {
   const home = contentByLocale[locale];
   const { hero, placeholderLabel } = home;
-  const ctaHref = hrefFor(locale, 'contact');
   const isDev = process.env.NODE_ENV === 'development';
 
   return (
@@ -100,12 +99,7 @@ export function Hero({ locale }: { locale: Locale }) {
           </div>
 
           <div>
-            <Link
-              href={ctaHref}
-              className="inline-flex items-center h-[44px] px-6 rounded-md bg-brand-500 hover:bg-brand-400 text-text-on-dark font-ui text-button transition-colors"
-            >
-              {hero.ctaLabel}
-            </Link>
+            <HeroCta label={hero.ctaLabel} targetId="final-cta" />
           </div>
         </div>
       </div>
