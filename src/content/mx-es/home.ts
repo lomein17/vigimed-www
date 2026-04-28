@@ -3,16 +3,16 @@ import type { HomeContent } from '@/content/us-en/home';
 export const homeContent: HomeContent = {
   hero: {
     eyebrow: 'LA PLATAFORMA DE RESPUESTA A EVENTOS CRÍTICOS',
-    headlineLine1: 'Incidentes, detectados en tiempo real.',
+    headlineLine1: 'Incidentes, detectados en vivo.',
     headlineLine2: 'Soluciones, coordinadas al cierre.',
     subhead: [
       { text: 'Cámaras dedicadas en sus áreas críticas detectan eventos que comprometen la ' },
       { text: 'seguridad del paciente', emphasis: 'bold-amber' },
       { text: ' y la ' },
       { text: 'calidad de la atención', emphasis: 'bold-amber' },
-      { text: ', en el momento en que ocurren. Cada detección es confirmada por un analista humano en nuestro Centro de Revisión, para que usted actúe sobre eventos verificados. Cada incidente se documenta a detalle, y los patrones que emergen entre eventos llegan a su equipo para mejorar procesos y la operación.' },
+      { text: ' en el momento en que ocurren. Cada detección es confirmada por un analista humano en nuestro Centro de Revisión, para que usted actúe sobre eventos verificados. Cada incidente se documenta a detalle, y los patrones que emergen entre eventos llegan a su equipo para mejorar procesos y la operación.' },
     ],
-    ctaLabel: 'Solicite una demo',
+    ctaLabel: 'Solicite una evaluación',
   },
   capabilities: {
     eyebrow: 'DE LA DETECCIÓN A LA PREVENCIÓN',
@@ -29,7 +29,7 @@ export const homeContent: HomeContent = {
       {
         title: 'Confirma.',
         reveal:
-          'Un analista capacitado en nuestro Centro de Revisión verifica cada detección antes de emitir una alerta.',
+          'Un analista de nuestro Centro de Revisión verifica en segundos la detección y la alerta.',
         icon: 'CheckCircle2',
       },
       {
@@ -41,13 +41,13 @@ export const homeContent: HomeContent = {
       {
         title: 'Documenta.',
         reveal:
-          'Cada evento, respuesta y resultado queda registrado de forma legalmente defensible, aprobado por un humano antes de finalizarse.',
+          'Cada evento, respuesta y resultado queda registrado de forma legalmente defensible, y el proceso de notificaciones y aprobaciones internas es automatizado.',
         icon: 'FileText',
       },
       {
         title: 'Analiza.',
         reveal:
-          'Los patrones entre eventos llegan a quien puede actuar, antes de que ocurra el siguiente evento crítico.',
+          'Las tendencias entre eventos se analizan en vivo, y las oportunidades de mejora llegan al responsable para mejorar la seguridad del paciente y reducir ineficiencias clínicas.',
         icon: 'TrendingUp',
       },
     ],
@@ -79,15 +79,15 @@ export const homeContent: HomeContent = {
       },
       {
         subEyebrow: 'LA CAPA DE ARQUITECTURA',
-        heading: 'Una plataforma, no un conjunto de herramientas',
-        headingLine2: 'por integrar.',
+        heading: 'Una plataforma, no un conjunto',
+        headingLine2: 'de herramientas por integrar.',
         body: 'Detección, confirmación, coordinación, documentación y análisis operan sobre una sola arquitectura. VigiMed instala y opera las cámaras, la analítica, el Centro de Revisión y la capa de reportes. Sin integración con el área de TI del hospital para comenzar.',
       },
     ],
   },
   finalCta: {
-    eyebrow: 'EMPIECE',
-    h2: 'Hable con nuestro equipo',
+    eyebrow: 'COMENCEMOS',
+    h2: '¿Listo para mejorar la calidad de la atención?',
     frame:
       'Hable con nuestro equipo para entender alcance, costo, integraciones, y cómo funciona realmente una implementación.',
     steps: [
@@ -101,7 +101,7 @@ export const homeContent: HomeContent = {
       },
       {
         heading: 'Solución a la Medida',
-        body: 'Le entregaremos una propuesta integral adaptada a su operación, y una hoja de ruta.',
+        body: 'Le entregaremos una propuesta integral adaptada a su operación, incluyendo una hoja de ruta.',
       },
     ],
     form: {

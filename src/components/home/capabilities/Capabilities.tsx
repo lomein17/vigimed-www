@@ -77,7 +77,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
               {capabilities.heading}
             </h2>
           </div>
-          <div className="max-w-[760px] mx-auto">
+          <div className="max-w-[940px] mx-auto">
             <p
               className="font-body"
               style={{ color: '#2B2B2B', lineHeight: 1.6, fontSize: '1.0625rem' }}

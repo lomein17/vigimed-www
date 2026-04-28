@@ -127,9 +127,9 @@ export const homeContent: HomeContent = {
       { text: 'patient safety', emphasis: 'bold-amber' },
       { text: ' and ' },
       { text: 'quality of care', emphasis: 'bold-amber' },
-      { text: ', as they happen. Every detection is confirmed by a human analyst in our Compliance Review Center, so you act on verified events. Each incident is documented in detail, and the patterns that emerge across events reach your team to improve processes and operations.' },
+      { text: ' as they happen. Every detection is confirmed by a human analyst in our Compliance Review Center, so you act on verified events. Each incident is documented in detail, and the patterns that emerge across events reach your team to improve processes and operations.' },
     ],
-    ctaLabel: 'Request a demo',
+    ctaLabel: 'Request an evaluation',
   },
   capabilities: {
     eyebrow: 'FROM DETECTION TO PREVENTION',
@@ -146,7 +146,7 @@ export const homeContent: HomeContent = {
       {
         title: 'Confirms.',
         reveal:
-          'A trained analyst in our Compliance Review Center verifies every detection before any alert fires.',
+          'Within seconds, a trained analyst in our Compliance Review Center verifies the detection and the alert.',
         icon: 'CheckCircle2',
       },
       {
@@ -158,13 +158,13 @@ export const homeContent: HomeContent = {
       {
         title: 'Documents.',
         reveal:
-          "Every event, response, and outcome becomes a legally defensible record, approved by a human before it's finalized.",
+          'Every event, response, and outcome becomes a legally defensible record, and the internal notification and approval process is automated.',
         icon: 'FileText',
       },
       {
         title: 'Analyzes.',
         reveal:
-          'Patterns across events reach whoever can act on them, before the next critical event happens.',
+          'Trends across events are analyzed live, and improvement opportunities reach the right owner to advance patient safety and reduce clinical inefficiency.',
         icon: 'TrendingUp',
       },
     ],
@@ -202,7 +202,7 @@ export const homeContent: HomeContent = {
   },
   finalCta: {
     eyebrow: 'GET STARTED',
-    h2: 'Talk to our team',
+    h2: 'Ready to improve quality of care?',
     frame:
       'Speak with our team to understand scope, cost, integrations, and what a deployment actually looks like.',
     steps: [
