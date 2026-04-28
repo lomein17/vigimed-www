@@ -632,17 +632,20 @@ h1, h2, h3 {
   }
 }
 
-/* Soft cyan radial haze. Locked at 10% center stop after visual UAT;
- * tunable to {6, 8, 10, 12, 14}%. Shipped value: 10%. */
+/* Soft cyan radial haze. Center moved to 50% 62% (between Row 1 and Row 2)
+ * with ellipse height expanded to 80% so both rows read with equal lift;
+ * mid-stop relaxed to 50% and outer stop pushed to 95% for a softer falloff.
+ * Locked at 10% center stop within the {6, 8, 10, 12, 14}% range, retunable
+ * during UAT. Shipped value: 10%. */
 .vm-integrations-haze {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background: radial-gradient(
-    ellipse 80% 60% at 50% 35%,
+    ellipse 80% 80% at 50% 62%,
     rgba(32, 162, 226, 0.10) 0%,
-    rgba(32, 162, 226, 0.05) 40%,
-    rgba(32, 162, 226, 0) 80%
+    rgba(32, 162, 226, 0.05) 50%,
+    rgba(32, 162, 226, 0) 95%
   );
 }
 
