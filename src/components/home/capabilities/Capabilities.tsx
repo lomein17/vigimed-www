@@ -16,7 +16,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
   return (
     <section
       aria-labelledby="capabilities-heading"
-      className="relative bg-surface-warm py-section px-gutter overflow-hidden md:min-h-[640px] lg:min-h-[880px]"
+      className="vm-capabilities-section relative bg-surface-warm py-section px-gutter overflow-hidden md:min-h-[640px] lg:min-h-[880px]"
     >
       <div aria-hidden="true" className="absolute inset-0 bg-surface-warm">
         {isDev && (

@@ -17,7 +17,7 @@ export function Hero({ locale }: { locale: Locale }) {
   return (
     <section
       aria-labelledby="hero-headline"
-      className="relative w-full overflow-hidden flex items-center md:min-h-[640px] lg:min-h-screen"
+      className="vm-hero-section relative w-full overflow-hidden flex items-center md:min-h-[640px] lg:min-h-screen"
       style={{
         background: 'var(--color-navy-800)',
       }}

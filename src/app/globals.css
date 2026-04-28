@@ -1036,3 +1036,56 @@ h1, h2, h3 {
   color: #0A1628;
   margin: 0;
 }
+
+/* =======================================================================
+ * Scroll-snap (VM-413)
+ * -----------------------------------------------------------------------
+ * Anchors top-level sections to viewport top with a 72px offset matching
+ * the sticky nav's h-[72px]. Proximity (not mandatory) so long sections
+ * like Final CTA + form remain freely scrollable. Gated to >=1024px with
+ * hover capability so phones, portrait tablets, and touch-only iPads keep
+ * native scrolling.
+ * ======================================================================= */
+
+@media (min-width: 1024px) and (hover: hover) {
+  html {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 72px;
+  }
+
+  .vm-hero-section,
+  .vm-capabilities-section,
+  .vm-pim-section,
+  .vm-moat-section,
+  .vm-integrations-section,
+  .vm-final-cta-section {
+    scroll-snap-align: start;
+    scroll-margin-top: 72px;
+  }
+}
+
+/* =======================================================================
+ * PIM viewport cap (VM-413)
+ * -----------------------------------------------------------------------
+ * Reservation breakdown for the 320px subtraction:
+ *   72  sticky nav
+ *   96  .vm-pim-section padding-top at >=1024px
+ *   80  .vm-pim-headline (h2) line-height + bottom margin
+ *   40  .vm-pim-frame paragraph + bottom margin
+ *   30  .vm-pim-caption + spacing
+ *   --- = 318, rounded up to 320.
+ * Uses 100svh (small viewport height) so the calc is stable when mobile-
+ * style chrome is present. If max-height clamps the frame shorter than
+ * 16:9 within available width, the inner video letterboxes via
+ * object-fit: contain instead of cropping.
+ * ======================================================================= */
+
+@media (min-width: 1024px) {
+  .vm-pim-scene {
+    max-height: calc(100svh - 320px);
+  }
+
+  .vm-pim-video {
+    object-fit: contain;
+  }
+}
