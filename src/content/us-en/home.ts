@@ -102,6 +102,20 @@ export interface FinalCtaPayload {
   phone: string;
 }
 
+export interface IntegrationsTile {
+  name: string;
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+}
+
+export interface IntegrationsContent {
+  h2: string;
+  // Exactly 8, in row-major order: row 1 anchor, row 2 specialist.
+  tiles: ReadonlyArray<IntegrationsTile>;
+}
+
 export interface HomeContent {
   hero: {
     eyebrow: string;
@@ -113,6 +127,7 @@ export interface HomeContent {
   capabilities: CapabilitiesContent;
   problemInMotion: ProblemInMotionContent;
   moat: MoatContent;
+  integrations: IntegrationsContent;
   finalCta: FinalCtaContent;
   placeholderLabel: string;
 }
@@ -198,6 +213,19 @@ export const homeContent: HomeContent = {
         heading: 'One platform, not a stack to assemble.',
         body: 'Detection, confirmation, coordination, documentation, and analysis run on a single architecture. VigiMed installs and operates the cameras, the analytics, the Compliance Review Center, and the reporting layer. No hospital IT integration required to begin.',
       },
+    ],
+  },
+  integrations: {
+    h2: 'Built to fit your existing stack.',
+    tiles: [
+      { name: 'Epic', src: '/integrations/epic.svg', width: 248, height: 97, alt: 'Epic logo' },
+      { name: 'Microsoft', src: '/integrations/microsoft.svg', width: 604, height: 129, alt: 'Microsoft logo' },
+      { name: 'Oracle', src: '/integrations/oracle.svg', width: 462, height: 60, alt: 'Oracle logo' },
+      { name: 'ServiceNow', src: '/integrations/servicenow.svg', width: 685, height: 100, alt: 'ServiceNow logo' },
+      { name: 'MEDITECH', src: '/integrations/meditech.svg', width: 442, height: 64, alt: 'MEDITECH logo' },
+      { name: 'TigerConnect', src: '/integrations/tigerconnect.png', width: 243, height: 81, alt: 'TigerConnect logo' },
+      { name: 'Spok', src: '/integrations/spok.png', width: 292, height: 120, alt: 'Spok logo' },
+      { name: 'PerfectServe', src: '/integrations/perfectserve.png', width: 320, height: 110, alt: 'PerfectServe logo' },
     ],
   },
   finalCta: {

@@ -4,6 +4,7 @@ import { notFound, redirect } from 'next/navigation';
 import { Hero } from '@/components/home/Hero';
 import { Capabilities } from '@/components/home/capabilities/Capabilities';
 import { FinalCta } from '@/components/home/final-cta/FinalCta';
+import { Integrations } from '@/components/home/integrations/Integrations';
 import { Moat } from '@/components/home/moat/Moat';
 import { ProblemInMotion } from '@/components/home/problem-in-motion/ProblemInMotion';
 import { isLocale, type Locale } from '@/lib/i18n';
@@ -58,6 +59,7 @@ export default async function HomePage({
       <Capabilities locale={typedLocale} />
       <ProblemInMotion locale={typedLocale} />
       <Moat locale={typedLocale} />
+      <Integrations locale={typedLocale} />
       <FinalCta locale={typedLocale} />
     </>
   );

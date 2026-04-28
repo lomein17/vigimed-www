@@ -604,6 +604,145 @@ h1, h2, h3 {
 }
 
 /* =======================================================================
+ * Integrations section (VM-412)
+ * -----------------------------------------------------------------------
+ * Off-white Home-arc section at position 6 (after Moat). 8-tile responsive
+ * logo grid on the surface-warm background continuous with Moat, sitting
+ * under a soft cyan radial haze. Locked H2, no subhead, no CTA. Tiles are
+ * white cards with dual-layer shadow; hover-capable, fine-pointer devices
+ * receive the magnetic-tile cursor-attraction interaction (translate is
+ * lerped per-frame in JS; scale is CSS-eased via the `scale` property).
+ * Spec source: issue VM-412 (Render spec).
+ * ======================================================================= */
+
+.vm-integrations-section {
+  position: relative;
+  width: 100%;
+  background: var(--color-surface-warm);
+  padding-top: 32px;
+  padding-bottom: 48px;
+  padding-left: var(--site-gutter);
+  padding-right: var(--site-gutter);
+}
+
+@media (min-width: 1024px) {
+  .vm-integrations-section {
+    padding-top: 32px;
+    padding-bottom: 64px;
+  }
+}
+
+/* Soft cyan radial haze. Locked at 10% center stop after visual UAT;
+ * tunable to {6, 8, 10, 12, 14}%. Shipped value: 10%. */
+.vm-integrations-haze {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 35%,
+    rgba(32, 162, 226, 0.10) 0%,
+    rgba(32, 162, 226, 0.05) 40%,
+    rgba(32, 162, 226, 0) 80%
+  );
+}
+
+.vm-integrations-inner {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.vm-integrations-h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #0A1628;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 32px;
+}
+
+@media (min-width: 768px) {
+  .vm-integrations-h2 {
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vm-integrations-h2 {
+    font-size: 28px;
+  }
+}
+
+.vm-integrations-magnetic {
+  position: relative;
+}
+
+.vm-integrations-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .vm-integrations-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+
+.vm-integrations-tile {
+  background: #FFFFFF;
+  border-radius: 14px;
+  aspect-ratio: 1 / 1;
+  padding: 20px;
+  box-shadow:
+    0 1px 3px rgba(10, 22, 40, 0.06),
+    0 4px 12px rgba(10, 22, 40, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  transition: scale 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translate(0, 0);
+  scale: 1;
+}
+
+@media (min-width: 768px) {
+  .vm-integrations-tile {
+    border-radius: 16px;
+    padding: 24px;
+  }
+}
+
+.vm-integrations-tile img {
+  max-width: 70%;
+  max-height: 60%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Tighten Moat's bottom padding only when Integrations follows it, so the
+ * combined gap between the last Moat row and the Integrations H2 lands at
+ * ~64px (32 + 32) on desktop. Fallback for browsers without :has() is the
+ * default 96px Moat bottom padding, which is acceptable. */
+.vm-moat-section:has(+ .vm-integrations-section) {
+  padding-bottom: 32px;
+}
+
+@media (min-width: 1024px) {
+  .vm-moat-section:has(+ .vm-integrations-section) {
+    padding-bottom: 32px;
+  }
+}
+
+/* =======================================================================
  * Final CTA section (VM-371)
  * -----------------------------------------------------------------------
  * Navy full-bleed Home-arc section at position 6 (after Moat). Two-column

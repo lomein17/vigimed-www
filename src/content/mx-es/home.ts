@@ -85,6 +85,19 @@ export const homeContent: HomeContent = {
       },
     ],
   },
+  integrations: {
+    h2: 'Diseñado para integrarse con su sistema actual.',
+    tiles: [
+      { name: 'Microsoft', src: '/integrations/microsoft.svg', width: 604, height: 129, alt: 'Microsoft logo' },
+      { name: 'Epic', src: '/integrations/epic.svg', width: 248, height: 97, alt: 'Epic logo' },
+      { name: 'Google', src: '/integrations/google.svg', width: 140, height: 44, alt: 'Google logo' },
+      { name: 'Oracle', src: '/integrations/oracle.svg', width: 462, height: 60, alt: 'Oracle logo' },
+      { name: 'MEDITECH', src: '/integrations/meditech.svg', width: 442, height: 64, alt: 'MEDITECH logo' },
+      { name: 'WhatsApp', src: '/integrations/whatsapp.svg', width: 674, height: 435, alt: 'WhatsApp logo' },
+      { name: 'Slack', src: '/integrations/slack.png', width: 1600, height: 572, alt: 'Slack logo' },
+      { name: 'ServiceNow', src: '/integrations/servicenow.svg', width: 685, height: 100, alt: 'ServiceNow logo' },
+    ],
+  },
   finalCta: {
     eyebrow: 'COMENCEMOS',
     h2: '¿Listo para mejorar la calidad de la atención?',
