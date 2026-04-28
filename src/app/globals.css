@@ -1060,29 +1060,34 @@ h1, h2, h3 {
   .vm-integrations-section,
   .vm-final-cta-section {
     scroll-snap-align: start;
-    scroll-margin-top: 72px;
   }
 }
 
 /* =======================================================================
  * PIM viewport cap (VM-413)
  * -----------------------------------------------------------------------
- * Reservation breakdown for the 320px subtraction:
- *   72  sticky nav
- *   96  .vm-pim-section padding-top at >=1024px
- *   80  .vm-pim-headline (h2) line-height + bottom margin
- *   40  .vm-pim-frame paragraph + bottom margin
- *   30  .vm-pim-caption + spacing
- *   --- = 318, rounded up to 320.
+ * Reservation breakdown for the 560px subtraction:
+ *   72   sticky nav
+ *   96   .vm-pim-section padding-top at >=1024px
+ *   36   eyebrow (16) + margin-bottom (20)
+ *   122  .vm-pim-headline (h2) at 48px x 1.08 line-height x 2 lines (forced
+ *        by the <br/>) + 18 margin-bottom
+ *   100  .vm-pim-frame paragraph at 20px x 1.5 line-height x ~2 lines +
+ *        40 margin-bottom
+ *   72   .vm-pim-caption (16) + margin-top (16) + margin-bottom (40)
+ *   96   .vm-pim-section padding-bottom at >=1024px
+ *   ---
+ *   594, rounded down to 560 for slight cap headroom.
+ *
  * Uses 100svh (small viewport height) so the calc is stable when mobile-
- * style chrome is present. If max-height clamps the frame shorter than
+ * style chrome is present. When the cap forces the frame shorter than
  * 16:9 within available width, the inner video letterboxes via
  * object-fit: contain instead of cropping.
  * ======================================================================= */
 
 @media (min-width: 1024px) {
   .vm-pim-scene {
-    max-height: calc(100svh - 320px);
+    max-height: calc(100svh - 560px);
   }
 
   .vm-pim-video {
