@@ -164,7 +164,7 @@ export const homeContent: HomeContent = {
       {
         title: 'Analyzes.',
         reveal:
-          'Trends across events are analyzed live, and improvement opportunities reach the right owner to advance patient safety and reduce clinical inefficiency.',
+          'Trends across events are detected and surfaced to the owner to advance patient safety and reduce clinical inefficiency.',
         icon: 'TrendingUp',
       },
     ],

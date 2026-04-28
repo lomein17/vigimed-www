@@ -47,7 +47,7 @@ export const homeContent: HomeContent = {
       {
         title: 'Analiza.',
         reveal:
-          'Las tendencias entre eventos se analizan en vivo, y las oportunidades de mejora llegan al responsable para mejorar la seguridad del paciente y reducir ineficiencias clínicas.',
+          'Las tendencias entre eventos son detectadas y se presentan al responsable para mejorar la seguridad del paciente y reducir ineficiencias clínicas.',
         icon: 'TrendingUp',
       },
     ],
