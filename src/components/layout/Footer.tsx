@@ -18,7 +18,7 @@ export function Footer({ locale }: { locale: Locale }) {
   return (
     <footer className="bg-navy-900 text-text-on-dark">
       <div className="brand-line" aria-hidden="true" />
-      <div className="max-w-content mx-auto px-gutter pt-12 pb-6 md:pt-16 md:pb-8 font-ui">
+      <div className="max-w-[1280px] mx-auto px-gutter pt-12 pb-6 md:pt-16 md:pb-8 font-ui">
         <div className="flex flex-col gap-8 md:flex-row md:justify-end md:gap-24">
           {columns.map((col) => (
             <nav
@@ -53,7 +53,7 @@ export function Footer({ locale }: { locale: Locale }) {
 
         <div
           aria-hidden="true"
-          className="h-[3px] bg-brand-pulse mt-10 mb-5 md:mt-6 md:mb-6"
+          className="h-[3px] bg-brand-pulse mt-12 mb-5 md:mt-16 md:mb-6"
         />
 
         <div className="flex flex-col gap-3 text-left text-[11px] md:grid md:grid-cols-3 md:items-end md:gap-4 md:text-xs text-text-on-dark-muted">

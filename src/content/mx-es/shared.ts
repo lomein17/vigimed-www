@@ -28,8 +28,8 @@ export const sharedContent: SharedContent = {
       {
         heading: 'Soluciones',
         links: [
-          { label: 'Hospitales Públicos' },
           { label: 'Hospitales Privados' },
+          { label: 'Hospitales Públicos' },
           { label: 'Sistemas Hospitalarios' },
           { label: 'Clínicas de Maternidad' },
           { label: 'Laboratorios Clínicos' },

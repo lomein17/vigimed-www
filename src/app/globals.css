@@ -1058,7 +1058,8 @@ h1, h2, h3 {
   .vm-pim-section,
   .vm-moat-section,
   .vm-integrations-section,
-  .vm-final-cta-section {
+  .vm-final-cta-section,
+  footer {
     scroll-snap-align: start;
   }
 }

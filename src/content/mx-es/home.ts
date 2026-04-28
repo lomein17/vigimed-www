@@ -109,7 +109,7 @@ export const homeContent: HomeContent = {
         body: 'Una persona del equipo de VigiMed responderá por correo en un día hábil para confirmar la recepción y proponer horarios de llamada.',
       },
       {
-        heading: 'Evaluemos el Ajuste',
+        heading: 'Evaluemos Compatibilidad',
         body: 'Una conversación sobre su operación, sus áreas críticas y sus áreas de oportunidad, junto con un recorrido de la plataforma.',
       },
       {
