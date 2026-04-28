@@ -26,29 +26,32 @@ export const sharedContent: SharedContent = {
   footer: {
     columns: [
       {
-        heading: 'Plataforma',
+        heading: 'Soluciones',
         links: [
-          { label: 'Inicio', route: 'home' },
-          { label: 'Plataforma', route: 'platform' },
-          { label: 'Casos de Uso', route: 'useCases' },
-          { label: 'Por qué VigiMed', route: 'whyVigimed' },
-          { label: 'Cómo Funciona', route: 'howItWorks' },
-          { label: 'Contacto', route: 'contact' },
+          { label: 'Hospitales Públicos' },
+          { label: 'Hospitales Privados' },
+          { label: 'Sistemas Hospitalarios' },
+          { label: 'Clínicas de Maternidad' },
+          { label: 'Laboratorios Clínicos' },
         ],
       },
       {
-        heading: 'Empresa',
-        links: [{ label: 'Contacto', route: 'contact' }],
-      },
-      {
-        heading: 'Contacto',
+        heading: 'Acerca de VigiMed',
         links: [
-          { label: 'contacto@vigimed.ai', href: 'mailto:contacto@vigimed.ai' },
+          { label: 'Newsroom' },
+          { label: 'Oportunidades Laborales' },
+          { label: 'Contactar a VigiMed', route: 'contact' },
         ],
       },
     ],
-    copyright: '© VigiMed 2026',
-    privacyLabel: 'Política de Privacidad',
+    copyright: {
+      prefix: 'Copyright © 2026 VigiMed.',
+      suffix: 'Todos los derechos reservados.',
+    },
+    legalLinks: [
+      { label: 'Política de Privacidad' },
+      { label: 'Términos de Uso' },
+    ],
   },
   comingSoon: {
     positioning:

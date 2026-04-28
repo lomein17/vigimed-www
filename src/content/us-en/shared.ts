@@ -1,8 +1,8 @@
 import type { Locale, RouteKey } from '@/lib/i18n';
 
-export type FooterLink =
-  | { label: string; href: string; external?: boolean }
-  | { label: string; route: RouteKey };
+export type FooterItem = { label: string; route?: RouteKey };
+
+export type FooterColumn = { heading: string; links: FooterItem[] };
 
 export type MarketSegmentIcon = 'hospital' | 'clinic' | 'lab';
 
@@ -19,9 +19,9 @@ export interface SharedContent {
     otherLocale: Locale;
   };
   footer: {
-    columns: Array<{ heading: string; links: FooterLink[] }>;
-    copyright: string;
-    privacyLabel: string;
+    columns: readonly [FooterColumn, FooterColumn];
+    copyright: { prefix: string; suffix: string };
+    legalLinks: readonly [{ label: string }, { label: string }];
   };
   comingSoon: {
     positioning: string;
@@ -55,29 +55,31 @@ export const sharedContent: SharedContent = {
   footer: {
     columns: [
       {
-        heading: 'Platform',
+        heading: 'Solutions',
         links: [
-          { label: 'Home', route: 'home' },
-          { label: 'Platform', route: 'platform' },
-          { label: 'Use Cases', route: 'useCases' },
-          { label: 'Why VigiMed', route: 'whyVigimed' },
-          { label: 'How It Works', route: 'howItWorks' },
-          { label: 'Contact', route: 'contact' },
+          { label: 'Health Systems' },
+          { label: 'Community Hospitals' },
+          { label: 'Academic Medical Centers' },
+          { label: 'Clinical Labs' },
         ],
       },
       {
-        heading: 'Company',
-        links: [{ label: 'Contact', route: 'contact' }],
-      },
-      {
-        heading: 'Contact',
+        heading: 'About VigiMed',
         links: [
-          { label: 'contact@vigimed.ai', href: 'mailto:contact@vigimed.ai' },
+          { label: 'Newsroom' },
+          { label: 'Career Opportunities' },
+          { label: 'Contact VigiMed', route: 'contact' },
         ],
       },
     ],
-    copyright: '© VigiMed 2026',
-    privacyLabel: 'Privacy Policy',
+    copyright: {
+      prefix: 'Copyright © 2026 VigiMed.',
+      suffix: 'All rights reserved.',
+    },
+    legalLinks: [
+      { label: 'Privacy Policy' },
+      { label: 'Terms of Use' },
+    ],
   },
   comingSoon: {
     positioning:
