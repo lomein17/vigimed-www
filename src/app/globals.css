@@ -1066,37 +1066,40 @@ h1, h2, h3 {
 /* =======================================================================
  * PIM viewport-fitting (VM-413)
  * -----------------------------------------------------------------------
- * Scales .vm-pim-scene with viewport height while preserving 16:9.
+ * The PIM section is hero-like: it should read as "one screen" on desktop.
+ * Pin the section to min-height: 100svh (box-sizing border-box, so padding
+ * is included in the 100svh). Make the inner wrapper a flex column that
+ * fills the section's content area. Chrome elements (eyebrow, H2, frame,
+ * caption) take their natural heights; the scene takes whatever is left
+ * via flex: 1.
  *
- * The trick: tie the scene's max-width to (svh - chrome reservation),
- * scaled by 16/9. With aspect-ratio: 16/9 still in effect, the height
- * derived from that width always lands at (svh - reservation), which is
- * exactly the available vertical room. Width and height move together,
- * so the frame stays 16:9 at every viewport.
+ * aspect-ratio: 16/9 (set unconditionally on .vm-pim-scene earlier in the
+ * file) drives the scene's width from its flex-determined height. The
+ * 1920x1080 max caps prevent the scene from growing past a sensible
+ * ceiling on ultrawide tall viewports. When max-width caps, max-height
+ * caps in lockstep (1920 / 16 * 9 = 1080) so the frame stays 16:9.
  *
- * Ceiling at 1920px so the frame doesn't grow indefinitely on ultrawide
- * monitors. .vm-pim-inner lifts to match so it never constrains the
- * frame before it reaches its natural size.
- *
- * Reservation breakdown for the 560px subtraction:
- *   72   sticky nav
- *   96   .vm-pim-section padding-top at >=1024px
- *   36   eyebrow + margin-bottom
- *   122  .vm-pim-headline at 48px x 1.08 line-height x 2 lines + 18 margin
- *   100  .vm-pim-frame at 20px x 1.5 line-height x ~2 lines + 40 margin
- *   72   .vm-pim-caption + top/bottom margins
- *   96   .vm-pim-section padding-bottom
- *   ---
- *   594, rounded down to 560 for slight headroom.
- * Uses 100svh for stability with mobile-style chrome.
+ * No static reservation. The section always equals viewport. The scene
+ * always maxes the available vertical room.
  * ======================================================================= */
 
 @media (min-width: 1024px) {
+  .vm-pim-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+  }
+
   .vm-pim-inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     max-width: 1920px;
   }
 
   .vm-pim-scene {
-    max-width: min(1920px, calc((100svh - 560px) * 16 / 9));
+    flex: 1 1 0;
+    max-width: 1920px;
+    max-height: 1080px;
   }
 }
