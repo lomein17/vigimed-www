@@ -279,7 +279,6 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
     Math.max(0, subsegmentCount - 1) * CARD_GAP_PX;
   const innerWidth = cardsRowWidth;
   const drawerWidthPx = innerWidth + 2 * DRAWER_PADDING_X_PX;
-  const isNarrow = subsegmentCount === 1;
 
   return (
     <>
@@ -452,38 +451,10 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
       >
         {activeParent ? (
           <>
-            {isNarrow ? (
-              <div style={{ marginBottom: 28 }}>
-                <div
-                  className="flex items-center"
-                  style={{ gap: 14, marginBottom: 12 }}
-                >
-                  <ParentIcon parentKey={openKey ?? ''} size={18} />
-                  <span
-                    className="font-display text-text-on-dark"
-                    style={{ fontSize: 18, fontWeight: 500 }}
-                  >
-                    {activeParent.drawerName}
-                  </span>
-                </div>
-                <p
-                  className="font-ui"
-                  style={{
-                    fontSize: 14,
-                    fontStyle: 'italic',
-                    fontWeight: 400,
-                    color: 'rgba(255, 255, 255, 0.75)',
-                    whiteSpace: 'pre-line',
-                    margin: 0,
-                  }}
-                >
-                  {activeParent.drawerQuestion}
-                </p>
-              </div>
-            ) : (
+            <div style={{ marginBottom: 28 }}>
               <div
                 className="flex items-center"
-                style={{ marginBottom: 28, gap: 14 }}
+                style={{ gap: 14, marginBottom: 12 }}
               >
                 <ParentIcon parentKey={openKey ?? ''} size={18} />
                 <span
@@ -492,31 +463,21 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
                 >
                   {activeParent.drawerName}
                 </span>
-                <span
-                  aria-hidden="true"
-                  style={{
-                    color: 'rgba(32, 162, 226, 0.5)',
-                    fontSize: 18,
-                    fontWeight: 300,
-                    padding: '0 4px',
-                  }}
-                >
-                  |
-                </span>
-                <span
-                  className="font-ui"
-                  style={{
-                    fontSize: 14,
-                    fontStyle: 'italic',
-                    fontWeight: 400,
-                    color: 'rgba(255, 255, 255, 0.75)',
-                    whiteSpace: 'pre-line',
-                  }}
-                >
-                  {activeParent.drawerQuestion}
-                </span>
               </div>
-            )}
+              <p
+                className="font-ui"
+                style={{
+                  fontSize: 14,
+                  fontStyle: 'italic',
+                  fontWeight: 400,
+                  color: 'rgba(255, 255, 255, 0.75)',
+                  whiteSpace: 'pre-line',
+                  margin: 0,
+                }}
+              >
+                {activeParent.drawerQuestion}
+              </p>
+            </div>
             <div
               className="grid"
               style={{
