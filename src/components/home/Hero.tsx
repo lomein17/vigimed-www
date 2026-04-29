@@ -31,41 +31,43 @@ export function Hero({ locale }: { locale: Locale }) {
       </div>
 
       {hero.backgroundImage && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          aria-hidden="true"
-          alt=""
-          src={hero.backgroundImage}
-          decoding="async"
-          fetchPriority="high"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center',
-            filter: 'saturate(0.6)',
-          }}
-        />
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            aria-hidden="true"
+            alt=""
+            src={hero.backgroundImage}
+            decoding="async"
+            fetchPriority="high"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              filter: 'saturate(0.6)',
+            }}
+          />
+
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              background: 'rgba(0,0,0,0.30)',
+            }}
+          />
+
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 25%, rgba(0,0,0,0) 100%)',
+            }}
+          />
+        </>
       )}
-
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background: 'rgba(0,0,0,0.30)',
-        }}
-      />
-
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 25%, rgba(0,0,0,0) 100%)',
-        }}
-      />
 
       <div
         className="relative z-10 w-full py-section"
