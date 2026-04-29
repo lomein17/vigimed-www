@@ -45,3 +45,6 @@ next-env.d.ts
 .claude/
 vm-engineering-cowork-instructions.md
 .preview/
+
+# Raw asset inputs (machine-local pre-processing only, never commit)
+assets-src/

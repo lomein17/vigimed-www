@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { homeContent as mxHome } from '@/content/mx-es/home';
 import { homeContent as usHome } from '@/content/us-en/home';
@@ -12,24 +13,25 @@ const contentByLocale = {
   'us-en': usHome,
 } as const;
 
-// Flip this to the real MP4 path to activate the real video; placeholder
-// renders when null. Single-line swap is intentional: VM-360 lands the real
-// 12-second scene by changing only this constant (and the timing config).
-const SCENE_VIDEO_SRC: string | null = null;
+const VIDEO_SRC_DESKTOP = '/videos/pim-sterile-breach-1080.mp4';
+const VIDEO_SRC_MOBILE = '/videos/pim-sterile-breach-480.mp4';
+const POSTER_SRC = '/videos/pim-sterile-breach-poster.jpg';
 
-const LOOP_MS = 12000;
+const LOOP_DURATION_SEC = 14.0;
 
-// Even 4/4/4 split placeholder. VM-360 replaces this with a per-scene config
-// driven by the real MP4's visual cues (nurse enters buffer zone = amber,
-// crosses sterile line = red).
+// Initial estimates. Pablo locks final values via UAT screen-share against the
+// rendered staging clip and patches these two constants in a follow-up.
+const GREEN_TO_AMBER_SEC = 3.5;
+const AMBER_TO_RED_SEC = 9.0;
+
 const STATE_SEQUENCE: ReadonlyArray<{
   state: BreachState;
-  startMs: number;
-  endMs: number;
+  startSec: number;
+  endSec: number;
 }> = [
-  { state: 'green', startMs: 0, endMs: 4000 },
-  { state: 'amber', startMs: 4000, endMs: 8000 },
-  { state: 'red', startMs: 8000, endMs: LOOP_MS },
+  { state: 'green', startSec: 0, endSec: GREEN_TO_AMBER_SEC },
+  { state: 'amber', startSec: GREEN_TO_AMBER_SEC, endSec: AMBER_TO_RED_SEC },
+  { state: 'red', startSec: AMBER_TO_RED_SEC, endSec: LOOP_DURATION_SEC },
 ];
 
 const FILTER_COLOR: Record<BreachState, string> = {
@@ -44,9 +46,37 @@ const BANNER_STYLE: Record<BreachState, { color: string; border: string }> = {
   red: { color: '#F7C1C1', border: 'rgba(247, 193, 193, 0.55)' },
 };
 
-function stateAtElapsed(elapsedMs: number): BreachState {
+const REDUCED_MOTION_SEQUENCE_MS: ReadonlyArray<{
+  state: BreachState;
+  durationMs: number;
+}> = [
+  { state: 'green', durationMs: 4000 },
+  { state: 'amber', durationMs: 5000 },
+  { state: 'red', durationMs: 5000 },
+];
+
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+
+function subscribeReducedMotion(onChange: () => void) {
+  const query = window.matchMedia(REDUCED_MOTION_QUERY);
+  query.addEventListener('change', onChange);
+  return () => query.removeEventListener('change', onChange);
+}
+
+function getReducedMotionSnapshot(): boolean {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
+function getReducedMotionServerSnapshot(): boolean {
+  return false;
+}
+
+function stateAtCurrentTimeSec(currentTimeSec: number): BreachState {
+  const positionSec =
+    ((currentTimeSec % LOOP_DURATION_SEC) + LOOP_DURATION_SEC) %
+    LOOP_DURATION_SEC;
   for (const entry of STATE_SEQUENCE) {
-    if (elapsedMs >= entry.startMs && elapsedMs < entry.endMs) {
+    if (positionSec >= entry.startSec && positionSec < entry.endSec) {
       return entry.state;
     }
   }
@@ -56,23 +86,55 @@ function stateAtElapsed(elapsedMs: number): BreachState {
 export function ProblemInMotion({ locale }: { locale: Locale }) {
   const home = contentByLocale[locale];
   const content = home.problemInMotion;
-  const placeholderLabel = home.placeholderLabel;
 
   const [state, setState] = useState<BreachState>('green');
-  const startRef = useRef<number | null>(null);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  );
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    let rafId = 0;
-    const tick = (now: number) => {
-      if (startRef.current === null) startRef.current = now;
-      const elapsed = (now - startRef.current) % LOOP_MS;
-      const nextState = stateAtElapsed(elapsed);
-      setState((prev) => (prev === nextState ? prev : nextState));
-      rafId = requestAnimationFrame(tick);
+    if (prefersReducedMotion) return;
+    const videoEl = videoRef.current;
+    if (videoEl === null) return;
+
+    const sync = () => {
+      const next = stateAtCurrentTimeSec(videoEl.currentTime);
+      setState((prev) => (prev === next ? prev : next));
     };
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
-  }, []);
+
+    videoEl.addEventListener('timeupdate', sync);
+    videoEl.addEventListener('seeked', sync);
+    return () => {
+      videoEl.removeEventListener('timeupdate', sync);
+      videoEl.removeEventListener('seeked', sync);
+    };
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    if (!prefersReducedMotion) return;
+
+    let cancelled = false;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const step = (index: number) => {
+      if (cancelled) return;
+      const entry = REDUCED_MOTION_SEQUENCE_MS[index];
+      if (entry === undefined) return;
+      setState(entry.state);
+      const nextIndex = (index + 1) % REDUCED_MOTION_SEQUENCE_MS.length;
+      timeoutId = setTimeout(() => step(nextIndex), entry.durationMs);
+    };
+
+    step(0);
+
+    return () => {
+      cancelled = true;
+      if (timeoutId !== null) clearTimeout(timeoutId);
+    };
+  }, [prefersReducedMotion]);
 
   const bannerStyle = BANNER_STYLE[state];
 
@@ -91,21 +153,45 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
         <p className="vm-pim-frame">{content.frame}</p>
 
         <div className="vm-pim-scene">
-          {SCENE_VIDEO_SRC !== null ? (
-            <video
+          {prefersReducedMotion ? (
+            <Image
               className="vm-pim-video"
-              src={SCENE_VIDEO_SRC}
-              autoPlay
-              muted
-              loop
-              playsInline
+              src={POSTER_SRC}
+              alt=""
+              aria-label={content.videoAriaLabel}
+              fill
+              priority
+              sizes="(min-width: 768px) 1280px, 100vw"
             />
           ) : (
-            <div className="vm-pim-placeholder" aria-hidden="true">
-              <span className="vm-pim-placeholder-label">
-                {placeholderLabel}
-              </span>
-            </div>
+            <>
+              {/*
+                Responsive video pattern (VM-417): two H.264 MP4 sources behind
+                the same <video> element. The 1080p source serves desktop
+                (>= 768px viewport), the 480p source serves mobile and acts as
+                fallback. Browsers pick at element creation; window resize does
+                not re-evaluate. Native HTML5 loop. Subsequent asset wiring
+                (Hero, Loop, Moat, Final CTA) follows this shape.
+              */}
+              <video
+                ref={videoRef}
+                className="vm-pim-video"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster={POSTER_SRC}
+                aria-label={content.videoAriaLabel}
+              >
+                <source
+                  src={VIDEO_SRC_DESKTOP}
+                  type="video/mp4"
+                  media="(min-width: 768px)"
+                />
+                <source src={VIDEO_SRC_MOBILE} type="video/mp4" />
+              </video>
+            </>
           )}
 
           <div

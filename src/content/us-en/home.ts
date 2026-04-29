@@ -29,6 +29,7 @@ export interface ProblemInMotionContent {
   frame: string;
   sceneCaption: string;
   banners: Record<BreachState, string>;
+  videoAriaLabel: string;
 }
 
 export interface MoatClaim {
@@ -197,6 +198,8 @@ export const homeContent: HomeContent = {
         'OR 1 · Contamination risk detected · Non-sterile personnel in zone',
       red: 'OR 1 · Sterile field breach',
     },
+    videoAriaLabel:
+      'Surgical team operating in an OR while a non-scrubbed nurse approaches the sterile instrument table, picks up an instrument, and exits the frame.',
   },
   moat: {
     eyebrow: 'WHY ONLY VIGIMED',

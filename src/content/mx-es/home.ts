@@ -66,6 +66,8 @@ export const homeContent: HomeContent = {
         'Q1 · Riesgo de contaminación detectado · Personal no estéril en zona',
       red: 'Q1 · Ruptura de campo estéril',
     },
+    videoAriaLabel:
+      'Equipo quirúrgico operando en un quirófano mientras una enfermera no estéril se acerca a la mesa de instrumentos estériles, toma un instrumento y sale del cuadro.',
   },
   moat: {
     eyebrow: 'POR QUÉ SOLO VIGIMED',
