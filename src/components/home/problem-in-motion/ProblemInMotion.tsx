@@ -17,7 +17,9 @@ const VIDEO_SRC_DESKTOP = '/videos/pim-sterile-breach-1080.mp4';
 const VIDEO_SRC_MOBILE = '/videos/pim-sterile-breach-480.mp4';
 const POSTER_SRC = '/videos/pim-sterile-breach-poster.jpg';
 
-const REST_DURATION_MS = 1000;
+const REST_FADE_MS = 500;
+const REST_HOLD_MS = 1000;
+const REST_TOTAL_MS = REST_FADE_MS + REST_HOLD_MS;
 
 // Initial estimates. Pablo locks final values via UAT screen-share against the
 // rendered staging clip and patches these two constants in a follow-up.
@@ -44,7 +46,7 @@ const REDUCED_MOTION_SEQUENCE: ReadonlyArray<{
   { state: 'green', restProgress: 0, durationMs: 4000 },
   { state: 'amber', restProgress: 0, durationMs: 5000 },
   { state: 'red', restProgress: 0, durationMs: 5000 },
-  { state: 'red', restProgress: 1, durationMs: 1000 },
+  { state: 'red', restProgress: 1, durationMs: 1500 },
 ];
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
@@ -98,9 +100,7 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
       const startMs = performance.now();
       const tick = () => {
         const elapsed = performance.now() - startMs;
-        const progress = Math.min(elapsed / REST_DURATION_MS, 1);
-        setRestProgress(progress);
-        if (progress >= 1) {
+        if (elapsed >= REST_TOTAL_MS) {
           rafHandle = null;
           videoEl.currentTime = 0;
           setState('green');
@@ -108,6 +108,8 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
           videoEl.play().catch(() => {});
           return;
         }
+        const progress = elapsed < REST_FADE_MS ? elapsed / REST_FADE_MS : 1;
+        setRestProgress(progress);
         rafHandle = requestAnimationFrame(tick);
       };
       tick();
@@ -174,6 +176,7 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
               fill
               priority
               sizes="(min-width: 768px) 1280px, 100vw"
+              style={{ opacity: overlayOpacity }}
             />
           ) : (
             <>
@@ -183,7 +186,7 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
                 (>= 768px viewport), the 480p source serves mobile and acts as
                 fallback. Browsers pick at element creation; window resize does
                 not re-evaluate. Loop is driven manually via the ended event so
-                a 1-second rest window can fade the overlay before currentTime
+                a 500ms fade plus 1000ms black hold can run before currentTime
                 resets, masking the frame jump at the seam. Subsequent asset
                 wiring (Hero, Loop, Moat, Final CTA) follows this shape.
               */}
@@ -196,6 +199,7 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
                 preload="metadata"
                 poster={POSTER_SRC}
                 aria-label={content.videoAriaLabel}
+                style={{ opacity: overlayOpacity }}
               >
                 <source
                   src={VIDEO_SRC_DESKTOP}
