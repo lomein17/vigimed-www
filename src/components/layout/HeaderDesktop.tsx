@@ -24,7 +24,6 @@ const TRANSITION_TIMING = 'cubic-bezier(0.4, 0, 0.2, 1)';
 const CARD_WIDTH_PX = 380;
 const CARD_GAP_PX = 20;
 const DRAWER_PADDING_X_PX = 32;
-const DRAWER_MIN_INNER_WIDTH_PX = 700;
 
 function ParentIcon({
   parentKey,
@@ -278,18 +277,20 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
   const cardsRowWidth =
     subsegmentCount * CARD_WIDTH_PX +
     Math.max(0, subsegmentCount - 1) * CARD_GAP_PX;
-  const innerWidth = Math.max(cardsRowWidth, DRAWER_MIN_INNER_WIDTH_PX);
+  const innerWidth = cardsRowWidth;
   const drawerWidthPx = innerWidth + 2 * DRAWER_PADDING_X_PX;
+  const isNarrow = subsegmentCount === 1;
 
   return (
-    <div
-      className="hidden md:flex relative items-center justify-between gap-6 mx-auto h-[72px] px-6 lg:px-8"
-      style={{ maxWidth: 'var(--container-content)' }}
-    >
-      <div className="flex items-center gap-6 lg:gap-12">
+    <>
+      <div
+        className="hidden md:grid items-center h-[72px] px-6 lg:px-8"
+        style={{ gridTemplateColumns: '1fr auto 1fr' }}
+      >
         <Link
           href={hrefFor(locale, 'home')}
           className="flex items-center focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
+          style={{ justifySelf: 'start' }}
           aria-label="VigiMed"
         >
           <Image
@@ -369,49 +370,52 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
             );
           })}
         </nav>
-      </div>
 
-      <div className="flex items-center gap-4 lg:gap-[22px]">
-        <a
-          href={header.loginUrl}
-          target="_self"
-          className="font-ui transition-colors duration-[120ms] ease-out hover:text-text-on-dark focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
-          style={{
-            fontSize: 13,
-            fontWeight: 400,
-            color: 'rgba(255, 255, 255, 0.7)',
-          }}
+        <div
+          className="flex items-center gap-4 lg:gap-[22px]"
+          style={{ justifySelf: 'end' }}
         >
-          {header.utility.login}
-        </a>
-        <button
-          type="button"
-          onClick={handleScrollCta}
-          className="font-ui text-text-on-dark cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
-          style={{
-            fontSize: 14,
-            fontWeight: 500,
-            background: '#20A2E2',
-            border: 0,
-            padding: '11px 22px',
-            borderRadius: 6,
-            transition: `background-color ${TRANSITION_MS}ms ${TRANSITION_TIMING}`,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = '#1A8AC4';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = '#20A2E2';
-          }}
-        >
-          {header.cta.demo}
-        </button>
+          <a
+            href={header.loginUrl}
+            target="_self"
+            className="font-ui transition-colors duration-[120ms] ease-out hover:text-text-on-dark focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
+            style={{
+              fontSize: 13,
+              fontWeight: 400,
+              color: 'rgba(255, 255, 255, 0.7)',
+            }}
+          >
+            {header.utility.login}
+          </a>
+          <button
+            type="button"
+            onClick={handleScrollCta}
+            className="font-ui text-text-on-dark cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
+            style={{
+              fontSize: 14,
+              fontWeight: 500,
+              background: '#20A2E2',
+              border: 0,
+              padding: '11px 22px',
+              borderRadius: 6,
+              transition: `background-color ${TRANSITION_MS}ms ${TRANSITION_TIMING}`,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#1A8AC4';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#20A2E2';
+            }}
+          >
+            {header.cta.demo}
+          </button>
+        </div>
       </div>
 
       <div
         aria-hidden={!drawerOpen}
         onClick={closeDrawer}
-        className="fixed inset-x-0 bottom-0"
+        className="hidden md:block fixed inset-x-0 bottom-0"
         style={{
           top: DROPDOWN_OFFSET_PX,
           background: 'rgba(0, 0, 0, 0.75)',
@@ -430,7 +434,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
             ? `${activeParent.drawerName} ${locale === 'mx-es' ? 'menú' : 'menu'}`
             : undefined
         }
-        className="fixed left-1/2"
+        className="hidden md:block fixed left-1/2"
         style={{
           top: DROPDOWN_OFFSET_PX,
           width: `min(${drawerWidthPx}px, calc(100vw - 32px))`,
@@ -448,41 +452,71 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
       >
         {activeParent ? (
           <>
-            <div
-              className="flex items-center"
-              style={{ marginBottom: 28, gap: 14 }}
-            >
-              <ParentIcon parentKey={openKey ?? ''} size={18} />
-              <span
-                className="font-display text-text-on-dark"
-                style={{ fontSize: 18, fontWeight: 500 }}
+            {isNarrow ? (
+              <div style={{ marginBottom: 28 }}>
+                <div
+                  className="flex items-center"
+                  style={{ gap: 14, marginBottom: 12 }}
+                >
+                  <ParentIcon parentKey={openKey ?? ''} size={18} />
+                  <span
+                    className="font-display text-text-on-dark"
+                    style={{ fontSize: 18, fontWeight: 500 }}
+                  >
+                    {activeParent.drawerName}
+                  </span>
+                </div>
+                <p
+                  className="font-ui"
+                  style={{
+                    fontSize: 14,
+                    fontStyle: 'italic',
+                    fontWeight: 400,
+                    color: 'rgba(255, 255, 255, 0.75)',
+                    whiteSpace: 'pre-line',
+                    margin: 0,
+                  }}
+                >
+                  {activeParent.drawerQuestion}
+                </p>
+              </div>
+            ) : (
+              <div
+                className="flex items-center"
+                style={{ marginBottom: 28, gap: 14 }}
               >
-                {activeParent.drawerName}
-              </span>
-              <span
-                aria-hidden="true"
-                style={{
-                  color: 'rgba(32, 162, 226, 0.5)',
-                  fontSize: 18,
-                  fontWeight: 300,
-                  padding: '0 4px',
-                }}
-              >
-                |
-              </span>
-              <span
-                className="font-ui"
-                style={{
-                  fontSize: 14,
-                  fontStyle: 'italic',
-                  fontWeight: 400,
-                  color: 'rgba(255, 255, 255, 0.75)',
-                  whiteSpace: 'pre-line',
-                }}
-              >
-                {activeParent.drawerQuestion}
-              </span>
-            </div>
+                <ParentIcon parentKey={openKey ?? ''} size={18} />
+                <span
+                  className="font-display text-text-on-dark"
+                  style={{ fontSize: 18, fontWeight: 500 }}
+                >
+                  {activeParent.drawerName}
+                </span>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    color: 'rgba(32, 162, 226, 0.5)',
+                    fontSize: 18,
+                    fontWeight: 300,
+                    padding: '0 4px',
+                  }}
+                >
+                  |
+                </span>
+                <span
+                  className="font-ui"
+                  style={{
+                    fontSize: 14,
+                    fontStyle: 'italic',
+                    fontWeight: 400,
+                    color: 'rgba(255, 255, 255, 0.75)',
+                    whiteSpace: 'pre-line',
+                  }}
+                >
+                  {activeParent.drawerQuestion}
+                </span>
+              </div>
+            )}
             <div
               className="grid"
               style={{
@@ -505,6 +539,6 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
           </>
         ) : null}
       </div>
-    </div>
+    </>
   );
 }
