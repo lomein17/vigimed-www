@@ -1,23 +1,6 @@
 import type { SharedContent } from '@/content/us-en/shared';
 
 export const sharedContent: SharedContent = {
-  nav: {
-    marketSegments: [
-      { label: 'Hospitales', route: 'platform', icon: 'hospital' },
-      { label: 'Clínicas', route: 'platform', icon: 'clinic' },
-      { label: 'Laboratorios', route: 'platform', icon: 'lab' },
-    ],
-    contactCta: { label: 'Contáctenos', route: 'contact' },
-    demoCta: { label: 'Agende una demo', route: 'contact' },
-    drawer: [
-      { label: 'Inicio', route: 'home' },
-      { label: 'Plataforma', route: 'platform' },
-      { label: 'Casos de Uso', route: 'useCases' },
-      { label: 'Por qué VigiMed', route: 'whyVigimed' },
-      { label: 'Cómo Funciona', route: 'howItWorks' },
-      { label: 'Contacto', route: 'contact' },
-    ],
-  },
   localeSelector: {
     currentLabel: 'México',
     otherLabel: 'Estados Unidos',

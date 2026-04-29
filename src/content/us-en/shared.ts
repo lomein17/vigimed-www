@@ -4,15 +4,7 @@ export type FooterItem = { label: string; route?: RouteKey };
 
 export type FooterColumn = { heading: string; links: FooterItem[] };
 
-export type MarketSegmentIcon = 'hospital' | 'clinic' | 'lab';
-
 export interface SharedContent {
-  nav: {
-    marketSegments: Array<{ label: string; route: RouteKey; icon: MarketSegmentIcon }>;
-    contactCta: { label: string; route: 'contact' };
-    demoCta: { label: string; route: 'contact' };
-    drawer: Array<{ label: string; route: RouteKey }>;
-  };
   localeSelector: {
     currentLabel: string;
     otherLabel: string;
@@ -31,22 +23,6 @@ export interface SharedContent {
 }
 
 export const sharedContent: SharedContent = {
-  nav: {
-    marketSegments: [
-      { label: 'Hospitals', route: 'platform', icon: 'hospital' },
-      { label: 'Labs', route: 'platform', icon: 'lab' },
-    ],
-    contactCta: { label: 'Contact us', route: 'contact' },
-    demoCta: { label: 'Book a demo', route: 'contact' },
-    drawer: [
-      { label: 'Home', route: 'home' },
-      { label: 'Platform', route: 'platform' },
-      { label: 'Use Cases', route: 'useCases' },
-      { label: 'Why VigiMed', route: 'whyVigimed' },
-      { label: 'How It Works', route: 'howItWorks' },
-      { label: 'Contact', route: 'contact' },
-    ],
-  },
   localeSelector: {
     currentLabel: 'United States',
     otherLabel: 'Mexico',
