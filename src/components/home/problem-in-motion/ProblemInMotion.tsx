@@ -21,10 +21,8 @@ const REST_FADE_MS = 500;
 const REST_HOLD_MS = 1000;
 const REST_TOTAL_MS = REST_FADE_MS + REST_HOLD_MS;
 
-// Initial estimates. Pablo locks final values via UAT screen-share against the
-// rendered staging clip and patches these two constants in a follow-up.
-const GREEN_TO_AMBER_SEC = 3.5;
-const AMBER_TO_RED_SEC = 9.0;
+const GREEN_TO_AMBER_SEC = 7.5;
+const AMBER_TO_RED_SEC = 10.5;
 
 const FILTER_COLOR: Record<BreachState, string> = {
   green: 'rgba(29, 158, 117, 0.26)',
