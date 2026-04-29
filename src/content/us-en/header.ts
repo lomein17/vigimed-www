@@ -1,6 +1,8 @@
 export type HeaderSubsegment = {
   name: string;
   slug: string;
+  valueProp?: string;
+  image?: { src: string; alt: string };
 };
 
 export type HeaderParent = {
@@ -16,8 +18,6 @@ export interface HeaderContent {
   nav: Record<string, HeaderParent>;
   utility: {
     login: string;
-    contact: string;
-    contactMobile: string;
   };
   cta: {
     demo: string;
@@ -35,11 +35,23 @@ export const header: HeaderContent = {
       drawerQuestion:
         'What if every critical event closed with the same rigor as your best case?',
       subsegments: [
-        { name: 'Health Systems', slug: '/us-en/health-systems/' },
-        { name: 'Community Hospitals', slug: '/us-en/community-hospitals/' },
+        {
+          name: 'Health Systems',
+          slug: '/us-en/health-systems/',
+          valueProp:
+            'What works at your flagship facility, now running identically at every hospital in your network.',
+        },
+        {
+          name: 'Community Hospitals',
+          slug: '/us-en/community-hospitals/',
+          valueProp:
+            'Critical-event response that fits inside your current staff load, not on top of it.',
+        },
         {
           name: 'Academic Medical Centers',
           slug: '/us-en/academic-medical-centers/',
+          valueProp:
+            'The rigor your residents are trained to expect, built into the operation around them.',
         },
       ],
     },
@@ -49,14 +61,17 @@ export const header: HeaderContent = {
       drawerQuestion:
         'Do your preanalytical errors reach the right owner before they become complaints?',
       subsegments: [
-        { name: 'Clinical Labs', slug: '/us-en/clinical-labs/' },
+        {
+          name: 'Clinical Labs',
+          slug: '/us-en/clinical-labs/',
+          valueProp:
+            'Preanalytical errors stay hidden in the LIS until they cost a result. VigiMed surfaces them earlier.',
+        },
       ],
     },
   },
   utility: {
     login: 'Log in',
-    contact: 'Contact us',
-    contactMobile: 'Contact',
   },
   cta: {
     demo: 'Book a demo',

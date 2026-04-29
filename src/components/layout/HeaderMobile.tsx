@@ -183,21 +183,6 @@ export function HeaderMobile({ locale, header, navOrder }: HeaderMobileProps) {
         <button
           type="button"
           onClick={handleScrollCta}
-          className="font-ui cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
-          style={{
-            fontSize: 12,
-            fontWeight: 400,
-            color: 'rgba(255, 255, 255, 0.75)',
-            background: 'transparent',
-            border: 0,
-            padding: 0,
-          }}
-        >
-          {header.utility.contactMobile}
-        </button>
-        <button
-          type="button"
-          onClick={handleScrollCta}
           className="font-ui text-text-on-dark cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
           style={{
             fontSize: 12,

@@ -21,6 +21,11 @@ const DROPDOWN_OFFSET_PX = HEADER_HEIGHT_PX + DIVIDER_HEIGHT_PX;
 const TRANSITION_MS = 150;
 const TRANSITION_TIMING = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
+const CARD_WIDTH_PX = 380;
+const CARD_GAP_PX = 20;
+const DRAWER_PADDING_X_PX = 32;
+const DRAWER_MIN_INNER_WIDTH_PX = 700;
+
 function ParentIcon({
   parentKey,
   size = 14,
@@ -108,11 +113,15 @@ function ArrowRight({ size = 12, color = '#20A2E2' }: { size?: number; color?: s
 function DrawerCard({
   name,
   slug,
+  valueProp,
+  image,
   cardCta,
   onNavigate,
 }: {
   name: string;
   slug: string;
+  valueProp?: string;
+  image?: { src: string; alt: string };
   cardCta: string;
   onNavigate: () => void;
 }) {
@@ -126,42 +135,81 @@ function DrawerCard({
         className="relative w-full"
         style={{
           aspectRatio: '4 / 3',
-          background: 'linear-gradient(135deg, #102844 0%, #1a3a5e 100%)',
           border: '1px solid rgba(32, 162, 226, 0.15)',
           borderRadius: 4,
+          overflow: 'hidden',
         }}
       >
-        <span
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            fontSize: 11,
-            letterSpacing: '0.1em',
-            color: 'rgba(255, 255, 255, 0.35)',
-            textTransform: 'uppercase',
-          }}
-        >
-          [ asset placeholder ]
-        </span>
+        {image ? (
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes={`${CARD_WIDTH_PX}px`}
+          />
+        ) : (
+          <>
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(135deg, #102844 0%, #1a3a5e 100%)',
+              }}
+            />
+            <span
+              style={{
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 11,
+                letterSpacing: '0.1em',
+                color: 'rgba(255, 255, 255, 0.35)',
+                textTransform: 'uppercase',
+              }}
+            >
+              [ asset placeholder ]
+            </span>
+          </>
+        )}
       </div>
       <div className="mt-[14px]">
         <p
           className="font-display text-text-on-dark"
-          style={{ fontSize: 16, fontWeight: 500, margin: 0, marginBottom: 10 }}
+          style={{ fontSize: 16, fontWeight: 500, margin: 0 }}
         >
           {name}
         </p>
-        <span
-          className="inline-flex items-center font-ui transition-transform duration-[120ms] ease-out group-hover:translate-x-[2px]"
-          style={{
-            fontSize: 13,
-            fontWeight: 400,
-            color: '#20A2E2',
-            gap: 6,
-          }}
-        >
-          {cardCta}
-          <ArrowRight />
-        </span>
+        {valueProp ? (
+          <p
+            className="font-ui"
+            style={{
+              fontSize: 13,
+              fontWeight: 400,
+              color: 'rgba(255, 255, 255, 0.65)',
+              lineHeight: 1.4,
+              margin: '8px 0 0 0',
+            }}
+          >
+            {valueProp}
+          </p>
+        ) : null}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
+          <span
+            className="inline-flex items-center font-ui transition-transform duration-[120ms] ease-out group-hover:translate-x-[2px]"
+            style={{
+              fontSize: 13,
+              fontWeight: 400,
+              color: '#20A2E2',
+              gap: 6,
+            }}
+          >
+            {cardCta}
+            <ArrowRight />
+          </span>
+        </div>
       </div>
     </Link>
   );
@@ -225,6 +273,13 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
   const activeParent: HeaderParent | undefined = openKey
     ? header.nav[openKey]
     : undefined;
+
+  const subsegmentCount = activeParent?.subsegments.length ?? 0;
+  const cardsRowWidth =
+    subsegmentCount * CARD_WIDTH_PX +
+    Math.max(0, subsegmentCount - 1) * CARD_GAP_PX;
+  const innerWidth = Math.max(cardsRowWidth, DRAWER_MIN_INNER_WIDTH_PX);
+  const drawerWidthPx = innerWidth + 2 * DRAWER_PADDING_X_PX;
 
   return (
     <div
@@ -332,21 +387,6 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
         <button
           type="button"
           onClick={handleScrollCta}
-          className="font-ui transition-colors duration-[120ms] ease-out hover:text-text-on-dark cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
-          style={{
-            fontSize: 13,
-            fontWeight: 400,
-            color: 'rgba(255, 255, 255, 0.7)',
-            background: 'transparent',
-            border: 0,
-            padding: 0,
-          }}
-        >
-          {header.utility.contact}
-        </button>
-        <button
-          type="button"
-          onClick={handleScrollCta}
           className="font-ui text-text-on-dark cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
           style={{
             fontSize: 14,
@@ -393,11 +433,10 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
         className="fixed left-1/2"
         style={{
           top: DROPDOWN_OFFSET_PX,
-          width: 'calc(100vw - 32px)',
-          maxWidth: 1280,
+          width: `min(${drawerWidthPx}px, calc(100vw - 32px))`,
           background: '#0A1628',
           borderRadius: '0 0 12px 12px',
-          padding: '32px 32px 40px',
+          padding: `32px ${DRAWER_PADDING_X_PX}px 40px`,
           opacity: drawerOpen ? 1 : 0,
           transform: drawerOpen
             ? 'translate(-50%, 0)'
@@ -408,10 +447,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
         }}
       >
         {activeParent ? (
-          <div
-            className="mx-auto"
-            style={{ maxWidth: 'var(--container-content)' }}
-          >
+          <>
             <div
               className="flex items-center"
               style={{ marginBottom: 28, gap: 14 }}
@@ -449,8 +485,8 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
             <div
               className="grid"
               style={{
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: 20,
+                gridTemplateColumns: `repeat(${subsegmentCount}, ${CARD_WIDTH_PX}px)`,
+                gap: CARD_GAP_PX,
               }}
             >
               {activeParent.subsegments.map((sub) => (
@@ -458,12 +494,14 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
                   key={sub.slug}
                   name={sub.name}
                   slug={sub.slug}
+                  valueProp={sub.valueProp}
+                  image={sub.image}
                   cardCta={header.cardCta}
                   onNavigate={handleCardNavigate}
                 />
               ))}
             </div>
-          </div>
+          </>
         ) : null}
       </div>
     </div>
