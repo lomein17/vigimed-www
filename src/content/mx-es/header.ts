@@ -32,7 +32,7 @@ export const header: HeaderContent = {
       label: 'CLÍNICAS',
       drawerName: 'Clínicas',
       drawerQuestion:
-        '¿Cuántos eventos críticos pasan sin documentar en su clínica esta semana?',
+        '¿Cuántos eventos críticos pasan sin\ndocumentar en su clínica esta semana?',
       subsegments: [
         {
           name: 'Clínicas de Maternidad',
@@ -46,7 +46,7 @@ export const header: HeaderContent = {
       label: 'LABORATORIOS',
       drawerName: 'Laboratorios',
       drawerQuestion:
-        '¿Sus errores preanalíticos llegan al responsable antes de que se conviertan en quejas?',
+        '¿Sus errores preanalíticos llegan al responsable\nantes de que se conviertan en quejas?',
       subsegments: [
         {
           name: 'Laboratorios Clínicos',

@@ -186,7 +186,7 @@ function DrawerCard({
           <p
             className="font-ui"
             style={{
-              fontSize: 13,
+              fontSize: 14,
               fontWeight: 400,
               color: 'rgba(255, 255, 255, 0.65)',
               lineHeight: 1.4,
@@ -473,10 +473,11 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
               <span
                 className="font-ui"
                 style={{
-                  fontSize: 15,
+                  fontSize: 14,
                   fontStyle: 'italic',
                   fontWeight: 400,
                   color: 'rgba(255, 255, 255, 0.75)',
+                  whiteSpace: 'pre-line',
                 }}
               >
                 {activeParent.drawerQuestion}

@@ -59,7 +59,7 @@ export const header: HeaderContent = {
       label: 'LABS',
       drawerName: 'Labs',
       drawerQuestion:
-        'Do your preanalytical errors reach the right owner before they become complaints?',
+        'Do your preanalytical errors reach the right\nowner before they become complaints?',
       subsegments: [
         {
           name: 'Clinical Labs',
