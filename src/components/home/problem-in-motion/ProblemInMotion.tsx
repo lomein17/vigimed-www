@@ -157,8 +157,7 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
             <Image
               className="vm-pim-video"
               src={POSTER_SRC}
-              alt=""
-              aria-label={content.videoAriaLabel}
+              alt={content.videoAriaLabel}
               fill
               priority
               sizes="(min-width: 768px) 1280px, 100vw"

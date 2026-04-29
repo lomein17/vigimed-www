@@ -47,4 +47,6 @@ vm-engineering-cowork-instructions.md
 .preview/
 
 # Raw asset inputs (machine-local pre-processing only, never commit)
-assets-src/
+# README.md is the exception so the convention is visible after fresh clone.
+assets-src/*
+!assets-src/README.md
