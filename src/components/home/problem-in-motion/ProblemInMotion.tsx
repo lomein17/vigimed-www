@@ -17,22 +17,12 @@ const VIDEO_SRC_DESKTOP = '/videos/pim-sterile-breach-1080.mp4';
 const VIDEO_SRC_MOBILE = '/videos/pim-sterile-breach-480.mp4';
 const POSTER_SRC = '/videos/pim-sterile-breach-poster.jpg';
 
-const LOOP_DURATION_SEC = 14.0;
+const REST_DURATION_MS = 1000;
 
 // Initial estimates. Pablo locks final values via UAT screen-share against the
 // rendered staging clip and patches these two constants in a follow-up.
 const GREEN_TO_AMBER_SEC = 3.5;
 const AMBER_TO_RED_SEC = 9.0;
-
-const STATE_SEQUENCE: ReadonlyArray<{
-  state: BreachState;
-  startSec: number;
-  endSec: number;
-}> = [
-  { state: 'green', startSec: 0, endSec: GREEN_TO_AMBER_SEC },
-  { state: 'amber', startSec: GREEN_TO_AMBER_SEC, endSec: AMBER_TO_RED_SEC },
-  { state: 'red', startSec: AMBER_TO_RED_SEC, endSec: LOOP_DURATION_SEC },
-];
 
 const FILTER_COLOR: Record<BreachState, string> = {
   green: 'rgba(29, 158, 117, 0.26)',
@@ -46,13 +36,15 @@ const BANNER_STYLE: Record<BreachState, { color: string; border: string }> = {
   red: { color: '#F7C1C1', border: 'rgba(247, 193, 193, 0.55)' },
 };
 
-const REDUCED_MOTION_SEQUENCE_MS: ReadonlyArray<{
+const REDUCED_MOTION_SEQUENCE: ReadonlyArray<{
   state: BreachState;
+  restProgress: number;
   durationMs: number;
 }> = [
-  { state: 'green', durationMs: 4000 },
-  { state: 'amber', durationMs: 5000 },
-  { state: 'red', durationMs: 5000 },
+  { state: 'green', restProgress: 0, durationMs: 4000 },
+  { state: 'amber', restProgress: 0, durationMs: 5000 },
+  { state: 'red', restProgress: 0, durationMs: 5000 },
+  { state: 'red', restProgress: 1, durationMs: 1000 },
 ];
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
@@ -72,15 +64,9 @@ function getReducedMotionServerSnapshot(): boolean {
 }
 
 function stateAtCurrentTimeSec(currentTimeSec: number): BreachState {
-  const positionSec =
-    ((currentTimeSec % LOOP_DURATION_SEC) + LOOP_DURATION_SEC) %
-    LOOP_DURATION_SEC;
-  for (const entry of STATE_SEQUENCE) {
-    if (positionSec >= entry.startSec && positionSec < entry.endSec) {
-      return entry.state;
-    }
-  }
-  return 'green';
+  if (currentTimeSec < GREEN_TO_AMBER_SEC) return 'green';
+  if (currentTimeSec < AMBER_TO_RED_SEC) return 'amber';
+  return 'red';
 }
 
 export function ProblemInMotion({ locale }: { locale: Locale }) {
@@ -88,6 +74,7 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
   const content = home.problemInMotion;
 
   const [state, setState] = useState<BreachState>('green');
+  const [restProgress, setRestProgress] = useState(0);
   const prefersReducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotionSnapshot,
@@ -100,16 +87,40 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
     const videoEl = videoRef.current;
     if (videoEl === null) return;
 
+    let rafHandle: number | null = null;
+
     const sync = () => {
       const next = stateAtCurrentTimeSec(videoEl.currentTime);
       setState((prev) => (prev === next ? prev : next));
     };
 
+    const handleEnded = () => {
+      const startMs = performance.now();
+      const tick = () => {
+        const elapsed = performance.now() - startMs;
+        const progress = Math.min(elapsed / REST_DURATION_MS, 1);
+        setRestProgress(progress);
+        if (progress >= 1) {
+          rafHandle = null;
+          videoEl.currentTime = 0;
+          setState('green');
+          setRestProgress(0);
+          videoEl.play().catch(() => {});
+          return;
+        }
+        rafHandle = requestAnimationFrame(tick);
+      };
+      tick();
+    };
+
     videoEl.addEventListener('timeupdate', sync);
     videoEl.addEventListener('seeked', sync);
+    videoEl.addEventListener('ended', handleEnded);
     return () => {
       videoEl.removeEventListener('timeupdate', sync);
       videoEl.removeEventListener('seeked', sync);
+      videoEl.removeEventListener('ended', handleEnded);
+      if (rafHandle !== null) cancelAnimationFrame(rafHandle);
     };
   }, [prefersReducedMotion]);
 
@@ -121,10 +132,11 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
 
     const step = (index: number) => {
       if (cancelled) return;
-      const entry = REDUCED_MOTION_SEQUENCE_MS[index];
+      const entry = REDUCED_MOTION_SEQUENCE[index];
       if (entry === undefined) return;
       setState(entry.state);
-      const nextIndex = (index + 1) % REDUCED_MOTION_SEQUENCE_MS.length;
+      setRestProgress(entry.restProgress);
+      const nextIndex = (index + 1) % REDUCED_MOTION_SEQUENCE.length;
       timeoutId = setTimeout(() => step(nextIndex), entry.durationMs);
     };
 
@@ -137,6 +149,7 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
   }, [prefersReducedMotion]);
 
   const bannerStyle = BANNER_STYLE[state];
+  const overlayOpacity = 1 - restProgress;
 
   return (
     <section
@@ -169,15 +182,16 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
                 the same <video> element. The 1080p source serves desktop
                 (>= 768px viewport), the 480p source serves mobile and acts as
                 fallback. Browsers pick at element creation; window resize does
-                not re-evaluate. Native HTML5 loop. Subsequent asset wiring
-                (Hero, Loop, Moat, Final CTA) follows this shape.
+                not re-evaluate. Loop is driven manually via the ended event so
+                a 1-second rest window can fade the overlay before currentTime
+                resets, masking the frame jump at the seam. Subsequent asset
+                wiring (Hero, Loop, Moat, Final CTA) follows this shape.
               */}
               <video
                 ref={videoRef}
                 className="vm-pim-video"
                 autoPlay
                 muted
-                loop
                 playsInline
                 preload="metadata"
                 poster={POSTER_SRC}
@@ -196,7 +210,10 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
           <div
             className="vm-pim-filter"
             aria-hidden="true"
-            style={{ background: FILTER_COLOR[state] }}
+            style={{
+              background: FILTER_COLOR[state],
+              opacity: overlayOpacity,
+            }}
           />
 
           <div
@@ -204,6 +221,7 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
             style={{
               color: bannerStyle.color,
               borderColor: bannerStyle.border,
+              opacity: overlayOpacity,
             }}
           >
             {content.banners[state]}
