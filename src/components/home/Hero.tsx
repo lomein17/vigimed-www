@@ -45,7 +45,7 @@ export function Hero({ locale }: { locale: Locale }) {
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center',
-            filter: 'saturate(0.35)',
+            filter: 'saturate(0.6)',
           }}
         />
       )}
@@ -55,7 +55,7 @@ export function Hero({ locale }: { locale: Locale }) {
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(90deg, rgba(48,36,12,0.88) 0%, rgba(48,36,12,0.72) 35%, rgba(48,36,12,0.3) 65%, rgba(48,36,12,0.1) 100%)',
+            'linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 8%, rgba(0,0,0,0.15) 17%, rgba(0,0,0,0) 100%)',
         }}
       />
 
