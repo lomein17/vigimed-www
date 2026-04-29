@@ -55,7 +55,7 @@ export function Hero({ locale }: { locale: Locale }) {
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(90deg, rgba(10,22,40,0.88) 0%, rgba(10,22,40,0.72) 35%, rgba(10,22,40,0.3) 65%, rgba(10,22,40,0.1) 100%)',
+            'linear-gradient(90deg, rgba(38,28,18,0.88) 0%, rgba(38,28,18,0.72) 35%, rgba(38,28,18,0.3) 65%, rgba(38,28,18,0.1) 100%)',
         }}
       />
 
