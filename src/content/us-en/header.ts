@@ -40,18 +40,30 @@ export const header: HeaderContent = {
           slug: '/us-en/health-systems/',
           valueProp:
             'What works at your flagship facility, now running identically at every hospital in your network.',
+          image: {
+            src: '/subsegments/us_systems.jpeg',
+            alt: 'Health Systems',
+          },
         },
         {
           name: 'Community Hospitals',
           slug: '/us-en/community-hospitals/',
           valueProp:
             'Critical-event response that fits inside your current staff load, not on top of it.',
+          image: {
+            src: '/subsegments/us_community.jpeg',
+            alt: 'Community Hospitals',
+          },
         },
         {
           name: 'Academic Medical Centers',
           slug: '/us-en/academic-medical-centers/',
           valueProp:
             'The rigor your residents are trained to expect, built into the operation around them.',
+          image: {
+            src: '/subsegments/us_academic.jpeg',
+            alt: 'Academic Medical Centers',
+          },
         },
       ],
     },
@@ -66,6 +78,10 @@ export const header: HeaderContent = {
           slug: '/us-en/clinical-labs/',
           valueProp:
             'Preanalytical errors stay hidden in the LIS until they cost a result. VigiMed surfaces them earlier.',
+          image: {
+            src: '/subsegments/us_labs.jpeg',
+            alt: 'Clinical Labs',
+          },
         },
       ],
     },

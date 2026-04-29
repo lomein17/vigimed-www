@@ -13,18 +13,30 @@ export const header: HeaderContent = {
           slug: '/mx-es/hospitales-privados/',
           valueProp:
             'Cuando un incidente llega a redes sociales o a una demanda, ya es tarde. VigiMed lo captura cuando ocurre.',
+          image: {
+            src: '/subsegments/mx_private.jpeg',
+            alt: 'Hospitales Privados',
+          },
         },
         {
           name: 'Hospitales Públicos',
           slug: '/mx-es/hospitales-publicos/',
           valueProp:
             'Documentación lista para auditoría desde el momento en que se genera el evento.',
+          image: {
+            src: '/subsegments/mx_public.jpeg',
+            alt: 'Hospitales Públicos',
+          },
         },
         {
           name: 'Sistemas Hospitalarios',
           slug: '/mx-es/sistemas-hospitalarios/',
           valueProp:
             'Lo que funciona en su hospital insignia, replicado con la misma rigurosidad en cada unidad de su red.',
+          image: {
+            src: '/subsegments/mx_systems.jpeg',
+            alt: 'Sistemas Hospitalarios',
+          },
         },
       ],
     },
@@ -38,7 +50,11 @@ export const header: HeaderContent = {
           name: 'Clínicas de Maternidad',
           slug: '/mx-es/clinicas-de-maternidad/',
           valueProp:
-            'El reporte voluntario no captura lo que pasa en sala de partos. VigiMed sí.',
+            'El reporte voluntario no captura a detalle\nlos eventos de las pacientes. VigiMed sí.',
+          image: {
+            src: '/subsegments/mx_clinic.jpeg',
+            alt: 'Clínicas de Maternidad',
+          },
         },
       ],
     },

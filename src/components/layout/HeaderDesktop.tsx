@@ -181,20 +181,20 @@ function DrawerCard({
         >
           {name}
         </p>
-        {valueProp ? (
-          <p
-            className="font-ui"
-            style={{
-              fontSize: 14,
-              fontWeight: 400,
-              color: 'rgba(255, 255, 255, 0.65)',
-              lineHeight: 1.4,
-              margin: '8px 0 0 0',
-            }}
-          >
-            {valueProp}
-          </p>
-        ) : null}
+        <p
+          className="font-ui"
+          style={{
+            fontSize: 14,
+            fontWeight: 400,
+            color: 'rgba(255, 255, 255, 0.65)',
+            lineHeight: 1.4,
+            margin: '8px 0 0 0',
+            minHeight: '4.2em',
+            whiteSpace: 'pre-line',
+          }}
+        >
+          {valueProp ?? ''}
+        </p>
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
           <span
             className="inline-flex items-center font-ui transition-transform duration-[120ms] ease-out group-hover:translate-x-[2px]"
