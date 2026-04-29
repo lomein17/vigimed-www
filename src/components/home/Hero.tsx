@@ -54,8 +54,16 @@ export function Hero({ locale }: { locale: Locale }) {
         aria-hidden="true"
         className="absolute inset-0"
         style={{
+          background: 'rgba(0,0,0,0.30)',
+        }}
+      />
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
           background:
-            'linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 8%, rgba(0,0,0,0.15) 17%, rgba(0,0,0,0) 100%)',
+            'linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 25%, rgba(0,0,0,0) 100%)',
         }}
       />
 
