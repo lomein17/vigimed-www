@@ -30,6 +30,26 @@ export function Hero({ locale }: { locale: Locale }) {
         )}
       </div>
 
+      {hero.backgroundImage && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          aria-hidden="true"
+          alt=""
+          src={hero.backgroundImage}
+          decoding="async"
+          fetchPriority="high"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            filter: 'saturate(0.35)',
+          }}
+        />
+      )}
+
       <div
         aria-hidden="true"
         className="absolute inset-0"

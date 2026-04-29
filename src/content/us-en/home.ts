@@ -124,6 +124,7 @@ export interface HomeContent {
     headlineLine2: string;
     subhead: SubheadSegment[];
     ctaLabel: string;
+    backgroundImage?: string;
   };
   capabilities: CapabilitiesContent;
   problemInMotion: ProblemInMotionContent;
