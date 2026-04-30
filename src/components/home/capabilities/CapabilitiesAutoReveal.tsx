@@ -6,19 +6,22 @@ const CARD_REVEAL_INITIAL_DELAY_MS = 250;
 const CARD_REVEAL_STAGGER_MS = 500;
 // Matches the existing 1000ms .vm-capability-front transition in globals.css:271-274. Locked by VM-424 non-goals; do not tune via this constant.
 const CARD_REVEAL_OPEN_DURATION_MS = 1000;
-const SESSION_KEY = 'vigimed.capabilities.firstReveal';
 const AUTO_OPEN_CLASS = 'vm-capability-card--auto-open';
+
+// Module-level guard prevents replay across component remounts within a single
+// page-load lifetime (e.g., App Router internal navigation). Hard reload re-evaluates
+// the module and resets the flag, which is the intended demo behavior. See VM-424
+// round 3 (2026-04-30) for the rationale and the AC #4/#5 deviation.
+let hasPlayed = false;
 
 export function CapabilitiesAutoReveal({ children }: { children: ReactNode }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    if (window.sessionStorage.getItem(SESSION_KEY)) return;
+    if (hasPlayed) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      window.sessionStorage.setItem(SESSION_KEY, '1');
+      hasPlayed = true;
       return;
     }
 
@@ -45,7 +48,7 @@ export function CapabilitiesAutoReveal({ children }: { children: ReactNode }) {
       for (const card of cards) {
         card.classList.remove(AUTO_OPEN_CLASS);
       }
-      window.sessionStorage.setItem(SESSION_KEY, '1');
+      hasPlayed = true;
       document.removeEventListener('click', halt);
       for (const { card, handler } of cardHaltHandlers) {
         card.removeEventListener('pointerenter', handler);
@@ -56,7 +59,7 @@ export function CapabilitiesAutoReveal({ children }: { children: ReactNode }) {
     const startWave = () => {
       if (started) return;
       started = true;
-      window.sessionStorage.setItem(SESSION_KEY, '1');
+      hasPlayed = true;
 
       cards.forEach((card, i) => {
         const openAt = CARD_REVEAL_INITIAL_DELAY_MS + i * CARD_REVEAL_STAGGER_MS;
