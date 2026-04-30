@@ -286,6 +286,11 @@ h1, h2, h3 {
   color: var(--color-brand-500);
 }
 
+.vm-capability-card--auto-open .vm-capability-front {
+  transform: translateX(-101%);
+  color: var(--color-brand-500);
+}
+
 .vm-capability-front__reveal-mobile {
   display: none;
 }

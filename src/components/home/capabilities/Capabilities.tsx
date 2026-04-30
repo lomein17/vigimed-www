@@ -2,6 +2,7 @@ import { homeContent as mxHome } from '@/content/mx-es/home';
 import { homeContent as usHome } from '@/content/us-en/home';
 import type { Locale } from '@/lib/i18n';
 
+import { CapabilitiesAutoReveal } from './CapabilitiesAutoReveal';
 import { CapabilityCard } from './CapabilityCard';
 
 const contentByLocale = {
@@ -87,19 +88,21 @@ export function Capabilities({ locale }: { locale: Locale }) {
           </div>
         </header>
 
-        <div
-          className="mx-auto grid grid-cols-1 md:grid-cols-5 gap-4"
-          style={{ maxWidth: 1100 }}
-        >
-          {capabilities.cards.map((card) => (
-            <CapabilityCard
-              key={card.icon}
-              title={card.title}
-              reveal={card.reveal}
-              icon={card.icon}
-            />
-          ))}
-        </div>
+        <CapabilitiesAutoReveal>
+          <div
+            className="mx-auto grid grid-cols-1 md:grid-cols-5 gap-4"
+            style={{ maxWidth: 1100 }}
+          >
+            {capabilities.cards.map((card) => (
+              <CapabilityCard
+                key={card.icon}
+                title={card.title}
+                reveal={card.reveal}
+                icon={card.icon}
+              />
+            ))}
+          </div>
+        </CapabilitiesAutoReveal>
       </div>
     </section>
   );
