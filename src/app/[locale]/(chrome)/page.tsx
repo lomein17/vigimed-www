@@ -4,8 +4,7 @@ import { notFound, redirect } from 'next/navigation';
 import { Hero } from '@/components/home/Hero';
 import { Capabilities } from '@/components/home/capabilities/Capabilities';
 import { FinalCta } from '@/components/home/final-cta/FinalCta';
-import { Integrations } from '@/components/home/integrations/Integrations';
-import { Moat } from '@/components/home/moat/Moat';
+import { MoatPlusIntegrations } from '@/components/home/moat-plus-integrations/MoatPlusIntegrations';
 import { ProblemInMotion } from '@/components/home/problem-in-motion/ProblemInMotion';
 import { isLocale, type Locale } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/seo/constants';
@@ -58,8 +57,7 @@ export default async function HomePage({
       <Hero locale={typedLocale} />
       <Capabilities locale={typedLocale} />
       <ProblemInMotion locale={typedLocale} />
-      <Moat locale={typedLocale} />
-      <Integrations locale={typedLocale} />
+      <MoatPlusIntegrations locale={typedLocale} />
       <FinalCta locale={typedLocale} />
     </>
   );

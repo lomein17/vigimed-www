@@ -14,10 +14,7 @@ export function Integrations({ locale }: { locale: Locale }) {
   const { integrations } = contentByLocale[locale];
 
   return (
-    <section
-      aria-labelledby="integrations-heading"
-      className="vm-integrations-section"
-    >
+    <div className="vm-integrations-section">
       <div className="vm-integrations-haze" aria-hidden="true" />
       <div className="vm-integrations-inner">
         <h2 id="integrations-heading" className="vm-integrations-h2">
@@ -31,7 +28,7 @@ export function Integrations({ locale }: { locale: Locale }) {
           </div>
         </IntegrationsMagnetic>
       </div>
-    </section>
+    </div>
   );
 }
 

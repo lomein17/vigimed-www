@@ -11,7 +11,7 @@ export function Moat({ locale }: { locale: Locale }) {
   const { moat } = contentByLocale[locale];
 
   return (
-    <section aria-labelledby="moat-heading" className="vm-moat-section">
+    <div className="vm-moat-section">
       <div className="vm-moat-pulse" aria-hidden="true" />
       <div className="vm-moat-inner">
         <header className="vm-moat-header">
@@ -41,6 +41,6 @@ export function Moat({ locale }: { locale: Locale }) {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

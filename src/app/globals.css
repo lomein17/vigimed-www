@@ -716,18 +716,17 @@ h1, h2, h3 {
   object-fit: contain;
 }
 
-/* Tighten Moat's bottom padding only when Integrations follows it, so the
- * combined gap between the last Moat row and the Integrations H2 lands at
- * ~64px (32 + 32) on desktop. Fallback for browsers without :has() is the
- * default 96px Moat bottom padding, which is acceptable. */
-.vm-moat-section:has(+ .vm-integrations-section) {
-  padding-bottom: 32px;
-}
+/* =======================================================================
+ * Combined Moat + Integrations section (VM-422)
+ * -----------------------------------------------------------------------
+ * Single 100svh container; Moat content stacks above Integrations content
+ * with no fracture. Replaces the prior :has(+) adjacency collapse rule.
+ * ======================================================================= */
 
-@media (min-width: 1024px) {
-  .vm-moat-section:has(+ .vm-integrations-section) {
-    padding-bottom: 32px;
-  }
+.vm-moat-integrations-section {
+  position: relative;
+  width: 100%;
+  background: var(--color-surface-warm);
 }
 
 /* =======================================================================
@@ -1023,6 +1022,28 @@ h1, h2, h3 {
 }
 
 /* =======================================================================
+ * Home full-viewport rhythm (VM-422)
+ * -----------------------------------------------------------------------
+ * Every Home content section is at least one small-viewport tall and
+ * vertically centers its content. svh (not vh/dvh) for stable layout
+ * across mobile chrome states. min-height (not height) so tall content
+ * (PIM at narrow viewports, Hero on mobile portrait) overflows gracefully
+ * to document-level scroll rather than nested scroll containers.
+ * Footer is exempt and keeps natural height.
+ * ======================================================================= */
+
+.vm-hero-section,
+.vm-capabilities-section,
+.vm-pim-section,
+.vm-moat-integrations-section,
+.vm-final-cta-section {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* =======================================================================
  * Scroll-snap (VM-413)
  * -----------------------------------------------------------------------
  * Anchors top-level sections to viewport top with a 72px offset matching
@@ -1041,8 +1062,7 @@ h1, h2, h3 {
   .vm-hero-section,
   .vm-capabilities-section,
   .vm-pim-section,
-  .vm-moat-section,
-  .vm-integrations-section,
+  .vm-moat-integrations-section,
   .vm-final-cta-section,
   footer {
     scroll-snap-align: start;
