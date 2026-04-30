@@ -314,6 +314,49 @@ h1, h2, h3 {
 }
 
 /* =======================================================================
+ * Capabilities ECG waveform (VM-423)
+ * -----------------------------------------------------------------------
+ * Static dim background trace plus animated sweep overlay drawing left to
+ * right with a traveling cursor dot. 5 spikes per 6s cycle, mimicking a
+ * real ECG monitor. Under prefers-reduced-motion: reduce, the sweep and
+ * cursor hide and only the static dim trace remains.
+ * ======================================================================= */
+
+.vm-ecg-svg {
+  overflow: visible;
+}
+
+.vm-ecg-sweep {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation:
+    vmEcgDraw 6s linear infinite,
+    vmEcgFade 6s linear infinite;
+}
+
+@keyframes vmEcgDraw {
+  0%, 5%   { stroke-dashoffset: 1000; }
+  85%      { stroke-dashoffset: 0; }
+  100%     { stroke-dashoffset: 0; }
+}
+
+@keyframes vmEcgFade {
+  0%, 90%   { opacity: 1; }
+  98%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vm-ecg-sweep {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  .vm-ecg-cursor {
+    display: none;
+  }
+}
+
+/* =======================================================================
  * Problem-in-motion section (VM-359)
  * -----------------------------------------------------------------------
  * Navy full-bleed section with a 16:9 scene container and two
