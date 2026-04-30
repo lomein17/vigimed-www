@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { Footer } from '@/components/layout/Footer';
+import { FooterSpacebarLoop } from '@/components/layout/FooterSpacebarLoop';
 import { StickyNav } from '@/components/layout/StickyNav';
 import { isLocale, type Locale } from '@/lib/i18n';
 
@@ -20,6 +21,7 @@ export default async function ChromeLayout({
       <StickyNav locale={locale as Locale} />
       {children}
       <Footer locale={locale as Locale} />
+      <FooterSpacebarLoop />
     </>
   );
 }

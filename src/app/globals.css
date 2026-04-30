@@ -112,6 +112,11 @@
   --brand-gradient: linear-gradient(90deg, #20A2E2 0%, #2FBBF7 50%, #20A2E2 100%);
   --brand-pulse: linear-gradient(90deg, transparent 0%, #20A2E2 20%, #2FBBF7 50%, #20A2E2 80%, transparent 100%);
 
+  /* StickyNav in-flow band: 72px nav grid + 3px brand-pulse line. Used to
+   * subtract nav height from full-viewport sections and as the scroll-snap
+   * top offset (VM-422 round 2). */
+  --vm-nav-h: 75px;
+
   /* Responsive spacing (§4.4), mobile baseline */
   --site-gutter: 1rem;
   --site-section: 3rem;
@@ -729,19 +734,45 @@ h1, h2, h3 {
   background: var(--color-surface-warm);
 }
 
+/* Inner-subsection padding compression (VM-422 round 2). The original
+ * .vm-moat-section / .vm-integrations-section paddings were sized for
+ * standalone sections; nested inside the combined wrapper, the outer flex
+ * container handles vertical framing, so collapse the outer paddings and
+ * keep only a compact mid-gap between Moat and Integrations content. The
+ * standalone rules above stay intact for any future solo use. */
+.vm-moat-integrations-section .vm-moat-section {
+  padding-top: 0;
+  padding-bottom: 24px;
+}
+
+.vm-moat-integrations-section .vm-integrations-section {
+  padding-top: 24px;
+  padding-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+  .vm-moat-integrations-section .vm-moat-section {
+    padding-bottom: 32px;
+  }
+  .vm-moat-integrations-section .vm-integrations-section {
+    padding-top: 32px;
+  }
+}
+
 /* =======================================================================
  * Final CTA section (VM-371)
  * -----------------------------------------------------------------------
  * Navy full-bleed Home-arc section at position 6 (after Moat). Two-column
  * layout: text + reassurance ladder on the left, form card on the right.
- * The 96px scroll-margin-top on the #final-cta anchor offsets the
+ * The 99px scroll-margin-top on the #final-cta anchor offsets the
  * 1000ms smooth-scroll target so the eyebrow lands ~24px below the
- * bottom edge of the 72px sticky nav (72 + 24 = 96).
+ * bottom edge of the 75px sticky nav band (75 + 24 = 99); 75 = 72 nav
+ * grid + 3 brand-pulse line, tightened from 96 in VM-422 round 2.
  * Spec source: issue VM-371 (Render spec); content lock VM-369.
  * ======================================================================= */
 
 #final-cta {
-  scroll-margin-top: 96px;
+  scroll-margin-top: 99px;
 }
 
 .vm-final-cta-section {
@@ -1022,11 +1053,16 @@ h1, h2, h3 {
 }
 
 /* =======================================================================
- * Home full-viewport rhythm (VM-422)
+ * Home full-viewport rhythm (VM-422 round 2)
  * -----------------------------------------------------------------------
- * Every Home content section is at least one small-viewport tall and
- * vertically centers its content. svh (not vh/dvh) for stable layout
- * across mobile chrome states. min-height (not height) so tall content
+ * Every Home content section fills the visible-below-nav area exactly:
+ * one small-viewport tall minus the StickyNav band (--vm-nav-h = 75px =
+ * 72px nav grid + 3px brand-pulse line). The nav is position: sticky and
+ * occupies real document flow at scroll=0, so subtracting its height is
+ * what places sections cleanly between nav-bottom and viewport-bottom
+ * when snapped, with content centered in the visible area rather than
+ * pushed below the fold. svh (not vh/dvh) for stable layout across
+ * mobile chrome states. min-height (not height) so tall content
  * (PIM at narrow viewports, Hero on mobile portrait) overflows gracefully
  * to document-level scroll rather than nested scroll containers.
  * Footer is exempt and keeps natural height.
@@ -1037,7 +1073,7 @@ h1, h2, h3 {
 .vm-pim-section,
 .vm-moat-integrations-section,
 .vm-final-cta-section {
-  min-height: 100svh;
+  min-height: calc(100svh - var(--vm-nav-h));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1046,17 +1082,19 @@ h1, h2, h3 {
 /* =======================================================================
  * Scroll-snap (VM-413)
  * -----------------------------------------------------------------------
- * Anchors top-level sections to viewport top with a 72px offset matching
- * the sticky nav's h-[72px]. Proximity (not mandatory) so long sections
- * like Final CTA + form remain freely scrollable. Gated to >=1024px with
- * hover capability so phones, portrait tablets, and touch-only iPads keep
- * native scrolling.
+ * Anchors top-level sections to viewport top with a 75px offset matching
+ * the full sticky nav band (72px nav grid + 3px brand-pulse line),
+ * tightened from 72px in VM-422 round 2 so snap targets align with the
+ * actual nav bottom edge rather than 3px above it. Proximity (not
+ * mandatory) so long sections like Final CTA + form remain freely
+ * scrollable. Gated to >=1024px with hover capability so phones, portrait
+ * tablets, and touch-only iPads keep native scrolling.
  * ======================================================================= */
 
 @media (min-width: 1024px) and (hover: hover) {
   html {
     scroll-snap-type: y proximity;
-    scroll-padding-top: 72px;
+    scroll-padding-top: var(--vm-nav-h);
   }
 
   .vm-hero-section,
