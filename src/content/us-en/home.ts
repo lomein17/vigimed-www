@@ -124,7 +124,11 @@ export interface HomeContent {
     headlineLine2: string;
     subhead: SubheadSegment[];
     ctaLabel: string;
-    backgroundImage?: string;
+    heroVideo: {
+      desktop: string;
+      mobile: string;
+      poster: string;
+    };
   };
   capabilities: CapabilitiesContent;
   problemInMotion: ProblemInMotionContent;
@@ -147,6 +151,11 @@ export const homeContent: HomeContent = {
       { text: ' as they happen. Every detection is confirmed by a human analyst in our Compliance Review Center, so you act on verified events. Each incident is documented in detail, and the patterns that emerge across events reach your team to improve processes and operations.' },
     ],
     ctaLabel: 'Request an evaluation',
+    heroVideo: {
+      desktop: '/videos/hero-us-en-desktop.mp4',
+      mobile: '/videos/hero-us-en-mobile.mp4',
+      poster: '/images/hero/hero-us-en-poster.jpg',
+    },
   },
   capabilities: {
     eyebrow: 'FROM DETECTION TO PREVENTION',

@@ -13,7 +13,11 @@ export const homeContent: HomeContent = {
       { text: ' en el momento en que ocurren. Cada detección es confirmada por un analista humano en nuestro Centro de Revisión, para que usted actúe sobre eventos verificados. Cada incidente se documenta a detalle, y los patrones que emergen entre eventos llegan a su equipo para mejorar procesos y la operación.' },
     ],
     ctaLabel: 'Solicite una evaluación',
-    backgroundImage: '/images/hero/hero-mx-es-1-bedside.png',
+    heroVideo: {
+      desktop: '/videos/hero-mx-es-desktop.mp4',
+      mobile: '/videos/hero-mx-es-mobile.mp4',
+      poster: '/images/hero/hero-mx-es-poster.jpg',
+    },
   },
   capabilities: {
     eyebrow: 'DE LA DETECCIÓN A LA PREVENCIÓN',

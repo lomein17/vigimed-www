@@ -30,44 +30,48 @@ export function Hero({ locale }: { locale: Locale }) {
         )}
       </div>
 
-      {hero.backgroundImage && (
-        <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            aria-hidden="true"
-            alt=""
-            src={hero.backgroundImage}
-            decoding="async"
-            fetchPriority="high"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center',
-              filter: 'saturate(0.6)',
-            }}
-          />
+      <video
+        aria-hidden="true"
+        autoPlay
+        muted
+        playsInline
+        loop
+        preload="metadata"
+        poster={hero.heroVideo.poster}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
+          filter: 'saturate(0.6)',
+        }}
+      >
+        <source
+          src={hero.heroVideo.desktop}
+          type="video/mp4"
+          media="(min-width: 768px)"
+        />
+        <source src={hero.heroVideo.mobile} type="video/mp4" />
+      </video>
 
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              background: 'rgba(0,0,0,0.30)',
-            }}
-          />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background: 'rgba(0,0,0,0.30)',
+        }}
+      />
 
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              background:
-                'linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 25%, rgba(0,0,0,0) 100%)',
-            }}
-          />
-        </>
-      )}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 25%, rgba(0,0,0,0) 100%)',
+        }}
+      />
 
       <div
         className="relative z-10 w-full py-section"
