@@ -3,7 +3,9 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 
 const CARD_REVEAL_INITIAL_DELAY_MS = 250;
-const CARD_REVEAL_STAGGER_MS = 1000;
+const CARD_REVEAL_STAGGER_MS = 500;
+// Matches the existing 1000ms .vm-capability-front transition in globals.css:271-274. Locked by VM-424 non-goals; do not tune via this constant.
+const CARD_REVEAL_OPEN_DURATION_MS = 1000;
 const SESSION_KEY = 'vigimed.capabilities.firstReveal';
 const AUTO_OPEN_CLASS = 'vm-capability-card--auto-open';
 
@@ -58,7 +60,7 @@ export function CapabilitiesAutoReveal({ children }: { children: ReactNode }) {
 
       cards.forEach((card, i) => {
         const openAt = CARD_REVEAL_INITIAL_DELAY_MS + i * CARD_REVEAL_STAGGER_MS;
-        const closeAt = openAt + CARD_REVEAL_STAGGER_MS;
+        const closeAt = openAt + CARD_REVEAL_OPEN_DURATION_MS;
 
         const openId = window.setTimeout(() => {
           if (halted) return;
