@@ -474,15 +474,6 @@ h1, h2, h3 {
   }
 }
 
-.vm-moat-pulse {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--brand-gradient);
-}
-
 .vm-moat-inner {
   max-width: 1100px;
   margin: 0 auto;

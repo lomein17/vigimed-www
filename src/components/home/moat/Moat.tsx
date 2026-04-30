@@ -12,7 +12,6 @@ export function Moat({ locale }: { locale: Locale }) {
 
   return (
     <div className="vm-moat-section">
-      <div className="vm-moat-pulse" aria-hidden="true" />
       <div className="vm-moat-inner">
         <header className="vm-moat-header">
           <p className="vm-moat-eyebrow">{moat.eyebrow}</p>
