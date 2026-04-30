@@ -6,6 +6,15 @@ const CARD_REVEAL_INITIAL_DELAY_MS = 250;
 const CARD_REVEAL_STAGGER_MS = 500;
 // Matches the existing 1000ms .vm-capability-front transition in globals.css:271-274. Locked by VM-424 non-goals; do not tune via this constant.
 const CARD_REVEAL_OPEN_DURATION_MS = 1000;
+// Intersection ratio required to arm the dwell timer. 0.6 = 60% of the
+// Capabilities section in view. Higher than the previous 0.4 to avoid
+// firing during rapid scroll-by. Tunable.
+const CARD_REVEAL_INTERSECTION_THRESHOLD = 0.6;
+// Sustained-intersection dwell required before the wave starts. Cancels
+// if the user scrolls below the threshold within this window. Long enough
+// to filter fast scroll-by, short enough not to feel laggy after a deliberate
+// scroll-snap settlement. Tunable.
+const CARD_REVEAL_DWELL_MS = 300;
 const AUTO_OPEN_CLASS = 'vm-capability-card--auto-open';
 
 // Module-level guard prevents replay across component remounts within a single
@@ -86,21 +95,37 @@ export function CapabilitiesAutoReveal({ children }: { children: ReactNode }) {
       }
     };
 
+    let dwellTimer: number | null = null;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            observer.disconnect();
-            startWave();
-            break;
+        const entry = entries[0];
+        if (entry === undefined) return;
+
+        if (entry.isIntersecting) {
+          if (dwellTimer === null) {
+            dwellTimer = window.setTimeout(() => {
+              dwellTimer = null;
+              observer.disconnect();
+              startWave();
+            }, CARD_REVEAL_DWELL_MS);
+          }
+        } else {
+          if (dwellTimer !== null) {
+            window.clearTimeout(dwellTimer);
+            dwellTimer = null;
           }
         }
       },
-      { threshold: 0.4 },
+      { threshold: CARD_REVEAL_INTERSECTION_THRESHOLD },
     );
     observer.observe(container);
 
     return () => {
+      if (dwellTimer !== null) {
+        window.clearTimeout(dwellTimer);
+        dwellTimer = null;
+      }
       observer.disconnect();
       for (const id of timeouts) {
         window.clearTimeout(id);
