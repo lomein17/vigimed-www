@@ -10,7 +10,7 @@ export const homeContent: HomeContent = {
       { text: 'seguridad del paciente', emphasis: 'bold-amber' },
       { text: ' y la ' },
       { text: 'calidad de la atención', emphasis: 'bold-amber' },
-      { text: ' en el momento en que ocurren. Cada detección es confirmada por un analista humano en nuestro Centro de Revisión, para que usted actúe sobre eventos verificados. Cada incidente se documenta a detalle, y los patrones que emergen entre eventos llegan a su equipo para mejorar procesos y la operación.' },
+      { text: ' al instante. Un analista confirma cada detección para que usted actúe sobre eventos verificados, documentados a detalle, con patrones que mejoran su operación.' },
     ],
     ctaLabel: 'Solicite una evaluación',
     heroVideo: {

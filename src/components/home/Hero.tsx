@@ -77,10 +77,10 @@ export function Hero({ locale }: { locale: Locale }) {
         className="relative z-10 w-full py-section"
         style={{
           // VM-364: Hero-specific horizontal anchor. Left edge sits in the
-          // left third of the composition on desktop (clamped to 240px at
+          // left third of the composition on desktop (clamped to 208px at
           // wide viewports), scales down to the standard gutter floor on
           // narrow ones. Right padding stays on the global gutter.
-          paddingLeft: 'clamp(var(--site-gutter), 15vw, 240px)',
+          paddingLeft: 'clamp(var(--site-gutter), 15vw, 208px)',
           paddingRight: 'var(--site-gutter)',
         }}
       >
@@ -102,7 +102,7 @@ export function Hero({ locale }: { locale: Locale }) {
           <div className="max-w-[1100px]">
             <h1
               id="hero-headline"
-              className="text-text-on-dark text-[2.5rem] md:text-[3rem] lg:text-[3.75rem]"
+              className="text-text-on-dark text-[2.333rem] md:text-[2.833rem] lg:text-[3.583rem]"
               style={{
                 letterSpacing: '-0.015em',
                 lineHeight: 1.08,

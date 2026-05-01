@@ -148,7 +148,7 @@ export const homeContent: HomeContent = {
       { text: 'patient safety', emphasis: 'bold-amber' },
       { text: ' and ' },
       { text: 'quality of care', emphasis: 'bold-amber' },
-      { text: ' as they happen. Every detection is confirmed by a human analyst in our Compliance Review Center, so you act on verified events. Each incident is documented in detail, and the patterns that emerge across events reach your team to improve processes and operations.' },
+      { text: ' as they happen. An analyst confirms every detection so you act on verified events, documented in detail, with patterns that improve your operations.' },
     ],
     ctaLabel: 'Request an evaluation',
     heroVideo: {
