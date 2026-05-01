@@ -10,7 +10,7 @@ export const header: HeaderContent = {
       subsegments: [
         {
           name: 'Hospitales Privados',
-          slug: '/mx-es/hospitales-privados/',
+          slug: '/mx-es/hospitales-privados',
           valueProp:
             'Cuando un incidente llega a redes sociales o a una demanda, ya es tarde. VigiMed lo captura cuando ocurre.',
           image: {
@@ -20,7 +20,7 @@ export const header: HeaderContent = {
         },
         {
           name: 'Hospitales Públicos',
-          slug: '/mx-es/hospitales-publicos/',
+          slug: '/mx-es/hospitales-publicos',
           valueProp:
             'Documentación lista para auditoría desde el momento en que se genera el evento.',
           image: {
@@ -30,7 +30,7 @@ export const header: HeaderContent = {
         },
         {
           name: 'Sistemas Hospitalarios',
-          slug: '/mx-es/sistemas-hospitalarios/',
+          slug: '/mx-es/sistemas-hospitalarios',
           valueProp:
             'Lo que funciona en su hospital insignia, replicado con la misma rigurosidad en cada unidad de su red.',
           image: {
@@ -48,7 +48,7 @@ export const header: HeaderContent = {
       subsegments: [
         {
           name: 'Clínicas de Maternidad',
-          slug: '/mx-es/clinicas-de-maternidad/',
+          slug: '/mx-es/clinicas-de-maternidad',
           valueProp:
             'El reporte voluntario no captura a detalle\nlos eventos de las pacientes. VigiMed sí.',
           image: {
@@ -66,7 +66,7 @@ export const header: HeaderContent = {
       subsegments: [
         {
           name: 'Laboratorios Clínicos',
-          slug: '/mx-es/laboratorios-clinicos/',
+          slug: '/mx-es/laboratorios-clinicos',
           valueProp:
             'Los errores preanalíticos no aparecen en el LIS. VigiMed los hace visibles antes del resultado.',
           image: {

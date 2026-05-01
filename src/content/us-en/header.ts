@@ -37,7 +37,7 @@ export const header: HeaderContent = {
       subsegments: [
         {
           name: 'Health Systems',
-          slug: '/us-en/health-systems/',
+          slug: '/us-en/health-systems',
           valueProp:
             'What works at your flagship facility, now running identically at every hospital in your network.',
           image: {
@@ -47,7 +47,7 @@ export const header: HeaderContent = {
         },
         {
           name: 'Community Hospitals',
-          slug: '/us-en/community-hospitals/',
+          slug: '/us-en/community-hospitals',
           valueProp:
             'Critical-event response that fits inside your current staff load, not on top of it.',
           image: {
@@ -57,7 +57,7 @@ export const header: HeaderContent = {
         },
         {
           name: 'Academic Medical Centers',
-          slug: '/us-en/academic-medical-centers/',
+          slug: '/us-en/academic-medical-centers',
           valueProp:
             'The rigor your residents are trained to expect, built into the operation around them.',
           image: {
@@ -75,7 +75,7 @@ export const header: HeaderContent = {
       subsegments: [
         {
           name: 'Clinical Labs',
-          slug: '/us-en/clinical-labs/',
+          slug: '/us-en/clinical-labs',
           valueProp:
             'Preanalytical errors stay hidden in the LIS until they cost a result. VigiMed surfaces them earlier.',
           image: {
