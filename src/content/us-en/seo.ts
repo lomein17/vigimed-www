@@ -29,11 +29,6 @@ export const seoContent: SeoContent = {
       description:
         'Passive observation, automatic verification, and audit-ready reporting. Built to align with Joint Commission standards without adding clinical burden.',
     },
-    contact: {
-      title: 'Contact VigiMed: Request a Hospital Demo',
-      description:
-        'Book a walkthrough with the VigiMed team. Coverage for US hospitals aligning with Joint Commission, CMS Conditions of Participation, and state surveys.',
-    },
     comingSoon: {
       title: 'VigiMed: Coming Soon',
       description:

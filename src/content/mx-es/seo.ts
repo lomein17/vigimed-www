@@ -19,11 +19,6 @@ export const seoContent: SeoContent = {
       description:
         'Observación pasiva, verificación automática y reportes auditables. Una plataforma diseñada para cumplir NOM sin sumar carga al personal clínico.',
     },
-    contact: {
-      title: 'Contacto VigiMed: Solicita una demostración',
-      description:
-        'Agenda una demostración con el equipo VigiMed. Cobertura para hospitales en México y alineación con NOM aplicables al área quirúrgica y terapia intensiva.',
-    },
     comingSoon: {
       title: 'VigiMed: Próximamente',
       description:

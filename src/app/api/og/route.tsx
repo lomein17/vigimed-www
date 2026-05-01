@@ -9,7 +9,7 @@ import type { SeoContent } from '@/content/us-en/seo';
 export const runtime = 'edge';
 export const contentType = 'image/png';
 
-const PAGE_KEYS = ['home', 'platform', 'contact', 'comingSoon'] as const;
+const PAGE_KEYS = ['home', 'platform', 'comingSoon'] as const;
 type PageKey = (typeof PAGE_KEYS)[number];
 
 function isPageKey(value: string): value is PageKey {

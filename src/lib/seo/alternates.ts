@@ -6,7 +6,6 @@ import { SITE_URL, type PageKey } from '@/lib/seo/constants';
 const pageKeyToRouteKey: Record<PageKey, RouteKey> = {
   home: 'home',
   platform: 'platform',
-  contact: 'contact',
   comingSoon: 'useCases',
 };
 

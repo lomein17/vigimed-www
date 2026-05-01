@@ -181,6 +181,11 @@
   text-transform: uppercase;
 }
 
+/* Global smooth scroll for in-page anchors (VM-430) */
+html {
+  scroll-behavior: smooth;
+}
+
 /* =======================================================================
  * Base typography defaults
  * -----------------------------------------------------------------------
