@@ -11,11 +11,11 @@ export const sharedContent: SharedContent = {
       {
         heading: 'Soluciones',
         links: [
-          { label: 'Hospitales Privados' },
-          { label: 'Hospitales Públicos' },
-          { label: 'Sistemas Hospitalarios' },
-          { label: 'Clínicas de Maternidad' },
-          { label: 'Laboratorios Clínicos' },
+          { label: 'Hospitales Privados', slug: '/mx-es/hospitales-privados' },
+          { label: 'Hospitales Públicos', slug: '/mx-es/hospitales-publicos' },
+          { label: 'Sistemas Hospitalarios', slug: '/mx-es/sistemas-hospitalarios' },
+          { label: 'Clínicas de Maternidad', slug: '/mx-es/clinicas-de-maternidad' },
+          { label: 'Laboratorios Clínicos', slug: '/mx-es/laboratorios-clinicos' },
         ],
       },
       {

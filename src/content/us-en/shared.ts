@@ -1,6 +1,6 @@
 import type { Locale, RouteKey } from '@/lib/i18n';
 
-export type FooterItem = { label: string; route?: RouteKey };
+export type FooterItem = { label: string; route?: RouteKey; slug?: string };
 
 export type FooterColumn = { heading: string; links: FooterItem[] };
 
@@ -33,10 +33,10 @@ export const sharedContent: SharedContent = {
       {
         heading: 'Solutions',
         links: [
-          { label: 'Health Systems' },
-          { label: 'Community Hospitals' },
-          { label: 'Academic Medical Centers' },
-          { label: 'Clinical Labs' },
+          { label: 'Health Systems', slug: '/us-en/health-systems' },
+          { label: 'Community Hospitals', slug: '/us-en/community-hospitals' },
+          { label: 'Academic Medical Centers', slug: '/us-en/academic-medical-centers' },
+          { label: 'Clinical Labs', slug: '/us-en/clinical-labs' },
         ],
       },
       {
