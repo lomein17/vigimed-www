@@ -62,9 +62,7 @@ export function CountryPicker({
       return;
     }
     event.preventDefault();
-    window.location.assign(
-      otherHrefBase + window.location.search + window.location.hash,
-    );
+    window.location.assign(otherHrefBase);
   };
 
   return (

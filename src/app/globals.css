@@ -767,17 +767,12 @@ h1, h2, h3 {
  * -----------------------------------------------------------------------
  * Navy full-bleed Home-arc section at position 6 (after Moat). Two-column
  * layout: text + reassurance ladder on the left, form card on the right.
- * The 24px scroll-margin-top on the #final-cta anchor combines with the
- * global html { scroll-padding-top: var(--vm-nav-h) } to total 99px of
- * offset (75px nav + 24px breathing). Anchor click and spacebar/keyboard
- * scroll-snap now agree on landing position across all viewports.
- * Updated for VM-430 UAT round 2; supersedes VM-422 round 2 math.
+ * Anchor scroll for #final-cta is governed by the global
+ * html { scroll-padding-top: var(--vm-nav-h) } (75px), matching
+ * spacebar/keyboard scroll-snap landing. No per-anchor offset needed.
+ * Updated for VM-430 UAT round 3; supersedes VM-422 round 2 math.
  * Spec source: issue VM-371 (Render spec); content lock VM-369.
  * ======================================================================= */
-
-#final-cta {
-  scroll-margin-top: 24px;
-}
 
 .vm-final-cta-section {
   position: relative;
