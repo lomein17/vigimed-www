@@ -61,3 +61,17 @@ export function getPageMetadata(locale: Locale, page: PageKey): Metadata {
 
   return metadata;
 }
+
+export function getPlaceholderMetadata(
+  locale: Locale,
+  options: { isPlaceholder: boolean; titleSuffix: string },
+): Metadata {
+  const { siteName } = seoByLocale[locale];
+  const metadata: Metadata = {
+    title: `${siteName}: ${options.titleSuffix}`,
+  };
+  if (options.isPlaceholder) {
+    metadata.robots = { index: false, follow: false };
+  }
+  return metadata;
+}
