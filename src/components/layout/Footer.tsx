@@ -40,12 +40,21 @@ export function Footer({ locale }: { locale: Locale }) {
                         {item.label}
                       </Link>
                     ) : item.slug !== undefined ? (
-                      <Link
-                        href={item.slug}
-                        className="text-text-on-dark-muted hover:text-brand-500 transition-colors"
-                      >
-                        {item.label}
-                      </Link>
+                      item.slug.includes('#') ? (
+                        <a
+                          href={item.slug}
+                          className="text-text-on-dark-muted hover:text-brand-500 transition-colors"
+                        >
+                          {item.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={item.slug}
+                          className="text-text-on-dark-muted hover:text-brand-500 transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                      )
                     ) : (
                       <span className="text-text-on-dark-muted">
                         {item.label}
