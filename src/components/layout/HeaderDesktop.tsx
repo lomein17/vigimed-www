@@ -3,7 +3,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 
 import type { HeaderContent, HeaderParent } from '@/content/us-en/header';
 import { hrefFor, type Locale } from '@/lib/i18n';
@@ -18,12 +25,34 @@ interface HeaderDesktopProps {
 const HEADER_HEIGHT_PX = 72;
 const DIVIDER_HEIGHT_PX = 3;
 const DROPDOWN_OFFSET_PX = HEADER_HEIGHT_PX + DIVIDER_HEIGHT_PX;
-const TRANSITION_MS = 150;
-const TRANSITION_TIMING = 'cubic-bezier(0.4, 0, 0.2, 1)';
+
+// VM-425: drawer slides from translateY(-100%); open and close use asymmetric timing and easing per Decisions D1 and D7.
+const UI_TRANSITION_MS = 150;
+const UI_TRANSITION_TIMING = 'cubic-bezier(0.4, 0, 0.2, 1)';
+const DRAWER_OPEN_MS = 240;
+const DRAWER_OPEN_EASING = 'cubic-bezier(0.32, 0.72, 0, 1)';
+const DRAWER_CLOSE_MS = 200;
+const DRAWER_CLOSE_EASING = 'cubic-bezier(0.4, 0, 1, 1)';
 
 const CARD_WIDTH_PX = 380;
 const CARD_GAP_PX = 20;
 const DRAWER_PADDING_X_PX = 32;
+
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+
+function subscribeReducedMotion(onChange: () => void) {
+  const query = window.matchMedia(REDUCED_MOTION_QUERY);
+  query.addEventListener('change', onChange);
+  return () => query.removeEventListener('change', onChange);
+}
+
+function getReducedMotionSnapshot(): boolean {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
+function getReducedMotionServerSnapshot(): boolean {
+  return false;
+}
 
 function ParentIcon({
   parentKey,
@@ -83,7 +112,7 @@ function Chevron({ open }: { open: boolean }) {
       strokeLinejoin="round"
       style={{
         transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
-        transition: `transform ${TRANSITION_MS}ms ${TRANSITION_TIMING}, stroke ${TRANSITION_MS}ms ${TRANSITION_TIMING}`,
+        transition: `transform ${UI_TRANSITION_MS}ms ${UI_TRANSITION_TIMING}, stroke ${UI_TRANSITION_MS}ms ${UI_TRANSITION_TIMING}`,
       }}
     >
       <path d="M6 9l6 6 6-6" />
@@ -221,6 +250,11 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
   const drawerId = useId();
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const lastOpenedByRef = useRef<string | null>(null);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  );
 
   if (lastPath !== pathname) {
     setLastPath(pathname);
@@ -255,6 +289,53 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
+  }, [openKey, closeDrawer]);
+
+  useEffect(() => {
+    if (!openKey) return;
+
+    let isClosing = false;
+    const triggerClose = () => {
+      if (isClosing) return;
+      isClosing = true;
+      closeDrawer();
+    };
+
+    const onWheel = () => triggerClose();
+    const onTouchMove = () => triggerClose();
+    const SCROLL_KEYS = new Set([
+      'ArrowUp',
+      'ArrowDown',
+      'PageUp',
+      'PageDown',
+      'Home',
+      'End',
+      ' ',
+      'Spacebar',
+    ]);
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (!SCROLL_KEYS.has(event.key)) return;
+      const target = event.target as HTMLElement | null;
+      const tag = target?.tagName;
+      if (
+        tag === 'INPUT' ||
+        tag === 'TEXTAREA' ||
+        tag === 'SELECT' ||
+        target?.isContentEditable === true
+      ) {
+        return;
+      }
+      triggerClose();
+    };
+
+    document.addEventListener('wheel', onWheel, { passive: true });
+    document.addEventListener('touchmove', onTouchMove, { passive: true });
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('wheel', onWheel);
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('keydown', onKeyDown);
+    };
   }, [openKey, closeDrawer]);
 
   const handleScrollCta = useCallback(() => {
@@ -351,7 +432,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
                     color: isInactive
                       ? 'rgba(255, 255, 255, 0.55)'
                       : '#FFFFFF',
-                    transition: `color ${TRANSITION_MS}ms ${TRANSITION_TIMING}`,
+                    transition: `color ${UI_TRANSITION_MS}ms ${UI_TRANSITION_TIMING}`,
                   }}
                 >
                   {parent.label}
@@ -397,7 +478,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
               border: 0,
               padding: '11px 22px',
               borderRadius: 6,
-              transition: `background-color ${TRANSITION_MS}ms ${TRANSITION_TIMING}`,
+              transition: `background-color ${UI_TRANSITION_MS}ms ${UI_TRANSITION_TIMING}`,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = '#1A8AC4';
@@ -417,10 +498,10 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
         className="hidden md:block fixed inset-x-0 bottom-0"
         style={{
           top: DROPDOWN_OFFSET_PX,
-          background: 'rgba(0, 0, 0, 0.75)',
+          background: 'rgba(0, 0, 0, 0.35)',
           opacity: drawerOpen ? 1 : 0,
           pointerEvents: drawerOpen ? 'auto' : 'none',
-          transition: `opacity ${TRANSITION_MS}ms ${TRANSITION_TIMING}`,
+          transition: `opacity ${drawerOpen ? DRAWER_OPEN_MS : DRAWER_CLOSE_MS}ms ${drawerOpen ? DRAWER_OPEN_EASING : DRAWER_CLOSE_EASING}`,
           zIndex: 30,
         }}
       />
@@ -441,11 +522,15 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
           borderRadius: '0 0 12px 12px',
           padding: `32px ${DRAWER_PADDING_X_PX}px 40px`,
           opacity: drawerOpen ? 1 : 0,
-          transform: drawerOpen
+          transform: prefersReducedMotion
             ? 'translate(-50%, 0)'
-            : 'translate(-50%, -10px)',
+            : drawerOpen
+              ? 'translate(-50%, 0)'
+              : 'translate(-50%, -100%)',
           pointerEvents: drawerOpen ? 'auto' : 'none',
-          transition: `opacity ${TRANSITION_MS}ms ${TRANSITION_TIMING}, transform ${TRANSITION_MS}ms ${TRANSITION_TIMING}`,
+          transition: prefersReducedMotion
+            ? `opacity ${drawerOpen ? DRAWER_OPEN_MS : DRAWER_CLOSE_MS}ms ${drawerOpen ? DRAWER_OPEN_EASING : DRAWER_CLOSE_EASING}`
+            : `opacity ${drawerOpen ? DRAWER_OPEN_MS : DRAWER_CLOSE_MS}ms ${drawerOpen ? DRAWER_OPEN_EASING : DRAWER_CLOSE_EASING}, transform ${drawerOpen ? DRAWER_OPEN_MS : DRAWER_CLOSE_MS}ms ${drawerOpen ? DRAWER_OPEN_EASING : DRAWER_CLOSE_EASING}`,
           zIndex: 31,
         }}
       >
