@@ -49,22 +49,6 @@ export function CountryPicker({
     };
   }, [open]);
 
-  const handleAlternateClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (typeof window === 'undefined') return;
-    if (
-      event.defaultPrevented ||
-      event.button !== 0 ||
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey
-    ) {
-      return;
-    }
-    event.preventDefault();
-    window.location.assign(otherHrefBase);
-  };
-
   return (
     <div
       ref={containerRef}
@@ -73,7 +57,6 @@ export function CountryPicker({
       {open ? (
         <a
           href={otherHrefBase}
-          onClick={handleAlternateClick}
           className="text-[11px] md:text-xs text-text-on-dark hover:text-brand-500 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
         >
           {otherLabel}
