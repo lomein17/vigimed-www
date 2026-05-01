@@ -115,10 +115,10 @@ export function Hero({ locale }: { locale: Locale }) {
             </h1>
           </div>
 
-          <div className="max-w-[640px]">
+          <div className="max-w-[672px] md:max-w-[688px] lg:max-w-[712px]">
             <p
               className="font-body"
-              style={{ color: '#D8DCE4', lineHeight: 1.6, fontSize: '1.0625rem' }}
+              style={{ color: '#D8DCE4', lineHeight: 1.6, fontSize: '1.2292rem' }}
             >
               {hero.subhead.map((segment, i) =>
                 segment.emphasis === 'bold-amber' ? (
