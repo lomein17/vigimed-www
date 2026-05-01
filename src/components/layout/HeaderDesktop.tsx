@@ -369,7 +369,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
   return (
     <>
       <div
-        className="hidden md:grid items-center h-[72px] px-6 lg:px-8"
+        className="hidden md:grid items-center h-[72px] px-6 lg:px-8 bg-navy-800"
         style={{ gridTemplateColumns: '1fr auto 1fr', position: 'relative', zIndex: 32 }}
       >
         <Link
