@@ -226,7 +226,7 @@ function DrawerCard({
         </p>
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
           <span
-            className="inline-flex items-center font-ui transition-transform duration-[120ms] ease-out group-hover:translate-x-[2px]"
+            className="inline-flex items-center font-ui"
             style={{
               fontSize: 13,
               fontWeight: 400,
@@ -245,6 +245,7 @@ function DrawerCard({
 
 export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) {
   const [openKey, setOpenKey] = useState<string | null>(null);
+  const [displayKey, setDisplayKey] = useState<string | null>(null);
   const pathname = usePathname();
   const [lastPath, setLastPath] = useState(pathname);
   const drawerId = useId();
@@ -255,6 +256,10 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
     getReducedMotionSnapshot,
     getReducedMotionServerSnapshot,
   );
+
+  if (openKey !== null && displayKey !== openKey) {
+    setDisplayKey(openKey);
+  }
 
   if (lastPath !== pathname) {
     setLastPath(pathname);
@@ -350,8 +355,8 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
   }, []);
 
   const drawerOpen = openKey !== null;
-  const activeParent: HeaderParent | undefined = openKey
-    ? header.nav[openKey]
+  const activeParent: HeaderParent | undefined = displayKey
+    ? header.nav[displayKey]
     : undefined;
 
   const subsegmentCount = activeParent?.subsegments.length ?? 0;
@@ -365,7 +370,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
     <>
       <div
         className="hidden md:grid items-center h-[72px] px-6 lg:px-8"
-        style={{ gridTemplateColumns: '1fr auto 1fr' }}
+        style={{ gridTemplateColumns: '1fr auto 1fr', position: 'relative', zIndex: 32 }}
       >
         <Link
           href={hrefFor(locale, 'home')}
@@ -541,7 +546,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
                 className="flex items-center"
                 style={{ gap: 14, marginBottom: 12 }}
               >
-                <ParentIcon parentKey={openKey ?? ''} size={18} />
+                <ParentIcon parentKey={displayKey ?? ''} size={18} />
                 <span
                   className="font-display text-text-on-dark"
                   style={{ fontSize: 18, fontWeight: 500 }}

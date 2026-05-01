@@ -23,7 +23,7 @@ export function StickyNav({ locale }: { locale: Locale }) {
     <header className="sticky top-0 z-40 bg-navy-800">
       <HeaderDesktop locale={locale} header={header} navOrder={navOrder} />
       <HeaderMobile locale={locale} header={header} navOrder={navOrder} />
-      <div aria-hidden="true" className="h-[3px] bg-brand-pulse" />
+      <div aria-hidden="true" className="relative z-[32] h-[3px] bg-brand-pulse" />
     </header>
   );
 }
