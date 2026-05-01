@@ -441,7 +441,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
                 aria-haspopup="true"
                 aria-expanded={isOpen}
                 aria-controls={drawerId}
-                className="group relative inline-flex items-center -mb-[2px] py-2 cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
+                className="group relative inline-flex items-center -mb-[2px] py-2 cursor-pointer focus:outline-none"
                 style={{ gap: 8 }}
               >
                 <ParentIcon
