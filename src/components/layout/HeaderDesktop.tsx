@@ -269,14 +269,16 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
   }
 
   const closeDrawer = useCallback(() => {
-    const lastTriggerKey = lastOpenedByRef.current;
     setOpenKey(null);
-    requestAnimationFrame(() => {
-      if (lastTriggerKey) {
-        triggerRefs.current[lastTriggerKey]?.focus();
-      }
-      lastOpenedByRef.current = null;
-    });
+    lastOpenedByRef.current = null;
+    // VM-425 round 4: do not refocus the originating trigger on close.
+    // Returning focus to the trigger button lets a subsequent Space keypress
+    // activate the button (re-opening the drawer) instead of falling through
+    // to the browser-default Space scroll that the page's CSS scroll-snap
+    // depends on. Blur the current focus target so focus lands on body.
+    if (typeof document !== 'undefined' && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   }, []);
 
   const openDrawerFor = useCallback((key: string) => {
@@ -315,8 +317,6 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
       'PageDown',
       'Home',
       'End',
-      ' ',
-      'Spacebar',
     ]);
     const onKeyDown = (event: KeyboardEvent) => {
       if (!SCROLL_KEYS.has(event.key)) return;
@@ -342,6 +342,28 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
       document.removeEventListener('keydown', onKeyDown);
     };
   }, [openKey, closeDrawer]);
+
+  useEffect(() => {
+    if (!openKey) return;
+
+    const onSpace = (event: KeyboardEvent) => {
+      if (event.key !== ' ' && event.key !== 'Spacebar') return;
+      const target = event.target as HTMLElement | null;
+      const tag = target?.tagName;
+      if (
+        tag === 'INPUT' ||
+        tag === 'TEXTAREA' ||
+        tag === 'SELECT' ||
+        target?.isContentEditable === true
+      ) {
+        return;
+      }
+      event.preventDefault();
+    };
+
+    document.addEventListener('keydown', onSpace);
+    return () => document.removeEventListener('keydown', onSpace);
+  }, [openKey]);
 
   const handleScrollCta = useCallback(() => {
     setOpenKey(null);
