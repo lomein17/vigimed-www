@@ -93,7 +93,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
         <CapabilitiesAutoReveal>
           <div
             className="mx-auto grid grid-cols-1 md:grid-cols-5 gap-4"
-            style={{ maxWidth: 1344 }}
+            style={{ maxWidth: 1140 }}
           >
             {capabilities.cards.map((card) => (
               <CapabilityCard
