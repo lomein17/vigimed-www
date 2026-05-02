@@ -238,7 +238,7 @@ h1, h2, h3 {
 .vm-capability-card {
   position: relative;
   overflow: hidden;
-  min-height: 200px;
+  aspect-ratio: 1 / 1;
   border-radius: 10px;
   isolation: isolate;
   border: 1px solid rgba(10, 22, 40, 0.16);
@@ -305,6 +305,7 @@ h1, h2, h3 {
 @media (max-width: 767.98px) {
   .vm-capability-card {
     min-height: auto;
+    aspect-ratio: auto;
     overflow: visible;
   }
   .vm-capability-back {
