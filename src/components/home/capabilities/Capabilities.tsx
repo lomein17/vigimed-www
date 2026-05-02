@@ -49,49 +49,51 @@ export function Capabilities({ locale }: { locale: Locale }) {
         />
       </svg>
 
-      <div className="relative z-10 max-w-content mx-auto">
-        <header className="mx-auto text-center flex flex-col gap-4 mb-12">
-          <p
-            className="font-ui"
-            style={{
-              color: 'var(--color-brand-500)',
-              fontSize: 12,
-              fontWeight: 500,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              lineHeight: 1.4,
-            }}
-          >
-            {capabilities.eyebrow}
-          </p>
-          <div className="max-w-[780px] mx-auto">
-            <h2
-              id="capabilities-heading"
+      <div className="relative z-10">
+        <div className="max-w-content mx-auto">
+          <header className="mx-auto text-center flex flex-col gap-4 mb-12">
+            <p
+              className="font-ui"
               style={{
-                fontSize: 'var(--text-h2)',
-                letterSpacing: '-0.01em',
-                lineHeight: 1.15,
+                color: 'var(--color-brand-500)',
+                fontSize: 12,
                 fontWeight: 500,
-                color: '#0A1628',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                lineHeight: 1.4,
               }}
             >
-              {capabilities.heading}
-            </h2>
-          </div>
-          <div className="max-w-[940px] mx-auto">
-            <p
-              className="font-body"
-              style={{ color: '#2B2B2B', lineHeight: 1.6, fontSize: '1.0625rem' }}
-            >
-              {capabilities.subhead}
+              {capabilities.eyebrow}
             </p>
-          </div>
-        </header>
+            <div className="max-w-[780px] mx-auto">
+              <h2
+                id="capabilities-heading"
+                style={{
+                  fontSize: 'var(--text-h2)',
+                  letterSpacing: '-0.01em',
+                  lineHeight: 1.15,
+                  fontWeight: 500,
+                  color: '#0A1628',
+                }}
+              >
+                {capabilities.heading}
+              </h2>
+            </div>
+            <div className="max-w-[940px] mx-auto">
+              <p
+                className="font-body"
+                style={{ color: '#2B2B2B', lineHeight: 1.6, fontSize: '1.0625rem' }}
+              >
+                {capabilities.subhead}
+              </p>
+            </div>
+          </header>
+        </div>
 
         <CapabilitiesAutoReveal>
           <div
             className="mx-auto grid grid-cols-1 md:grid-cols-5 gap-4"
-            style={{ maxWidth: 1184 }}
+            style={{ maxWidth: 1500 }}
           >
             {capabilities.cards.map((card) => (
               <CapabilityCard
