@@ -3,9 +3,14 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 
 const CARD_REVEAL_INITIAL_DELAY_MS = 250;
-const CARD_REVEAL_STAGGER_MS = 500;
-// Matches the existing 1000ms .vm-capability-front transition in globals.css:271-274. Locked by VM-424 non-goals; do not tune via this constant.
-const CARD_REVEAL_OPEN_DURATION_MS = 1000;
+// Must match the 1000ms transform transition on .vm-capability-front in globals.css:279.
+// If that value changes, re-sync this constant manually.
+const CARD_REVEAL_CSS_TRANSITION_MS = 1000;
+// VM-435 supersedes the VM-424 rolling-wave model with a synchronized open / dwell / close.
+// All cards open together, hold fully open for this duration after the CSS transition
+// completes, then close together. Safely tunable: bumping this value changes only the
+// fully-open rest period; close time is openAt + CARD_REVEAL_CSS_TRANSITION_MS + this value.
+const CARD_REVEAL_OPEN_DWELL_MS = 3000;
 // Intersection ratio required to arm the dwell timer. 0.6 = 60% of the
 // Capabilities section in view. Higher than the previous 0.4 to avoid
 // firing during rapid scroll-by. Tunable.
@@ -70,9 +75,9 @@ export function CapabilitiesAutoReveal({ children }: { children: ReactNode }) {
       started = true;
       hasPlayed = true;
 
-      cards.forEach((card, i) => {
-        const openAt = CARD_REVEAL_INITIAL_DELAY_MS + i * CARD_REVEAL_STAGGER_MS;
-        const closeAt = openAt + CARD_REVEAL_OPEN_DURATION_MS;
+      cards.forEach((card) => {
+        const openAt = CARD_REVEAL_INITIAL_DELAY_MS;
+        const closeAt = openAt + CARD_REVEAL_CSS_TRANSITION_MS + CARD_REVEAL_OPEN_DWELL_MS;
 
         const openId = window.setTimeout(() => {
           if (halted) return;
