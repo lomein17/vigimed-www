@@ -9,6 +9,16 @@ export const header: HeaderContent = {
         '¿Y si cada evento crítico se resolviera con la misma rigurosidad que su mejor caso?',
       subsegments: [
         {
+          name: 'Sistemas Hospitalarios',
+          slug: '/mx-es/sistemas-hospitalarios',
+          valueProp:
+            'Lo que funciona en su hospital insignia, replicado con la misma rigurosidad en cada unidad de su red.',
+          image: {
+            src: '/subsegments/mx_systems.jpeg',
+            alt: 'Sistemas Hospitalarios',
+          },
+        },
+        {
           name: 'Hospitales Privados',
           slug: '/mx-es/hospitales-privados',
           valueProp:
@@ -26,16 +36,6 @@ export const header: HeaderContent = {
           image: {
             src: '/subsegments/mx_public.jpeg',
             alt: 'Hospitales Públicos',
-          },
-        },
-        {
-          name: 'Sistemas Hospitalarios',
-          slug: '/mx-es/sistemas-hospitalarios',
-          valueProp:
-            'Lo que funciona en su hospital insignia, replicado con la misma rigurosidad en cada unidad de su red.',
-          image: {
-            src: '/subsegments/mx_systems.jpeg',
-            alt: 'Sistemas Hospitalarios',
           },
         },
       ],
