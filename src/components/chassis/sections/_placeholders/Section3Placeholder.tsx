@@ -3,7 +3,7 @@
 export function Section3Placeholder() {
   return (
     <section className="vm-segment-section-placeholder vm-segment-section--navy">
-      <p>[Section 3 — placeholder]</p>
+      <p>[Section 3: placeholder]</p>
     </section>
   );
 }
