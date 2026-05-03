@@ -1,6 +1,7 @@
 import type { Locale } from '@/lib/i18n';
 import type { Section5Slots } from '@/lib/chassis/slots';
 import { RichText } from '../primitives/RichText';
+import { Section5CtaPill } from '../primitives/Section5CtaPill';
 
 export function Section5FinalCta({
   locale,
@@ -114,18 +115,7 @@ export function Section5FinalCta({
           </p>
 
           {/* CTA pill: chassis-constant label */}
-          <a
-            href="#segment-final-cta"
-            className="inline-flex items-center justify-center rounded-md px-6 py-3 font-ui text-white"
-            style={{
-              backgroundColor: 'var(--color-brand-500)',
-              fontSize: 14,
-              fontWeight: 500,
-              letterSpacing: '0.02em',
-            }}
-          >
-            {ctaLabel}
-          </a>
+          <Section5CtaPill label={ctaLabel} />
 
           {/* Reassurance microcopy */}
           <p
