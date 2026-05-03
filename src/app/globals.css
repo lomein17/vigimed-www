@@ -1143,3 +1143,66 @@ h1, h2, h3 {
     max-width: min(1920px, calc((100svh - 560px) * 16 / 9));
   }
 }
+
+/* =======================================================================
+ * Segment page chassis (VM-436)
+ * -----------------------------------------------------------------------
+ * Chassis-level section classes for the universal segment page. Each
+ * segment section uses the vm-segment-* prefix to stay visually
+ * independent from Home-page section styles (vm-hero-section etc.).
+ * Chassis Brief v1.1 §9.1 page rhythm; Slot Map v1.1 §2 constraints.
+ * ======================================================================= */
+
+.vm-segment-hero-section {
+  position: relative;
+  width: 100%;
+  background: #0A1628;
+  padding-left: var(--site-gutter);
+  padding-right: var(--site-gutter);
+  padding-top: var(--site-section);
+  padding-bottom: var(--site-section);
+}
+
+.vm-segment-final-cta-section {
+  position: relative;
+  width: 100%;
+  background: #0A1628;
+  padding-left: var(--site-gutter);
+  padding-right: var(--site-gutter);
+  padding-top: var(--site-section);
+  padding-bottom: var(--site-section);
+}
+
+/* Placeholder sections for Sections 2-4 (deleted by VM-437) */
+
+.vm-segment-section-placeholder {
+  position: relative;
+  width: 100%;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--site-section) var(--site-gutter);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.vm-segment-section--navy {
+  background: #0A1628;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.vm-segment-section--offwhite {
+  background: #F5F3EE;
+  color: rgba(10, 22, 40, 0.3);
+}
+
+/* Slot Map v1.1 §2 em-dash glyph rendering (D-S25-1).
+ * Pins font settings for consistent glyph rendering across the
+ * General Sans / Inter / fallback chain in metricCell null states. */
+
+.vm-metric-cell-value {
+  font-feature-settings: normal;
+  font-variant-numeric: normal;
+}
