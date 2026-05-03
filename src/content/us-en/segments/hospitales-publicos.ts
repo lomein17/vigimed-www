@@ -1,8 +1,11 @@
-// US-EN chassis fixture. All slots are null-state placeholders because
-// no us-en lock exists for Public Hospitals MX (mx-es-only segment per
-// Site Architecture parity rule). Future us-en segment pages (Health
-// Systems / IDNs US, etc.) will have their own fixtures with real us-en
-// content in the 'us-en' Paired fields.
+// US-EN parity fill for the Public Hospitals MX segment. Public Hospitals
+// MX is mx-es-only per Site Architecture parity rule, so this file is
+// never rendered: the route guard at
+// src/app/[locale]/(chrome)/hospitales-publicos/page.tsx returns
+// notFound() for non-mx-es requests. We keep a us-en parity fixture so
+// the chassis-preview dev route can render the same shape under us-en
+// and so future us-en segments (Health Systems / IDNs US, etc.) have a
+// reference layout.
 
 import type { ChassisFill } from '@/lib/chassis/slots';
 import { EM_DASH_GLYPH } from '@/lib/chassis/constants';
@@ -10,7 +13,7 @@ import { EM_DASH_GLYPH } from '@/lib/chassis/constants';
 const p = (text: string) =>
   ({ 'mx-es': text, 'us-en': text }) as const;
 
-export const chassisFixtureUsEn: ChassisFill = {
+export const hospitalesPublicosFillUsEn: ChassisFill = {
   hero: {
     contextBar: p('[context bar pending]'),
     eyebrow: p('[eyebrow pending]'),

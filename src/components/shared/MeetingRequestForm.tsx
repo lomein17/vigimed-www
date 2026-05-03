@@ -1,5 +1,16 @@
 'use client';
 
+// Shared meeting-request form. Single source of truth for the form on
+// the Home Final CTA section and the segment-page chassis Section 5.
+// Reads labels/options/errors/consent/confirmation from
+// src/content/{locale}/home.ts:finalCta.form so authoring stays in one
+// place. Lifted out of the original src/components/home/final-cta/
+// FinalCtaForm.tsx in VM-437.
+//
+// The wrapping element carries data-meeting-form-anchor so the chassis
+// Section 5 CTA pill can scroll the user here and place keyboard focus
+// on the first field.
+
 import {
   useState,
   type ChangeEvent,
@@ -76,7 +87,7 @@ function deriveError(
   return null;
 }
 
-export function FinalCtaForm({ locale }: { locale: Locale }) {
+export function MeetingRequestForm({ locale }: { locale: Locale }) {
   const { finalCta } = contentByLocale[locale];
   const { form, confirmation } = finalCta;
   const { labels, placeholders, options, errors } = form;
@@ -144,7 +155,7 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
 
   if (submitted) {
     return (
-      <div className="vm-final-cta-card">
+      <div className="vm-final-cta-card" data-meeting-form-anchor>
         <div
           className="vm-final-cta-confirmation"
           role="status"
@@ -177,18 +188,18 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
   const submitDisabled = submitting || hasAnyValidationError;
 
   return (
-    <div className="vm-final-cta-card">
+    <div className="vm-final-cta-card" data-meeting-form-anchor>
       <form
         className="vm-final-cta-form"
         onSubmit={handleSubmit}
         noValidate
       >
         <div className="vm-final-cta-field">
-          <label className="vm-final-cta-label" htmlFor="final-cta-name">
+          <label className="vm-final-cta-label" htmlFor="meeting-form-name">
             {labels.name}
           </label>
           <input
-            id="final-cta-name"
+            id="meeting-form-name"
             type="text"
             className="vm-final-cta-input"
             value={values.name}
@@ -196,12 +207,12 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
             onBlur={handleBlur('name')}
             aria-invalid={shouldShowError('name') || undefined}
             aria-describedby={
-              shouldShowError('name') ? 'final-cta-name-error' : undefined
+              shouldShowError('name') ? 'meeting-form-name-error' : undefined
             }
             autoComplete="name"
           />
           {shouldShowError('name') ? (
-            <p id="final-cta-name-error" className="vm-final-cta-error">
+            <p id="meeting-form-name-error" className="vm-final-cta-error">
               {errorMap.name}
             </p>
           ) : null}
@@ -210,12 +221,12 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
         <div className="vm-final-cta-field">
           <label
             className="vm-final-cta-label"
-            htmlFor="final-cta-job-title"
+            htmlFor="meeting-form-job-title"
           >
             {labels.jobTitle}
           </label>
           <input
-            id="final-cta-job-title"
+            id="meeting-form-job-title"
             type="text"
             className="vm-final-cta-input"
             value={values.jobTitle}
@@ -224,14 +235,14 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
             aria-invalid={shouldShowError('jobTitle') || undefined}
             aria-describedby={
               shouldShowError('jobTitle')
-                ? 'final-cta-job-title-error'
+                ? 'meeting-form-job-title-error'
                 : undefined
             }
             autoComplete="organization-title"
           />
           {shouldShowError('jobTitle') ? (
             <p
-              id="final-cta-job-title-error"
+              id="meeting-form-job-title-error"
               className="vm-final-cta-error"
             >
               {errorMap.jobTitle}
@@ -242,12 +253,12 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
         <div className="vm-final-cta-field">
           <label
             className="vm-final-cta-label"
-            htmlFor="final-cta-organization-name"
+            htmlFor="meeting-form-organization-name"
           >
             {labels.organizationName}
           </label>
           <input
-            id="final-cta-organization-name"
+            id="meeting-form-organization-name"
             type="text"
             className="vm-final-cta-input"
             value={values.organizationName}
@@ -256,14 +267,14 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
             aria-invalid={shouldShowError('organizationName') || undefined}
             aria-describedby={
               shouldShowError('organizationName')
-                ? 'final-cta-organization-name-error'
+                ? 'meeting-form-organization-name-error'
                 : undefined
             }
             autoComplete="organization"
           />
           {shouldShowError('organizationName') ? (
             <p
-              id="final-cta-organization-name-error"
+              id="meeting-form-organization-name-error"
               className="vm-final-cta-error"
             >
               {errorMap.organizationName}
@@ -274,12 +285,12 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
         <div className="vm-final-cta-field">
           <label
             className="vm-final-cta-label"
-            htmlFor="final-cta-organization-type"
+            htmlFor="meeting-form-organization-type"
           >
             {labels.organizationType}
           </label>
           <select
-            id="final-cta-organization-type"
+            id="meeting-form-organization-type"
             className="vm-final-cta-select"
             value={values.organizationType}
             onChange={handleChange('organizationType')}
@@ -287,7 +298,7 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
             aria-invalid={shouldShowError('organizationType') || undefined}
             aria-describedby={
               shouldShowError('organizationType')
-                ? 'final-cta-organization-type-error'
+                ? 'meeting-form-organization-type-error'
                 : undefined
             }
           >
@@ -302,7 +313,7 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
           </select>
           {shouldShowError('organizationType') ? (
             <p
-              id="final-cta-organization-type-error"
+              id="meeting-form-organization-type-error"
               className="vm-final-cta-error"
             >
               {errorMap.organizationType}
@@ -313,12 +324,12 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
         <div className="vm-final-cta-field">
           <label
             className="vm-final-cta-label"
-            htmlFor="final-cta-work-email"
+            htmlFor="meeting-form-work-email"
           >
             {labels.workEmail}
           </label>
           <input
-            id="final-cta-work-email"
+            id="meeting-form-work-email"
             type="email"
             className="vm-final-cta-input"
             value={values.workEmail}
@@ -327,7 +338,7 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
             aria-invalid={shouldShowError('workEmail') || undefined}
             aria-describedby={
               shouldShowError('workEmail')
-                ? 'final-cta-work-email-error'
+                ? 'meeting-form-work-email-error'
                 : undefined
             }
             autoComplete="email"
@@ -335,7 +346,7 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
           />
           {shouldShowError('workEmail') ? (
             <p
-              id="final-cta-work-email-error"
+              id="meeting-form-work-email-error"
               className="vm-final-cta-error"
             >
               {errorMap.workEmail}
@@ -344,14 +355,14 @@ export function FinalCtaForm({ locale }: { locale: Locale }) {
         </div>
 
         <div className="vm-final-cta-field">
-          <label className="vm-final-cta-label" htmlFor="final-cta-phone">
+          <label className="vm-final-cta-label" htmlFor="meeting-form-phone">
             {labels.phone}{' '}
             <span className="vm-final-cta-label-opt">
               {labels.phoneOptional}
             </span>
           </label>
           <input
-            id="final-cta-phone"
+            id="meeting-form-phone"
             type="tel"
             className="vm-final-cta-input"
             value={values.phone}

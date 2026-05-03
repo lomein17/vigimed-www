@@ -2,6 +2,8 @@ import type { Locale } from '@/lib/i18n';
 import type { Section5Slots } from '@/lib/chassis/slots';
 import { RichText } from '../primitives/RichText';
 import { Section5CtaPill } from '../primitives/Section5CtaPill';
+import { FaqAccordion } from '../primitives/FaqAccordion';
+import { MeetingRequestForm } from '@/components/shared/MeetingRequestForm';
 
 export function Section5FinalCta({
   locale,
@@ -26,7 +28,7 @@ export function Section5FinalCta({
       className="vm-segment-final-cta-section"
     >
       <div className="mx-auto" style={{ maxWidth: 1200 }}>
-        {/* Zone A -- FAQ accordion */}
+        {/* Zone A -- FAQ accordion (Slot Map v1.1 §8.2) */}
         <div style={{ maxWidth: 720, marginBottom: 64 }}>
           <p
             className="font-ui text-brand-500"
@@ -40,38 +42,10 @@ export function Section5FinalCta({
           >
             {faqEyebrow}
           </p>
-
-          {/* FAQ items render as static collapsed headers. Interactive
-              accordion wired in VM-437 with the rest of Section 5 body. */}
-          <div className="flex flex-col gap-4">
-            {fill.faqItems.map((item) => {
-              const question = item.question[locale];
-              return (
-                <div
-                  key={question}
-                  className="flex items-center justify-between py-4"
-                  style={{ borderBottom: '1px solid rgba(255,255,255,0.12)' }}
-                >
-                  <span
-                    className="font-display text-text-on-dark"
-                    style={{ fontSize: 18, fontWeight: 500 }}
-                  >
-                    {question}
-                  </span>
-                  <span
-                    className="text-brand-500 ml-4 flex-shrink-0"
-                    style={{ fontSize: 20 }}
-                    aria-hidden="true"
-                  >
-                    +
-                  </span>
-                </div>
-              );
-            })}
-          </div>
+          <FaqAccordion items={fill.faqItems} locale={locale} />
         </div>
 
-        {/* Zone B -- Final CTA */}
+        {/* Zone B -- Final CTA (Slot Map v1.1 §8.3) */}
         <div style={{ maxWidth: 680 }}>
           <p
             className="font-ui text-brand-500"
@@ -114,7 +88,7 @@ export function Section5FinalCta({
             {frame}
           </p>
 
-          {/* CTA pill: chassis-constant label */}
+          {/* CTA pill: chassis-constant label; scrolls to the form below */}
           <Section5CtaPill label={ctaLabel} />
 
           {/* Reassurance microcopy */}
@@ -125,19 +99,11 @@ export function Section5FinalCta({
             {reassurance}
           </p>
 
-          {/* Meeting-request form: mounts here in VM-437. Shared component
-              across Home and segment pages; not in chassis brief scope. */}
-          <div
-            className="mt-10 rounded-lg p-6"
-            style={{
-              border: '1px dashed rgba(255,255,255,0.15)',
-              color: 'rgba(255,255,255,0.3)',
-              textAlign: 'center',
-              fontSize: 14,
-              fontFamily: 'var(--font-ui)',
-            }}
-          >
-            [form mounts here in VM-437]
+          {/* Meeting-request form: shared component, also mounted on the
+              Home Final CTA. Carries data-meeting-form-anchor for the
+              CTA pill above to scroll to. */}
+          <div style={{ marginTop: 40 }}>
+            <MeetingRequestForm locale={locale} />
           </div>
         </div>
       </div>

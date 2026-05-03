@@ -1,22 +1,23 @@
-// VM-436 chassis preview route. Dev-only; noindex/nofollow via
+// Chassis preview route. Dev-only; noindex/nofollow via
 // getPlaceholderMetadata. Renders the SegmentChassis with locale-keyed
-// fixtures from src/content/{locale}/chassis/.
+// per-segment fills. Currently fronts the Public Hospitals MX fixture
+// for both locales; future segment fills mount here as they land.
 //
 // Schema: src/lib/chassis/slots.ts (ChassisFill)
-// Fixtures: src/content/mx-es/chassis/index.ts, src/content/us-en/chassis/index.ts
+// Fixtures: src/content/{locale}/segments/hospitales-publicos.ts
 
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { SegmentChassis } from '@/components/chassis/SegmentChassis';
-import { chassisFixtureMxEs } from '@/content/mx-es/chassis';
-import { chassisFixtureUsEn } from '@/content/us-en/chassis';
+import { hospitalesPublicosFillMxEs } from '@/content/mx-es/segments';
+import { hospitalesPublicosFillUsEn } from '@/content/us-en/segments';
 import { isLocale, type Locale } from '@/lib/i18n';
 import { getPlaceholderMetadata } from '@/lib/seo/metadata';
 
 const fixtureByLocale = {
-  'mx-es': chassisFixtureMxEs,
-  'us-en': chassisFixtureUsEn,
+  'mx-es': hospitalesPublicosFillMxEs,
+  'us-en': hospitalesPublicosFillUsEn,
 } as const;
 
 export async function generateMetadata({

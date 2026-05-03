@@ -1,13 +1,16 @@
-// VM-403 (Hero) and VM-407 (Final CTA) locked mx-es content for the
-// Public Hospitals MX segment page. This file is the SINGLE source of
-// truth for those locked specs in the repo; no other file duplicates
-// this copy. Future evolution per Chassis Brief §10.3 governance
-// updates this file directly.
+// Public Hospitals MX segment fill (mx-es).
+// VM-403 (Hero) and VM-407 (Final CTA) locked content. This file is
+// the SINGLE source of truth for those locked specs in the repo; no
+// other file duplicates this copy. Future evolution per Chassis Brief
+// §10.3 governance updates this file directly.
 //
 // Locale handling: Public Hospitals MX is mx-es-only by design per Site
 // Architecture parity rule. The us-en side of locked Paired fields uses
-// '[us-en pending]' markers. TODO(VM-437): downstream segments fill
-// the us-en side when us-en locks exist.
+// '[us-en pending]' markers and is never rendered (the route guard at
+// src/app/[locale]/(chrome)/hospitales-publicos/page.tsx returns
+// notFound() for non-mx-es requests). VM-438 fills the placeholder
+// strings (S2/S3/S4 bodies, FAQ Zone A, Sticky prompts) with the live
+// Public Hospitals MX content lock.
 //
 // Section 3 uses tabCount: 4 (Public Hospitals MX buyer chain has four
 // meaningful roles per Worksheet v2.1).
@@ -15,7 +18,7 @@
 import type { ChassisFill } from '@/lib/chassis/slots';
 import { EM_DASH_GLYPH } from '@/lib/chassis/constants';
 
-export const chassisFixtureMxEs: ChassisFill = {
+export const hospitalesPublicosFillMxEs: ChassisFill = {
   // ---------------------------------------------------------------------------
   // Section 1 -- Hero (VM-403 locked mx-es content)
   // ---------------------------------------------------------------------------
@@ -82,7 +85,7 @@ export const chassisFixtureMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 2 -- Operational Reality (placeholder)
+  // Section 2 -- Operational Reality (placeholder; VM-438 fills)
   // ---------------------------------------------------------------------------
   section2: {
     eyebrow: {

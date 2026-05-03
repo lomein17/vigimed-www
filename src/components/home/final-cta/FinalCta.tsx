@@ -2,7 +2,7 @@ import { homeContent as mxHome } from '@/content/mx-es/home';
 import { homeContent as usHome } from '@/content/us-en/home';
 import type { Locale } from '@/lib/i18n';
 
-import { FinalCtaForm } from './FinalCtaForm';
+import { MeetingRequestForm } from '@/components/shared/MeetingRequestForm';
 
 const contentByLocale = {
   'mx-es': mxHome,
@@ -41,7 +41,7 @@ export function FinalCta({ locale }: { locale: Locale }) {
             </ol>
           </div>
           <div>
-            <FinalCtaForm locale={locale} />
+            <MeetingRequestForm locale={locale} />
           </div>
         </div>
       </div>
