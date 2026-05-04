@@ -12,7 +12,7 @@ export const sharedContent: SharedContent = {
         heading: 'Soluciones',
         links: [
           { label: 'Sistemas Hospitalarios', slug: '/mx-es/sistemas-hospitalarios' },
-          { label: 'Hospitales Privados', slug: '/mx-es/hospitales-privados' },
+          { label: 'Centros Médicos', slug: '/mx-es/centros-medicos' },
           { label: 'Hospitales Públicos', slug: '/mx-es/hospitales-publicos' },
           { label: 'Clínicas de Maternidad', slug: '/mx-es/clinicas-de-maternidad' },
           { label: 'Laboratorios Clínicos', slug: '/mx-es/laboratorios-clinicos' },

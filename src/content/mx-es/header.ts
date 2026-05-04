@@ -19,13 +19,13 @@ export const header: HeaderContent = {
           },
         },
         {
-          name: 'Hospitales Privados',
-          slug: '/mx-es/hospitales-privados',
+          name: 'Centros Médicos',
+          slug: '/mx-es/centros-medicos',
           valueProp:
             'Cuando un incidente llega a redes sociales o a una demanda, ya es tarde. VigiMed lo captura cuando ocurre.',
           image: {
             src: '/subsegments/mx_private.jpeg',
-            alt: 'Hospitales Privados',
+            alt: 'Centros Médicos',
           },
         },
         {

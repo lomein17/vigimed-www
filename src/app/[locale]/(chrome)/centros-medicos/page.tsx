@@ -16,11 +16,11 @@ export async function generateMetadata({
   if (!isLocale(locale) || locale !== 'mx-es') return {};
   return getPlaceholderMetadata(locale, {
     isPlaceholder,
-    titleSuffix: 'Hospitales Privados',
+    titleSuffix: 'Centros Médicos',
   });
 }
 
-export default async function HospitalesPrivadosPage({
+export default async function CentrosMedicosPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
