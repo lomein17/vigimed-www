@@ -38,6 +38,14 @@ export function StickyCta({
   locale: Locale;
   fill: StickyCtaSlots;
 }) {
+  // V1 disable per VM-445 UAT 2026-05-07: site-wide right-rail and mobile
+  // bottom-bar sticky drop. Fixtures still carry sticky.promptMobile and
+  // sticky.promptDesktop slots; the component stops rendering them. v2 may
+  // reintroduce a different mechanic (Q&A chatbot) consuming these slots
+  // differently. Slot Map v1.1 §9.2 retained; spec-side note logged on the
+  // Linear doc by Cowork.
+  return null;
+
   const ctaLabel = CONVERSION_CTA_LABELS[locale];
   const promptDesktop = fill.promptDesktop[locale];
   const promptMobile = fill.promptMobile[locale];

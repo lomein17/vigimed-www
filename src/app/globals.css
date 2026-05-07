@@ -38,10 +38,14 @@
 
   /* ---------- Typography scale (§4.2, mobile baseline) ----------
    * H1 and H2 use discrete breakpoint overrides below to hit the exact
-   * 72/56/40 and 48/40/32 values required by the spec. Other sizes are
-   * stable across breakpoints per spec ("never shrink body text"). */
+   * spec values. Other sizes are stable across breakpoints per spec
+   * ("never shrink body text"). VM-445 (2026-05-07) retunes --text-h1 to
+   * the Home Hero scale (2.333 / 2.833 / 3.583rem) so the segment chassis
+   * Hero matches Home Hero typography 1:1. Sole consumer is
+   * Section1Hero; companion --text-h1--* tokens stay on the original
+   * spec values for any future H1 utility consumer. */
 
-  --text-h1: 2.5rem;
+  --text-h1: 2.333rem;
   --text-h1--line-height: 1.05;
   --text-h1--letter-spacing: -0.015em;
   --text-h1--font-weight: 700;
@@ -125,7 +129,7 @@
 /* Responsive H1, H2, gutter, section-y (§4.2 and §4.4) */
 @media (min-width: 768px) {
   :root {
-    --text-h1: 3.5rem;
+    --text-h1: 2.833rem;
     --text-h2: 2.5rem;
     --site-gutter: 1.5rem;
     --site-section: 4rem;
@@ -134,7 +138,7 @@
 
 @media (min-width: 1024px) {
   :root {
-    --text-h1: 4.5rem;
+    --text-h1: 3.583rem;
     --text-h2: 3rem;
     --site-gutter: 3rem;
     --site-section: 6rem;
@@ -1072,7 +1076,8 @@ h1, h2, h3 {
 .vm-capabilities-section,
 .vm-pim-section,
 .vm-moat-integrations-section,
-.vm-final-cta-section {
+.vm-final-cta-section,
+.vm-segment-hero-section {
   min-height: calc(100svh - var(--vm-nav-h));
   display: flex;
   flex-direction: column;

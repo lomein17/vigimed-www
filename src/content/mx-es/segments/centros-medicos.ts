@@ -43,8 +43,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
     h1Line2: {
       'mx-es': [
         { text: 'que su institución toma ' },
-        { text: 'una vez', emphasis: 'brand-cyan' },
-        { text: '.' },
+        { text: 'una vez.', emphasis: 'brand-cyan' },
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },

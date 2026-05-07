@@ -94,11 +94,14 @@ export function Section1Hero({
               </h1>
             </div>
 
-            {/* Subhead with inline emphasis */}
+            {/* Subhead with inline emphasis. Typography pinned to Home
+                Hero (color/size/family) per VM-445 UAT 2026-05-07; the
+                580px max-width is the chassis design choice and stays
+                narrower than Home's stepped 684/706/739. */}
             <div style={{ maxWidth: 580 }}>
               <p
                 className="font-body"
-                style={{ color: '#C9D1DC', lineHeight: 1.6, fontSize: 17 }}
+                style={{ color: '#D8DCE4', lineHeight: 1.6, fontSize: '1.2292rem' }}
               >
                 <RichText segments={subhead} />
               </p>
