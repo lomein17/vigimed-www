@@ -50,7 +50,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
     subhead: {
       'mx-es': [
         {
-          text: 'Detección continua, confirmación humana, y análisis documentado de cada evento crítico en sus áreas de mayor riesgo. ',
+          text: 'Detección continua, confirmación humana, y análisis de\ncada evento crítico en sus áreas de mayor riesgo.\n',
         },
         {
           text: 'Inteligencia operativa requerida para mejorar, no para vigilar.',

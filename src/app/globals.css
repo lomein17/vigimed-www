@@ -1162,8 +1162,12 @@ h1, h2, h3 {
   position: relative;
   width: 100%;
   background: #0A1628;
-  padding-left: var(--site-gutter);
-  padding-right: var(--site-gutter);
+  /* Horizontal padding intentionally omitted (VM-445 UAT 2026-05-07).
+   * Hero content uses an inline clamp anchor on its inner wrapper to
+   * align with Home Hero (Hero.tsx); section-level gutter padding would
+   * stack on top of that and shift content rightward. Vertical padding
+   * stays for section rhythm. Sibling segment sections keep gutter
+   * padding via their own rules below. */
   padding-top: var(--site-section);
   padding-bottom: var(--site-section);
 }
