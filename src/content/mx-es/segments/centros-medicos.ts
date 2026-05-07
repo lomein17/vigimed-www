@@ -78,89 +78,57 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 2 -- Operational Reality (VM-446 D-S52-1 locked mx-es content, 2026-05-07)
+  // Section 2 -- Operational Reality (placeholder; VM-441 fills)
   // ---------------------------------------------------------------------------
   section2: {
     eyebrow: {
-      'mx-es': 'LA REALIDAD OPERATIVA',
+      'mx-es': '[S2 eyebrow pending]',
       'us-en': '[S2 eyebrow pending]',
     },
     heading: {
-      'mx-es': 'Tres modelos en transición. Una sola institución que responde.',
+      'mx-es': '[S2 heading pending]',
       'us-en': '[S2 heading pending]',
     },
     pressures: [
-      {
-        'mx-es':
-          'MAPEVE recalibró las definiciones de IAAS contra estándares NHSN/CDC en junio 2024. Cada caso se revalida.',
-        'us-en': '[pressure 1 pending]',
-      },
-      {
-        'mx-es':
-          'MOCEBPASS sustituyó al MUEC en septiembre 2025 con 273 estándares más una plataforma digital nueva.',
-        'us-en': '[pressure 2 pending]',
-      },
-      {
-        'mx-es':
-          'El Plan de Mejora Continua sintetiza MOCEBPASS, JCI o ISO en un solo documento de cierre de ciclo.',
-        'us-en': '[pressure 3 pending]',
-      },
-      {
-        'mx-es':
-          'La continuidad de la acreditación se concentra en una sola firma. Sin red que diluya.',
-        'us-en': '[pressure 4 pending]',
-      },
+      { 'mx-es': '[presión 1 pendiente]', 'us-en': '[pressure 1 pending]' },
+      { 'mx-es': '[presión 2 pendiente]', 'us-en': '[pressure 2 pending]' },
+      { 'mx-es': '[presión 3 pendiente]', 'us-en': '[pressure 3 pending]' },
+      { 'mx-es': '[presión 4 pendiente]', 'us-en': '[pressure 4 pending]' },
     ],
     ucEyebrow: {
-      'mx-es': 'LO QUE VIGIMED HACE POR CADA ROL',
+      'mx-es': '[UC strip eyebrow pending]',
       'us-en': '[UC strip eyebrow pending]',
     },
     ucHeading: {
-      'mx-es': 'Cuatro cargos. Cuatro vistas. Una sola operación.',
+      'mx-es': '[UC strip heading pending]',
       'us-en': '[UC strip heading pending]',
     },
     ucCards: [
       {
-        name: {
-          'mx-es': 'UVEH · Señal a patrón',
-          'us-en': '[UC1 pending]',
-        },
+        name: { 'mx-es': '[UC1 pendiente]', 'us-en': '[UC1 pending]' },
         framing: {
-          'mx-es':
-            'Valida cada caso del archivo semanal contra MAPEVE 2024 y notifica a Plataforma RHOVE sin reescribir.',
+          'mx-es': '[framing 1 pendiente]',
           'us-en': '[framing 1 pending]',
         },
       },
       {
-        name: {
-          'mx-es': 'Subdirección de Calidad · Patrón a tendencia',
-          'us-en': '[UC2 pending]',
-        },
+        name: { 'mx-es': '[UC2 pendiente]', 'us-en': '[UC2 pending]' },
         framing: {
-          'mx-es':
-            'Mapea cada hallazgo contra MOCEBPASS, JCI e ISO al mismo tiempo. Un solo Plan, no tres.',
+          'mx-es': '[framing 2 pendiente]',
           'us-en': '[framing 2 pending]',
         },
       },
       {
-        name: {
-          'mx-es': 'Dirección Médica · Tendencia a criterio',
-          'us-en': '[UC3 pending]',
-        },
+        name: { 'mx-es': '[UC3 pendiente]', 'us-en': '[UC3 pending]' },
         framing: {
-          'mx-es':
-            'Cierra el ciclo mensual de CODECIN con evidencia ya consolidada por servicio y por campus.',
+          'mx-es': '[framing 3 pendiente]',
           'us-en': '[framing 3 pending]',
         },
       },
       {
-        name: {
-          'mx-es': 'Dirección General · Criterio a estándar',
-          'us-en': '[UC4 pending]',
-        },
+        name: { 'mx-es': '[UC4 pendiente]', 'us-en': '[UC4 pending]' },
         framing: {
-          'mx-es':
-            'Llega a la conferencia de apertura con un Plan ya leído, no uno firmado a ciegas.',
+          'mx-es': '[framing 4 pendiente]',
           'us-en': '[framing 4 pending]',
         },
       },
