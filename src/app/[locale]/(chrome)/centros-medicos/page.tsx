@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { PlaceholderBody } from '@/components/PlaceholderBody';
+import { SegmentChassis } from '@/components/chassis/SegmentChassis';
+import { centrosMedicosFillMxEs } from '@/content/mx-es/segments';
 import { isLocale } from '@/lib/i18n';
 import { getPlaceholderMetadata } from '@/lib/seo/metadata';
-
-const isPlaceholder = true;
 
 export async function generateMetadata({
   params,
@@ -15,7 +14,7 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale) || locale !== 'mx-es') return {};
   return getPlaceholderMetadata(locale, {
-    isPlaceholder,
+    isPlaceholder: false,
     titleSuffix: 'Centros Médicos',
   });
 }
@@ -27,5 +26,5 @@ export default async function CentrosMedicosPage({
 }) {
   const { locale } = await params;
   if (locale !== 'mx-es') notFound();
-  return <PlaceholderBody locale={locale} />;
+  return <SegmentChassis locale="mx-es" fill={centrosMedicosFillMxEs} />;
 }
