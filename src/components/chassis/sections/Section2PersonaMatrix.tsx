@@ -45,15 +45,26 @@ export function Section2PersonaMatrix({
     medica: null,
     general: null,
   });
+  const isFirstRun = useRef(true);
 
+  // VM-448 S57 FIX 1: previously called node.scrollIntoView on every
+  // mount/active change. With block: 'nearest', cold load (when §B sits
+  // below the fold) still scrolled the page vertically to bring the
+  // active tab into view, landing the user near §B instead of §A. Mirror
+  // the S56 §C fix: skip the first invocation so mount never scrolls,
+  // and use horizontal-only scrollTo on the tab strip parent so
+  // user-initiated tab changes still snap the active tab to the strip's
+  // left edge without touching the page's vertical scroll.
   useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
     const node = tabRefs.current[active];
-    if (!node) return;
-    node.scrollIntoView({
-      inline: 'start',
-      block: 'nearest',
-      behavior: 'auto',
-    });
+    if (!node || !node.parentElement) return;
+    const parent = node.parentElement;
+    const offsetLeft = node.offsetLeft - parent.offsetLeft;
+    parent.scrollTo({ left: offsetLeft, behavior: 'auto' });
   }, [active]);
 
   const activeSet = fill.ucByPersona[active];

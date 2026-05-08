@@ -340,13 +340,14 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         'VIGIMED EN LA PRÁCTICA: EL CAMINO DE RESOLUCIÓN DE UN INCIDENTE',
       'us-en': '[us-en pending]',
     },
-    // S55 FIX 2: prevention-frame heading. 28 words. Operationalizes
-    // §A H1 promise of "una decisión que su institución toma una vez"
-    // by naming both the prevented infection and the prevented
-    // recurrence.
+    // S57 FIX 2: heading rewritten on the same prevention-frame as S55
+    // but tightened: "brecha" (feminine) replaces "quiebre"; "evitada"
+    // replaces "que no ocurrió"; trailing clause restated as "lo que
+    // impidió que volviera a ocurrir." Adjective concord follows
+    // "brecha" (feminine), so "detectada".
     heading: {
       'mx-es':
-        'Un quiebre de campo estéril en quirófano detectado en el momento.\nLa infección que no ocurrió, y la que la institución impidió que volviera a ocurrir.',
+        'Brecha de campo estéril detectada en el momento.\nLa infección evitada, y lo que impidió que volviera a ocurrir.',
       'us-en': '[us-en pending]',
     },
     // S56 FIX 3 + 4: explicit \n before the chain pins it onto its

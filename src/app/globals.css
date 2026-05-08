@@ -1675,10 +1675,14 @@ h1, h2, h3 {
 }
 
 /* VM-448 S55 FIX 2: single prose body block for the chain branch.
- * Body-copy type scale (replaces prior result + step pair). */
+ * Body-copy type scale (replaces prior result + step pair).
+ * VM-448 S57 FIX 4: explicit font-weight 400 neutralizes any inherited
+ * weight that read as bold; type stepped down 1pt (16→15 base, 17→16
+ * desktop) for a quieter body voice next to the active-tab role label. */
 .vm-section-3-body {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-weight: 400;
+  font-size: 15px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.88);
   margin: 0;
@@ -1686,16 +1690,17 @@ h1, h2, h3 {
 
 @media (min-width: 768px) {
   .vm-section-3-body {
-    font-size: 17px;
+    font-size: 16px;
   }
 }
 
-/* S55 FIX 5: body block min-height calibrated to 50-word cap. ~5 lines
- * at 17px / 1.6 line-height = ~136px. Padded to 150px desktop for
- * mid-Spanish-prose variability; mobile leaves natural height. */
+/* S55 FIX 5 / S57 FIX 4: body block min-height calibrated to 50-word
+ * cap at the stepped-down type scale. ~5 lines at 16px / 1.6
+ * line-height = ~128px. Padded to 140px desktop (was 150px under the
+ * 17px scale); mobile leaves natural height. */
 @media (min-width: 1024px) {
   .vm-section-3-body {
-    min-height: 150px;
+    min-height: 140px;
   }
 }
 
@@ -1708,15 +1713,18 @@ h1, h2, h3 {
   color: rgba(255, 255, 255, 0.86);
   border-left: 3px solid var(--color-brand-amber);
   padding-left: 20px;
-  /* S55 FIX 4: marked vertical breathing room above and below. */
-  margin: 16px 0;
+  /* VM-448 S57 FIX 3: zero vertical margin. The .vm-section-3-content
+   * flex gap (20px) carries body→quote and quote→citation alone, so the
+   * quote no longer compounds an extra ~16-20px on each side and the
+   * tab content panel reads tighter without losing the amber side rule
+   * or padding inset. */
+  margin: 0;
 }
 
 @media (min-width: 768px) {
   .vm-section-3-quote {
     font-size: 19px;
     padding-left: 24px;
-    margin: 20px 0;
   }
 }
 
@@ -2039,12 +2047,13 @@ h1, h2, h3 {
   }
 }
 
-/* VM-448 S56 FIX 5: italic regulatory citation and brand-cyan chip
- * rail read as one composite "regulatory" unit. Pull the chip rail
- * up against the citation rather than the 20px row gap that .vm-
- * section-3-content applies between every other block. */
+/* VM-448 S56 FIX 5 / S57 FIX 3: italic regulatory citation and
+ * brand-cyan chip rail read as one composite "regulatory" unit. Pull
+ * the chip rail up against the citation so only ~5px of effective gap
+ * remains (20px flex gap minus 15px adjacent margin-top), tightening
+ * the coupling further than S56's 8px effective gap. */
 .vm-section-3-citation + .vm-section-3-regulatory {
-  margin-top: -12px;
+  margin-top: -15px;
 }
 
 /* Section 4 -- Proof + Legitimacy. Off-white per Brief §9.1. */
