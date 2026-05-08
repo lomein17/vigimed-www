@@ -324,11 +324,15 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant; v2
-  // incident-walkthrough framing per VM-448 corrective patch 2026-05-08).
+  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant;
+  // S55 prevention-frame rewrite per VM-448 punch-list 2026-05-08).
+  // Tab 1 catches a real breach in real time and prevents that
+  // patient's infection. Tabs 2-4 work the recurring breach pattern
+  // across multiple OR sessions, feed Insights, and produce governance
+  // change. Word-cap discipline (50w body / 30w quote / 50w citation)
+  // is fixture-only: chassis enforces no runtime caps.
   // tabCount: 4 (Jefe de UVEH, Subdirección de Calidad, Dirección
-  // Médica, Dirección General); tabDefault: 1 (Jefe de UVEH = chain
-  // origin under incident-walkthrough framing).
+  // Médica, Dirección General); tabDefault: 1.
   // ---------------------------------------------------------------------------
   section3: {
     eyebrow: {
@@ -336,9 +340,13 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         'VIGIMED EN LA PRÁCTICA: EL CAMINO DE RESOLUCIÓN DE UN INCIDENTE',
       'us-en': '[us-en pending]',
     },
+    // S55 FIX 2: prevention-frame heading. 28 words. Operationalizes
+    // §A H1 promise of "una decisión que su institución toma una vez"
+    // by naming both the prevented infection and the prevented
+    // recurrence.
     heading: {
       'mx-es':
-        'Un paciente regresa con infección de sitio quirúrgico. La causa: un quiebre de campo estéril hace siete días.',
+        'Un quiebre de campo estéril en quirófano detectado en el momento. La infección que no ocurrió, y la que la institución impidió que volviera a ocurrir.',
       'us-en': '[us-en pending]',
     },
     headingFrame: {
@@ -355,6 +363,9 @@ export const centrosMedicosFillMxEs: ChassisFill = {
     tabCount: 4,
     tabDefault: 1,
     tabs: [
+      // Tab 1 -- Jefe de UVEH. Chain origin: signal detected in real
+      // time, escalated, infection prevented. body 48w / quote 28w /
+      // citation 28w (NOM-045 §3.1 trimmed verbatim to fit 50w cap).
       {
         label: { 'mx-es': 'Jefe de UVEH', 'us-en': '[us-en pending]' },
         tier: {
@@ -363,24 +374,19 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         },
         headshot: '/headshots/centros-medicos/uveh.png',
         chainTiers: ['senal', 'patron'],
-        result: {
+        body: {
           'mx-es':
-            'El reingreso confirmó la infección. La señal del quiebre de campo estéril ya estaba en VigiMed desde el día de la cirugía, y el patrón por sala cardiotorácica se consolidó sin reconstrucción.',
-          'us-en': '[us-en pending]',
-        },
-        step: {
-          'mx-es':
-            'Antes: la jefatura abría dos semanas de revisión retrospectiva de expedientes para reconstruir si había habido más casos similares por sala. Con VigiMed: la señal del quiebre quedó registrada en tiempo real, el patrón por sala se consolidó automáticamente, y la jefatura empieza su trabajo donde antes terminaba.',
+            'VigiMed detectó el ingreso de personal sin vestimenta estéril al quirófano cardiotorácico en tiempo real. La señal escaló a la jefatura antes del cierre del campo. La infección que ese paciente habría desarrollado en siete días no ocurrió, y el evento entró al registro institucional como señal documentada.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Antes pasaba dos semanas armando si había más casos. Ahora el patrón ya está. Mi trabajo empieza donde antes terminaba."',
+            '"Sin la alerta en tiempo real, ese paciente regresa a los siete días con infección de sitio quirúrgico, y nosotros abrimos dos semanas reconstruyendo si hubo más casos."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'NOM-045-SSA2-2005, §3.1: "Vigilancia Epidemiológica de Infecciones Nosocomiales: a la observación y análisis sistemáticos, continuos y activos de la ocurrencia y distribución de las infecciones nosocomiales, así como de los factores de riesgo asociados a éstas."',
+            'NOM-045-SSA2-2005, §3.1: "Vigilancia Epidemiológica de Infecciones Nosocomiales: a la observación y análisis sistemáticos, continuos y activos de la ocurrencia y distribución de las infecciones nosocomiales."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
@@ -388,6 +394,11 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
       },
+      // Tab 2 -- Subdirección de Calidad. Pattern consolidation from
+      // recurring sterile-field breaches; one tendency read by all
+      // concurrent regulatory frames. body 45w / quote 25w / citation
+      // 28w (NOM-004 §1 trimmed verbatim; same trim point as Tab 3,
+      // duplication acknowledged per S54-1 lock).
       {
         label: {
           'mx-es': 'Subdirección de Calidad',
@@ -403,24 +414,19 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         },
         headshot: '/headshots/centros-medicos/calidad.png',
         chainTiers: ['patron', 'tendencia'],
-        result: {
+        body: {
           'mx-es':
-            'La trayectoria del patrón quedó visible antes de que el caso se volviera hallazgo. La revisión institucional consultó una sola tendencia documentada, no tres reportes paralelos en formatos distintos.',
-          'us-en': '[us-en pending]',
-        },
-        step: {
-          'mx-es':
-            'Antes: tres documentos paralelos para tres marcos de revisión, cada uno con su propio formato y su propia ventana de tiempo. Con VigiMed: una sola tendencia institucional, leída por todos los marcos concurrentes desde la misma evidencia. El Plan de Mejora Continua se redactó leyendo, no reconstruyendo.',
+            'La señal del primer evento no quedó aislada. VigiMed consolidó el patrón de quiebres de campo estéril en quirófano cardiotorácico a lo largo del trimestre, y la tendencia ya estaba documentada cuando la revisión institucional la pidió. Una sola evidencia, leída por todos los marcos concurrentes.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Llegué a la junta con una tendencia firmada. Antes llegaba con tres documentos y los explicaba uno por uno."',
+            '"Sin tendencia documentada, llego a junta con tres reportes en tres formatos distintos y dedico la primera hora a explicar de dónde sale cada cifra."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'NOM-004-SSA3-2012, §1: "Esta norma, establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
+            'NOM-004-SSA3-2012, §1: "Esta norma establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
@@ -428,6 +434,11 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
       },
+      // Tab 3 -- Dirección Médica. Tendency arrives at clinical
+      // committee already crossed with patient outcomes and root
+      // cause; institutional criterion (double-verify protocol) signed
+      // in one session. body 43w / quote 24w / citation 28w (same
+      // NOM-004 §1 trim as Tab 2).
       {
         label: { 'mx-es': 'Dirección Médica', 'us-en': '[us-en pending]' },
         tier: {
@@ -436,24 +447,19 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         },
         headshot: '/headshots/centros-medicos/medica.png',
         chainTiers: ['tendencia', 'criterio'],
-        result: {
+        body: {
           'mx-es':
-            'El comité clínico decidió la intervención sobre la sala cardiotorácica con tendencia documentada por servicio. El criterio institucional se firmó en una sesión, no en tres.',
-          'us-en': '[us-en pending]',
-        },
-        step: {
-          'mx-es':
-            'Antes: el comité abría sesión con cifras desconectadas de su contexto operativo, y dedicaba la primera hora a alinear interpretación. Con VigiMed: la tendencia llegó al comité ya cruzada con resultados de paciente y causa raíz documentada. La sesión arrancó en decisión, no en reconstrucción.',
+            'La tendencia llegó al comité clínico ya cruzada con resultados de paciente y causa raíz. El criterio institucional sobre acceso al quirófano cardiotorácico se firmó en una sola sesión: protocolo de doble verificación al cierre de campo, vinculante para todo el servicio.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"El comité me pregunta por qué pasó. Antes daba cifras y las defendía. Ahora doy criterio y lo sostengo."',
+            '"Sin criterio derivado de tendencia documentada, el comité abre la sesión alineando interpretación. Salimos con acuerdos individuales que el siguiente caso vuelve a discutir."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'NOM-004-SSA3-2012, §1: "Esta norma, establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
+            'NOM-004-SSA3-2012, §1: "Esta norma establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
@@ -461,6 +467,10 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
       },
+      // Tab 4 -- Dirección General. Signed criterion elevated to
+      // institutional standard with full chain (signal -> operational
+      // change) documented as evidence-of-response in VigiMed
+      // Insights. body 46w / quote 23w / citation 19w.
       {
         label: { 'mx-es': 'Dirección General', 'us-en': '[us-en pending]' },
         tier: {
@@ -469,19 +479,14 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         },
         headshot: '/headshots/centros-medicos/general.png',
         chainTiers: ['criterio', 'estandar'],
-        result: {
+        body: {
           'mx-es':
-            'El consejo recibió el caso como evidencia de respuesta institucional, no como crisis reputacional. La posición ante aseguradora y CONAMED se sostuvo con el criterio firmado, ya elevado a estándar reportable.',
-          'us-en': '[us-en pending]',
-        },
-        step: {
-          'mx-es':
-            'Antes: una infección con reingreso disparaba reuniones extraordinarias del consejo, defensa reactiva ante aseguradora, y exposición individual de la dirección general. Con VigiMed: el criterio clínico ya firmado por el comité subió al consejo como estándar institucional. La posición ante reguladores se construyó antes de que la llamada llegara.',
+            'El criterio firmado por el comité subió al consejo como estándar institucional con respaldo en VigiMed Insights: la cadena completa, desde la señal de quiebre hasta el cambio operativo, documentada como evidencia de respuesta. La posición ante aseguradora y CONAMED se sostuvo antes de cualquier llamada.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Al consejo no le importa el evento. Le importa cómo respondió la institución. Esta vez tenía la respuesta antes de la pregunta."',
+            '"Sin evidencia de respuesta institucional documentada, una infección con reingreso es crisis reputacional. Defiendes operación, no decisión. Llegas a aseguradora explicando, no respondiendo."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {

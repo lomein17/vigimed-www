@@ -77,20 +77,29 @@ export interface RoleTabFlat {
   readonly regulatory: Paired<string>;
 }
 
-export interface RoleTabWithChain extends RoleTabFlat {
+// VM-448 S55 FIX 2: chain branch collapses prior result + step into a
+// single prose `body` block at body-copy type scale. Quote becomes the
+// without-VigiMed counterfactual, citation carries the verbatim
+// regulatory clause, and the chip rail is unchanged. The flat branch
+// retains result + step (RoleTabFlat) verbatim for backward compat.
+export interface RoleTabWithChain
+  extends Omit<RoleTabFlat, 'result' | 'step'> {
   readonly tier: Paired<string>;
   readonly chainTiers: LocaleAgnostic<readonly ChainTierId[]>;
   readonly labelMobile?: Paired<string>;
   // Locale-agnostic image source path (relative to /public). Square aspect,
-  // rendered as a circular crop ~40px diameter on each tab between the
-  // responsibility-domain eyebrow and the role label. Optional at chassis
-  // level; when absent the tab renders without the headshot zone (no
-  // regression on segments that have not authored headshot assets).
+  // rendered as a circular crop on each tab between the responsibility-
+  // domain eyebrow and the role label. Render diameter is set in CSS
+  // (.vm-section-3-tab-headshot, 72px desktop / 56px mobile per VM-448
+  // S55 FIX 3). Source asset constraint: square, max 200x200.
   readonly headshot?: LocaleAgnostic<string>;
+  // Single prose body block (VM-448 S55 FIX 2). Replaces prior result +
+  // step pair. 50-word hard cap enforced at fixture-author time.
+  readonly body: Paired<string>;
   // Verbatim regulatory citation rendered above the chip rail. Italic at
-  // low saturation, smaller type than result/step. Optional at chassis
-  // level; segments that do not author citation copy render only the chip
-  // rail (regulatory).
+  // low saturation, smaller type than body. Optional at chassis level;
+  // segments that do not author citation copy render only the chip rail.
+  // 50-word hard cap enforced at fixture-author time.
   readonly regulatoryCitation?: Paired<string>;
 }
 

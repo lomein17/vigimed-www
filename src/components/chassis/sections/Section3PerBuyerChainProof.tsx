@@ -365,8 +365,8 @@ function ChainDesktop({
                   className="vm-section-3-tab-headshot"
                   src={tab.headshot}
                   alt={tab.label[locale]}
-                  width={40}
-                  height={40}
+                  width={72}
+                  height={72}
                 />
               ) : null}
               <span className="vm-section-3-tab-role">
@@ -483,8 +483,8 @@ function ChainAccordionItem({
               className="vm-section-3-tab-headshot"
               src={tab.headshot}
               alt={tab.label[locale]}
-              width={40}
-              height={40}
+              width={72}
+              height={72}
             />
           ) : null}
           <span className="vm-section-3-tab-role">{triggerLabel}</span>
@@ -564,14 +564,23 @@ function RoleTabContent({
   tab: RoleTabFlat | RoleTabWithChain;
   locale: Locale;
 }) {
+  // VM-448 S55 FIX 2: chain branch renders single `body` block in place
+  // of prior result + step pair. Flat branch keeps result + step.
+  const isChain = 'body' in tab;
   const citation =
     'regulatoryCitation' in tab && tab.regulatoryCitation
       ? tab.regulatoryCitation[locale]
       : null;
   return (
     <div className="vm-section-3-content">
-      <p className="vm-section-3-result">{tab.result[locale]}</p>
-      <p className="vm-section-3-step">{tab.step[locale]}</p>
+      {isChain ? (
+        <p className="vm-section-3-body">{tab.body[locale]}</p>
+      ) : (
+        <>
+          <p className="vm-section-3-result">{tab.result[locale]}</p>
+          <p className="vm-section-3-step">{tab.step[locale]}</p>
+        </>
+      )}
       <blockquote className="vm-section-3-quote">
         {tab.quote[locale]}
       </blockquote>

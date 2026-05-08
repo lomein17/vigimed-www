@@ -1634,7 +1634,14 @@ h1, h2, h3 {
   padding: 0 20px 20px;
 }
 
-/* Tab/accordion content shape: result, step, quote, regulatory. */
+/* Tab/accordion content shape:
+ *   - flat branch: result (display headline) + step (body) + quote +
+ *     regulatory.
+ *   - chain branch (VM-448 S55 FIX 2): body (single prose paragraph)
+ *     + quote (without-VigiMed counterfactual, upgraded type per
+ *     S55 FIX 4) + citation + regulatory chips.
+ * Min-heights on body / quote / citation eliminate layout shift on
+ * tab switch (S55 FIX 5; mirrors §B Path C). */
 
 .vm-section-3-content {
   display: flex;
@@ -1667,15 +1674,59 @@ h1, h2, h3 {
   margin: 0;
 }
 
+/* VM-448 S55 FIX 2: single prose body block for the chain branch.
+ * Body-copy type scale (replaces prior result + step pair). */
+.vm-section-3-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .vm-section-3-body {
+    font-size: 17px;
+  }
+}
+
+/* S55 FIX 5: body block min-height calibrated to 50-word cap. ~5 lines
+ * at 17px / 1.6 line-height = ~136px. Padded to 150px desktop for
+ * mid-Spanish-prose variability; mobile leaves natural height. */
+@media (min-width: 1024px) {
+  .vm-section-3-body {
+    min-height: 150px;
+  }
+}
+
 .vm-section-3-quote {
   font-family: var(--font-body);
   font-style: italic;
-  font-size: 15px;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.78);
+  /* S55 FIX 4: 1.25x upgrade. Was 15px; now 19px desktop, 18px mobile. */
+  font-size: 18px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.86);
   border-left: 3px solid var(--color-brand-amber);
-  padding-left: 16px;
-  margin: 4px 0;
+  padding-left: 20px;
+  /* S55 FIX 4: marked vertical breathing room above and below. */
+  margin: 16px 0;
+}
+
+@media (min-width: 768px) {
+  .vm-section-3-quote {
+    font-size: 19px;
+    padding-left: 24px;
+    margin: 20px 0;
+  }
+}
+
+/* S55 FIX 5: quote min-height calibrated to 30-word cap at upgraded
+ * type scale. ~3 lines at 19px / 1.45 line-height = ~83px. Padded to
+ * 96px desktop. */
+@media (min-width: 1024px) {
+  .vm-section-3-quote {
+    min-height: 96px;
+  }
 }
 
 .vm-section-3-regulatory {
@@ -1705,6 +1756,26 @@ h1, h2, h3 {
 @media (min-width: 1024px) {
   .vm-section-3-heading-frame {
     font-size: 16px;
+  }
+}
+
+/* VM-448 S55 FIX 1: at desktop full-screen widths the brand-amber
+ * chain string `senal -> patron -> tendencia -> criterio -> estandar`
+ * must render unbroken on a single visual line. Two-part fix:
+ *   1. Widen heading-frame container at >=1280px so the chain has room.
+ *   2. Force nowrap on the bold-amber emphasis span inside the frame
+ *      so it never breaks mid-string regardless of where the lead
+ *      sentence's last token lands. Mobile preserves natural wrap. */
+@media (min-width: 1280px) {
+  .vm-section-3-heading-frame {
+    max-width: 1080px;
+  }
+  /* The bold-amber emphasis span is the only <strong> inside the
+   * heading frame (RichText renders bold-amber as <strong
+   * class="font-semibold text-brand-amber">). nowrap keeps the chain
+   * enumeration on a single visual line at desktop widths. */
+  .vm-section-3-heading-frame strong {
+    white-space: nowrap;
   }
 }
 
@@ -1900,16 +1971,27 @@ h1, h2, h3 {
   gap: 4px;
 }
 
-/* Tab-level headshot (chain branch). Circular crop ~40px between the
+/* Tab-level headshot (chain branch). Circular crop between the
  * responsibility-domain eyebrow and the role label. Brand-cyan border
- * on active tab matches the brand-500 spotlight elsewhere on the section. */
+ * on active tab matches the brand-500 spotlight elsewhere on the
+ * section. VM-448 S55 FIX 3: render diameter upgraded from 40px to
+ * 72px desktop / 56px mobile so the face reads as a role anchor, not
+ * decorative dot. Source asset stays 200x200 max. */
 .vm-section-3-tab-headshot {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
-  margin: 4px 0;
+  margin: 6px 0;
   border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+@media (min-width: 1024px) {
+  .vm-section-3-tab-headshot {
+    width: 72px;
+    height: 72px;
+    margin: 8px 0;
+  }
 }
 
 .vm-section-3-tab[data-active] .vm-section-3-tab-headshot {
@@ -1917,7 +1999,7 @@ h1, h2, h3 {
 }
 
 /* Verbatim regulatory citation, italic at low saturation, smaller type
- * than result/step. Renders above the chip rail (.vm-section-3-regulatory). */
+ * than body. Renders above the chip rail (.vm-section-3-regulatory). */
 .vm-section-3-citation {
   font-family: var(--font-body);
   font-style: italic;
@@ -1931,6 +2013,15 @@ h1, h2, h3 {
 @media (min-width: 768px) {
   .vm-section-3-citation {
     font-size: 13px;
+  }
+}
+
+/* S55 FIX 5: citation min-height calibrated to 50-word cap at italic
+ * low-sat type scale. ~4 lines at 13px / 1.55 line-height = ~80px.
+ * Padded to 92px desktop. */
+@media (min-width: 1024px) {
+  .vm-section-3-citation {
+    min-height: 92px;
   }
 }
 
