@@ -324,86 +324,190 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 3 -- Per-Buyer-Chain Proof (placeholder, tabCount: 4 per
-  // VM-441 D-S39-1; VM-441 fills downstream)
+  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant;
+  // dummy content per the issue brief verbatim. Locked content lands via
+  // a separate fixture-fill ticket.)
+  // tabCount: 4 (Jefe de UVEH, Subdirección de Calidad, Dirección
+  // Médica, Dirección General); tabDefault: 3 places Dirección Médica
+  // active on first paint.
   // ---------------------------------------------------------------------------
   section3: {
     eyebrow: {
-      'mx-es': '[S3 eyebrow pending]',
-      'us-en': '[S3 eyebrow pending]',
+      'mx-es': 'POR ROL CLÍNICO',
+      'us-en': '[us-en pending]',
     },
     heading: {
-      'mx-es': '[S3 heading pending]',
-      'us-en': '[S3 heading pending]',
+      'mx-es': 'Cuatro responsables. Una sola cadena de decisión.',
+      'us-en': '[us-en pending]',
+    },
+    headingFrame: {
+      'mx-es':
+        'Cada rol institucional opera en un punto distinto de la cadena señal → patrón → tendencia → criterio → estándar. Vea cómo VigiMed se acopla al suyo.',
+      'us-en': '[us-en pending]',
     },
     tabCount: 4,
-    tabDefault: 1,
+    tabDefault: 3,
     tabs: [
       {
-        label: { 'mx-es': '[Rol 1]', 'us-en': '[Role 1]' },
-        result: {
-          'mx-es': '[resultado 1 pendiente]',
-          'us-en': '[result 1 pending]',
+        label: { 'mx-es': 'Jefe de UVEH', 'us-en': '[us-en pending]' },
+        tier: {
+          'mx-es': 'Vigilancia epidemiológica',
+          'us-en': '[us-en pending]',
         },
-        step: { 'mx-es': '[paso 1 pendiente]', 'us-en': '[step 1 pending]' },
+        chainTiers: ['senal', 'patron'],
+        result: {
+          'mx-es':
+            'Cada evento detectado se valida contra el caso activo y se consolida como patrón institucional, no como reporte aislado.',
+          'us-en': '[us-en pending]',
+        },
+        step: {
+          'mx-es':
+            'VigiMed detecta el evento, lo confirma humanamente contra el contexto operativo, y consolida el patrón por servicio antes de que la jefatura prepare el cierre semanal.',
+          'us-en': '[us-en pending]',
+        },
         quote: {
-          'mx-es': '[cita 1 pendiente]',
-          'us-en': '[quote 1 pending]',
+          'mx-es':
+            '"Antes documentaba lo que recordaba. Ahora documento lo que el sistema ya consolidó."',
+          'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': '[regulatorio 1 pendiente]',
-          'us-en': '[regulatory 1 pending]',
+          'mx-es': 'RHOVE · NOM-045 · NOM-016',
+          'us-en': '[us-en pending]',
         },
       },
       {
-        label: { 'mx-es': '[Rol 2]', 'us-en': '[Role 2]' },
-        result: {
-          'mx-es': '[resultado 2 pendiente]',
-          'us-en': '[result 2 pending]',
+        label: {
+          'mx-es': 'Subdirección de Calidad',
+          'us-en': '[us-en pending]',
         },
-        step: { 'mx-es': '[paso 2 pendiente]', 'us-en': '[step 2 pending]' },
+        labelMobile: {
+          'mx-es': 'Subdir. Calidad',
+          'us-en': '[us-en pending]',
+        },
+        tier: {
+          'mx-es': 'Calidad y acreditación',
+          'us-en': '[us-en pending]',
+        },
+        chainTiers: ['patron', 'tendencia'],
+        result: {
+          'mx-es':
+            'Cada patrón se eleva a tendencia con cruce contra estándar institucional vigente, sin reescritura por marco acreditador.',
+          'us-en': '[us-en pending]',
+        },
+        step: {
+          'mx-es':
+            'VigiMed mapea cada patrón contra los marcos acreditadores concurrentes en una sola lectura, y produce la tendencia institucional que sustenta el Plan ante junta directiva.',
+          'us-en': '[us-en pending]',
+        },
         quote: {
-          'mx-es': '[cita 2 pendiente]',
-          'us-en': '[quote 2 pending]',
+          'mx-es':
+            '"Dejé de mantener tres documentos paralelos. Ahora mantengo una tendencia y tres lecturas."',
+          'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': '[regulatorio 2 pendiente]',
-          'us-en': '[regulatory 2 pending]',
+          'mx-es': 'MOCEBPASS · JCI · CONAMED',
+          'us-en': '[us-en pending]',
         },
       },
       {
-        label: { 'mx-es': '[Rol 3]', 'us-en': '[Role 3]' },
-        result: {
-          'mx-es': '[resultado 3 pendiente]',
-          'us-en': '[result 3 pending]',
+        label: { 'mx-es': 'Dirección Médica', 'us-en': '[us-en pending]' },
+        tier: {
+          'mx-es': 'Decisión clínica institucional',
+          'us-en': '[us-en pending]',
         },
-        step: { 'mx-es': '[paso 3 pendiente]', 'us-en': '[step 3 pending]' },
+        chainTiers: ['tendencia', 'criterio'],
+        result: {
+          'mx-es':
+            'Cada caso confirmado se vuelve criterio, no anécdota. Su comité clínico decide con tendencia documentada, no con memoria institucional.',
+          'us-en': '[us-en pending]',
+        },
+        step: {
+          'mx-es':
+            'Cada evento crítico se detecta, se confirma humanamente y se documenta con su contexto operativo. Lo que antes era reporte mensual ahora es tendencia clínica viva, lista para sustentar el criterio institucional que su consejo le pide.',
+          'us-en': '[us-en pending]',
+        },
         quote: {
-          'mx-es': '[cita 3 pendiente]',
-          'us-en': '[quote 3 pending]',
+          'mx-es':
+            '"El comité me pregunta por qué pasó. Antes daba cifras. Ahora doy criterio."',
+          'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': '[regulatorio 3 pendiente]',
-          'us-en': '[regulatory 3 pending]',
+          'mx-es': 'CONAMED · NOM-004 · CSG',
+          'us-en': '[us-en pending]',
         },
       },
       {
-        label: { 'mx-es': '[Rol 4]', 'us-en': '[Role 4]' },
-        result: {
-          'mx-es': '[resultado 4 pendiente]',
-          'us-en': '[result 4 pending]',
+        label: { 'mx-es': 'Dirección General', 'us-en': '[us-en pending]' },
+        tier: {
+          'mx-es': 'Posición institucional',
+          'us-en': '[us-en pending]',
         },
-        step: { 'mx-es': '[paso 4 pendiente]', 'us-en': '[step 4 pending]' },
+        chainTiers: ['criterio', 'estandar'],
+        result: {
+          'mx-es':
+            'Cada criterio clínico se eleva a estándar reportable ante consejo, ya consolidado y firmado, sin reconstrucción reactiva.',
+          'us-en': '[us-en pending]',
+        },
+        step: {
+          'mx-es':
+            'VigiMed convierte el criterio institucional en evidencia reportable trimestre a trimestre, con la cadena de decisiones documentada por servicio y por campus, lista para conferencia de apertura o auditoría externa.',
+          'us-en': '[us-en pending]',
+        },
         quote: {
-          'mx-es': '[cita 4 pendiente]',
-          'us-en': '[quote 4 pending]',
+          'mx-es':
+            '"Al consejo no le importan los eventos. Le importa cómo respondió la institución. Ahora tengo la respuesta."',
+          'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': '[regulatorio 4 pendiente]',
-          'us-en': '[regulatory 4 pending]',
+          'mx-es': 'CSG · COFEPRIS · ASF',
+          'us-en': '[us-en pending]',
         },
       },
     ],
+    chain: {
+      tiers: {
+        senal: {
+          label: { 'mx-es': 'Señal', 'us-en': '[us-en pending]' },
+          description: {
+            'mx-es': 'Evento crítico detectado en su entorno',
+            'us-en': '[us-en pending]',
+          },
+        },
+        patron: {
+          label: { 'mx-es': 'Patrón', 'us-en': '[us-en pending]' },
+          description: {
+            'mx-es': 'Confirmación humana, contexto operativo',
+            'us-en': '[us-en pending]',
+          },
+        },
+        tendencia: {
+          label: { 'mx-es': 'Tendencia', 'us-en': '[us-en pending]' },
+          description: {
+            'mx-es': 'Casos agregados con interpretación clínica',
+            'us-en': '[us-en pending]',
+          },
+        },
+        criterio: {
+          label: { 'mx-es': 'Criterio', 'us-en': '[us-en pending]' },
+          description: {
+            'mx-es': 'Decisiones institucionales documentadas',
+            'us-en': '[us-en pending]',
+          },
+        },
+        estandar: {
+          label: { 'mx-es': 'Estándar', 'us-en': '[us-en pending]' },
+          description: {
+            'mx-es':
+              'Posición institucional ante consejo y reguladores',
+            'us-en': '[us-en pending]',
+          },
+        },
+      },
+      frame: {
+        'mx-es': 'Cada rol opera en un punto. La cadena los conecta.',
+        'us-en': '[us-en pending]',
+      },
+    },
   },
 
   // ---------------------------------------------------------------------------

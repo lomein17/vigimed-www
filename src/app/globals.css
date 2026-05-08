@@ -1687,6 +1687,218 @@ h1, h2, h3 {
   letter-spacing: 0.01em;
 }
 
+/* Section 3 chain branch (VM-448 D-S49-3). Two-line tab labels +
+ * right-rail five-tier chain anchor + closing italic frame line. The
+ * legacy flat-branch selectors above remain unchanged so
+ * hospitales-publicos.ts renders identically. */
+
+.vm-section-3-heading-frame {
+  margin: 16px 0 0;
+  max-width: 720px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (min-width: 1024px) {
+  .vm-section-3-heading-frame {
+    font-size: 16px;
+  }
+}
+
+/* Tab strip: chain variant lays each button as a two-line stack.
+ * Inactive tier line at low saturation; active tier brand-cyan. */
+.vm-section-3-tab.vm-section-3-tab-chain {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+  padding: 14px 14px;
+}
+
+@media (min-width: 1024px) {
+  .vm-section-3-tab.vm-section-3-tab-chain {
+    padding: 16px 18px;
+  }
+}
+
+.vm-section-3-tab-tier {
+  font-family: var(--font-ui);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.2;
+  transition: color 150ms ease-out;
+}
+
+.vm-section-3-tab.vm-section-3-tab-chain[data-active] .vm-section-3-tab-tier {
+  color: var(--color-brand-500);
+}
+
+.vm-section-3-tab-role {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.78);
+  transition: color 150ms ease-out;
+}
+
+@media (min-width: 1024px) {
+  .vm-section-3-tab-role {
+    font-size: 15px;
+  }
+}
+
+.vm-section-3-tab.vm-section-3-tab-chain[data-active] .vm-section-3-tab-role {
+  color: var(--color-text-on-dark);
+  font-weight: 600;
+}
+
+.vm-section-3-tab.vm-section-3-tab-chain:hover:not([data-active])
+  .vm-section-3-tab-role {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Two-column grid (≥1024px): panel left, chain rail right. Below 1024px
+ * a single column with the rail beneath the panel. */
+.vm-section-3-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .vm-section-3-grid {
+    grid-template-columns: minmax(0, 60fr) minmax(0, 40fr);
+    column-gap: 32px;
+  }
+}
+
+.vm-section-3-panel-narrow .vm-section-3-content {
+  max-width: 620px;
+}
+
+/* Chain anchor rail. */
+.vm-section-3-chain-rail {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 360px;
+}
+
+@media (max-width: 1023.98px) {
+  .vm-section-3-chain-rail {
+    max-width: none;
+  }
+}
+
+.vm-section-3-chain-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+@media (min-width: 1024px) {
+  .vm-section-3-chain-list {
+    gap: 16px;
+  }
+}
+
+.vm-section-3-chain-tier {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 12px;
+  border-left: 2px solid rgba(255, 255, 255, 0.12);
+  transition: border-color 150ms ease-out;
+}
+
+.vm-section-3-chain-tier[data-active] {
+  border-left-color: var(--color-brand-500);
+}
+
+.vm-section-3-chain-tier-label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 150ms ease-out;
+}
+
+.vm-section-3-chain-tier[data-active] .vm-section-3-chain-tier-label {
+  color: var(--color-brand-500);
+}
+
+.vm-section-3-chain-tier-description {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 150ms ease-out;
+}
+
+@media (min-width: 1024px) {
+  .vm-section-3-chain-tier-description {
+    font-size: 14px;
+  }
+}
+
+.vm-section-3-chain-tier[data-active] .vm-section-3-chain-tier-description {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.vm-section-3-chain-frame {
+  margin: 20px 0 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.56);
+}
+
+/* Mobile chain composition: accordion above, single rail below. */
+.vm-section-3-mobile-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .vm-section-3-mobile-chain {
+    display: none;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .vm-section-3-desktop {
+    display: none;
+  }
+}
+
+/* Two-line accordion trigger for the chain branch. */
+.vm-section-3-acc-trigger-chain {
+  align-items: flex-start;
+}
+
+.vm-section-3-acc-label-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
 /* Section 4 -- Proof + Legitimacy. Off-white per Brief §9.1. */
 
 .vm-segment-section-4 {

@@ -1,7 +1,7 @@
 // Typed-slot schema for the universal segment-page chassis.
-// Authority: Slot Map v1.1 (slug 9fb768019127), Chassis Design Brief v1.1
-// (slug 7c5e7054002b). All 53 slots represented; chassis-constant slots
-// (CTA labels, render triggers) are intentionally absent from the fill
+// Authority: Slot Map v1.1 / v1.3 (slug 9fb768019127), Chassis Design
+// Brief v1.1 / v1.3 (slug 7c5e7054002b). Chassis-constant slots (CTA
+// labels, render triggers) are intentionally absent from the fill
 // interfaces and live in constants.ts.
 
 import type { Locale } from '@/lib/i18n';
@@ -59,14 +59,69 @@ export interface Video {
   readonly poster: string;
 }
 
-// Slot Map v1.1 §6.2: composite per buyer-chain role (Section 3).
-// Each field is Paired per Slot Map locale handling.
-export interface RoleTab {
+// Slot Map v1.1 §6.2 / v1.3 §6.2: composite per buyer-chain role
+// (Section 3). Each field is Paired per Slot Map locale handling.
+//
+// Two shapes:
+//   - RoleTabFlat: legacy flat-tab shape used by Section3FlatSlots.
+//   - RoleTabWithChain: VM-448 D-S49-3 chain-aware shape that adds a
+//     responsibility-domain `tier` eyebrow, the `chainTiers` enum array
+//     driving the active-tier spotlight on the chain-anchor rail, and
+//     an optional short-form `labelMobile` for the accordion trigger
+//     when the desktop label exceeds visual budget on narrow viewports.
+export interface RoleTabFlat {
   readonly label: Paired<string>;
   readonly result: Paired<string>;
   readonly step: Paired<string>;
   readonly quote: Paired<string>;
   readonly regulatory: Paired<string>;
+}
+
+export interface RoleTabWithChain extends RoleTabFlat {
+  readonly tier: Paired<string>;
+  readonly chainTiers: LocaleAgnostic<readonly ChainTierId[]>;
+  readonly labelMobile?: Paired<string>;
+}
+
+// Backward-compat alias: existing imports of `RoleTab` resolve to the
+// flat shape (only Section3PerBuyerChainProof.tsx imports it today,
+// but the alias avoids a no-op rename across the tree).
+export type RoleTab = RoleTabFlat;
+
+// Chain anchor tier identifiers (D-S49-3 segment-binding analytics-
+// maturity chain). Slug-style (no diacritics) for engineering ergonomics;
+// display labels carry the diacritics. Stable rendering order is the
+// CHAIN_TIER_ORDER constant; the chassis renders all five tiers in this
+// order regardless of which subset a given role owns.
+export type ChainTierId =
+  | 'senal'
+  | 'patron'
+  | 'tendencia'
+  | 'criterio'
+  | 'estandar';
+
+export const CHAIN_TIER_ORDER: readonly ChainTierId[] = [
+  'senal',
+  'patron',
+  'tendencia',
+  'criterio',
+  'estandar',
+] as const;
+
+// Slot Map v1.3 §6.3 chassis-level chain anchor content. Filled once per
+// segment-page instance; the chassis renders the same five-tier rail on
+// every tab, with the active role's chainTiers spotlit.
+export interface ChainAnchor {
+  readonly tiers: Readonly<
+    Record<
+      ChainTierId,
+      {
+        readonly label: Paired<string>;
+        readonly description: Paired<string>;
+      }
+    >
+  >;
+  readonly frame: Paired<string>;
 }
 
 // ---------------------------------------------------------------------------
@@ -159,23 +214,64 @@ export type Section2Slots =
   | Section2FlatUcSlots
   | Section2PersonaMatrixSlots;
 
-// Slot Map v1.1 §6 -- Section 3 Per-Buyer-Chain Proof
-// Discriminated tuple union on tabCount (3 or 4) per D-S25-1.
-export type Section3Slots =
+// Slot Map v1.1 §6 / v1.3 §6 -- Section 3 Per-Buyer-Chain Proof.
+// Two-level discriminated union:
+//   - Outer: presence of a top-level `chain` block selects the chain-
+//     aware variant (VM-448 D-S49-3) vs. the legacy flat variant.
+//   - Inner: tabCount (3 | 4) narrows the tabs tuple length per D-S25-1.
+// Section3FlatSlots is retained verbatim for backward compatibility;
+// hospitales-publicos.ts conforms to it without modification.
+export type Section3FlatSlots =
   | {
       readonly eyebrow: Paired<string>;
       readonly heading: Paired<string>;
       readonly tabCount: 3;
       readonly tabDefault: 1 | 2 | 3;
-      readonly tabs: readonly [RoleTab, RoleTab, RoleTab];
+      readonly tabs: readonly [RoleTabFlat, RoleTabFlat, RoleTabFlat];
     }
   | {
       readonly eyebrow: Paired<string>;
       readonly heading: Paired<string>;
       readonly tabCount: 4;
       readonly tabDefault: 1 | 2 | 3 | 4;
-      readonly tabs: readonly [RoleTab, RoleTab, RoleTab, RoleTab];
+      readonly tabs: readonly [
+        RoleTabFlat,
+        RoleTabFlat,
+        RoleTabFlat,
+        RoleTabFlat,
+      ];
     };
+
+export type Section3WithChainSlots =
+  | {
+      readonly eyebrow: Paired<string>;
+      readonly heading: Paired<string>;
+      readonly headingFrame?: Paired<string>;
+      readonly tabCount: 3;
+      readonly tabDefault: 1 | 2 | 3;
+      readonly tabs: readonly [
+        RoleTabWithChain,
+        RoleTabWithChain,
+        RoleTabWithChain,
+      ];
+      readonly chain: ChainAnchor;
+    }
+  | {
+      readonly eyebrow: Paired<string>;
+      readonly heading: Paired<string>;
+      readonly headingFrame?: Paired<string>;
+      readonly tabCount: 4;
+      readonly tabDefault: 1 | 2 | 3 | 4;
+      readonly tabs: readonly [
+        RoleTabWithChain,
+        RoleTabWithChain,
+        RoleTabWithChain,
+        RoleTabWithChain,
+      ];
+      readonly chain: ChainAnchor;
+    };
+
+export type Section3Slots = Section3FlatSlots | Section3WithChainSlots;
 
 // Slot Map v1.1 §7 -- Section 4 Proof + Legitimacy block (12 slots)
 export interface Section4Slots {
