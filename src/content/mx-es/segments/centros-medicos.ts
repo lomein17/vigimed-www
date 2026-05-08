@@ -360,7 +360,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
     // >=1280px (S55 FIX 1).
     headingFrame: {
       'mx-es': [
-        { text: 'Cada rol institucional opera en un punto distinto de la cadena. ' },
+        { text: 'Cada rol institucional opera en un punto distinto de la cadena ' },
         {
           text: 'señal → patrón → tendencia → criterio → estándar.',
           emphasis: 'bold-amber',
