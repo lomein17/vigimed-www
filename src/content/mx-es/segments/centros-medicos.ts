@@ -107,7 +107,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed detecta cada infección de sitio quirúrgico, la confirma contra el criterio vigente sin reescritura, y consolida el patrón por servicio antes de que la jefatura prepare el reporte mensual.',
+                'VigiMed detecta cada infección de sitio quirúrgico, la confirma contra el criterio vigente, y consolida el patrón por servicio antes del reporte mensual.',
               'us-en': '[us-en pending]',
             },
           },
@@ -118,7 +118,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed registra cada apertura fuera de protocolo en aislamiento de contacto, confirma el evento contra el caso activo, y construye el patrón de quiebres por turno y servicio antes de que escale a brote.',
+                'VigiMed registra cada apertura fuera de protocolo, la confirma contra el caso activo, y construye el patrón de quiebres por turno antes de que escale a brote.',
               'us-en': '[us-en pending]',
             },
           },
@@ -129,7 +129,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed verifica la cobertura de limpieza terminal en áreas críticas, confirma cada hallazgo contra el ciclo del paciente egresado, y deja documentada la cadena de evidencia que sostiene la trazabilidad ante auditoría.',
+                'VigiMed verifica la cobertura de limpieza terminal en áreas críticas, confirma cada hallazgo contra el ciclo del paciente, y deja documentada la cadena de evidencia ante auditoría.',
               'us-en': '[us-en pending]',
             },
           },
@@ -140,7 +140,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed detecta segregación incorrecta en el punto de generación, confirma cada evento contra el criterio normativo aplicable, y consolida el patrón por servicio para que la jefatura intervenga antes de que se vuelva hallazgo.',
+                'VigiMed detecta segregación incorrecta en el punto de generación, confirma cada evento contra el criterio normativo, y consolida el patrón por servicio antes de que se vuelva hallazgo.',
               'us-en': '[us-en pending]',
             },
           },
@@ -163,7 +163,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed registra el ratio enfermería-paciente turno a turno, lo confirma contra el umbral institucional vigente, y consolida la tendencia que el Plan de Mejora Continua sintetiza en un solo cierre de ciclo.',
+                'VigiMed registra el ratio enfermería-paciente turno a turno, lo confirma contra el umbral institucional, y consolida la tendencia que el Plan de Mejora sintetiza en un cierre.',
               'us-en': '[us-en pending]',
             },
           },
@@ -174,7 +174,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed mapea cada quiebre de aislamiento contra el estándar institucional vigente, lo cruza con los marcos acreditadores concurrentes, y produce un solo plan de acción en lugar de tres documentos no alineados.',
+                'VigiMed mapea cada quiebre de aislamiento contra el estándar institucional, lo cruza con los marcos acreditadores concurrentes, y produce un solo plan de acción en lugar de tres.',
               'us-en': '[us-en pending]',
             },
           },
@@ -185,7 +185,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed documenta la adherencia al tiempo fuera por sala y por procedimiento, confirma el cumplimiento contra el protocolo institucional, y consolida la tendencia por servicio que sustenta la firma del Plan ante la junta directiva.',
+                'VigiMed documenta la adherencia al tiempo fuera por sala y procedimiento, confirma el cumplimiento del protocolo, y consolida la tendencia que sustenta la firma del Plan ante junta directiva.',
               'us-en': '[us-en pending]',
             },
           },
@@ -196,7 +196,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed valida cada ciclo de limpieza terminal contra el estándar institucional vigente, lo mapea contra los marcos acreditadores concurrentes en una sola lectura, y produce una sola tendencia institucional en lugar de tres documentos paralelos.',
+                'VigiMed valida cada ciclo de limpieza terminal contra el estándar institucional, lo mapea contra los marcos acreditadores en una sola lectura, y produce una sola tendencia institucional.',
               'us-en': '[us-en pending]',
             },
           },
@@ -219,7 +219,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed cierra el ciclo mensual de la junta médica con la tendencia de infecciones de sitio quirúrgico ya consolidada por servicio y por campus, lo que convierte la decisión clínica de criterio en una lectura, no una reconstrucción.',
+                'VigiMed cierra el ciclo mensual de la junta médica con la tendencia de infecciones de sitio quirúrgico ya consolidada por servicio y campus, lo que convierte la decisión clínica en lectura, no reconstrucción.',
               'us-en': '[us-en pending]',
             },
           },
@@ -230,7 +230,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed traduce la tendencia turno a turno en una decisión de asignación clínica por servicio, con la evidencia ya cruzada contra resultados de paciente, lo que permite a la dirección médica fijar criterio sin esperar al cierre.',
+                'VigiMed traduce la tendencia turno a turno en una decisión de asignación clínica, con la evidencia ya cruzada contra resultados de paciente, y permite fijar criterio sin esperar al cierre.',
               'us-en': '[us-en pending]',
             },
           },
@@ -241,7 +241,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed verifica la disposición y caducidad de cada carro rojo turno a turno, consolida la tendencia institucional de eventos centinela, y entrega a la dirección médica un criterio de readiness clínico documentado, no inferido.',
+                'VigiMed verifica disposición y caducidad de cada carro rojo turno a turno, consolida la tendencia institucional de eventos centinela, y entrega un criterio de readiness clínico documentado, no inferido.',
               'us-en': '[us-en pending]',
             },
           },
@@ -252,7 +252,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed documenta cada cirugía de sitio incorrecto evitada en el tiempo fuera, consolida la tendencia por sala y por equipo quirúrgico, y entrega criterio institucional sobre cuál servicio requiere intervención, no recordatorio.',
+                'VigiMed documenta cada cirugía de sitio incorrecto evitada en el tiempo fuera, consolida la tendencia por sala y equipo quirúrgico, y entrega criterio sobre cuál servicio requiere intervención.',
               'us-en': '[us-en pending]',
             },
           },
@@ -275,7 +275,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed convierte la tasa institucional de infección de sitio quirúrgico en estándar reportable ante consejo, ya consolidada y firmada, lo que permite a la dirección general llegar a la conferencia de apertura con un Plan leído.',
+                'VigiMed convierte la tasa institucional de infección de sitio quirúrgico en estándar reportable ante consejo, ya consolidada y firmada, y permite llegar a la conferencia de apertura con un Plan leído.',
               'us-en': '[us-en pending]',
             },
           },
@@ -286,7 +286,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed eleva el ratio enfermería-paciente a indicador institucional reportable trimestre a trimestre, ya cruzado con resultados clínicos, lo que sostiene la decisión de asignación de capital ante consejo sin necesidad de reconstrucción.',
+                'VigiMed eleva el ratio enfermería-paciente a indicador institucional reportable trimestre a trimestre, ya cruzado con resultados clínicos, y sostiene la decisión de asignación de capital ante consejo.',
               'us-en': '[us-en pending]',
             },
           },
@@ -297,7 +297,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed convierte el readiness de carros rojos en evidencia institucional documentada por campus, lo que protege la firma de la dirección general ante eventos centinela y sostiene la posición institucional ante consejo o aseguradora.',
+                'VigiMed convierte el readiness de carros rojos en evidencia institucional documentada por campus, lo que protege la firma de la dirección general ante eventos centinela y aseguradora.',
               'us-en': '[us-en pending]',
             },
           },
@@ -308,7 +308,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed produce evidencia institucional de cumplimiento RPBI lista para reporte externo, consolidada por servicio y firmada, lo que protege a la dirección general frente a hallazgo regulatorio o exposición pública sin reconstrucción reactiva.',
+                'VigiMed produce evidencia institucional de cumplimiento RPBI lista para reporte externo, consolidada y firmada, lo que protege a la dirección general ante hallazgo regulatorio o exposición pública.',
               'us-en': '[us-en pending]',
             },
           },

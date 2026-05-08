@@ -1444,11 +1444,17 @@ h1, h2, h3 {
   border-left: 3px solid var(--color-brand-500);
   border-radius: 6px;
   padding: 18px;
+  /* Locks card height per breakpoint so the grid row does not recompute
+   * on persona-tab swap (VM-447 UAT r3). Sized to the longest cell
+   * (Médica · Campo Estéril, 33 words / 213 chars) plus buffer; rem so
+   * the floor scales with user font-size preferences. */
+  min-height: 13rem;
 }
 
 @media (min-width: 1024px) {
   .vm-uc-persona-card {
     padding: 22px;
+    min-height: 14rem;
   }
 }
 
