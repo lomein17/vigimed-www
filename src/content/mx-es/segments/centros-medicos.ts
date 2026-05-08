@@ -350,18 +350,22 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         'Brecha de campo estéril detectada en el momento.\nLa infección evitada, y lo que impidió se repitiera.',
       'us-en': '[us-en pending]',
     },
-    // S56 FIX 3 + 4: explicit \n before the chain pins it onto its
-    // own line at all widths, and the trailing period moves into the
-    // bold-amber span so it renders amber alongside the rest of the
-    // chain.
+    // S56 FIX 3 + 4: trailing period moves into the bold-amber span so it
+    // renders amber alongside the rest of the chain.
+    // S59 FIX 1: explicit \n line breaks dropped so wrap is governed by
+    // CSS, not string literals. At >=1440px the entire frame line
+    // renders single-line via white-space: nowrap on .vm-section-3-
+    // heading-frame; below that, segments wrap naturally based on
+    // container width while the bold-amber span stays unbroken at
+    // >=1280px (S55 FIX 1).
     headingFrame: {
       'mx-es': [
-        { text: 'Cada rol institucional opera en un punto distinto de la cadena.\n' },
+        { text: 'Cada rol institucional opera en un punto distinto de la cadena. ' },
         {
           text: 'señal → patrón → tendencia → criterio → estándar.',
           emphasis: 'bold-amber',
         },
-        { text: '\nVea cómo VigiMed se acopla al suyo.' },
+        { text: ' Vea cómo VigiMed se acopla al suyo.' },
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },

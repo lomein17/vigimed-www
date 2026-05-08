@@ -1660,10 +1660,15 @@ h1, h2, h3 {
 /* Wrapper min-height calibrated empirically against the tallest of the
  * four chain-branch tabs at >=1024px; buffered so future copy edits
  * within the existing word caps (50w body / 30w quote / 50w citation)
- * do not shift the panel below. */
+ * do not shift the panel below.
+ * VM-448 S59 FIX 2: justify-content: center distributes wrapper slack
+ * evenly above and below the content stack on tabs whose natural
+ * height is shorter than 400px. Without it, slack accumulated at the
+ * bottom and the chip rail floated unanchored from the panel base. */
 @media (min-width: 1024px) {
   .vm-section-3-content {
     min-height: 400px;
+    justify-content: center;
   }
 }
 
@@ -1770,6 +1775,9 @@ h1, h2, h3 {
   }
 }
 
+/* VM-448 S59 FIX 1: white-space: pre-line removed; the fixture no
+ * longer carries explicit \n line breaks so wrap is governed by
+ * container width at <1440px and by white-space: nowrap at >=1440px. */
 .vm-section-3-heading-frame {
   margin: 16px 0 0;
   max-width: 720px;
@@ -1777,7 +1785,6 @@ h1, h2, h3 {
   font-size: 15px;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.72);
-  white-space: pre-line;
 }
 
 @media (min-width: 1024px) {
@@ -1802,6 +1809,24 @@ h1, h2, h3 {
    * class="font-semibold text-brand-amber">). nowrap keeps the chain
    * enumeration on a single visual line at desktop widths. */
   .vm-section-3-heading-frame strong {
+    white-space: nowrap;
+  }
+}
+
+/* VM-448 S59 FIX 1: at >=1440px the entire frame line (lead sentence +
+ * bold-amber chain + closing line) renders on a single visual line.
+ * Header and frame containers widen to 1200px to match the section's
+ * outer max-width, and white-space: nowrap on the frame itself prevents
+ * the lead sentence from breaking before the chain. Below 1440px (i.e.
+ * 1280-1439px laptops) the frame falls back to natural multi-line wrap
+ * with the chain enumeration kept unbroken via the strong-span nowrap
+ * at >=1280px. */
+@media (min-width: 1440px) {
+  .vm-section-3-header,
+  .vm-section-3-heading-frame {
+    max-width: 1200px;
+  }
+  .vm-section-3-heading-frame {
     white-space: nowrap;
   }
 }
