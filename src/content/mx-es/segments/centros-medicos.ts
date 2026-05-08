@@ -78,61 +78,245 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 2 -- Operational Reality (placeholder; VM-441 fills)
+  // Section 2 -- Operational Reality (VM-447 D-S52-2 locked mx-es content)
+  // Persona x domain matrix: four buyer-chain personas, four UCs each.
   // ---------------------------------------------------------------------------
   section2: {
     eyebrow: {
-      'mx-es': '[S2 eyebrow pending]',
-      'us-en': '[S2 eyebrow pending]',
+      'mx-es': 'LA REALIDAD OPERATIVA',
+      'us-en': '[us-en pending]',
     },
     heading: {
-      'mx-es': '[S2 heading pending]',
-      'us-en': '[S2 heading pending]',
+      'mx-es': 'Cuatro cargos. Una sola institución que responde.',
+      'us-en': '[us-en pending]',
     },
-    pressures: [
-      { 'mx-es': '[presión 1 pendiente]', 'us-en': '[pressure 1 pending]' },
-      { 'mx-es': '[presión 2 pendiente]', 'us-en': '[pressure 2 pending]' },
-      { 'mx-es': '[presión 3 pendiente]', 'us-en': '[pressure 3 pending]' },
-      { 'mx-es': '[presión 4 pendiente]', 'us-en': '[pressure 4 pending]' },
-    ],
-    ucEyebrow: {
-      'mx-es': '[UC strip eyebrow pending]',
-      'us-en': '[UC strip eyebrow pending]',
+    pressures: [],
+    ucByPersona: {
+      jefeUveh: {
+        roleLabel: { 'mx-es': 'Jefe UVEH', 'us-en': '[us-en pending]' },
+        tierLabel: { 'mx-es': 'Señal · Patrón', 'us-en': '[us-en pending]' },
+        cards: [
+          {
+            name: {
+              'mx-es': 'UC1 Campo Estéril',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed detecta cada infección de sitio quirúrgico, la confirma contra el criterio vigente sin reescritura, y consolida el patrón por servicio antes de que la jefatura prepare el reporte mensual.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC6 Puerta de Aislamiento',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed registra cada apertura fuera de protocolo en aislamiento de contacto, confirma el evento contra el caso activo, y construye el patrón de quiebres por turno y servicio antes de que escale a brote.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC3 Limpieza Ambiental',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed verifica la cobertura de limpieza terminal en áreas críticas, confirma cada hallazgo contra el ciclo del paciente egresado, y deja documentada la cadena de evidencia que sostiene la trazabilidad ante auditoría.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC5 Segregación RPBI',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed detecta segregación incorrecta en el punto de generación, confirma cada evento contra el criterio normativo aplicable, y consolida el patrón por servicio para que la jefatura intervenga antes de que se vuelva hallazgo.',
+              'us-en': '[us-en pending]',
+            },
+          },
+        ],
+      },
+      calidad: {
+        roleLabel: {
+          'mx-es': 'Subdirección de Calidad',
+          'us-en': '[us-en pending]',
+        },
+        tierLabel: {
+          'mx-es': 'Patrón · Tendencia',
+          'us-en': '[us-en pending]',
+        },
+        cards: [
+          {
+            name: {
+              'mx-es': 'UC10 Proporción Personal-Paciente',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed registra el ratio enfermería-paciente turno a turno, lo confirma contra el umbral institucional vigente, y consolida la tendencia que el Plan de Mejora Continua sintetiza en un solo cierre de ciclo.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC6 Puerta de Aislamiento',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed mapea cada quiebre de aislamiento contra el estándar institucional vigente, lo cruza con los marcos acreditadores concurrentes, y produce un solo plan de acción en lugar de tres documentos no alineados.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC2 Tiempo Fuera',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed documenta la adherencia al tiempo fuera por sala y por procedimiento, confirma el cumplimiento contra el protocolo institucional, y consolida la tendencia por servicio que sustenta la firma del Plan ante la junta directiva.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC3 Limpieza Ambiental',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed valida cada ciclo de limpieza terminal contra el estándar institucional vigente, lo mapea contra los marcos acreditadores concurrentes en una sola lectura, y produce una sola tendencia institucional en lugar de tres documentos paralelos.',
+              'us-en': '[us-en pending]',
+            },
+          },
+        ],
+      },
+      medica: {
+        roleLabel: {
+          'mx-es': 'Dirección Médica',
+          'us-en': '[us-en pending]',
+        },
+        tierLabel: {
+          'mx-es': 'Tendencia · Criterio',
+          'us-en': '[us-en pending]',
+        },
+        cards: [
+          {
+            name: {
+              'mx-es': 'UC1 Campo Estéril',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed cierra el ciclo mensual de la junta médica con la tendencia de infecciones de sitio quirúrgico ya consolidada por servicio y por campus, lo que convierte la decisión clínica de criterio en una lectura, no una reconstrucción.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC10 Proporción Personal-Paciente',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed traduce la tendencia turno a turno en una decisión de asignación clínica por servicio, con la evidencia ya cruzada contra resultados de paciente, lo que permite a la dirección médica fijar criterio sin esperar al cierre.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC8 Carro Rojo',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed verifica la disposición y caducidad de cada carro rojo turno a turno, consolida la tendencia institucional de eventos centinela, y entrega a la dirección médica un criterio de readiness clínico documentado, no inferido.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC2 Tiempo Fuera',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed documenta cada cirugía de sitio incorrecto evitada en el tiempo fuera, consolida la tendencia por sala y por equipo quirúrgico, y entrega criterio institucional sobre cuál servicio requiere intervención, no recordatorio.',
+              'us-en': '[us-en pending]',
+            },
+          },
+        ],
+      },
+      general: {
+        roleLabel: {
+          'mx-es': 'Dirección General',
+          'us-en': '[us-en pending]',
+        },
+        tierLabel: {
+          'mx-es': 'Criterio · Estándar',
+          'us-en': '[us-en pending]',
+        },
+        cards: [
+          {
+            name: {
+              'mx-es': 'UC1 Campo Estéril',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed convierte la tasa institucional de infección de sitio quirúrgico en estándar reportable ante consejo, ya consolidada y firmada, lo que permite a la dirección general llegar a la conferencia de apertura con un Plan leído.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC10 Proporción Personal-Paciente',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed eleva el ratio enfermería-paciente a indicador institucional reportable trimestre a trimestre, ya cruzado con resultados clínicos, lo que sostiene la decisión de asignación de capital ante consejo sin necesidad de reconstrucción.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC8 Carro Rojo',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed convierte el readiness de carros rojos en evidencia institucional documentada por campus, lo que protege la firma de la dirección general ante eventos centinela y sostiene la posición institucional ante consejo o aseguradora.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'UC5 Segregación RPBI',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed produce evidencia institucional de cumplimiento RPBI lista para reporte externo, consolidada por servicio y firmada, lo que protege a la dirección general frente a hallazgo regulatorio o exposición pública sin reconstrucción reactiva.',
+              'us-en': '[us-en pending]',
+            },
+          },
+        ],
+      },
     },
-    ucHeading: {
-      'mx-es': '[UC strip heading pending]',
-      'us-en': '[UC strip heading pending]',
+    defaultPersona: 'medica',
+    ucSupplement: {
+      'mx-es':
+        'Además de 13 casos de uso adicionales en el catálogo VigiMed, más la inteligencia documentada que emerge de VigiMed Insights.',
+      'us-en': '[us-en pending]',
     },
-    ucCards: [
-      {
-        name: { 'mx-es': '[UC1 pendiente]', 'us-en': '[UC1 pending]' },
-        framing: {
-          'mx-es': '[framing 1 pendiente]',
-          'us-en': '[framing 1 pending]',
-        },
-      },
-      {
-        name: { 'mx-es': '[UC2 pendiente]', 'us-en': '[UC2 pending]' },
-        framing: {
-          'mx-es': '[framing 2 pendiente]',
-          'us-en': '[framing 2 pending]',
-        },
-      },
-      {
-        name: { 'mx-es': '[UC3 pendiente]', 'us-en': '[UC3 pending]' },
-        framing: {
-          'mx-es': '[framing 3 pendiente]',
-          'us-en': '[framing 3 pending]',
-        },
-      },
-      {
-        name: { 'mx-es': '[UC4 pendiente]', 'us-en': '[UC4 pending]' },
-        framing: {
-          'mx-es': '[framing 4 pendiente]',
-          'us-en': '[framing 4 pending]',
-        },
-      },
-    ],
   },
 
   // ---------------------------------------------------------------------------

@@ -1313,6 +1313,175 @@ h1, h2, h3 {
   margin: 0;
 }
 
+/* Section 2 -- Persona x Domain Matrix variant (VM-447 D-S52-2).
+ * Tab strip over four buyer-chain personas + 2-col card grid (1-col
+ * mobile) + supplement line. Selectors are scoped to the matrix render
+ * path so the legacy flat-UC selectors above remain untouched. */
+
+.vm-section-2-persona-tabs {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgba(10, 22, 40, 0.12);
+  margin-bottom: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 0;
+}
+
+@media (min-width: 1024px) {
+  .vm-section-2-persona-tabs {
+    overflow-x: visible;
+    scroll-snap-type: none;
+    margin-bottom: 32px;
+  }
+}
+
+.vm-section-2-persona-tab {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  color: rgba(10, 22, 40, 0.56);
+  font-family: var(--font-ui);
+  font-weight: 400;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  transition: color 150ms ease-out, border-color 150ms ease-out;
+}
+
+@media (min-width: 1024px) {
+  .vm-section-2-persona-tab {
+    flex: 1 1 0;
+    align-items: center;
+    padding: 14px 16px;
+  }
+}
+
+.vm-section-2-persona-tab:hover:not([data-active]) {
+  color: rgba(10, 22, 40, 0.78);
+}
+
+.vm-section-2-persona-tab[data-active] {
+  color: #0A1628;
+  font-weight: 500;
+  border-bottom-color: var(--color-brand-500);
+}
+
+.vm-section-2-persona-tab:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: -2px;
+}
+
+.vm-section-2-persona-tab-role {
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+@media (min-width: 1024px) {
+  .vm-section-2-persona-tab-role {
+    font-size: 13.5px;
+  }
+}
+
+.vm-section-2-persona-tab-tier {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: rgba(10, 22, 40, 0.4);
+}
+
+.vm-section-2-persona-tab[data-active] .vm-section-2-persona-tab-tier {
+  color: rgba(10, 22, 40, 0.7);
+}
+
+.vm-uc-persona-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 1024px) {
+  .vm-uc-persona-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+.vm-uc-persona-card {
+  background: #F5F3EE;
+  border: 1px solid rgba(10, 22, 40, 0.10);
+  border-left: 3px solid var(--color-brand-500);
+  border-radius: 6px;
+  padding: 18px;
+}
+
+@media (min-width: 1024px) {
+  .vm-uc-persona-card {
+    padding: 22px;
+  }
+}
+
+.vm-uc-persona-card-name {
+  font-size: 15.5px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  color: #0A1628;
+  margin: 0 0 10px;
+}
+
+@media (min-width: 1024px) {
+  .vm-uc-persona-card-name {
+    font-size: 18px;
+  }
+}
+
+.vm-uc-persona-card-framing {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: rgba(10, 22, 40, 0.72);
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .vm-uc-persona-card-framing {
+    font-size: 14.5px;
+  }
+}
+
+.vm-uc-supplement {
+  margin: 24px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(10, 22, 40, 0.56);
+  font-style: italic;
+}
+
+@media (min-width: 1024px) {
+  .vm-uc-supplement {
+    margin-top: 28px;
+    font-size: 14.5px;
+  }
+}
+
+.vm-uc-supplement-mark {
+  font-style: normal;
+  font-weight: 500;
+  color: #0A1628;
+}
+
 /* Section 3 -- Per-Buyer-Chain Proof. Navy per Brief §9.1. */
 
 .vm-segment-section-3 {

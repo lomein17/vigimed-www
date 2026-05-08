@@ -107,27 +107,57 @@ export interface HeroSlots {
   readonly video: LocaleAgnostic<Video>;
 }
 
-// Slot Map v1.1 §5.2 S2.uc.{N} composite
+// Slot Map v1.1 §5.2 S2.uc.{N} composite.
+// Content cap: framing <=40 words / <=240 chars (relaxed from earlier
+// chassis spec to fit the persona-matrix variant). The chassis applies
+// no runtime cap; copy is governed at fixture-author time.
 export interface UcCard {
   readonly name: Paired<string>;
   readonly framing: Paired<string>;
 }
 
-// Slot Map v1.1 §5 -- Section 2 Operational Reality
-export interface Section2Slots {
-  // Slot Map v1.1 §5.2 S2.eyebrow
+// Persona key for the Section 2 persona-matrix variant (VM-447 D-S52-2).
+// Stable order is enforced at the chassis component, not at the type level.
+export type PersonaKey = 'jefeUveh' | 'calidad' | 'medica' | 'general';
+
+// Slot Map v1.1 §5.2 S2.uc.persona composite. Each persona contributes a
+// role label (top line of the tab), a chain-tier subtitle, and the four
+// UC cards rendered for that persona's panel.
+export interface PersonaUcSet {
+  readonly roleLabel: Paired<string>;
+  readonly tierLabel: Paired<string>;
+  readonly cards: readonly UcCard[];
+}
+
+// Slot Map v1.1 §5 -- Section 2 Operational Reality.
+// Two variants, discriminated by the presence of `ucByPersona`:
+//   - Section2FlatUcSlots: legacy flat-UC strip (eyebrow/heading +
+//     numbered pressures + ucEyebrow/ucHeading + ucCards).
+//   - Section2PersonaMatrixSlots: VM-447 D-S52-2 persona x domain
+//     matrix; pressures optional (drops the pressure block when absent
+//     or empty), no ucEyebrow/ucHeading, supplement line below the grid.
+
+export interface Section2FlatUcSlots {
   readonly eyebrow: Paired<string>;
-  // Slot Map v1.1 §5.2 S2.heading
   readonly heading: Paired<string>;
-  // Slot Map v1.1 §5.2 S2.pressure.{N} -- 4-6 items per segment
   readonly pressures: readonly Paired<string>[];
-  // Slot Map v1.1 §5.2 S2.uc.eyebrow
   readonly ucEyebrow: Paired<string>;
-  // Slot Map v1.1 §5.2 S2.uc.heading
   readonly ucHeading: Paired<string>;
-  // Slot Map v1.1 §5.2 S2.uc.{N} -- 4-6 cards per segment
   readonly ucCards: readonly UcCard[];
 }
+
+export interface Section2PersonaMatrixSlots {
+  readonly eyebrow: Paired<string>;
+  readonly heading: Paired<string>;
+  readonly pressures?: readonly Paired<string>[];
+  readonly ucByPersona: Readonly<Record<PersonaKey, PersonaUcSet>>;
+  readonly defaultPersona: PersonaKey;
+  readonly ucSupplement: Paired<string>;
+}
+
+export type Section2Slots =
+  | Section2FlatUcSlots
+  | Section2PersonaMatrixSlots;
 
 // Slot Map v1.1 §6 -- Section 3 Per-Buyer-Chain Proof
 // Discriminated tuple union on tabCount (3 or 4) per D-S25-1.
