@@ -87,7 +87,8 @@ export const centrosMedicosFillMxEs: ChassisFill = {
       'us-en': '[us-en pending]',
     },
     heading: {
-      'mx-es': 'Cuatro cargos. Una sola institución que responde.',
+      'mx-es':
+        'Cuatro responsabilidades.\nUna solución que coordina la respuesta.',
       'us-en': '[us-en pending]',
     },
     pressures: [],

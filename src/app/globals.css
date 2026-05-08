@@ -1057,19 +1057,28 @@ h1, h2, h3 {
 }
 
 /* =======================================================================
- * Home full-viewport rhythm (VM-422 round 2)
+ * Full-viewport rhythm (VM-422 round 2; VM-447 UAT r1 chassis-wide)
  * -----------------------------------------------------------------------
- * Every Home content section fills the visible-below-nav area exactly:
- * one small-viewport tall minus the StickyNav band (--vm-nav-h = 75px =
- * 72px nav grid + 3px brand-pulse line). The nav is position: sticky and
- * occupies real document flow at scroll=0, so subtracting its height is
- * what places sections cleanly between nav-bottom and viewport-bottom
- * when snapped, with content centered in the visible area rather than
- * pushed below the fold. svh (not vh/dvh) for stable layout across
- * mobile chrome states. min-height (not height) so tall content
- * (PIM at narrow viewports, Hero on mobile portrait) overflows gracefully
- * to document-level scroll rather than nested scroll containers.
- * Footer is exempt and keeps natural height.
+ * Every top-level content section fills the visible-below-nav area
+ * exactly: one small-viewport tall minus the StickyNav band
+ * (--vm-nav-h = 75px = 72px nav grid + 3px brand-pulse line). The nav
+ * is position: sticky and occupies real document flow at scroll=0, so
+ * subtracting its height is what places sections cleanly between
+ * nav-bottom and viewport-bottom when snapped, with content centered
+ * in the visible area rather than pushed below the fold. svh (not
+ * vh/dvh) for stable layout across mobile chrome states. min-height
+ * (not height) so tall content (PIM at narrow viewports, Hero on
+ * mobile portrait, persona-matrix card grid on smaller laptops)
+ * overflows gracefully to document-level scroll rather than nested
+ * scroll containers. Padding-top / padding-bottom on each section
+ * selector cooperate with the flex-center: padding becomes the outer
+ * breathing room, flex centers the content in the remaining space.
+ * Both Home (.vm-hero-section, .vm-capabilities-section,
+ * .vm-pim-section, .vm-moat-integrations-section, .vm-final-cta-section)
+ * and segment-page chassis (.vm-segment-hero-section,
+ * .vm-segment-section-2, .vm-segment-section-3, .vm-segment-section-4,
+ * .vm-segment-final-cta-section) participate. Footer is exempt and
+ * keeps natural height.
  * ======================================================================= */
 
 .vm-hero-section,
@@ -1077,7 +1086,11 @@ h1, h2, h3 {
 .vm-pim-section,
 .vm-moat-integrations-section,
 .vm-final-cta-section,
-.vm-segment-hero-section {
+.vm-segment-hero-section,
+.vm-segment-section-2,
+.vm-segment-section-3,
+.vm-segment-section-4,
+.vm-segment-final-cta-section {
   min-height: calc(100svh - var(--vm-nav-h));
   display: flex;
   flex-direction: column;
@@ -1085,7 +1098,7 @@ h1, h2, h3 {
 }
 
 /* =======================================================================
- * Scroll-snap (VM-413)
+ * Scroll-snap (VM-413; VM-447 UAT r1 chassis-wide)
  * -----------------------------------------------------------------------
  * Anchors top-level sections to viewport top with a 75px offset matching
  * the full sticky nav band (72px nav grid + 3px brand-pulse line),
@@ -1093,7 +1106,10 @@ h1, h2, h3 {
  * actual nav bottom edge rather than 3px above it. Proximity (not
  * mandatory) so long sections like Final CTA + form remain freely
  * scrollable. Gated to >=1024px with hover capability so phones, portrait
- * tablets, and touch-only iPads keep native scrolling.
+ * tablets, and touch-only iPads keep native scrolling. Segment-page
+ * chassis sections (Hero, Section 2-4, Final CTA) join the snap group
+ * so spacebar/keyboard scroll lands on each segment chassis section's
+ * visual top, mirroring Home behavior.
  * ======================================================================= */
 
 @media (min-width: 1024px) and (hover: hover) {
@@ -1106,6 +1122,11 @@ h1, h2, h3 {
   .vm-pim-section,
   .vm-moat-integrations-section,
   .vm-final-cta-section,
+  .vm-segment-hero-section,
+  .vm-segment-section-2,
+  .vm-segment-section-3,
+  .vm-segment-section-4,
+  .vm-segment-final-cta-section,
   footer {
     scroll-snap-align: start;
   }
@@ -1435,7 +1456,7 @@ h1, h2, h3 {
 
 .vm-uc-persona-card-name {
   font-size: 15.5px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.005em;
   line-height: 1.25;
   color: #0A1628;

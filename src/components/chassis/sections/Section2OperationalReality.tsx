@@ -53,6 +53,7 @@ export function Section2OperationalReality({
               lineHeight: 1.1,
               fontWeight: 500,
               color: '#0A1628',
+              whiteSpace: 'pre-line',
             }}
           >
             {fill.heading[locale]}
