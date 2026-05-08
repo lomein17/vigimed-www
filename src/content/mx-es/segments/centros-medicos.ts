@@ -95,11 +95,14 @@ export const centrosMedicosFillMxEs: ChassisFill = {
     ucByPersona: {
       jefeUveh: {
         roleLabel: { 'mx-es': 'Jefe UVEH', 'us-en': '[us-en pending]' },
-        tierLabel: { 'mx-es': 'Señal · Patrón', 'us-en': '[us-en pending]' },
+        tierLabel: {
+          'mx-es': 'Vigilancia epidemiológica',
+          'us-en': '[us-en pending]',
+        },
         cards: [
           {
             name: {
-              'mx-es': 'UC1 Campo Estéril',
+              'mx-es': 'Campo Estéril',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -110,7 +113,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC6 Puerta de Aislamiento',
+              'mx-es': 'Puerta de Aislamiento',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -121,7 +124,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC3 Limpieza Ambiental',
+              'mx-es': 'Limpieza Ambiental',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -132,7 +135,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC5 Segregación RPBI',
+              'mx-es': 'Segregación RPBI',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -149,13 +152,13 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
         tierLabel: {
-          'mx-es': 'Patrón · Tendencia',
+          'mx-es': 'Calidad y acreditación',
           'us-en': '[us-en pending]',
         },
         cards: [
           {
             name: {
-              'mx-es': 'UC10 Proporción Personal-Paciente',
+              'mx-es': 'Proporción Personal-Paciente',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -166,7 +169,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC6 Puerta de Aislamiento',
+              'mx-es': 'Puerta de Aislamiento',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -177,7 +180,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC2 Tiempo Fuera',
+              'mx-es': 'Tiempo Fuera',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -188,7 +191,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC3 Limpieza Ambiental',
+              'mx-es': 'Limpieza Ambiental',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -205,13 +208,13 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
         tierLabel: {
-          'mx-es': 'Tendencia · Criterio',
+          'mx-es': 'Decisión clínica institucional',
           'us-en': '[us-en pending]',
         },
         cards: [
           {
             name: {
-              'mx-es': 'UC1 Campo Estéril',
+              'mx-es': 'Campo Estéril',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -222,7 +225,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC10 Proporción Personal-Paciente',
+              'mx-es': 'Proporción Personal-Paciente',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -233,7 +236,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC8 Carro Rojo',
+              'mx-es': 'Carro Rojo',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -244,7 +247,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC2 Tiempo Fuera',
+              'mx-es': 'Tiempo Fuera',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -261,13 +264,13 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
         tierLabel: {
-          'mx-es': 'Criterio · Estándar',
+          'mx-es': 'Posición institucional',
           'us-en': '[us-en pending]',
         },
         cards: [
           {
             name: {
-              'mx-es': 'UC1 Campo Estéril',
+              'mx-es': 'Campo Estéril',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -278,7 +281,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC10 Proporción Personal-Paciente',
+              'mx-es': 'Proporción Personal-Paciente',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -289,7 +292,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC8 Carro Rojo',
+              'mx-es': 'Carro Rojo',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -300,7 +303,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'UC5 Segregación RPBI',
+              'mx-es': 'Segregación RPBI',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -312,7 +315,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         ],
       },
     },
-    defaultPersona: 'medica',
+    defaultPersona: 'jefeUveh',
     ucSupplement: {
       'mx-es':
         'Además de 13 casos de uso adicionales en el catálogo VigiMed, más la inteligencia documentada que emerge de VigiMed Insights.',

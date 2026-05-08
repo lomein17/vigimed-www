@@ -31,7 +31,7 @@ export function Section2OperationalReality({
     >
       <div className="mx-auto" style={{ maxWidth: 1200 }}>
         {/* Section header */}
-        <div style={{ maxWidth: 820, marginBottom: 48 }}>
+        <div style={{ marginBottom: 48 }}>
           <p
             className="font-ui text-brand-500"
             style={{
