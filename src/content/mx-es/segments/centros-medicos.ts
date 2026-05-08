@@ -347,7 +347,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
     // "brecha" (feminine), so "detectada".
     heading: {
       'mx-es':
-        'Brecha de campo estéril detectada en el momento.\nLa infección evitada, y lo que impidió que volviera a ocurrir.',
+        'Brecha de campo estéril detectada en el momento.\nLa infección evitada, y lo que impidió se repitiera.',
       'us-en': '[us-en pending]',
     },
     // S56 FIX 3 + 4: explicit \n before the chain pins it onto its

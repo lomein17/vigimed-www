@@ -1640,14 +1640,31 @@ h1, h2, h3 {
  *   - chain branch (VM-448 S55 FIX 2): body (single prose paragraph)
  *     + quote (without-VigiMed counterfactual, upgraded type per
  *     S55 FIX 4) + citation + regulatory chips.
- * Min-heights on body / quote / citation eliminate layout shift on
- * tab switch (S55 FIX 5; mirrors §B Path C). */
+ * VM-448 S58 FIX 2: layout-shift floor moved from per-block min-heights
+ * (which created visible padding inside short blocks and broke the
+ * uniform 20px rhythm between blocks) to the wrapper. The wrapper
+ * absorbs content-height variance across the four chain-branch tabs;
+ * blocks stack at natural height with a single 20px gap between every
+ * pair. The S56/S57 citation→regulatory adjacent-margin override is
+ * gone — every gap is now uniform. Trade-off: chip-rail position
+ * inside the panel can drift ±20-40px across tabs (S58 directive
+ * accepts this; S55's chip-rail-invariant AC is superseded). */
 
 .vm-section-3-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
   max-width: 720px;
+}
+
+/* Wrapper min-height calibrated empirically against the tallest of the
+ * four chain-branch tabs at >=1024px; buffered so future copy edits
+ * within the existing word caps (50w body / 30w quote / 50w citation)
+ * do not shift the panel below. */
+@media (min-width: 1024px) {
+  .vm-section-3-content {
+    min-height: 400px;
+  }
 }
 
 .vm-section-3-result {
@@ -1694,15 +1711,9 @@ h1, h2, h3 {
   }
 }
 
-/* S55 FIX 5 / S57 FIX 4: body block min-height calibrated to 50-word
- * cap at the stepped-down type scale. ~5 lines at 16px / 1.6
- * line-height = ~128px. Padded to 140px desktop (was 150px under the
- * 17px scale); mobile leaves natural height. */
-@media (min-width: 1024px) {
-  .vm-section-3-body {
-    min-height: 140px;
-  }
-}
+/* S58 FIX 2: per-block min-height removed; layout-shift floor lives on
+ * the .vm-section-3-content wrapper so inter-block rhythm stays uniform
+ * and short bodies no longer pad themselves into a wider visible gap. */
 
 .vm-section-3-quote {
   font-family: var(--font-body);
@@ -1728,14 +1739,8 @@ h1, h2, h3 {
   }
 }
 
-/* S55 FIX 5: quote min-height calibrated to 30-word cap at upgraded
- * type scale. ~3 lines at 19px / 1.45 line-height = ~83px. Padded to
- * 96px desktop. */
-@media (min-width: 1024px) {
-  .vm-section-3-quote {
-    min-height: 96px;
-  }
-}
+/* S58 FIX 2: per-block min-height removed; see .vm-section-3-content
+ * wrapper for the new layout-shift floor. */
 
 .vm-section-3-regulatory {
   font-family: var(--font-body);
@@ -1879,12 +1884,16 @@ h1, h2, h3 {
   max-width: 620px;
 }
 
-/* Chain anchor rail. */
+/* Chain anchor rail. VM-448 S58 FIX 3: max-width widened from 360 to
+ * 420 so the tier-5 description "Compromiso institucional firmado ante
+ * consejo y reguladores" renders on a single visual line. The desktop
+ * grid right column (minmax(0, 40fr) of a 1200px container minus 32px
+ * column-gap) accommodates ~467px, so 420 fits with breathing room. */
 .vm-section-3-chain-rail {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 360px;
+  max-width: 420px;
 }
 
 @media (max-width: 1023.98px) {
@@ -2038,23 +2047,10 @@ h1, h2, h3 {
   }
 }
 
-/* S55 FIX 5: citation min-height calibrated to 50-word cap at italic
- * low-sat type scale. ~4 lines at 13px / 1.55 line-height = ~80px.
- * Padded to 92px desktop. */
-@media (min-width: 1024px) {
-  .vm-section-3-citation {
-    min-height: 92px;
-  }
-}
-
-/* VM-448 S56 FIX 5 / S57 FIX 3: italic regulatory citation and
- * brand-cyan chip rail read as one composite "regulatory" unit. Pull
- * the chip rail up against the citation so only ~5px of effective gap
- * remains (20px flex gap minus 15px adjacent margin-top), tightening
- * the coupling further than S56's 8px effective gap. */
-.vm-section-3-citation + .vm-section-3-regulatory {
-  margin-top: -15px;
-}
+/* S58 FIX 2: per-block min-height removed; the citation→regulatory
+ * adjacent-margin override is also gone. Every inter-block gap inside
+ * .vm-section-3-content now reads uniformly at the wrapper's flex
+ * gap (20px). */
 
 /* Section 4 -- Proof + Legitimacy. Off-white per Brief §9.1. */
 
