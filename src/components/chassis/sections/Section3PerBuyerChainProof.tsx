@@ -20,6 +20,7 @@
 // state independently and drives the single chain rail rendered below
 // the entire accordion.
 
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 import type { Locale } from '@/lib/i18n';
@@ -33,6 +34,7 @@ import {
   type Section3Slots,
   type Section3WithChainSlots,
 } from '@/lib/chassis/slots';
+import { RichText } from '../primitives/RichText';
 
 export function Section3PerBuyerChainProof({
   locale,
@@ -89,7 +91,9 @@ function SectionHeader({
         {fill.heading[locale]}
       </h2>
       {headingFrame ? (
-        <p className="vm-section-3-heading-frame font-body">{headingFrame}</p>
+        <p className="vm-section-3-heading-frame font-body">
+          <RichText segments={headingFrame} />
+        </p>
       ) : null}
     </div>
   );
@@ -356,6 +360,15 @@ function ChainDesktop({
               <span className="vm-section-3-tab-tier">
                 {tab.tier[locale]}
               </span>
+              {tab.headshot ? (
+                <Image
+                  className="vm-section-3-tab-headshot"
+                  src={tab.headshot}
+                  alt={tab.label[locale]}
+                  width={40}
+                  height={40}
+                />
+              ) : null}
               <span className="vm-section-3-tab-role">
                 {tab.label[locale]}
               </span>
@@ -465,6 +478,15 @@ function ChainAccordionItem({
       >
         <span className="vm-section-3-acc-label-stack">
           <span className="vm-section-3-tab-tier">{tab.tier[locale]}</span>
+          {tab.headshot ? (
+            <Image
+              className="vm-section-3-tab-headshot"
+              src={tab.headshot}
+              alt={tab.label[locale]}
+              width={40}
+              height={40}
+            />
+          ) : null}
           <span className="vm-section-3-tab-role">{triggerLabel}</span>
         </span>
         <span className="vm-section-3-acc-icon" aria-hidden="true">
@@ -539,9 +561,13 @@ function RoleTabContent({
   tab,
   locale,
 }: {
-  tab: RoleTabFlat;
+  tab: RoleTabFlat | RoleTabWithChain;
   locale: Locale;
 }) {
+  const citation =
+    'regulatoryCitation' in tab && tab.regulatoryCitation
+      ? tab.regulatoryCitation[locale]
+      : null;
   return (
     <div className="vm-section-3-content">
       <p className="vm-section-3-result">{tab.result[locale]}</p>
@@ -549,6 +575,9 @@ function RoleTabContent({
       <blockquote className="vm-section-3-quote">
         {tab.quote[locale]}
       </blockquote>
+      {citation ? (
+        <p className="vm-section-3-citation">{citation}</p>
+      ) : null}
       <p className="vm-section-3-regulatory">{tab.regulatory[locale]}</p>
     </div>
   );

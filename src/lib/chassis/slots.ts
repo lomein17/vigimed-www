@@ -81,6 +81,17 @@ export interface RoleTabWithChain extends RoleTabFlat {
   readonly tier: Paired<string>;
   readonly chainTiers: LocaleAgnostic<readonly ChainTierId[]>;
   readonly labelMobile?: Paired<string>;
+  // Locale-agnostic image source path (relative to /public). Square aspect,
+  // rendered as a circular crop ~40px diameter on each tab between the
+  // responsibility-domain eyebrow and the role label. Optional at chassis
+  // level; when absent the tab renders without the headshot zone (no
+  // regression on segments that have not authored headshot assets).
+  readonly headshot?: LocaleAgnostic<string>;
+  // Verbatim regulatory citation rendered above the chip rail. Italic at
+  // low saturation, smaller type than result/step. Optional at chassis
+  // level; segments that do not author citation copy render only the chip
+  // rail (regulatory).
+  readonly regulatoryCitation?: Paired<string>;
 }
 
 // Backward-compat alias: existing imports of `RoleTab` resolve to the
@@ -246,7 +257,7 @@ export type Section3WithChainSlots =
   | {
       readonly eyebrow: Paired<string>;
       readonly heading: Paired<string>;
-      readonly headingFrame?: Paired<string>;
+      readonly headingFrame?: Paired<RichParagraph>;
       readonly tabCount: 3;
       readonly tabDefault: 1 | 2 | 3;
       readonly tabs: readonly [
@@ -259,7 +270,7 @@ export type Section3WithChainSlots =
   | {
       readonly eyebrow: Paired<string>;
       readonly heading: Paired<string>;
-      readonly headingFrame?: Paired<string>;
+      readonly headingFrame?: Paired<RichParagraph>;
       readonly tabCount: 4;
       readonly tabDefault: 1 | 2 | 3 | 4;
       readonly tabs: readonly [

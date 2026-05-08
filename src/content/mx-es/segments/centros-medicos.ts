@@ -324,29 +324,36 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant;
-  // dummy content per the issue brief verbatim. Locked content lands via
-  // a separate fixture-fill ticket.)
+  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant; v2
+  // incident-walkthrough framing per VM-448 corrective patch 2026-05-08).
   // tabCount: 4 (Jefe de UVEH, Subdirección de Calidad, Dirección
-  // Médica, Dirección General); tabDefault: 3 places Dirección Médica
-  // active on first paint.
+  // Médica, Dirección General); tabDefault: 1 (Jefe de UVEH = chain
+  // origin under incident-walkthrough framing).
   // ---------------------------------------------------------------------------
   section3: {
     eyebrow: {
-      'mx-es': 'POR ROL CLÍNICO',
+      'mx-es':
+        'VIGIMED EN LA PRÁCTICA: EL CAMINO DE RESOLUCIÓN DE UN INCIDENTE',
       'us-en': '[us-en pending]',
     },
     heading: {
-      'mx-es': 'Cuatro responsables. Una sola cadena de decisión.',
+      'mx-es':
+        'Un paciente regresa con infección de sitio quirúrgico. La causa: un quiebre de campo estéril hace siete días.',
       'us-en': '[us-en pending]',
     },
     headingFrame: {
-      'mx-es':
-        'Cada rol institucional opera en un punto distinto de la cadena señal → patrón → tendencia → criterio → estándar. Vea cómo VigiMed se acopla al suyo.',
-      'us-en': '[us-en pending]',
+      'mx-es': [
+        { text: 'Cada rol institucional opera en un punto distinto de la cadena ' },
+        {
+          text: 'señal → patrón → tendencia → criterio → estándar',
+          emphasis: 'bold-amber',
+        },
+        { text: '.\nVea cómo VigiMed se acopla al suyo.' },
+      ],
+      'us-en': [{ text: '[us-en pending]' }],
     },
     tabCount: 4,
-    tabDefault: 3,
+    tabDefault: 1,
     tabs: [
       {
         label: { 'mx-es': 'Jefe de UVEH', 'us-en': '[us-en pending]' },
@@ -354,20 +361,26 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es': 'Vigilancia epidemiológica',
           'us-en': '[us-en pending]',
         },
+        headshot: '/headshots/centros-medicos/uveh.png',
         chainTiers: ['senal', 'patron'],
         result: {
           'mx-es':
-            'Cada evento detectado se valida contra el caso activo y se consolida como patrón institucional, no como reporte aislado.',
+            'El reingreso confirmó la infección. La señal del quiebre de campo estéril ya estaba en VigiMed desde el día de la cirugía, y el patrón por sala cardiotorácica se consolidó sin reconstrucción.',
           'us-en': '[us-en pending]',
         },
         step: {
           'mx-es':
-            'VigiMed detecta el evento, lo confirma humanamente contra el contexto operativo, y consolida el patrón por servicio antes de que la jefatura prepare el cierre semanal.',
+            'Antes: la jefatura abría dos semanas de revisión retrospectiva de expedientes para reconstruir si había habido más casos similares por sala. Con VigiMed: la señal del quiebre quedó registrada en tiempo real, el patrón por sala se consolidó automáticamente, y la jefatura empieza su trabajo donde antes terminaba.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Antes documentaba lo que recordaba. Ahora documento lo que el sistema ya consolidó."',
+            '"Antes pasaba dos semanas armando si había más casos. Ahora el patrón ya está. Mi trabajo empieza donde antes terminaba."',
+          'us-en': '[us-en pending]',
+        },
+        regulatoryCitation: {
+          'mx-es':
+            'NOM-045-SSA2-2005, §3.1: "Vigilancia Epidemiológica de Infecciones Nosocomiales: a la observación y análisis sistemáticos, continuos y activos de la ocurrencia y distribución de las infecciones nosocomiales, así como de los factores de riesgo asociados a éstas."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
@@ -388,24 +401,30 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es': 'Calidad y acreditación',
           'us-en': '[us-en pending]',
         },
+        headshot: '/headshots/centros-medicos/calidad.png',
         chainTiers: ['patron', 'tendencia'],
         result: {
           'mx-es':
-            'Cada patrón se eleva a tendencia con cruce contra estándar institucional vigente, sin reescritura por marco acreditador.',
+            'La trayectoria del patrón quedó visible antes de que el caso se volviera hallazgo. La revisión institucional consultó una sola tendencia documentada, no tres reportes paralelos en formatos distintos.',
           'us-en': '[us-en pending]',
         },
         step: {
           'mx-es':
-            'VigiMed mapea cada patrón contra los marcos acreditadores concurrentes en una sola lectura, y produce la tendencia institucional que sustenta el Plan ante junta directiva.',
+            'Antes: tres documentos paralelos para tres marcos de revisión, cada uno con su propio formato y su propia ventana de tiempo. Con VigiMed: una sola tendencia institucional, leída por todos los marcos concurrentes desde la misma evidencia. El Plan de Mejora Continua se redactó leyendo, no reconstruyendo.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Dejé de mantener tres documentos paralelos. Ahora mantengo una tendencia y tres lecturas."',
+            '"Llegué a la junta con una tendencia firmada. Antes llegaba con tres documentos y los explicaba uno por uno."',
+          'us-en': '[us-en pending]',
+        },
+        regulatoryCitation: {
+          'mx-es':
+            'NOM-004-SSA3-2012, §1: "Esta norma, establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'MOCEBPASS · JCI · CONAMED',
+          'mx-es': 'NOM-004 · CONAMED · CSG',
           'us-en': '[us-en pending]',
         },
       },
@@ -415,20 +434,26 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es': 'Decisión clínica institucional',
           'us-en': '[us-en pending]',
         },
+        headshot: '/headshots/centros-medicos/medica.png',
         chainTiers: ['tendencia', 'criterio'],
         result: {
           'mx-es':
-            'Cada caso confirmado se vuelve criterio, no anécdota. Su comité clínico decide con tendencia documentada, no con memoria institucional.',
+            'El comité clínico decidió la intervención sobre la sala cardiotorácica con tendencia documentada por servicio. El criterio institucional se firmó en una sesión, no en tres.',
           'us-en': '[us-en pending]',
         },
         step: {
           'mx-es':
-            'Cada evento crítico se detecta, se confirma humanamente y se documenta con su contexto operativo. Lo que antes era reporte mensual ahora es tendencia clínica viva, lista para sustentar el criterio institucional que su consejo le pide.',
+            'Antes: el comité abría sesión con cifras desconectadas de su contexto operativo, y dedicaba la primera hora a alinear interpretación. Con VigiMed: la tendencia llegó al comité ya cruzada con resultados de paciente y causa raíz documentada. La sesión arrancó en decisión, no en reconstrucción.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"El comité me pregunta por qué pasó. Antes daba cifras. Ahora doy criterio."',
+            '"El comité me pregunta por qué pasó. Antes daba cifras y las defendía. Ahora doy criterio y lo sostengo."',
+          'us-en': '[us-en pending]',
+        },
+        regulatoryCitation: {
+          'mx-es':
+            'NOM-004-SSA3-2012, §1: "Esta norma, establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
@@ -442,24 +467,30 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es': 'Posición institucional',
           'us-en': '[us-en pending]',
         },
+        headshot: '/headshots/centros-medicos/general.png',
         chainTiers: ['criterio', 'estandar'],
         result: {
           'mx-es':
-            'Cada criterio clínico se eleva a estándar reportable ante consejo, ya consolidado y firmado, sin reconstrucción reactiva.',
+            'El consejo recibió el caso como evidencia de respuesta institucional, no como crisis reputacional. La posición ante aseguradora y CONAMED se sostuvo con el criterio firmado, ya elevado a estándar reportable.',
           'us-en': '[us-en pending]',
         },
         step: {
           'mx-es':
-            'VigiMed convierte el criterio institucional en evidencia reportable trimestre a trimestre, con la cadena de decisiones documentada por servicio y por campus, lista para conferencia de apertura o auditoría externa.',
+            'Antes: una infección con reingreso disparaba reuniones extraordinarias del consejo, defensa reactiva ante aseguradora, y exposición individual de la dirección general. Con VigiMed: el criterio clínico ya firmado por el comité subió al consejo como estándar institucional. La posición ante reguladores se construyó antes de que la llamada llegara.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Al consejo no le importan los eventos. Le importa cómo respondió la institución. Ahora tengo la respuesta."',
+            '"Al consejo no le importa el evento. Le importa cómo respondió la institución. Esta vez tenía la respuesta antes de la pregunta."',
+          'us-en': '[us-en pending]',
+        },
+        regulatoryCitation: {
+          'mx-es':
+            'Reglamento de Procedimientos CONAMED: "el criterio institucional, pues no se trata de la mera apreciación de perito persona física."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'CSG · COFEPRIS · ASF',
+          'mx-es': 'CONAMED · CSG · COFEPRIS',
           'us-en': '[us-en pending]',
         },
       },
@@ -469,28 +500,29 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         senal: {
           label: { 'mx-es': 'Señal', 'us-en': '[us-en pending]' },
           description: {
-            'mx-es': 'Evento crítico detectado en su entorno',
+            'mx-es': 'Evento crítico detectado en el momento en que ocurre',
             'us-en': '[us-en pending]',
           },
         },
         patron: {
           label: { 'mx-es': 'Patrón', 'us-en': '[us-en pending]' },
           description: {
-            'mx-es': 'Confirmación humana, contexto operativo',
+            'mx-es': 'Recurrencia confirmada del mismo evento en un servicio',
             'us-en': '[us-en pending]',
           },
         },
         tendencia: {
           label: { 'mx-es': 'Tendencia', 'us-en': '[us-en pending]' },
           description: {
-            'mx-es': 'Casos agregados con interpretación clínica',
+            'mx-es': 'Trayectoria del patrón a lo largo del tiempo',
             'us-en': '[us-en pending]',
           },
         },
         criterio: {
           label: { 'mx-es': 'Criterio', 'us-en': '[us-en pending]' },
           description: {
-            'mx-es': 'Decisiones institucionales documentadas',
+            'mx-es':
+              'Regla institucional derivada de la tendencia acumulada',
             'us-en': '[us-en pending]',
           },
         },
@@ -498,7 +530,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           label: { 'mx-es': 'Estándar', 'us-en': '[us-en pending]' },
           description: {
             'mx-es':
-              'Posición institucional ante consejo y reguladores',
+              'Compromiso institucional firmado ante consejo y reguladores',
             'us-en': '[us-en pending]',
           },
         },
