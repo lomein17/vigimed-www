@@ -346,17 +346,21 @@ export const centrosMedicosFillMxEs: ChassisFill = {
     // recurrence.
     heading: {
       'mx-es':
-        'Un quiebre de campo estéril en quirófano detectado en el momento. La infección que no ocurrió, y la que la institución impidió que volviera a ocurrir.',
+        'Un quiebre de campo estéril en quirófano detectado en el momento.\nLa infección que no ocurrió, y la que la institución impidió que volviera a ocurrir.',
       'us-en': '[us-en pending]',
     },
+    // S56 FIX 3 + 4: explicit \n before the chain pins it onto its
+    // own line at all widths, and the trailing period moves into the
+    // bold-amber span so it renders amber alongside the rest of the
+    // chain.
     headingFrame: {
       'mx-es': [
-        { text: 'Cada rol institucional opera en un punto distinto de la cadena ' },
+        { text: 'Cada rol institucional opera en un punto distinto de la cadena.\n' },
         {
-          text: 'señal → patrón → tendencia → criterio → estándar',
+          text: 'señal → patrón → tendencia → criterio → estándar.',
           emphasis: 'bold-amber',
         },
-        { text: '.\nVea cómo VigiMed se acopla al suyo.' },
+        { text: '\nVea cómo VigiMed se acopla al suyo.' },
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },

@@ -65,7 +65,11 @@ function SectionHeader({
       ? fill.headingFrame[locale]
       : null;
   return (
-    <div style={{ maxWidth: 820, marginBottom: 48 }}>
+    // VM-448 S56 FIX 2: header wrapping div widens at >=1280px to
+    // match .vm-section-3-heading-frame so the title does not wrap
+    // to four lines while the frame line below it sits wider. Class
+    // drives the responsive breakpoint instead of inline style.
+    <div className="vm-section-3-header" style={{ marginBottom: 48 }}>
       <p
         className="font-ui text-brand-500"
         style={{
@@ -86,6 +90,9 @@ function SectionHeader({
           letterSpacing: '-0.01em',
           lineHeight: 1.1,
           fontWeight: 500,
+          // S56 FIX 2: render explicit \n in heading copy as a line
+          // break (e.g. break after "momento.").
+          whiteSpace: 'pre-line',
         }}
       >
         {fill.heading[locale]}
@@ -322,16 +329,25 @@ function ChainDesktop({
   chain: ChainAnchor;
 }) {
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const isFirstRun = useRef(true);
   const activeTab = tabs[active] ?? tabs[0];
 
+  // VM-448 S56 FIX 1: previously called node.scrollIntoView with
+  // block: 'nearest', which scrolled the page vertically on cold load
+  // because the active tab sits below §A and §B. Switched to a
+  // horizontal-only scroll on the tab strip parent, and skip the first
+  // invocation so mount never scrolls (only user-initiated tab
+  // switches do).
   useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
     const node = tabRefs.current[active];
-    if (!node) return;
-    node.scrollIntoView({
-      inline: 'start',
-      block: 'nearest',
-      behavior: 'auto',
-    });
+    if (!node || !node.parentElement) return;
+    const parent = node.parentElement;
+    const offsetLeft = node.offsetLeft - parent.offsetLeft;
+    parent.scrollTo({ left: offsetLeft, behavior: 'auto' });
   }, [active]);
 
   if (!activeTab) return null;

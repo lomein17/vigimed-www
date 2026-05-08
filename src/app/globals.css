@@ -1743,6 +1743,20 @@ h1, h2, h3 {
  * legacy flat-branch selectors above remain unchanged so
  * hospitales-publicos.ts renders identically. */
 
+/* VM-448 S56 FIX 2: heading wrapping div matches .vm-section-3-heading-frame
+ * width at the same breakpoint so the title and the frame line read
+ * as a unified header block instead of the title wrapping narrower
+ * than the bar it crowns. */
+.vm-section-3-header {
+  max-width: 820px;
+}
+
+@media (min-width: 1280px) {
+  .vm-section-3-header {
+    max-width: 1080px;
+  }
+}
+
 .vm-section-3-heading-frame {
   margin: 16px 0 0;
   max-width: 720px;
@@ -2023,6 +2037,14 @@ h1, h2, h3 {
   .vm-section-3-citation {
     min-height: 92px;
   }
+}
+
+/* VM-448 S56 FIX 5: italic regulatory citation and brand-cyan chip
+ * rail read as one composite "regulatory" unit. Pull the chip rail
+ * up against the citation rather than the 20px row gap that .vm-
+ * section-3-content applies between every other block. */
+.vm-section-3-citation + .vm-section-3-regulatory {
+  margin-top: -12px;
 }
 
 /* Section 4 -- Proof + Legitimacy. Off-white per Brief §9.1. */
