@@ -1909,6 +1909,24 @@ h1, h2, h3 {
   max-width: 620px;
 }
 
+/* VM-448 S60: chain-branch card (left column of the 60/40 grid) collapses
+ * its vertical padding so the body paragraph's first line aligns with the
+ * SEÑAL label across the column gap. Horizontal padding unchanged; top
+ * and bottom symmetric. The S58 min-height floor (which combined with
+ * S59 justify-content: center seated the body 77.5px below the SEÑAL
+ * label baseline) drops to 0 on the chain branch only; the flat branch
+ * keeps the prior 400px floor and 40/48 panel padding. Chip-rail anchor
+ * across tabs (S58 lock) is superseded: panel height now follows natural
+ * content height per tab. */
+@media (min-width: 1024px) {
+  .vm-section-3-panel.vm-section-3-panel-narrow {
+    padding: 0 48px;
+  }
+  .vm-section-3-panel-narrow .vm-section-3-content {
+    min-height: 0;
+  }
+}
+
 /* Chain anchor rail. VM-448 S58 FIX 3: max-width widened from 360 to
  * 420 so the tier-5 description "Compromiso institucional firmado ante
  * consejo y reguladores" renders on a single visual line. The desktop
