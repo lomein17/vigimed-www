@@ -557,48 +557,156 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 4 -- Proof + Legitimacy (placeholder; VM-441 fills)
+  // Section 4 -- Proof + Legitimacy (VM-450 D-S56-2 §D Acta de
+  // Cumplimiento lock). regulatoryDocument theme, navy background.
+  // Content per issue Scope §2 table (Carro Rojo anchor, NOM-019-
+  // SSA3-2013). Zone A is the 4-card obligation grid; Zone B is the
+  // Acta itself; Zone C is the chip rail on navy.
   // ---------------------------------------------------------------------------
   section4: {
-    zoneAEyebrow: {
-      'mx-es': '[S4 eyebrow pending]',
-      'us-en': '[S4 eyebrow pending]',
-    },
-    zoneAMetrics: [
-      {
-        'mx-es': { value: '[pending]', label: '[pending]' },
-        'us-en': { value: '[pending]', label: '[pending]' },
+    theme: 'navy',
+    header: {
+      eyebrow: {
+        'mx-es': 'EL ESTÁNDAR YA EXISTE',
+        'us-en': '[us-en pending]',
       },
-      {
-        'mx-es': { value: '[pending]', label: '[pending]' },
-        'us-en': { value: '[pending]', label: '[pending]' },
+      headingLine1: {
+        'mx-es': [{ text: 'Su evidencia es documentable.' }],
+        'us-en': [{ text: '[us-en pending]' }],
       },
-      {
-        'mx-es': { value: '[pending]', label: '[pending]' },
-        'us-en': { value: '[pending]', label: '[pending]' },
+      headingLine2: {
+        'mx-es': [
+          {
+            text: 'La pregunta es si llega antes que el auditor.',
+            emphasis: 'brand-cyan',
+          },
+        ],
+        'us-en': [{ text: '[us-en pending]' }],
       },
-      {
-        'mx-es': { value: '[pending]', label: '[pending]' },
-        'us-en': { value: '[pending]', label: '[pending]' },
+      frame: {
+        'mx-es': [
+          { text: 'Su hospital ya opera bajo obligaciones regulatorias medibles. ' },
+          {
+            text: 'VigiMed las cumple en tiempo real, no en reconstrucción.',
+            emphasis: 'bold-amber',
+          },
+        ],
+        'us-en': [{ text: '[us-en pending]' }],
       },
-    ],
-    zoneBEyebrow: {
-      'mx-es': '[S4.B eyebrow pending]',
-      'us-en': '[S4.B eyebrow pending]',
     },
-    zoneBVideo: { desktop: '', mobile: '', poster: '' },
-    zoneBFrame: {
-      'mx-es': '[S4.B frame pending]',
-      'us-en': '[S4.B frame pending]',
+    zoneA: {
+      kind: 'obligationGrid',
+      cards: [
+        {
+          articleAnchor: {
+            'mx-es': 'NOM-019-SSA3-2013',
+            'us-en': '[us-en pending]',
+          },
+          label: {
+            'mx-es': 'Práctica de enfermería en respuesta de emergencia',
+            'us-en': '[us-en pending]',
+          },
+          frequency: { 'mx-es': 'POR TURNO', 'us-en': '[us-en pending]' },
+        },
+        {
+          articleAnchor: {
+            'mx-es': 'NOM-004-SSA3-2012 §1',
+            'us-en': '[us-en pending]',
+          },
+          label: {
+            'mx-es': 'Expediente clínico íntegro y trazable',
+            'us-en': '[us-en pending]',
+          },
+          frequency: { 'mx-es': 'POR EVENTO', 'us-en': '[us-en pending]' },
+        },
+        {
+          articleAnchor: {
+            'mx-es': 'NOM-016-SSA3-2012',
+            'us-en': '[us-en pending]',
+          },
+          label: {
+            'mx-es': 'Atención médica hospitalaria',
+            'us-en': '[us-en pending]',
+          },
+          frequency: { 'mx-es': 'CONTINUA', 'us-en': '[us-en pending]' },
+        },
+        {
+          articleAnchor: { 'mx-es': 'CSG', 'us-en': '[us-en pending]' },
+          label: {
+            'mx-es': 'Acreditación institucional',
+            'us-en': '[us-en pending]',
+          },
+          frequency: { 'mx-es': 'TRIENAL', 'us-en': '[us-en pending]' },
+        },
+      ],
     },
-    zoneBUcAnchor: '[uc anchor pending]',
-    zoneCEyebrow: {
-      'mx-es': '[S4.C eyebrow pending]',
-      'us-en': '[S4.C eyebrow pending]',
+    zoneB: {
+      kind: 'regulatoryDocument',
+      actaHeader: {
+        'mx-es': 'VIGIMED · ACTA DE CUMPLIMIENTO REGULATORIO',
+        'us-en': '[us-en pending]',
+      },
+      folio: { 'mx-es': 'FOLIO VM-MX-04127', 'us-en': '[us-en pending]' },
+      establecimientoLabel: {
+        'mx-es': '[Centro Médico, tercer nivel]',
+        'us-en': '[us-en pending]',
+      },
+      marcoNormativo: {
+        'mx-es': 'NOM-019-SSA3-2013, §6',
+        'us-en': '[us-en pending]',
+      },
+      obligationClauses: [
+        {
+          text: {
+            'mx-es':
+              'Preparación, verificación y reposición del carro rojo conforme a estándar institucional, con responsable identificado por turno y trazabilidad de contenido.',
+            'us-en': '[us-en pending]',
+          },
+          evidence: {
+            'mx-es':
+              'Verificación documentada por turno, contenido y caducidades registradas en tiempo real, alerta automática ante inconformidad.',
+            'us-en': '[us-en pending]',
+          },
+        },
+        {
+          text: {
+            'mx-es':
+              'Activación oportuna de la respuesta de emergencia, con tiempo de respuesta medible y cadena de decisión documentada por participante.',
+            'us-en': '[us-en pending]',
+          },
+          evidence: {
+            'mx-es':
+              'Tiempo de activación registrado al segundo, equipo respondiente identificado, cadena de decisión trazable por turno y por servicio.',
+            'us-en': '[us-en pending]',
+          },
+        },
+        {
+          text: {
+            'mx-es':
+              'Análisis posterior del evento que sustente revisión institucional, aprendizaje organizacional y defensa ante reclamación.',
+            'us-en': '[us-en pending]',
+          },
+          evidence: {
+            'mx-es':
+              'Reconstrucción minuto a minuto disponible para junta clínica al cierre del evento, sin reconstrucción retrospectiva.',
+            'us-en': '[us-en pending]',
+          },
+        },
+      ],
+      closingLine: {
+        'mx-es':
+          'CADENA DE EVIDENCIA SOSTENIDA EN TIEMPO REAL POR VIGIMED · NO REQUIERE RECONSTRUCCIÓN RETROSPECTIVA',
+        'us-en': '[us-en pending]',
+      },
+      sealLabel: {
+        'mx-es': 'EVIDENCIA / SOSTENIDA',
+        'us-en': '[us-en pending]',
+      },
     },
+    zoneCEyebrow: { 'mx-es': 'OPERAMOS BAJO', 'us-en': '[us-en pending]' },
     zoneCChips: {
-      'mx-es': ['[chip 1]', '[chip 2]', '[chip 3]', '[chip 4]'],
-      'us-en': ['[chip 1]', '[chip 2]', '[chip 3]', '[chip 4]'],
+      'mx-es': ['NOM-019', 'NOM-004', 'CONAMED', 'CSG'],
+      'us-en': ['[us-en pending]'],
     },
   },
 

@@ -104,17 +104,24 @@ export const hospitalesPublicosFillUsEn: ChassisFill = {
   },
 
   section4: {
-    zoneAEyebrow: p('[S4 eyebrow pending]'),
-    zoneAMetrics: [
-      { 'mx-es': { value: '[pending]', label: '[pending]' }, 'us-en': { value: '[pending]', label: '[pending]' } },
-      { 'mx-es': { value: EM_DASH_GLYPH, label: '[pending]' }, 'us-en': { value: EM_DASH_GLYPH, label: '[pending]' } },
-      { 'mx-es': { value: '[pending]', label: '[pending]' }, 'us-en': { value: '[pending]', label: '[pending]' } },
-      { 'mx-es': { value: '[pending]', label: '[pending]' }, 'us-en': { value: '[pending]', label: '[pending]' } },
-    ],
-    zoneBEyebrow: p('[S4.B eyebrow pending]'),
-    zoneBVideo: { desktop: '', mobile: '', poster: '' },
-    zoneBFrame: p('[S4.B frame pending]'),
-    zoneBUcAnchor: '',
+    theme: 'offwhite',
+    zoneA: {
+      kind: 'metricStrip',
+      eyebrow: p('[S4 eyebrow pending]'),
+      metrics: [
+        { 'mx-es': { value: '[pending]', label: '[pending]' }, 'us-en': { value: '[pending]', label: '[pending]' } },
+        { 'mx-es': { value: EM_DASH_GLYPH, label: '[pending]' }, 'us-en': { value: EM_DASH_GLYPH, label: '[pending]' } },
+        { 'mx-es': { value: '[pending]', label: '[pending]' }, 'us-en': { value: '[pending]', label: '[pending]' } },
+        { 'mx-es': { value: '[pending]', label: '[pending]' }, 'us-en': { value: '[pending]', label: '[pending]' } },
+      ],
+    },
+    zoneB: {
+      kind: 'video',
+      eyebrow: p('[S4.B eyebrow pending]'),
+      video: { desktop: '', mobile: '', poster: '' },
+      frame: p('[S4.B frame pending]'),
+      ucAnchor: '',
+    },
     zoneCEyebrow: p('[S4.C eyebrow pending]'),
     zoneCChips: {
       'mx-es': ['[chip 1]', '[chip 2]', '[chip 3]', '[chip 4]'],

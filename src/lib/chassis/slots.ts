@@ -293,26 +293,95 @@ export type Section3WithChainSlots =
 
 export type Section3Slots = Section3FlatSlots | Section3WithChainSlots;
 
-// Slot Map v1.1 §7 -- Section 4 Proof + Legitimacy block (12 slots)
+// Slot Map v1.1 §7 -- Section 4 Proof + Legitimacy block.
+// VM-450 D-S56-2 lifted the flat shape into theme + per-zone
+// discriminated unions to fit the Centros Médicos regulatoryDocument
+// treatment without disturbing the legacy hospitales-publicos render.
+
+// VM-450 Zone A obligation card (Centros Médicos §D regulatoryDocument
+// theme). Three string fields per card: monospaced article anchor,
+// body label, frequency tag.
+export interface ObligationCard {
+  readonly articleAnchor: Paired<string>;
+  readonly label: Paired<string>;
+  readonly frequency: Paired<string>;
+}
+
+// VM-450 Section 4 top-level header block (eyebrow + 2-line heading +
+// frame). Optional at chassis level; segments that author their §D
+// header render with it, segments without render Section 4 with no
+// top-level header (legacy behavior).
+export interface Section4Header {
+  readonly eyebrow: Paired<string>;
+  readonly headingLine1: Paired<RichString>;
+  readonly headingLine2: Paired<RichString>;
+  readonly frame: Paired<RichParagraph>;
+}
+
+// VM-450 Zone A discriminated union. kind: 'metricStrip' is the legacy
+// stat-strip shape (existing behavior preserved verbatim). kind:
+// 'obligationGrid' is the Centros Médicos §D 4-card variant.
+export type Section4ZoneA =
+  | {
+      readonly kind: 'metricStrip';
+      readonly eyebrow: Paired<string>;
+      readonly metrics: readonly [
+        Paired<MetricCell>,
+        Paired<MetricCell>,
+        Paired<MetricCell>,
+        Paired<MetricCell>,
+      ];
+    }
+  | {
+      readonly kind: 'obligationGrid';
+      readonly cards: readonly [
+        ObligationCard,
+        ObligationCard,
+        ObligationCard,
+        ObligationCard,
+      ];
+    };
+
+// VM-450 D-S56-2: Zone B widens to discriminated union. kind: 'video'
+// is the legacy PIM-scene shape (existing behavior preserved verbatim).
+// kind: 'regulatoryDocument' is the Centros Médicos §D Acta de
+// Cumplimiento variant. Word/char limits are fixture-author concerns;
+// the chassis applies no runtime caps.
+export type Section4ZoneB =
+  | {
+      readonly kind: 'video';
+      readonly eyebrow: Paired<string>;
+      readonly video: LocaleAgnostic<Video>;
+      readonly frame: Paired<Paragraph>;
+      // Metadata only; not rendered (Slot Map v1.1 §7.3 S4.B.uc.anchor)
+      readonly ucAnchor: LocaleAgnostic<string>;
+    }
+  | {
+      readonly kind: 'regulatoryDocument';
+      readonly actaHeader: Paired<string>;
+      readonly folio: Paired<string>;
+      readonly establecimientoLabel: Paired<string>;
+      readonly marcoNormativo: Paired<string>;
+      readonly obligationClauses: readonly {
+        readonly text: Paired<string>;
+        readonly evidence: Paired<string>;
+      }[];
+      readonly closingLine: Paired<string>;
+      readonly sealLabel: Paired<string>;
+    };
+
 export interface Section4Slots {
-  // Zone A -- Stat strip (Slot Map v1.1 §7.2)
-  readonly zoneAEyebrow: Paired<string>;
-  // Fixed 4-tuple per Chassis Brief §6.2
-  readonly zoneAMetrics: readonly [
-    Paired<MetricCell>,
-    Paired<MetricCell>,
-    Paired<MetricCell>,
-    Paired<MetricCell>,
-  ];
-  // Zone B -- PIM scene (Slot Map v1.1 §7.3)
-  readonly zoneBEyebrow: Paired<string>;
-  readonly zoneBVideo: LocaleAgnostic<Video>;
-  readonly zoneBFrame: Paired<Paragraph>;
-  // Metadata only; not rendered (Slot Map v1.1 §7.3 S4.B.uc.anchor)
-  readonly zoneBUcAnchor: LocaleAgnostic<string>;
-  // Zone C -- Regulatory chip rail (Slot Map v1.1 §7.4)
+  // VM-450: 'navy' unlocks the regulatoryDocument visual treatment and
+  // flips the section background; 'offwhite' preserves the §9.1 page
+  // rhythm for legacy segments.
+  readonly theme: 'offwhite' | 'navy';
+  // Optional top-level section header (eyebrow + 2-line heading + frame).
+  readonly header?: Section4Header;
+  readonly zoneA: Section4ZoneA;
+  readonly zoneB: Section4ZoneB;
+  // Zone C -- Regulatory chip rail (Slot Map v1.1 §7.4). 4-7 chips
+  // preferred; chassis renders all supplied.
   readonly zoneCEyebrow: Paired<string>;
-  // 4-7 chips preferred; chassis renders all supplied
   readonly zoneCChips: Paired<readonly Chip[]>;
 }
 

@@ -228,43 +228,52 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
   // Section 4 -- Proof + Legitimacy (placeholder)
   // Metric 2 (Camas activas) uses the em-dash glyph to exercise the
   // carve-out infrastructure end-to-end (AC#5).
+  // VM-450: migrated to the discriminated-union shape. offwhite theme
+  // with metricStrip + video zones preserves existing render.
   // ---------------------------------------------------------------------------
   section4: {
-    zoneAEyebrow: {
-      'mx-es': 'OPERAMOS ASÍ',
-      'us-en': '[S4 eyebrow pending]',
-    },
-    zoneAMetrics: [
-      {
-        'mx-es': { value: 'Pilotos 2026', label: 'Despliegue' },
-        'us-en': { value: '[pending]', label: '[pending]' },
+    theme: 'offwhite',
+    zoneA: {
+      kind: 'metricStrip',
+      eyebrow: {
+        'mx-es': 'OPERAMOS ASÍ',
+        'us-en': '[S4 eyebrow pending]',
       },
-      {
-        'mx-es': { value: EM_DASH_GLYPH, label: 'Camas activas' },
-        'us-en': { value: EM_DASH_GLYPH, label: '[pending]' },
-      },
-      {
-        'mx-es': {
-          value: 'CSG · CONAMED · ASF',
-          label: 'Marco regulatorio',
+      metrics: [
+        {
+          'mx-es': { value: 'Pilotos 2026', label: 'Despliegue' },
+          'us-en': { value: '[pending]', label: '[pending]' },
         },
-        'us-en': { value: '[pending]', label: '[pending]' },
-      },
-      {
-        'mx-es': { value: 'Servicio digital', label: 'Modalidad' },
-        'us-en': { value: '[pending]', label: '[pending]' },
-      },
-    ],
-    zoneBEyebrow: {
-      'mx-es': '[S4.B eyebrow pending]',
-      'us-en': '[S4.B eyebrow pending]',
+        {
+          'mx-es': { value: EM_DASH_GLYPH, label: 'Camas activas' },
+          'us-en': { value: EM_DASH_GLYPH, label: '[pending]' },
+        },
+        {
+          'mx-es': {
+            value: 'CSG · CONAMED · ASF',
+            label: 'Marco regulatorio',
+          },
+          'us-en': { value: '[pending]', label: '[pending]' },
+        },
+        {
+          'mx-es': { value: 'Servicio digital', label: 'Modalidad' },
+          'us-en': { value: '[pending]', label: '[pending]' },
+        },
+      ],
     },
-    zoneBVideo: { desktop: '', mobile: '', poster: '' },
-    zoneBFrame: {
-      'mx-es': '[S4.B frame pending]',
-      'us-en': '[S4.B frame pending]',
+    zoneB: {
+      kind: 'video',
+      eyebrow: {
+        'mx-es': '[S4.B eyebrow pending]',
+        'us-en': '[S4.B eyebrow pending]',
+      },
+      video: { desktop: '', mobile: '', poster: '' },
+      frame: {
+        'mx-es': '[S4.B frame pending]',
+        'us-en': '[S4.B frame pending]',
+      },
+      ucAnchor: 'UC1 Campo Estéril',
     },
-    zoneBUcAnchor: 'UC1 Campo Estéril',
     zoneCEyebrow: {
       'mx-es': '[S4.C eyebrow pending]',
       'us-en': '[S4.C eyebrow pending]',
