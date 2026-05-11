@@ -35,10 +35,21 @@ export function Section4ProofLegitimacy({
   locale: Locale;
   fill: Section4Slots;
 }) {
-  const themeClass =
-    fill.theme === 'navy'
-      ? 'vm-segment-section-4 vm-segment-section-4--theme-navy'
-      : 'vm-segment-section-4';
+  // VM-450 UAT r2: regulatoryDocument variant gets a compressed
+  // vertical rhythm (tighter top/bottom padding, smaller Zone gaps)
+  // so the whole §D fits inside a single 1440x900 desktop viewport.
+  // The modifier is keyed off zoneB.kind, not theme, so a future
+  // navy + regulatoryDocument combination still picks up the
+  // compression while metricStrip + video segments keep the
+  // var(--site-section) rhythm intact.
+  const classes = ['vm-segment-section-4'];
+  if (fill.theme === 'navy') {
+    classes.push('vm-segment-section-4--theme-navy');
+  }
+  if (fill.zoneB.kind === 'regulatoryDocument') {
+    classes.push('vm-segment-section-4--variant-regulatory-document');
+  }
+  const themeClass = classes.join(' ');
 
   return (
     <section

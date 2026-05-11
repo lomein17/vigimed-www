@@ -2201,7 +2201,11 @@ h1, h2, h3 {
 }
 
 .vm-section-4-header-frame {
-  max-width: 520px;
+  /* VM-450 UAT r2: width widens to fill the Section 4 inner content
+   * container so the frame renders single-line at >=1024px alongside
+   * the now-offwhite §D backdrop. Heading container above still caps
+   * at 640px so the two lines of the heading retain their balance. */
+  max-width: 100%;
   margin: 16px auto 0;
   font-size: 14px;
   line-height: 1.65;
@@ -2210,6 +2214,16 @@ h1, h2, h3 {
 
 .vm-segment-section-4--theme-navy .vm-section-4-header-frame {
   color: var(--color-text-on-dark-muted);
+}
+
+/* VM-450 UAT r2: brand-amber #FBBF24 fails AA on offwhite #F5F3EE
+ * (~1.4:1). Darken the bold-amber emphasis within the §D header frame
+ * to #BA7517 so "VigiMed las cumple en tiempo real, no en
+ * reconstrucción." reads cleanly. Scoped to .vm-section-4-header-frame
+ * so the universal RichText brand-amber treatment elsewhere is
+ * unaffected. */
+.vm-section-4-header-frame .text-brand-amber {
+  color: #BA7517;
 }
 
 /* Zone A -- stat strip (Brief §6.2 Zone A). Vertical separators
@@ -2372,6 +2386,65 @@ h1, h2, h3 {
   letter-spacing: 0.02em;
 }
 
+/* VM-450 UAT r2: regulatoryDocument variant compresses Section 4
+ * vertical rhythm so the entire §D fits inside a 1440x900 desktop
+ * viewport. Overrides the section's own padding (off var(--site-
+ * section)) and tightens both Zone A->acta and acta->chip-rail gaps
+ * to the 20/28/36 mobile/tablet/desktop ladder. Scoped to the
+ * variant class so hospitales-publicos (metricStrip + video) keeps
+ * the full var(--site-section) rhythm. */
+
+.vm-segment-section-4--variant-regulatory-document {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .vm-segment-section-4--variant-regulatory-document {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-section-4--variant-regulatory-document {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+.vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-a {
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-a {
+    margin-bottom: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-a {
+    margin-bottom: 36px;
+  }
+}
+
+.vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-b {
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-b {
+    margin-bottom: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-b {
+    margin-bottom: 36px;
+  }
+}
+
 /* Navy-theme chip rail: brand-cyan border + monospace cyan text, no
  * fill. Used by Centros Médicos §D regulatoryDocument variant. */
 
@@ -2403,8 +2476,15 @@ h1, h2, h3 {
   }
 }
 
+/* Default (offwhite) obligation card: cream tile that pairs visually
+ * with the acta surface below it, navy body text, brand-cyan accent
+ * and anchor. VM-450 UAT r2 flipped Centros Médicos §D to the
+ * offwhite theme, so this branch is the one rendered in production
+ * today; the navy override below is retained for any future segment
+ * that opts back into theme: 'navy'. */
+
 .vm-section-4-obligation-card {
-  background: var(--color-navy-700);
+  background: #F5F0E5;
   border-top: 2px solid var(--color-brand-500);
   border-radius: 4px;
   padding: 16px;
@@ -2423,7 +2503,7 @@ h1, h2, h3 {
 .vm-section-4-obligation-label {
   font-size: 12px;
   line-height: 1.4;
-  color: rgba(255, 255, 255, 0.85);
+  color: #0A1628;
 }
 
 .vm-section-4-obligation-frequency {
@@ -2431,8 +2511,22 @@ h1, h2, h3 {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(10, 22, 40, 0.55);
   margin-top: auto;
+}
+
+/* Navy-theme override (preserved for future segments that author §D
+ * with theme: 'navy'). */
+.vm-segment-section-4--theme-navy .vm-section-4-obligation-card {
+  background: var(--color-navy-700);
+}
+
+.vm-segment-section-4--theme-navy .vm-section-4-obligation-label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.vm-segment-section-4--theme-navy .vm-section-4-obligation-frequency {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 /* Acta de Cumplimiento (VM-450 Zone B regulatoryDocument variant).
@@ -2448,10 +2542,15 @@ h1, h2, h3 {
   background: #F5F0E5;
   color: #0A1628;
   /* VM-450 UAT r1: tile widens to fill the Section 4 inner content
-   * container (1200px) instead of the prior 620px lock. */
+   * container (1200px) instead of the prior 620px lock.
+   * VM-450 UAT r2: 1px hairline border so the cream tile reads as a
+   * distinct regulatory-document surface against the offwhite section
+   * background (the two surfaces are near-identical lightness). Same
+   * 0.18 opacity as .vm-stat-strip-cell separators. */
   width: 100%;
   margin: 0 auto;
   padding: 24px;
+  border: 1px solid rgba(10, 22, 40, 0.18);
   border-radius: 4px;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
 }

@@ -564,7 +564,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   // Acta itself; Zone C is the chip rail on navy.
   // ---------------------------------------------------------------------------
   section4: {
-    theme: 'navy',
+    theme: 'offwhite',
     header: {
       eyebrow: {
         'mx-es': 'EL ESTÁNDAR YA EXISTE',
