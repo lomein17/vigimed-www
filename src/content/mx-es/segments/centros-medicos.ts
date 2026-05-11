@@ -671,6 +671,18 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
+              'Verificación funcional del desfibrilador y equipo de vía aérea por turno, con prueba documentada por dispositivo y escalamiento inmediato ante hallazgo de falla.',
+            'us-en': '[us-en pending]',
+          },
+          evidence: {
+            'mx-es':
+              'Prueba funcional registrada por turno y por dispositivo, hallazgo escalado en tiempo real, último mantenimiento verificable al día.',
+            'us-en': '[us-en pending]',
+          },
+        },
+        {
+          text: {
+            'mx-es':
               'Activación oportuna de la respuesta de emergencia, con tiempo de respuesta medible y cadena de decisión documentada por participante.',
             'us-en': '[us-en pending]',
           },

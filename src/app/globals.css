@@ -2142,18 +2142,22 @@ h1, h2, h3 {
 }
 
 /* Section header block (VM-450). Eyebrow + 2-line display heading +
- * frame paragraph, centered, max-width ~640px so the line breaks read
- * naturally on the navy theme. Color treatment is theme-aware. */
+ * frame paragraph, centered, max-width 640px on the heading container
+ * and 520px on the frame so line breaks read naturally. VM-450 UAT r1
+ * tightened the heading type scale (22/26/28px) off the universal H2
+ * token to keep "La pregunta es si llega antes que el auditor." on a
+ * single rendered line at >=1024px and to land the section rhythm at
+ * 44px between the frame and Zone A. Color treatment is theme-aware. */
 
 .vm-section-4-header {
   max-width: 640px;
-  margin: 0 auto 56px;
+  margin: 0 auto 36px;
   text-align: center;
 }
 
 @media (min-width: 768px) {
   .vm-section-4-header {
-    margin-bottom: 72px;
+    margin-bottom: 44px;
   }
 }
 
@@ -2167,17 +2171,24 @@ h1, h2, h3 {
 }
 
 .vm-section-4-header-heading {
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 500;
-  line-height: 1.18;
+  line-height: 1.2;
   letter-spacing: -0.01em;
-  margin: 0 0 20px;
+  text-wrap: balance;
+  margin: 0;
   color: #0A1628;
 }
 
 @media (min-width: 768px) {
   .vm-section-4-header-heading {
-    font-size: 36px;
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vm-section-4-header-heading {
+    font-size: 28px;
   }
 }
 
@@ -2190,20 +2201,15 @@ h1, h2, h3 {
 }
 
 .vm-section-4-header-frame {
-  font-size: 15px;
-  line-height: 1.55;
-  margin: 0;
-  color: rgba(10, 22, 40, 0.78);
-}
-
-@media (min-width: 768px) {
-  .vm-section-4-header-frame {
-    font-size: 16px;
-  }
+  max-width: 520px;
+  margin: 16px auto 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--color-text-body);
 }
 
 .vm-segment-section-4--theme-navy .vm-section-4-header-frame {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--color-text-on-dark-muted);
 }
 
 /* Zone A -- stat strip (Brief §6.2 Zone A). Vertical separators
@@ -2441,7 +2447,9 @@ h1, h2, h3 {
 .vm-acta {
   background: #F5F0E5;
   color: #0A1628;
-  max-width: 620px;
+  /* VM-450 UAT r1: tile widens to fill the Section 4 inner content
+   * container (1200px) instead of the prior 620px lock. */
+  width: 100%;
   margin: 0 auto;
   padding: 24px;
   border-radius: 4px;
@@ -2527,9 +2535,17 @@ h1, h2, h3 {
   list-style: none;
   margin: 0 0 20px;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+@media (min-width: 768px) {
+  .vm-acta-clauses {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 36px;
+    row-gap: 22px;
+  }
 }
 
 .vm-acta-clause {
