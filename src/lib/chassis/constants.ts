@@ -12,6 +12,27 @@ export const CONVERSION_CTA_LABELS = {
   'us-en': 'Request a meeting',
 } as const satisfies Record<Locale, string>;
 
+// Slot Map v1.6 §S5.faq step-indicator label map (VM-451). Locale-aware;
+// the FaqAccordion primitive reads FAQ_STEP_LABELS[step][locale] to
+// derive the PASO N · LABEL strip rendered left of each `withStep`
+// FaqItem. Step 7 (`SURFAR`) is provisional pending VM-388 cross-segment
+// label review. us-en values are placeholder until segment fixtures are
+// authored for the second locale.
+export const FAQ_STEP_LABELS: Record<
+  1 | 2 | 3 | 4 | 5 | 6 | 7 | 8,
+  Record<Locale, string>
+> = {
+  1: { 'mx-es': 'DESPLEGAR', 'us-en': '[us-en pending]' },
+  2: { 'mx-es': 'DETECTAR', 'us-en': '[us-en pending]' },
+  3: { 'mx-es': 'CONFIRMAR', 'us-en': '[us-en pending]' },
+  4: { 'mx-es': 'COORDINAR', 'us-en': '[us-en pending]' },
+  5: { 'mx-es': 'RESPONDER', 'us-en': '[us-en pending]' },
+  6: { 'mx-es': 'DOCUMENTAR', 'us-en': '[us-en pending]' },
+  // PROVISIONAL VM-388: cross-segment label review pending
+  7: { 'mx-es': 'SURFAR', 'us-en': '[us-en pending]' },
+  8: { 'mx-es': 'ESCALAR', 'us-en': '[us-en pending]' },
+} as const;
+
 // Slot Map v1.1 §9.2 Sticky.render.start / Sticky.render.end
 export const STICKY_RENDER_TRIGGERS = {
   start: 'section2.top',

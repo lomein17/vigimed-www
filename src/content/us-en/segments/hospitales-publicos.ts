@@ -130,11 +130,24 @@ export const hospitalesPublicosFillUsEn: ChassisFill = {
   },
 
   section5: {
-    faqEyebrow: p('[FAQ eyebrow pending]'),
+    faqCount: 3,
+    faqDefaultOpen: 'none',
     faqItems: [
-      { question: p('[question 1 pending]'), answer: p('[answer 1 pending]') },
-      { question: p('[question 2 pending]'), answer: p('[answer 2 pending]') },
-      { question: p('[question 3 pending]'), answer: p('[answer 3 pending]') },
+      {
+        kind: 'basic',
+        question: p('[question 1 pending]'),
+        answer: p('[answer 1 pending]'),
+      },
+      {
+        kind: 'basic',
+        question: p('[question 2 pending]'),
+        answer: p('[answer 2 pending]'),
+      },
+      {
+        kind: 'basic',
+        question: p('[question 3 pending]'),
+        answer: p('[answer 3 pending]'),
+      },
     ],
     ctaEyebrow: p('[CTA eyebrow pending]'),
     ctaHeadingLine1: {

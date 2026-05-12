@@ -14,7 +14,6 @@ export function Section5FinalCta({
   fill: Section5Slots;
   ctaLabel: string;
 }) {
-  const faqEyebrow = fill.faqEyebrow[locale];
   const ctaEyebrow = fill.ctaEyebrow[locale];
   const headingLine1 = fill.ctaHeadingLine1[locale];
   const headingLine2 = fill.ctaHeadingLine2[locale];
@@ -28,21 +27,25 @@ export function Section5FinalCta({
       className="vm-segment-final-cta-section"
     >
       <div className="mx-auto" style={{ maxWidth: 1200 }}>
-        {/* Zone A -- FAQ accordion (Slot Map v1.1 §8.2) */}
-        <div style={{ maxWidth: 720, marginBottom: 64 }}>
-          <p
-            className="font-ui text-brand-500"
-            style={{
-              fontSize: 12,
-              fontWeight: 500,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              marginBottom: 24,
-            }}
-          >
-            {faqEyebrow}
-          </p>
-          <FaqAccordion items={fill.faqItems} locale={locale} />
+        {/* Zone A -- FAQ accordion (Slot Map v1.6 §8.2; VM-451).
+            Heading sits alone above the 3x2 grid; closing line sits
+            between the grid and Zone B. Wrapper takes the full 1200px
+            container width on desktop so the grid has room to breathe. */}
+        <div style={{ marginBottom: 64 }}>
+          {fill.faqHeading ? (
+            <h3 className="vm-faq-heading">{fill.faqHeading[locale]}</h3>
+          ) : null}
+          <FaqAccordion
+            items={fill.faqItems}
+            locale={locale}
+            defaultOpen={fill.faqDefaultOpen}
+            motionStagger={fill.faqMotionStagger ?? false}
+          />
+          {fill.faqClosingLine ? (
+            <p className="vm-faq-closing-line">
+              {fill.faqClosingLine[locale]}
+            </p>
+          ) : null}
         </div>
 
         {/* Zone B -- Final CTA (Slot Map v1.1 §8.3) */}

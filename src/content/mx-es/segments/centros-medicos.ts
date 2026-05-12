@@ -726,39 +726,129 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   // Section 5 -- Final CTA (placeholder; VM-441 fills)
   // ---------------------------------------------------------------------------
   section5: {
-    faqEyebrow: {
-      'mx-es': '[FAQ eyebrow pending]',
-      'us-en': '[FAQ eyebrow pending]',
+    faqHeading: {
+      'mx-es': 'El detalle, en seis preguntas.',
+      'us-en': '[us-en pending]',
+    },
+    faqCount: 6,
+    faqDefaultOpen: 'none',
+    faqClosingLine: {
+      'mx-es': 'Lo demás vive en la conversación.',
+      'us-en': '[us-en pending]',
     },
     faqItems: [
       {
+        kind: 'withStep',
+        step: 2,
         question: {
-          'mx-es': '[pregunta 1 pendiente]',
-          'us-en': '[question 1 pending]',
+          'mx-es':
+            '¿Qué ven exactamente las cámaras de VigiMed, y qué no ven?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'VigiMed instala cámaras dedicadas en áreas críticas: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de su institución.',
+          'us-en': '[us-en pending]',
         },
         answer: {
-          'mx-es': '[respuesta 1 pendiente]',
-          'us-en': '[answer 1 pending]',
+          'mx-es':
+            'VigiMed instala cámaras dedicadas en áreas críticas: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de su institución. La detección cubre eventos de seguridad del paciente y de calidad de la atención que ocurren dentro del campo de visión configurado, no consultas, no áreas administrativas, no espacios privados del paciente. La selección de áreas se hace con su institución durante la configuración inicial, no con un catálogo fijo.',
+          'us-en': '[us-en pending]',
         },
       },
       {
+        kind: 'withStep',
+        step: 3,
         question: {
-          'mx-es': '[pregunta 2 pendiente]',
-          'us-en': '[question 2 pending]',
+          'mx-es':
+            '¿Cómo funciona la confirmación humana? ¿Hay alguien revisando todo lo que detectan las cámaras?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución.',
+          'us-en': '[us-en pending]',
         },
         answer: {
-          'mx-es': '[respuesta 2 pendiente]',
-          'us-en': '[answer 2 pending]',
+          'mx-es':
+            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución. El CRC opera 24/7 y existe precisamente para eliminar falsos positivos: el equipo clínico recibe eventos verificados, no señales crudas. La confirmación humana es lo que convierte la detección en evidencia accionable, no un paso opcional ni un proceso automatizado.',
+          'us-en': '[us-en pending]',
         },
       },
       {
+        kind: 'withStep',
+        step: 4,
         question: {
-          'mx-es': '[pregunta 3 pendiente]',
-          'us-en': '[question 3 pending]',
+          'mx-es':
+            'Si VigiMed notifica a la persona equivocada en el momento equivocado, nuestros cirujanos no toleran un segundo más de interrupción. ¿Quién decide cómo se coordina la respuesta?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con su institución por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor.',
+          'us-en': '[us-en pending]',
         },
         answer: {
-          'mx-es': '[respuesta 3 pendiente]',
-          'us-en': '[answer 3 pending]',
+          'mx-es':
+            'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con su institución por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor. Cada coordinación queda registrada con tiempo de respuesta y persona que actuó, de manera que su institución puede ajustar la matriz cuando el patrón muestre que está mal calibrada. La coordinación no interrumpe el flujo clínico; lo documenta.',
+          'us-en': '[us-en pending]',
+        },
+      },
+      {
+        kind: 'withStep',
+        step: 1,
+        question: {
+          'mx-es':
+            'El equipo está saturado entre MAPEVE, MOCEBPASS, y el cambio de subdirección. ¿Es este el momento?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'Es el momento, justamente porque su institución está saturada.',
+          'us-en': '[us-en pending]',
+        },
+        answer: {
+          'mx-es':
+            'Es el momento, justamente porque su institución está saturada. VigiMed es un servicio gestionado: la instalación, la red, las cámaras, y la operación del Compliance Review Center los opera VigiMed, no su área de sistemas ni su equipo de calidad. La evidencia documentada empieza a producirse desde la primera semana, sin retirar a ningún equipo de sus transiciones actuales. El equipo nuevo de calidad llega a un sistema que ya está produciendo tendencia, no a uno que está empezando.',
+          'us-en': '[us-en pending]',
+        },
+      },
+      {
+        kind: 'withStep',
+        step: 6,
+        question: {
+          'mx-es':
+            '¿Qué pasa si ocurre un evento adverso grave teniendo VigiMed implementado?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'La institución llega a la conversación regulatoria con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva.',
+          'us-en': '[us-en pending]',
+        },
+        answer: {
+          'mx-es':
+            'La institución llega a la conversación regulatoria con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva. Los datos son de su institución; VigiMed los procesa bajo contrato de tratamiento, no los reutiliza, no los comparte con terceros, ni los hace disponibles a procesos jurídicos sin instrucción de su institución. Ante aseguradora, CONAMED, o consejo, la pregunta deja de ser qué ocurrió y se vuelve cómo respondió la institución.',
+          'us-en': '[us-en pending]',
+        },
+      },
+      {
+        kind: 'withStep',
+        step: 6,
+        question: {
+          'mx-es':
+            'Estamos en ciclo de re-acreditación. ¿Adoptar VigiMed nos arriesga la auditoría?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'La auditoría revisa el expediente clínico. VigiMed deposita su evidencia ahí, no en un sistema paralelo.',
+          'us-en': '[us-en pending]',
+        },
+        answer: {
+          'mx-es':
+            'La auditoría revisa el expediente clínico. VigiMed deposita su evidencia ahí, no en un sistema paralelo. Cada evento crítico queda confirmado por un humano, documentado en el formato que su institución usa, y disponible como tendencia institucional cuando el evaluador la pida. El equipo de calidad llega a la auditoría leyendo, no reconstruyendo.',
+          'us-en': '[us-en pending]',
         },
       },
     ],

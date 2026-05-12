@@ -1,8 +1,8 @@
 // Typed-slot schema for the universal segment-page chassis.
-// Authority: Slot Map v1.1 / v1.3 (slug 9fb768019127), Chassis Design
-// Brief v1.1 / v1.3 (slug 7c5e7054002b). Chassis-constant slots (CTA
-// labels, render triggers) are intentionally absent from the fill
-// interfaces and live in constants.ts.
+// Authority: Slot Map v1.6 (slug 9fb768019127), Chassis Design Brief
+// v1.6 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
+// triggers, FAQ step-indicator labels) are intentionally absent from
+// the fill interfaces and live in constants.ts.
 
 import type { Locale } from '@/lib/i18n';
 
@@ -46,11 +46,25 @@ export interface MetricCell {
 // Slot Map v1.1 §3 chip: small label rendered as chip/pill
 export type Chip = string;
 
-// Slot Map v1.1 §3 faqItem: question + answer composite
-export interface FaqItem {
-  readonly question: Paired<string>;
-  readonly answer: Paired<string>;
-}
+// Slot Map v1.6 §3 / §8.2 faqItem: discriminated union (VM-451).
+//   - kind: 'basic'    legacy minimal Q+A surface (hospitales-publicos).
+//   - kind: 'withStep' Pattern 2 inline-expand variant (centros-medicos).
+//     step indexes into FAQ_STEP_LABELS for the locale-aware `PASO N ·
+//     LABEL` strip; preview is the closed-state subhead and renders the
+//     first sentence of answer (fixture-author binding, AC-F6).
+export type FaqItem =
+  | {
+      readonly kind: 'basic';
+      readonly question: Paired<string>;
+      readonly answer: Paired<string>;
+    }
+  | {
+      readonly kind: 'withStep';
+      readonly step: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+      readonly question: Paired<string>;
+      readonly preview: Paired<string>;
+      readonly answer: Paired<string>;
+    };
 
 // Slot Map v1.1 §3 video: looping video asset bed
 export interface Video {
@@ -385,15 +399,21 @@ export interface Section4Slots {
   readonly zoneCChips: Paired<readonly Chip[]>;
 }
 
-// Slot Map v1.1 §8 -- Section 5 Final CTA (8 slots)
+// Slot Map v1.6 §8 -- Section 5 Final CTA.
 // S5.cta.pill.label is a chassis constant (D-S25-1); intentionally
 // absent. Read from CONVERSION_CTA_LABELS at render time.
+// VM-451: Zone A FAQ surface widened per Pablo overrides. S5.faq.eyebrow
+// removed; heading sits alone above the grid, closing line sits below.
+// Stagger slot ships; animation logic deferred to follow-on patch.
 export interface Section5Slots {
-  // Zone A -- FAQ accordion (Slot Map v1.1 §8.2)
-  readonly faqEyebrow: Paired<string>;
-  // 3-4 items per Slot Map v1.1 §8.2
+  // Zone A -- FAQ accordion (Slot Map v1.6 §8.2; VM-451)
+  readonly faqHeading?: Paired<string>;
+  readonly faqCount: 3 | 4 | 5 | 6;
+  readonly faqDefaultOpen: 'none' | 1 | 2 | 3 | 4 | 5 | 6;
+  readonly faqMotionStagger?: boolean;
   readonly faqItems: readonly FaqItem[];
-  // Zone B -- Final CTA (Slot Map v1.1 §8.3)
+  readonly faqClosingLine?: Paired<string>;
+  // Zone B -- Final CTA (Slot Map v1.1 §8.3, unchanged)
   readonly ctaEyebrow: Paired<string>;
   readonly ctaHeadingLine1: Paired<RichString>;
   readonly ctaHeadingLine2: Paired<RichString>;

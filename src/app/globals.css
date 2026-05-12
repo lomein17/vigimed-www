@@ -2754,18 +2754,105 @@ h1, h2, h3 {
   letter-spacing: 0.1em;
 }
 
-/* Section 5 FAQ accordion (Slot Map v1.1 §8.2). */
+/* Section 5 FAQ accordion (Slot Map v1.6 §8.2; VM-451).
+ *
+ * Two render branches share the same .vm-faq-cell shell. `withStep` adds
+ * a 3px cyan left rail, a PASO N · LABEL strip, indented question +
+ * always-visible preview, and a brand-amber chevron that rotates 90deg
+ * and shifts to brand-cyan when open. `basic` skips the rail/step/preview
+ * and renders a minimal Q + chevron, preserving legacy hospitales-publicos
+ * behavior under the new shell.
+ *
+ * Grid: single column below 1024px, 1fr 1fr at >=1024px with
+ * align-items: start so adjacent cells in the same row do not stretch
+ * to match their open sibling (independent accordions).
+ *
+ * Answer expansion uses the grid-template-rows 0fr -> 1fr pattern
+ * (250ms ease-out) which has full Edge/Chrome/Safari/Firefox support
+ * since 2024. */
 
-.vm-faq-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+.vm-faq-heading {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.18;
+  color: var(--color-text-on-dark);
+  margin: 0 0 32px 0;
+  max-width: 680px;
 }
 
-.vm-faq-item {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+@media (min-width: 1024px) {
+  .vm-faq-heading {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+}
+
+.vm-faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 32px;
+  row-gap: 0;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .vm-faq-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.vm-faq-cell {
+  position: relative;
+  padding: 24px 24px 24px 0;
+  border-top: 1px solid rgba(32, 162, 226, 0.15);
+  border-bottom: 1px solid rgba(32, 162, 226, 0.15);
+}
+
+@media (min-width: 1024px) {
+  .vm-faq-cell {
+    padding: 20px 16px 20px 0;
+  }
+}
+
+/* Collapse adjacent cell borders within a column on desktop so the
+ * row-boundary hairline reads as a single line rather than 2px. */
+@media (min-width: 1024px) {
+  .vm-faq-cell + .vm-faq-cell {
+    border-top: 0;
+  }
+}
+
+.vm-faq-rail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-brand-500);
+  opacity: 0.6;
+}
+
+.vm-faq-step {
+  position: absolute;
+  left: 12px;
+  top: 24px;
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-brand-500);
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .vm-faq-step {
+    left: 16px;
+    top: 22px;
+    font-size: 9px;
+  }
 }
 
 .vm-faq-trigger {
@@ -2774,10 +2861,10 @@ h1, h2, h3 {
   border: 0;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  padding: 18px 0;
+  padding: 0;
   text-align: left;
   cursor: pointer;
   color: var(--color-text-on-dark);
@@ -2789,43 +2876,150 @@ h1, h2, h3 {
   border-radius: 2px;
 }
 
-.vm-faq-question {
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 1.3;
+/* Indent the content block past the step rail on withStep cells. The
+ * basic branch leaves the trigger flush at the cell edge. */
+.vm-faq-cell[data-kind='withStep'] .vm-faq-content {
+  display: block;
+  padding-left: 48px;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
-@media (min-width: 768px) {
-  .vm-faq-question {
-    font-size: 18px;
+@media (min-width: 1024px) {
+  .vm-faq-cell[data-kind='withStep'] .vm-faq-content {
+    padding-left: 56px;
   }
 }
 
-.vm-faq-icon {
-  flex: 0 0 auto;
-  font-size: 22px;
-  line-height: 1;
-  color: var(--color-brand-500);
+.vm-faq-question {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-text-on-dark);
 }
 
-.vm-faq-panel {
-  padding: 0 0 18px;
+@media (min-width: 1024px) {
+  .vm-faq-question {
+    font-size: 17px;
+  }
+}
+
+.vm-faq-preview {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 8px;
+}
+
+@media (min-width: 1024px) {
+  .vm-faq-preview {
+    font-size: 14px;
+  }
+}
+
+.vm-faq-chevron {
+  position: relative;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  margin-top: 4px;
+  transform-origin: center;
+  transition: transform 200ms ease-in, opacity 200ms ease-in;
+  color: var(--color-brand-amber);
+  opacity: 0.8;
+}
+
+.vm-faq-chevron::before,
+.vm-faq-chevron::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+
+.vm-faq-chevron::before {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1.5px;
+  transform: translateY(-50%);
+}
+
+.vm-faq-chevron::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1.5px;
+  transform: translateX(-50%);
+  transition: transform 200ms ease-in;
+}
+
+.vm-faq-cell[data-open='true'] .vm-faq-chevron {
+  color: var(--color-brand-500);
+  opacity: 1;
+  transition: transform 200ms ease-out, opacity 200ms ease-out,
+    color 200ms ease-out;
+  transform: rotate(90deg);
+}
+
+/* Hide the vertical stroke when open so the chevron reads as a minus,
+ * not a plus that simply rotated to the same shape. */
+.vm-faq-cell[data-open='true'] .vm-faq-chevron::after {
+  transform: translateX(-50%) scaleY(0);
+}
+
+.vm-faq-answer-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 250ms ease-out;
+}
+
+.vm-faq-answer-wrap[data-open='true'] {
+  grid-template-rows: 1fr;
+}
+
+.vm-faq-answer-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.vm-faq-cell[data-kind='withStep'] .vm-faq-answer-inner {
+  padding-left: 48px;
+}
+
+@media (min-width: 1024px) {
+  .vm-faq-cell[data-kind='withStep'] .vm-faq-answer-inner {
+    padding-left: 56px;
+  }
 }
 
 .vm-faq-answer {
-  margin: 0;
+  margin: 14px 0 4px 0;
   font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.78);
-  max-width: 640px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-faq-answer {
-    font-size: 16px;
+    font-size: 15px;
   }
+}
+
+.vm-faq-closing-line {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 32px 0 24px 0;
+  text-align: center;
 }
 
 /* Sticky CTA (Slot Map v1.1 §9 / Brief §6.2 Sticky mechanic).

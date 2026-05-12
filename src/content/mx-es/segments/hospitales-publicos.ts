@@ -289,12 +289,11 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
   // FAQ Zone A is placeholder)
   // ---------------------------------------------------------------------------
   section5: {
-    faqEyebrow: {
-      'mx-es': 'ANTES DE SOLICITAR LA REUNIÓN',
-      'us-en': '[FAQ eyebrow pending]',
-    },
+    faqCount: 3,
+    faqDefaultOpen: 'none',
     faqItems: [
       {
+        kind: 'basic',
         question: {
           'mx-es': '[pregunta 1 pendiente]',
           'us-en': '[question 1 pending]',
@@ -305,6 +304,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         },
       },
       {
+        kind: 'basic',
         question: {
           'mx-es': '[pregunta 2 pendiente]',
           'us-en': '[question 2 pending]',
@@ -315,6 +315,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         },
       },
       {
+        kind: 'basic',
         question: {
           'mx-es': '[pregunta 3 pendiente]',
           'us-en': '[question 3 pending]',
