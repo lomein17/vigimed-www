@@ -3,15 +3,23 @@
 import { useEffect } from 'react';
 
 /**
- * VM-422 follow-on: when the user is at the very bottom of the document
- * (footer in view, no further scroll possible) and presses Space, scroll
- * smoothly back to the top. Default browser Space behavior is "scroll one
- * viewport down," which becomes a no-op once the page is scrolled to its
- * end; this component intercepts that case and loops.
+ * Layout-coupled effects for the footer:
  *
- * Bound to window keydown, not body, so it works regardless of focus
- * target. Skipped entirely when the focused element is a form input or
- * contenteditable region (typing a literal space must not trigger).
+ * 1. **Spacebar loop.** When the user is at the document bottom (footer
+ *    fully in view, no further scroll possible) and presses Space,
+ *    smoothly return to the top. Intercepts the default Space "scroll
+ *    one viewport" no-op at end-of-document.
+ *
+ * 2. **Footer height variable.** Writes the footer's measured offsetHeight
+ *    to --vm-footer-h on the root element. Consumed by chassis sections
+ *    that need to size themselves as (viewport - navbar - footer) so
+ *    section bottom meets footer top exactly. Updates on viewport resize
+ *    via ResizeObserver, which fires when the footer reflows (e.g.,
+ *    columns stacking under a breakpoint).
+ *
+ * Bound to window keydown, not body, so the loop works regardless of
+ * focus target. Skipped when the focused element is editable so typing
+ * a literal space never triggers the scroll.
  */
 export function FooterSpacebarLoop() {
   useEffect(() => {
@@ -32,8 +40,6 @@ export function FooterSpacebarLoop() {
       const distanceFromBottom =
         doc.scrollHeight - (window.scrollY + window.innerHeight);
 
-      // Within 4px of the bottom counts as "at the footer"; the threshold
-      // tolerates subpixel rounding without triggering mid-scroll.
       if (distanceFromBottom > 4) return;
 
       event.preventDefault();
@@ -42,6 +48,24 @@ export function FooterSpacebarLoop() {
 
     window.addEventListener('keydown', onKeydown);
     return () => window.removeEventListener('keydown', onKeydown);
+  }, []);
+
+  useEffect(() => {
+    const footer = document.querySelector<HTMLElement>('footer');
+    if (!footer) return;
+
+    function updateFooterHeightVar() {
+      if (!footer) return;
+      document.documentElement.style.setProperty(
+        '--vm-footer-h',
+        `${footer.offsetHeight}px`,
+      );
+    }
+
+    updateFooterHeightVar();
+    const ro = new ResizeObserver(updateFooterHeightVar);
+    ro.observe(footer);
+    return () => ro.disconnect();
   }, []);
 
   return null;

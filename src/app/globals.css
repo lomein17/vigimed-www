@@ -125,6 +125,11 @@
    * top offset (VM-422 round 2). */
   --vm-nav-h: 75px;
 
+  /* Footer measured height (VM-456 UAT r3). Updated at runtime by
+   * FooterSpacebarLoop via ResizeObserver. The 440px default is a sensible
+   * desktop approximation used for SSR / first paint before hydration. */
+  --vm-footer-h: 440px;
+
   /* Responsive spacing (§4.4), mobile baseline */
   --site-gutter: 1rem;
   --site-section: 3rem;
@@ -1233,13 +1238,13 @@ h1, h2, h3 {
 /* VM-456 D-S56-1: contracted segment-page §F variant. Off-white
  * register, 880px inner container, vertically-centered content.
  *
- * Resize rationale (VM-456 UAT r2): §F + footer share one desktop
- * viewport. Section is sized to (viewport - navbar - footer-estimate)
- * so its bottom edge meets the footer's top edge naturally. Snap
- * anchor restored so spacebar advance from §E lands at §F top with
- * the footer completing the frame. The 400px footer estimate is
- * content-driven and slightly over-allocates breathing room; native
- * scroll absorbs the ~10px variance across desktop viewport heights. */
+ * Resize rationale (VM-456 UAT r3): §F's min-height resolves to
+ * (viewport - navbar - footer) so its bottom meets the footer's top
+ * exactly. --vm-footer-h is measured at runtime by FooterSpacebarLoop
+ * and updated on resize via ResizeObserver, eliminating the hardcoded
+ * footer estimate from r2 and self-tuning to actual footer content.
+ * Snap anchor restored at >=1024px hover so spacebar from §E lands at
+ * §F top with the footer completing the frame. */
 .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
   background: #F5F3EE;
   padding-top: 96px;
@@ -1248,7 +1253,7 @@ h1, h2, h3 {
 
 @media (min-width: 1024px) {
   .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
-    min-height: calc(100svh - var(--vm-nav-h) - 400px);
+    min-height: calc(100svh - var(--vm-nav-h) - var(--vm-footer-h));
     display: flex;
     flex-direction: column;
     justify-content: center;
