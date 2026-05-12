@@ -10,12 +10,14 @@ import { useEffect } from 'react';
  *    smoothly return to the top. Intercepts the default Space "scroll
  *    one viewport" no-op at end-of-document.
  *
- * 2. **Footer height variable.** Writes the footer's measured offsetHeight
- *    to --vm-footer-h on the root element. Consumed by chassis sections
- *    that need to size themselves as (viewport - navbar - footer) so
- *    section bottom meets footer top exactly. Updates on viewport resize
- *    via ResizeObserver, which fires when the footer reflows (e.g.,
- *    columns stacking under a breakpoint).
+ * 2. **Footer height variable.** Writes the page footer's measured
+ *    offsetHeight to --vm-footer-h on the root element. Consumed by
+ *    chassis sections that need to size themselves as (viewport - navbar
+ *    - footer). Updates on viewport resize via ResizeObserver. The
+ *    selector targets `footer[data-site-footer]` specifically to avoid
+ *    matching nested semantic `<footer>` elements that exist for HTML
+ *    sectioning content (e.g., the Acta de Cumplimiento closing strip
+ *    inside Section 4 Zone B).
  *
  * Bound to window keydown, not body, so the loop works regardless of
  * focus target. Skipped when the focused element is editable so typing
@@ -51,7 +53,7 @@ export function FooterSpacebarLoop() {
   }, []);
 
   useEffect(() => {
-    const footer = document.querySelector<HTMLElement>('footer');
+    const footer = document.querySelector<HTMLElement>('footer[data-site-footer]');
     if (!footer) return;
 
     function updateFooterHeightVar() {

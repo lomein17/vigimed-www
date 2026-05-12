@@ -16,7 +16,7 @@ export function Footer({ locale }: { locale: Locale }) {
   const { columns, copyright, legalLinks } = shared.footer;
 
   return (
-    <footer className="bg-navy-900 text-text-on-dark">
+    <footer data-site-footer className="bg-navy-900 text-text-on-dark">
       <div className="brand-line" aria-hidden="true" />
       <div className="max-w-[1280px] mx-auto px-gutter pt-12 pb-6 md:pt-16 md:pb-8 font-ui">
         <div className="flex flex-col gap-8 md:flex-row md:justify-end md:gap-24">
