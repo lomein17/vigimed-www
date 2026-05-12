@@ -2509,19 +2509,19 @@ h1, h2, h3 {
 }
 
 .vm-section-4-obligation-anchor {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--color-brand-500);
   letter-spacing: 0.04em;
 }
 
 .vm-section-4-obligation-label {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.4;
   color: #0A1628;
 }
 
 .vm-section-4-obligation-frequency {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -2587,14 +2587,14 @@ h1, h2, h3 {
 }
 
 .vm-acta-header-title {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .vm-acta-header-folio {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.04em;
   text-align: right;
 }
@@ -2620,24 +2620,24 @@ h1, h2, h3 {
 }
 
 .vm-acta-meta-eyebrow {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.16em;
   color: rgba(10, 22, 40, 0.65);
 }
 
 .vm-acta-meta-value {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.4;
 }
 
 .vm-acta-meta-marco {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.02em;
 }
 
 .vm-acta-clauses-eyebrow {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.16em;
   color: rgba(10, 22, 40, 0.65);
@@ -2670,7 +2670,7 @@ h1, h2, h3 {
 }
 
 .vm-acta-clause-text {
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.5;
   margin: 0;
 }
@@ -2693,7 +2693,7 @@ h1, h2, h3 {
   display: inline-block;
   background: #0891A8;
   color: #F5F0E5;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.06em;
   padding: 2px 6px;
@@ -2703,7 +2703,7 @@ h1, h2, h3 {
 }
 
 .vm-acta-evidence-text {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
   color: #0891A8;
   margin: 0;
@@ -2720,7 +2720,7 @@ h1, h2, h3 {
 }
 
 .vm-acta-closing-line {
-  font-size: 9.5px;
+  font-size: 10.5px;
   font-weight: 500;
   letter-spacing: 0.12em;
   line-height: 1.45;
@@ -2745,7 +2745,7 @@ h1, h2, h3 {
 
 .vm-acta-seal-line {
   display: block;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.1em;
 }
