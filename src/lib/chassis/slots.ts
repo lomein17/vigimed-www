@@ -1,6 +1,6 @@
 // Typed-slot schema for the universal segment-page chassis.
-// Authority: Slot Map v1.9 (slug 9fb768019127), Chassis Design Brief
-// v1.8 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
+// Authority: Slot Map v1.10 (slug 9fb768019127), Chassis Design Brief
+// v1.10 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
 // triggers, FAQ step-indicator labels) are intentionally absent from
 // the fill interfaces and live in constants.ts.
 
@@ -162,37 +162,23 @@ export interface ChainAnchor {
 // Section slot interfaces
 // ---------------------------------------------------------------------------
 
-// Slot Map v1.1 §4.2 S1.cta.secondary.target
-export type SecondaryCtaTarget =
-  | 'section3.tab.default'
-  | 'section4.zoneB'
-  | 'none';
-
-// Slot Map v1.1 §4 -- Section 1 Hero (12 slots)
-// S1.cta.primary.label is a chassis constant (D-S25-1); intentionally
-// absent. Read from CONVERSION_CTA_LABELS at render time.
+// Slot Map v1.10 §4 -- Section 1 Hero (3 slots).
+// VM-457 D-S57-1 Palantir two-column composition: page-title (left ~60%),
+// claim (right ~40%), asset bed full-bleed below. The Slot Map v1.9 §A
+// overlay -- contextBar, eyebrow, h1Line1, h1Line2, subhead,
+// ctaSecondaryLabel, ctaSecondaryTarget, metrics -- is deprecated.
+// Centros §A H1 + subhead migrated verbatim to §B (S2.heading +
+// S2.framing) under D-S57-4. S1.cta.primary.label is a chassis constant
+// (D-S25-1); intentionally absent. Read from CONVERSION_CTA_LABELS at
+// render time.
 export interface HeroSlots {
-  // Slot Map v1.1 §4.2 S1.context.bar
-  readonly contextBar: Paired<string>;
-  // Slot Map v1.1 §4.2 S1.eyebrow
-  readonly eyebrow: Paired<string>;
-  // Slot Map v1.1 §4.2 S1.h1.line1
-  readonly h1Line1: Paired<RichString>;
-  // Slot Map v1.1 §4.2 S1.h1.line2
-  readonly h1Line2: Paired<RichString>;
-  // Slot Map v1.1 §4.2 S1.subhead
-  readonly subhead: Paired<RichParagraph>;
-  // Slot Map v1.1 §4.2 S1.cta.secondary.label (optional; renders when supplied)
-  readonly ctaSecondaryLabel?: Paired<string>;
-  // Slot Map v1.1 §4.2 S1.cta.secondary.target
-  readonly ctaSecondaryTarget: LocaleAgnostic<SecondaryCtaTarget>;
-  // Slot Map v1.1 §4.2 S1.metric.1, S1.metric.2, S1.metric.3
-  readonly metrics: readonly [
-    Paired<MetricCell>,
-    Paired<MetricCell>,
-    Paired<MetricCell>,
-  ];
-  // Slot Map v1.1 §4.2 S1.video.bed
+  // Slot Map v1.10 §4.2 S1.page.title -- left column, ~60% desktop.
+  readonly pageTitle: Paired<string>;
+  // Slot Map v1.10 §4.2 S1.claim -- right column, ~40% desktop. Body
+  // prose with inline emphasis spans.
+  readonly claim: Paired<RichParagraph>;
+  // Slot Map v1.10 §4.2 S1.video.bed -- preserved slot, render position
+  // changed from full-bleed-behind to full-bleed-below the title-claim row.
   readonly video: LocaleAgnostic<Video>;
 }
 
@@ -218,17 +204,25 @@ export interface PersonaUcSet {
   readonly cards: readonly UcCard[];
 }
 
-// Slot Map v1.1 §5 -- Section 2 Operational Reality.
+// Slot Map v1.10 §5 -- Section 2 Operational Reality.
 // Two variants, discriminated by the presence of `ucByPersona`:
 //   - Section2FlatUcSlots: legacy flat-UC strip (eyebrow/heading +
 //     numbered pressures + ucEyebrow/ucHeading + ucCards).
 //   - Section2PersonaMatrixSlots: VM-447 D-S52-2 persona x domain
 //     matrix; pressures optional (drops the pressure block when absent
 //     or empty), no ucEyebrow/ucHeading, supplement line below the grid.
+//
+// VM-457 D-S57-4: `heading` semantic widened to absorb the migrated
+// §A H1 (Centros: `Un incidente, una decisión que su institución toma
+// una vez.`). New optional `framing: Paired<RichParagraph>` slot
+// renders between heading and the pressure/matrix block, carrying the
+// migrated §A subhead with inline emphasis spans. Both branches accept
+// it; segments that do not author framing render §B unchanged.
 
 export interface Section2FlatUcSlots {
   readonly eyebrow: Paired<string>;
   readonly heading: Paired<string>;
+  readonly framing?: Paired<RichParagraph>;
   readonly pressures: readonly Paired<string>[];
   readonly ucEyebrow: Paired<string>;
   readonly ucHeading: Paired<string>;
@@ -238,6 +232,7 @@ export interface Section2FlatUcSlots {
 export interface Section2PersonaMatrixSlots {
   readonly eyebrow: Paired<string>;
   readonly heading: Paired<string>;
+  readonly framing?: Paired<RichParagraph>;
   readonly pressures?: readonly Paired<string>[];
   readonly ucByPersona: Readonly<Record<PersonaKey, PersonaUcSet>>;
   readonly defaultPersona: PersonaKey;

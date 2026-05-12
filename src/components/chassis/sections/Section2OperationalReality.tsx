@@ -10,6 +10,7 @@
 import type { Locale } from '@/lib/i18n';
 import type { Section2Slots } from '@/lib/chassis/slots';
 import { Section2PersonaMatrix } from './Section2PersonaMatrix';
+import { RichText } from '../primitives/RichText';
 
 export function Section2OperationalReality({
   locale,
@@ -59,6 +60,26 @@ export function Section2OperationalReality({
             {fill.heading[locale]}
           </h2>
         </div>
+
+        {/* VM-457 D-S57-4: optional framing paragraph below the section
+            heading. Carries the migrated §A subhead when authored;
+            `whiteSpace: 'pre-line'` honors literal `\n` characters in
+            segment text as hard breaks. */}
+        {fill.framing ? (
+          <div style={{ maxWidth: 820, marginBottom: 48 }}>
+            <p
+              className="font-body"
+              style={{
+                color: '#0A1628',
+                lineHeight: 1.5,
+                fontSize: '1.1875rem',
+                whiteSpace: 'pre-line',
+              }}
+            >
+              <RichText segments={fill.framing[locale]} />
+            </p>
+          </div>
+        ) : null}
 
         {/* Numbered pressure grid (flat-UC always, persona-matrix only
             when fixture supplies non-empty pressures) */}

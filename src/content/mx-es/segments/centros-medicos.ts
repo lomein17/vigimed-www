@@ -20,60 +20,27 @@
 // General).
 
 import type { ChassisFill } from '@/lib/chassis/slots';
-import { EM_DASH_GLYPH } from '@/lib/chassis/constants';
 
 export const centrosMedicosFillMxEs: ChassisFill = {
   // ---------------------------------------------------------------------------
-  // Section 1 -- Hero (VM-441 D-S51-2 locked mx-es content, 2026-05-07)
+  // Section 1 -- Hero (VM-457 Palantir two-column restructure, 2026-05-12).
+  // 3-slot composition: pageTitle (left ~60%) + claim (right ~40%) +
+  // asset bed below. Migrated §A H1 and subhead moved to §2 per
+  // D-S57-4 (see section2.heading and section2.framing below).
   // ---------------------------------------------------------------------------
   hero: {
-    contextBar: {
-      'mx-es':
-        'Hospitales privados de alta especialidad · Tercer nivel · Un solo gobierno',
+    pageTitle: {
+      'mx-es': 'VigiMed para Centros Médicos',
       'us-en': '[us-en pending]',
     },
-    eyebrow: {
-      'mx-es': 'Centros Médicos',
-      'us-en': '[us-en pending]',
-    },
-    h1Line1: {
-      'mx-es': [{ text: 'Un incidente, una decisión' }],
-      'us-en': [{ text: '[us-en pending]' }],
-    },
-    h1Line2: {
-      'mx-es': [
-        { text: 'que su institución toma ' },
-        { text: 'una vez.', emphasis: 'brand-cyan' },
-      ],
-      'us-en': [{ text: '[us-en pending]' }],
-    },
-    subhead: {
+    claim: {
       'mx-es': [
         {
-          text: 'Detección continua, confirmación humana, y análisis de\ncada evento crítico en sus áreas de mayor riesgo.\n',
-        },
-        {
-          text: 'Inteligencia operativa requerida para mejorar, no para vigilar.',
-          emphasis: 'bold-amber',
+          text: 'La inteligencia que su institución ya produce, sostenida en cada turno, en cada área crítica, sin omisión.',
         },
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },
-    ctaSecondaryTarget: 'none',
-    metrics: [
-      {
-        'mx-es': { value: EM_DASH_GLYPH, label: 'Eventos detectados' },
-        'us-en': { value: EM_DASH_GLYPH, label: '[us-en pending]' },
-      },
-      {
-        'mx-es': { value: EM_DASH_GLYPH, label: 'Patrones documentados' },
-        'us-en': { value: EM_DASH_GLYPH, label: '[us-en pending]' },
-      },
-      {
-        'mx-es': { value: EM_DASH_GLYPH, label: 'Criterio institucional' },
-        'us-en': { value: EM_DASH_GLYPH, label: '[us-en pending]' },
-      },
-    ],
     video: { desktop: '', mobile: '', poster: '' },
   },
 
@@ -86,10 +53,25 @@ export const centrosMedicosFillMxEs: ChassisFill = {
       'mx-es': 'LA REALIDAD OPERATIVA',
       'us-en': '[us-en pending]',
     },
+    // VM-457 D-S57-4: heading absorbs the migrated §A H1 verbatim.
     heading: {
-      'mx-es':
-        'Cuatro responsabilidades.\nUna solución que coordina la respuesta.',
+      'mx-es': 'Un incidente, una decisión que su institución toma una vez.',
       'us-en': '[us-en pending]',
+    },
+    // VM-457 D-S57-4: framing carries the migrated §A subhead. The `\n`
+    // literals are preserved verbatim; Section2OperationalReality.tsx
+    // applies `whiteSpace: 'pre-line'` so they render as hard breaks.
+    framing: {
+      'mx-es': [
+        {
+          text: 'Detección continua, confirmación humana, y análisis de\ncada evento crítico en sus áreas de mayor riesgo.\n',
+        },
+        {
+          text: 'Inteligencia operativa requerida para mejorar, no para vigilar.',
+          emphasis: 'bold-amber',
+        },
+      ],
+      'us-en': [{ text: '[us-en pending]' }],
     },
     pressures: [],
     ucByPersona: {

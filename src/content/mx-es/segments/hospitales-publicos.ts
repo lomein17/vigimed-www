@@ -20,67 +20,20 @@ import { EM_DASH_GLYPH } from '@/lib/chassis/constants';
 
 export const hospitalesPublicosFillMxEs: ChassisFill = {
   // ---------------------------------------------------------------------------
-  // Section 1 -- Hero (VM-403 locked mx-es content)
+  // Section 1 -- Hero (VM-457 Palantir two-column restructure, 2026-05-12).
+  // Conformance fixture: structural placeholders until HP authoring lands.
+  // The prior VM-403 locked H1/subhead are not surfaced here; their
+  // rehousing under §B is owned by a future segment-content ticket.
   // ---------------------------------------------------------------------------
   hero: {
-    contextBar: {
-      'mx-es':
-        'Hospitales públicos federales · Institutos Nacionales · UMAEs',
+    pageTitle: {
+      'mx-es': 'VigiMed para Hospitales Públicos',
       'us-en': '[us-en pending]',
     },
-    eyebrow: {
-      'mx-es': 'Atención de calidad. En el momento.',
-      'us-en': '[us-en pending]',
-    },
-    h1Line1: {
-      'mx-es': [
-        {
-          text: 'El Servicio Universal de Salud nombra la seguridad del paciente como criterio operativo.',
-        },
-      ],
+    claim: {
+      'mx-es': [{ text: '[claim pending hospitales-publicos authoring]' }],
       'us-en': [{ text: '[us-en pending]' }],
     },
-    h1Line2: {
-      'mx-es': [
-        { text: 'Coordinamos la respuesta', emphasis: 'brand-cyan' },
-        { text: ' en el momento.' },
-      ],
-      'us-en': [{ text: '[us-en pending]' }],
-    },
-    subhead: {
-      'mx-es': [
-        {
-          text: 'Servicio gestionado de respuesta a eventos críticos para hospitales del IMSS, ISSSTE, IMSS-Bienestar e Institutos Nacionales. ',
-        },
-        {
-          text: 'Detectamos cada evento en el momento',
-          emphasis: 'bold-amber',
-        },
-        {
-          text: ', lo confirmamos con un analista entrenado y coordinamos la respuesta institucional. Cada paso queda en constancia contemporánea ante SiNaCEAM y CONAMED.',
-        },
-      ],
-      'us-en': [{ text: '[us-en pending]' }],
-    },
-    ctaSecondaryLabel: {
-      'mx-es': 'Conocer el modelo operativo',
-      'us-en': '[us-en pending]',
-    },
-    ctaSecondaryTarget: 'section4.zoneB',
-    metrics: [
-      {
-        'mx-es': { value: '24/7', label: 'Centro de Revisión' },
-        'us-en': { value: '24/7', label: '[us-en pending]' },
-      },
-      {
-        'mx-es': { value: '17', label: 'Casos de uso' },
-        'us-en': { value: '17', label: '[us-en pending]' },
-      },
-      {
-        'mx-es': { value: '0', label: 'Integración requerida' },
-        'us-en': { value: '0', label: '[us-en pending]' },
-      },
-    ],
     video: { desktop: '', mobile: '', poster: '' },
   },
 

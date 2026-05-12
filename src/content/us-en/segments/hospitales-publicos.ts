@@ -14,36 +14,19 @@ const p = (text: string) =>
   ({ 'mx-es': text, 'us-en': text }) as const;
 
 export const hospitalesPublicosFillUsEn: ChassisFill = {
+  // VM-457: conformance fixture for the chassis-preview dev route under
+  // /us-en. The production HP page returns notFound() under us-en per
+  // Site Architecture parity; this file exists only so the preview
+  // route can render the same shape under both locales.
   hero: {
-    contextBar: p('[context bar pending]'),
-    eyebrow: p('[eyebrow pending]'),
-    h1Line1: {
-      'mx-es': [{ text: '[H1 line 1 pending]' }],
-      'us-en': [{ text: '[H1 line 1 pending]' }],
+    pageTitle: {
+      'mx-es': 'VigiMed para Hospitales Públicos',
+      'us-en': 'VigiMed for Public Hospitals',
     },
-    h1Line2: {
-      'mx-es': [{ text: '[H1 line 2 pending]' }],
-      'us-en': [{ text: '[H1 line 2 pending]' }],
+    claim: {
+      'mx-es': [{ text: '[claim pending]' }],
+      'us-en': [{ text: '[claim pending]' }],
     },
-    subhead: {
-      'mx-es': [{ text: '[subhead pending]' }],
-      'us-en': [{ text: '[subhead pending]' }],
-    },
-    ctaSecondaryTarget: 'none',
-    metrics: [
-      {
-        'mx-es': { value: '--', label: '[metric 1]' },
-        'us-en': { value: '--', label: '[metric 1]' },
-      },
-      {
-        'mx-es': { value: '--', label: '[metric 2]' },
-        'us-en': { value: '--', label: '[metric 2]' },
-      },
-      {
-        'mx-es': { value: '--', label: '[metric 3]' },
-        'us-en': { value: '--', label: '[metric 3]' },
-      },
-    ],
     video: { desktop: '', mobile: '', poster: '' },
   },
 

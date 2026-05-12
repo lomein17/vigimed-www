@@ -33,6 +33,7 @@ const config = [
       'tsconfig.tsbuildinfo',
       '.preview/**',
       '.vercel/**',
+      '.cct-artifacts/**',
     ],
   },
   ...nextVitals,

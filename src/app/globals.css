@@ -1211,6 +1211,70 @@ h1, h2, h3 {
   padding-bottom: var(--site-section);
 }
 
+/* VM-457 Palantir two-column hero composition. Title-claim row stacks
+ * below 1024px, runs as a row at >=1024px with the page-title at ~60%
+ * and the claim at ~40%. The asset bed sits below the row, full-bleed
+ * horizontally, at 16:6 desktop / 16:9 mobile. The chassis-wide
+ * min-height rule (line ~1104) keeps the whole composition centered in
+ * one viewport envelope. */
+
+.vm-segment-hero-title-claim-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-hero-title-claim-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 48px;
+  }
+}
+
+.vm-segment-hero-title-col {
+  width: 100%;
+}
+
+.vm-segment-hero-claim-col {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-hero-title-col {
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+
+  .vm-segment-hero-claim-col {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+}
+
+.vm-segment-hero-asset-bed {
+  position: relative;
+  width: 100%;
+  margin-top: 48px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-hero-asset-bed {
+    margin-top: 64px;
+    aspect-ratio: 16 / 6;
+  }
+}
+
 /* §E FAQ section (VM-451 UAT r1). Sibling to .vm-segment-final-cta-section
  * so spacebar/keyboard scroll anchors the FAQ to viewport top with full-
  * screen min-height, parallel to every other chassis section. Same navy
