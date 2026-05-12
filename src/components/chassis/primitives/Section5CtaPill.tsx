@@ -35,18 +35,10 @@ export function Section5CtaPill(props: Section5CtaPillProps) {
     return (
       <Link
         href={`/${props.locale}/#final-cta`}
-        className="inline-flex items-center justify-center font-ui"
-        style={{
-          backgroundColor: '#20A2E2',
-          color: '#0A1628',
-          fontSize: 14,
-          fontWeight: 700,
-          letterSpacing: '0.02em',
-          padding: '16px 32px',
-          borderRadius: 8,
-        }}
+        className="relative inline-flex items-center justify-center h-[38px] px-[18px] rounded-md border border-brand-500 bg-brand-500 hover:bg-brand-400 hover:border-brand-400 box-border font-ui text-button text-text-on-dark transition-colors"
       >
-        {props.label}
+        <span aria-hidden="true" className="absolute inset-x-0 -inset-y-[3px]" />
+        <span className="relative">{props.label}</span>
       </Link>
     );
   }

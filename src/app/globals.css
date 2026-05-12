@@ -1230,20 +1230,30 @@ h1, h2, h3 {
   padding-bottom: var(--site-section);
 }
 
-/* VM-456 D-S56-1: contracted segment-page §F variant. Off-white
- * register, navy text, 880px inner container. Inherits min-height +
- * flex column + justify-content: center from the shared chassis-fill
- * rule so the contracted content vertical-centers in the viewport. */
-.vm-segment-final-cta-section--segment {
+/* VM-456 corrective: contracted segment-page §F is content-driven height.
+ * Deliberately exits the chassis-fill trinity (chassis-fill + content
+ * height + snap-anchor are mutually exclusive per VM-453). Native scroll
+ * from §E passes through §F to footer; footer renders together with §F
+ * in one viewport on desktop. */
+.vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
+  min-height: auto;
+  display: block;
   background: #F5F3EE;
   padding-top: 96px;
   padding-bottom: 96px;
 }
 
 @media (max-width: 768px) {
-  .vm-segment-final-cta-section--segment {
+  .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
     padding-top: 72px;
     padding-bottom: 72px;
+  }
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+  .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
   }
 }
 

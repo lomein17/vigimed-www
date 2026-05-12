@@ -8,7 +8,7 @@ import type { Locale } from '@/lib/i18n';
 // Hero primary CTA, Sticky CTA pill, and Final CTA pill all render this
 // same literal label per locale. Per-segment override is not permitted.
 export const CONVERSION_CTA_LABELS = {
-  'mx-es': 'Solicitar una reunión',
+  'mx-es': 'Solicite una reunión',
   'us-en': 'Request a meeting',
 } as const satisfies Record<Locale, string>;
 
