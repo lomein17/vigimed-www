@@ -1,6 +1,6 @@
 // Typed-slot schema for the universal segment-page chassis.
-// Authority: Slot Map v1.7 (slug 9fb768019127), Chassis Design Brief
-// v1.7 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
+// Authority: Slot Map v1.8 (slug 9fb768019127), Chassis Design Brief
+// v1.8 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
 // triggers, FAQ step-indicator labels) are intentionally absent from
 // the fill interfaces and live in constants.ts.
 
@@ -399,29 +399,14 @@ export interface Section4Slots {
   readonly zoneCChips: Paired<readonly Chip[]>;
 }
 
-// Slot Map v1.7 §8 -- Section 5 Final CTA.
+// Slot Map v1.8 §8 -- Section 5 Final CTA.
 // S5.cta.pill.label is a chassis constant (D-S25-1); intentionally
 // absent. Read from CONVERSION_CTA_LABELS at render time.
 // VM-451: Zone A FAQ surface widened per Pablo overrides. S5.faq.eyebrow
 // removed; heading sits alone above the grid, closing line sits below.
 // Stagger slot ships; animation logic deferred to follow-on patch.
-// VM-453 (Slot Map v1.7): chassisFillBehavior discriminator added to
-// opt §E (and future naturally-short or naturally-overflow surfaces)
-// out of the shared chassis-fill flex-center invariant. Paired with
-// the `.vm-segment-natural-height` CSS modifier in globals.css.
 export interface Section5Slots {
-  // Slot Map v1.7 §8.2 S5.chassis.fillBehavior (VM-453 D-S62-2).
-  // Chassis-level opt-out from the shared `justify-content: center`
-  // invariant on the chassis fill rule. Apply 'naturalHeight' when the
-  // authored §E content fills or exceeds the chassis content-box (e.g.,
-  // the 6-card withStep fixture on Centros Médicos MX); the section
-  // anchors to its top instead of absorbing flex slack above the
-  // heading. 'centered' (the default when the slot is omitted) preserves
-  // the legacy chassis behavior for naturally-short surfaces such as
-  // hospitales-publicos basic-variant §E. See globals.css
-  // `.vm-segment-natural-height` modifier.
-  readonly chassisFillBehavior?: 'centered' | 'naturalHeight';
-  // Zone A -- FAQ accordion (Slot Map v1.7 §8.2; VM-451)
+  // Zone A -- FAQ accordion (Slot Map v1.8 §8.2; VM-451)
   readonly faqHeading?: Paired<string>;
   readonly faqCount: 3 | 4 | 5 | 6;
   readonly faqDefaultOpen: 'none' | 1 | 2 | 3 | 4 | 5 | 6;

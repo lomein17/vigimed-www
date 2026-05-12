@@ -3,15 +3,17 @@
 import { useEffect } from 'react';
 
 /**
- * VM-453 follow-up. Bridges Space and PageDown advance from §D to §E
- * when §D's natural height exceeds one spacebar advance (~vh - 40px),
- * which causes the default scroll to undershoot §E's snap point.
+ * VM-453 AC6. Bridges Space and PageDown advance from §D to §E when
+ * §D's natural height exceeds one spacebar advance (~vh - 40px), which
+ * causes the default scroll to undershoot §E's snap point.
  * `scroll-snap-stop: always` only engages on overshoot, so the undershoot
  * case must be handled imperatively.
  *
- * Scoped to `.vm-segment-natural-height` so it activates only on segments
- * that opt into the chassis natural-height variant. Hospitales-publicos
- * basic-variant §E does not carry the class and retains native snap.
+ * Mounted on every segment-page §E. The `rect.top > 80` and
+ * `<= vh * 1.2` guards yield to native scroll when §E is not the next
+ * approaching section, so the bridge is a no-op for hospitales-publicos
+ * basic-variant §E and any future segment whose §E reaches its snap
+ * point under native behavior.
  *
  * Yields to native scroll in every case except a deliberate Space or
  * PageDown advance toward an approaching §E:
@@ -25,7 +27,7 @@ import { useEffect } from 'react';
 export function Section5SnapBridge() {
   useEffect(() => {
     const target = document.querySelector<HTMLElement>(
-      '.vm-segment-natural-height',
+      '.vm-segment-faq-section',
     );
     if (!target) return;
 

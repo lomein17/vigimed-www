@@ -726,13 +726,6 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   // Section 5 -- Final CTA (placeholder; VM-441 fills)
   // ---------------------------------------------------------------------------
   section5: {
-    // VM-453 D-S62-2: opt §E out of the shared chassis-fill flex-center
-    // invariant. The 6-card withStep fixture below naturally fills (and
-    // overflows) the chassis content-box at 1440x900, so anchor the
-    // heading at section-top + padding-top via `.vm-segment-natural-height`
-    // rather than absorbing flex slack. hospitales-publicos basic-variant
-    // §E keeps this slot omitted, falling back to 'centered'.
-    chassisFillBehavior: 'naturalHeight',
     faqHeading: {
       'mx-es': 'El detalle, en seis preguntas.',
       'us-en': '[us-en pending]',
