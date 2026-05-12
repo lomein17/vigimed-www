@@ -2814,10 +2814,13 @@ h1, h2, h3 {
   max-width: 680px;
 }
 
+/* VM-452: bump heading weight and bottom rhythm at >=1024 so the heading
+ * earns its position above a 6-item grid and the chassis fills more
+ * honestly without padded-for-padding feel. */
 @media (min-width: 1024px) {
   .vm-faq-heading {
-    font-size: 28px;
-    margin-bottom: 40px;
+    font-size: 32px;
+    margin-bottom: 56px;
   }
 }
 
@@ -2858,6 +2861,16 @@ h1, h2, h3 {
 @media (min-width: 1024px) {
   .vm-faq-cell {
     padding: 20px 16px 20px 0;
+  }
+}
+
+/* VM-452: withStep cells carry three rows (step / question / preview).
+ * 20px vertical padding pinches them against the hairline; 28px reads as
+ * rhythm. Scoped via the data-kind attribute so basic-variant cells on
+ * hospitales-publicos are not affected. */
+@media (min-width: 1024px) {
+  .vm-faq-cell[data-kind='withStep'] {
+    padding: 28px 16px 28px 0;
   }
 }
 
@@ -2960,6 +2973,8 @@ h1, h2, h3 {
   }
 }
 
+/* VM-452: 4px lift on the preview so it breathes off the question line
+ * instead of crowding it. Rhythmic, not padded. */
 .vm-faq-preview {
   display: block;
   font-family: var(--font-body);
@@ -2967,7 +2982,7 @@ h1, h2, h3 {
   font-weight: 400;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.7);
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 /* Chevron: inline SVG (UAT r1; replaces the ::before/::after pseudo-
@@ -3032,13 +3047,17 @@ h1, h2, h3 {
   }
 }
 
+/* VM-452: closing line reads as sentence rather than label, with more
+ * breathing room above earning the typographic notch. 1px size bump and
+ * a 24px lift on the top margin so the line lands at a natural visual
+ * resting point below the grid. */
 .vm-faq-closing-line {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.7);
-  margin: 32px 0 24px 0;
+  margin: 56px 0 32px 0;
   text-align: center;
 }
 
