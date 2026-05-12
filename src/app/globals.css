@@ -1230,30 +1230,49 @@ h1, h2, h3 {
   padding-bottom: var(--site-section);
 }
 
-/* VM-456 corrective: contracted segment-page §F is content-driven height.
- * Deliberately exits the chassis-fill trinity (chassis-fill + content
- * height + snap-anchor are mutually exclusive per VM-453). Native scroll
- * from §E passes through §F to footer; footer renders together with §F
- * in one viewport on desktop. */
+/* VM-456 D-S56-1: contracted segment-page §F variant. Off-white
+ * register, 880px inner container, vertically-centered content.
+ *
+ * Resize rationale (VM-456 UAT r2): §F + footer share one desktop
+ * viewport. Section is sized to (viewport - navbar - footer-estimate)
+ * so its bottom edge meets the footer's top edge naturally. Snap
+ * anchor restored so spacebar advance from §E lands at §F top with
+ * the footer completing the frame. The 400px footer estimate is
+ * content-driven and slightly over-allocates breathing room; native
+ * scroll absorbs the ~10px variance across desktop viewport heights. */
 .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
-  min-height: auto;
-  display: block;
   background: #F5F3EE;
   padding-top: 96px;
   padding-bottom: 96px;
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
+    min-height: calc(100svh - var(--vm-nav-h) - 400px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+  .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+@media (max-width: 1023px) {
+  .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
+    min-height: auto;
+    display: block;
+  }
 }
 
 @media (max-width: 768px) {
   .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
     padding-top: 72px;
     padding-bottom: 72px;
-  }
-}
-
-@media (min-width: 1024px) and (hover: hover) {
-  .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
-    scroll-snap-align: none;
-    scroll-snap-stop: normal;
   }
 }
 
