@@ -2142,15 +2142,14 @@ h1, h2, h3 {
 }
 
 /* Section header block (VM-450). Eyebrow + 2-line display heading +
- * frame paragraph, centered, max-width 640px on the heading container
- * and 520px on the frame so line breaks read naturally. VM-450 UAT r1
- * tightened the heading type scale (22/26/28px) off the universal H2
- * token to keep "La pregunta es si llega antes que el auditor." on a
- * single rendered line at >=1024px and to land the section rhythm at
- * 44px between the frame and Zone A. Color treatment is theme-aware. */
+ * frame paragraph, centered. VM-450 UAT r3: the 640px max-width that
+ * used to live on .vm-section-4-header itself moved down to a new
+ * .vm-section-4-header-heading-wrap so the frame paragraph escapes
+ * the constraint and spans the full Section 4 inner content
+ * container. Heading type scale (22/26/28px) and 36/44 bottom margin
+ * between the header and Zone A are unchanged from r1. */
 
 .vm-section-4-header {
-  max-width: 640px;
   margin: 0 auto 36px;
   text-align: center;
 }
@@ -2167,7 +2166,14 @@ h1, h2, h3 {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-brand-500);
+  /* margin-top: 0 explicit so the variant section's padding-top is
+   * the only contributor to the gap above the eyebrow. */
   margin: 0 0 16px;
+}
+
+.vm-section-4-header-heading-wrap {
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 .vm-section-4-header-heading {
@@ -2395,37 +2401,45 @@ h1, h2, h3 {
  * the full var(--site-section) rhythm. */
 
 .vm-segment-section-4--variant-regulatory-document {
-  padding-top: 32px;
-  padding-bottom: 32px;
+  /* VM-450 UAT r3: symmetric top + bottom padding so the whitespace
+   * above the eyebrow matches the whitespace below the chip rail. */
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 @media (min-width: 768px) {
+  .vm-segment-section-4--variant-regulatory-document {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
   .vm-segment-section-4--variant-regulatory-document {
     padding-top: 40px;
     padding-bottom: 40px;
   }
 }
 
-@media (min-width: 1024px) {
-  .vm-segment-section-4--variant-regulatory-document {
-    padding-top: 56px;
-    padding-bottom: 56px;
-  }
-}
+/* VM-450 UAT r3: Zone A->acta gap tightens to 16/18/20 mobile/tablet/
+ * desktop. The acta tile itself carries zero top margin so this rule
+ * is the only contributor to the gap. The acta->chip-rail rhythm
+ * stays at 36/28/20 from UAT r2 so the chip rail doesn't crowd the
+ * acta footer. */
 
 .vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-a {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 @media (min-width: 768px) {
   .vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-a {
-    margin-bottom: 28px;
+    margin-bottom: 18px;
   }
 }
 
 @media (min-width: 1024px) {
   .vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-a {
-    margin-bottom: 36px;
+    margin-bottom: 20px;
   }
 }
 

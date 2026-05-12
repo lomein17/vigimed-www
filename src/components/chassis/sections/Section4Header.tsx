@@ -19,6 +19,11 @@ export function Section4Header({
   locale: Locale;
   fill: Section4HeaderSlots;
 }) {
+  // VM-450 UAT r3: heading lives inside its own max-width: 640px
+  // wrapper so the frame paragraph can escape that constraint and
+  // span the full Section 4 inner content container (~1200px). The
+  // eyebrow stays a direct child of the header so it sits centered
+  // against the same container the frame uses.
   return (
     <header className="vm-section-4-header">
       <p
@@ -27,14 +32,16 @@ export function Section4Header({
       >
         {fill.eyebrow[locale]}
       </p>
-      <h2 className="vm-section-4-header-heading font-display">
-        <span className="vm-section-4-header-heading-line">
-          <RichText segments={fill.headingLine1[locale]} />
-        </span>
-        <span className="vm-section-4-header-heading-line">
-          <RichText segments={fill.headingLine2[locale]} />
-        </span>
-      </h2>
+      <div className="vm-section-4-header-heading-wrap">
+        <h2 className="vm-section-4-header-heading font-display">
+          <span className="vm-section-4-header-heading-line">
+            <RichText segments={fill.headingLine1[locale]} />
+          </span>
+          <span className="vm-section-4-header-heading-line">
+            <RichText segments={fill.headingLine2[locale]} />
+          </span>
+        </h2>
+      </div>
       <p className="vm-section-4-header-frame font-body">
         <RichText segments={fill.frame[locale]} />
       </p>
