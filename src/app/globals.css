@@ -2161,7 +2161,7 @@ h1, h2, h3 {
 }
 
 .vm-section-4-header-eyebrow {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -2172,12 +2172,16 @@ h1, h2, h3 {
 }
 
 .vm-section-4-header-heading-wrap {
-  max-width: 640px;
+  /* VM-450 UAT r5: widened from 640px to 720px so the +2px heading
+   * (30px at >=1024px) keeps "La pregunta es si llega antes que el
+   * auditor." on a single line. The previous 640px constraint sat
+   * under the 28px scale and is now too narrow for the bumped type. */
+  max-width: 720px;
   margin: 0 auto;
 }
 
 .vm-section-4-header-heading {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -2188,13 +2192,13 @@ h1, h2, h3 {
 
 @media (min-width: 768px) {
   .vm-section-4-header-heading {
-    font-size: 26px;
+    font-size: 28px;
   }
 }
 
 @media (min-width: 1024px) {
   .vm-section-4-header-heading {
-    font-size: 28px;
+    font-size: 30px;
   }
 }
 
@@ -2210,10 +2214,10 @@ h1, h2, h3 {
   /* VM-450 UAT r2: width widens to fill the Section 4 inner content
    * container so the frame renders single-line at >=1024px alongside
    * the now-offwhite §D backdrop. Heading container above still caps
-   * at 640px so the two lines of the heading retain their balance. */
+   * at 720px so the two lines of the heading retain their balance. */
   max-width: 100%;
   margin: 16px auto 0;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.65;
   color: var(--color-text-body);
 }
