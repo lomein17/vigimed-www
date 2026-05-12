@@ -3,6 +3,7 @@ import type { Section5Slots } from '@/lib/chassis/slots';
 import { RichText } from '../primitives/RichText';
 import { Section5CtaPill } from '../primitives/Section5CtaPill';
 import { FaqAccordion } from '../primitives/FaqAccordion';
+import { Section5SnapBridge } from '../primitives/Section5SnapBridge';
 import { MeetingRequestForm } from '@/components/shared/MeetingRequestForm';
 
 export function Section5FinalCta({
@@ -32,6 +33,7 @@ export function Section5FinalCta({
 
   return (
     <>
+      {fill.chassisFillBehavior === 'naturalHeight' ? <Section5SnapBridge /> : null}
       {/* §E -- FAQ accordion (Slot Map v1.7 §8.2; VM-451 UAT r1, VM-453).
           Own snap section so spacebar scroll anchors the FAQ to the
           viewport top with full-screen min-height, parallel to every
