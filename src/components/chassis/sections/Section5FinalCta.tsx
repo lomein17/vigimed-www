@@ -21,19 +21,22 @@ export function Section5FinalCta({
   const reassurance = fill.ctaReassurance[locale];
 
   return (
-    <section
-      id="segment-final-cta"
-      aria-labelledby="segment-final-cta-heading"
-      className="vm-segment-final-cta-section"
-    >
-      <div className="mx-auto" style={{ maxWidth: 1200 }}>
-        {/* Zone A -- FAQ accordion (Slot Map v1.6 §8.2; VM-451).
-            Heading sits alone above the 3x2 grid; closing line sits
-            between the grid and Zone B. Wrapper takes the full 1200px
-            container width on desktop so the grid has room to breathe. */}
-        <div style={{ marginBottom: 64 }}>
+    <>
+      {/* §E -- FAQ accordion (Slot Map v1.6 §8.2; VM-451 UAT r1).
+          Own snap section so spacebar scroll anchors the FAQ to the
+          viewport top with full-screen min-height, parallel to every
+          other chassis section. Heading + grid + closing line live here;
+          the Final CTA pill + form live in the sibling section below. */}
+      <section
+        id="segment-faq"
+        aria-labelledby="segment-faq-heading"
+        className="vm-segment-faq-section"
+      >
+        <div className="mx-auto" style={{ maxWidth: 1200 }}>
           {fill.faqHeading ? (
-            <h3 className="vm-faq-heading">{fill.faqHeading[locale]}</h3>
+            <h3 id="segment-faq-heading" className="vm-faq-heading">
+              {fill.faqHeading[locale]}
+            </h3>
           ) : null}
           <FaqAccordion
             items={fill.faqItems}
@@ -47,69 +50,77 @@ export function Section5FinalCta({
             </p>
           ) : null}
         </div>
+      </section>
 
-        {/* Zone B -- Final CTA (Slot Map v1.1 §8.3) */}
-        <div style={{ maxWidth: 680 }}>
-          <p
-            className="font-ui text-brand-500"
-            style={{
-              fontSize: 12,
-              fontWeight: 500,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              marginBottom: 16,
-            }}
-          >
-            {ctaEyebrow}
-          </p>
+      {/* §F -- Final CTA pill + meeting-request form (Slot Map v1.1 §8.3). */}
+      <section
+        id="segment-final-cta"
+        aria-labelledby="segment-final-cta-heading"
+        className="vm-segment-final-cta-section"
+      >
+        <div className="mx-auto" style={{ maxWidth: 1200 }}>
+          <div style={{ maxWidth: 680 }}>
+            <p
+              className="font-ui text-brand-500"
+              style={{
+                fontSize: 12,
+                fontWeight: 500,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                marginBottom: 16,
+              }}
+            >
+              {ctaEyebrow}
+            </p>
 
-          <h2
-            id="segment-final-cta-heading"
-            className="font-display text-text-on-dark"
-            style={{
-              fontSize: 'var(--text-h2)',
-              letterSpacing: '-0.01em',
-              lineHeight: 1.1,
-              fontWeight: 500,
-            }}
-          >
-            <RichText segments={headingLine1} />
-            <br />
-            <RichText segments={headingLine2} />
-          </h2>
+            <h2
+              id="segment-final-cta-heading"
+              className="font-display text-text-on-dark"
+              style={{
+                fontSize: 'var(--text-h2)',
+                letterSpacing: '-0.01em',
+                lineHeight: 1.1,
+                fontWeight: 500,
+              }}
+            >
+              <RichText segments={headingLine1} />
+              <br />
+              <RichText segments={headingLine2} />
+            </h2>
 
-          <p
-            className="font-body"
-            style={{
-              color: 'rgba(255,255,255,0.78)',
-              lineHeight: 1.55,
-              fontSize: 17,
-              marginTop: 16,
-              marginBottom: 32,
-            }}
-          >
-            {frame}
-          </p>
+            <p
+              className="font-body"
+              style={{
+                color: 'rgba(255,255,255,0.78)',
+                lineHeight: 1.55,
+                fontSize: 17,
+                marginTop: 16,
+                marginBottom: 32,
+              }}
+            >
+              {frame}
+            </p>
 
-          {/* CTA pill: chassis-constant label; scrolls to the form below */}
-          <Section5CtaPill label={ctaLabel} />
+            {/* CTA pill: chassis-constant label; scrolls to the form below */}
+            <Section5CtaPill label={ctaLabel} />
 
-          {/* Reassurance microcopy */}
-          <p
-            className="font-ui text-text-on-dark-muted"
-            style={{ fontSize: 13, marginTop: 12 }}
-          >
-            {reassurance}
-          </p>
+            {/* Reassurance microcopy */}
+            <p
+              className="font-ui text-text-on-dark-muted"
+              style={{ fontSize: 13, marginTop: 12 }}
+            >
+              {reassurance}
+            </p>
 
-          {/* Meeting-request form: shared component, also mounted on the
-              Home Final CTA. Carries data-meeting-form-anchor for the
-              CTA pill above to scroll to. */}
-          <div style={{ marginTop: 40 }}>
-            <MeetingRequestForm locale={locale} />
+            {/* Meeting-request form: shared component, also mounted on the
+                Home Final CTA. Carries data-meeting-form-anchor for the
+                CTA pill above to scroll to. */}
+            <div style={{ marginTop: 40 }}>
+              <MeetingRequestForm locale={locale} />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

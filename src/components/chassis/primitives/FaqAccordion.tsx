@@ -1,15 +1,17 @@
 'use client';
 
 // FAQ accordion primitive for Section 5 Zone A.
-// Slot Map v1.6 §8.2 / Chassis Brief v1.6 §8 Zone A (VM-451).
+// Slot Map v1.6 §8.2 / Chassis Brief v1.6 §8 Zone A (VM-451; UAT r1).
 //
 // Two render branches discriminated on FaqItem.kind:
 //   - 'basic'    minimal Q + chevron + expanding answer (legacy
 //                hospitales-publicos surface).
-//   - 'withStep' Pattern 2 inline-expand. 3px cyan left rail, PASO N ·
-//                LABEL strip, indented question + always-visible preview,
-//                brand-amber chevron (cyan when open) with 90deg rotation,
-//                answer expands via grid-template-rows 0fr -> 1fr.
+//   - 'withStep' Pattern 2 inline-expand. 3px cyan left rail; PASO N ·
+//                LABEL strip rendered above the question (not absolute
+//                left of it, per UAT r1); amber question, white preview
+//                always visible; brand-amber chevron (cyan when open)
+//                with 90deg rotation; answer expands via
+//                grid-template-rows 0fr -> 1fr.
 //
 // Layout: CSS grid in .vm-faq-grid. Single column below 1024px, 1fr 1fr
 // at >=1024px with align-items: start so adjacent cells in the same row
@@ -53,6 +55,27 @@ export function FaqAccordion(props: {
   );
 }
 
+function Chevron() {
+  return (
+    <svg
+      className="vm-faq-chevron"
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      aria-hidden="true"
+    >
+      <path
+        d="M3 1 L9 6 L3 11"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function FaqAccordionItem({
   item,
   locale,
@@ -79,8 +102,10 @@ function FaqAccordionItem({
           aria-controls={panelId}
           onClick={() => setOpen((prev) => !prev)}
         >
-          <span className="vm-faq-question">{item.question[locale]}</span>
-          <span className="vm-faq-chevron" aria-hidden="true" />
+          <span className="vm-faq-content">
+            <span className="vm-faq-question">{item.question[locale]}</span>
+          </span>
+          <Chevron />
         </button>
         <div
           id={panelId}
@@ -102,9 +127,6 @@ function FaqAccordionItem({
   return (
     <div className="vm-faq-cell" data-kind="withStep" data-open={open}>
       <span className="vm-faq-rail" aria-hidden="true" />
-      <span className="vm-faq-step" aria-hidden="true">
-        {`PASO ${item.step} · ${stepLabel}`}
-      </span>
       <button
         id={triggerId}
         type="button"
@@ -114,10 +136,13 @@ function FaqAccordionItem({
         onClick={() => setOpen((prev) => !prev)}
       >
         <span className="vm-faq-content">
+          <span className="vm-faq-step" aria-hidden="true">
+            {`PASO ${item.step} · ${stepLabel}`}
+          </span>
           <span className="vm-faq-question">{item.question[locale]}</span>
           <span className="vm-faq-preview">{item.preview[locale]}</span>
         </span>
-        <span className="vm-faq-chevron" aria-hidden="true" />
+        <Chevron />
       </button>
       <div
         id={panelId}
