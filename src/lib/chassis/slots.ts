@@ -1,5 +1,5 @@
 // Typed-slot schema for the universal segment-page chassis.
-// Authority: Slot Map v1.8 (slug 9fb768019127), Chassis Design Brief
+// Authority: Slot Map v1.9 (slug 9fb768019127), Chassis Design Brief
 // v1.8 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
 // triggers, FAQ step-indicator labels) are intentionally absent from
 // the fill interfaces and live in constants.ts.
@@ -399,12 +399,19 @@ export interface Section4Slots {
   readonly zoneCChips: Paired<readonly Chip[]>;
 }
 
-// Slot Map v1.8 §8 -- Section 5 Final CTA.
+// Slot Map v1.9 §8 -- Section 5 Final CTA.
 // S5.cta.pill.label is a chassis constant (D-S25-1); intentionally
 // absent. Read from CONVERSION_CTA_LABELS at render time.
 // VM-451: Zone A FAQ surface widened per Pablo overrides. S5.faq.eyebrow
 // removed; heading sits alone above the grid, closing line sits below.
 // Stagger slot ships; animation logic deferred to follow-on patch.
+// VM-456 (D-S56-1): Zone B contracts on segment pages. Two new
+// optional slots, `heading` and `reassurance`, drive the segment-page
+// composition (heading + reassurance + pill on off-white, no form).
+// The legacy cta* slots are flipped to optional so segment fixtures
+// can drop them entirely; they remain required on the home-variant
+// render path (Section5FinalCta variant='home') for the future Home
+// migration.
 export interface Section5Slots {
   // Zone A -- FAQ accordion (Slot Map v1.8 §8.2; VM-451)
   readonly faqHeading?: Paired<string>;
@@ -413,12 +420,17 @@ export interface Section5Slots {
   readonly faqMotionStagger?: boolean;
   readonly faqItems: readonly FaqItem[];
   readonly faqClosingLine?: Paired<string>;
-  // Zone B -- Final CTA (Slot Map v1.1 §8.3, unchanged)
-  readonly ctaEyebrow: Paired<string>;
-  readonly ctaHeadingLine1: Paired<RichString>;
-  readonly ctaHeadingLine2: Paired<RichString>;
-  readonly ctaFrame: Paired<Paragraph>;
-  readonly ctaReassurance: Paired<string>;
+  // Zone B segment-page contraction (VM-456 D-S56-1). Required when
+  // Section5FinalCta variant='segment'; absent on variant='home'.
+  readonly heading?: Paired<string>;
+  readonly reassurance?: Paired<string>;
+  // Zone B legacy Final CTA slots (Slot Map v1.1 §8.3). Required when
+  // Section5FinalCta variant='home'; absent on variant='segment'.
+  readonly ctaEyebrow?: Paired<string>;
+  readonly ctaHeadingLine1?: Paired<RichString>;
+  readonly ctaHeadingLine2?: Paired<RichString>;
+  readonly ctaFrame?: Paired<Paragraph>;
+  readonly ctaReassurance?: Paired<string>;
 }
 
 // Slot Map v1.1 §9 -- Sticky CTA mechanic (5 slots)

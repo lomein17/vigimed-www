@@ -14,7 +14,6 @@ import {
 
 import type { HeaderContent, HeaderParent } from '@/content/us-en/header';
 import { hrefFor, type Locale } from '@/lib/i18n';
-import { scrollToFinalCTA } from '@/lib/scroll';
 
 interface HeaderDesktopProps {
   locale: Locale;
@@ -365,12 +364,6 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
     return () => document.removeEventListener('keydown', onSpace);
   }, [openKey]);
 
-  const handleScrollCta = useCallback(() => {
-    setOpenKey(null);
-    lastOpenedByRef.current = null;
-    scrollToFinalCTA(locale);
-  }, [locale]);
-
   const handleCardNavigate = useCallback(() => {
     setOpenKey(null);
     lastOpenedByRef.current = null;
@@ -494,9 +487,12 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
           >
             {header.utility.login}
           </a>
-          <button
-            type="button"
-            onClick={handleScrollCta}
+          {/* VM-456 D-S56-1: header CTA always routes to the Home Final
+              CTA on the active locale. Same-page scroll utility (VM-415)
+              is deleted; the pathname change closes the drawer via the
+              usePathname() effect above. */}
+          <Link
+            href={`/${locale}/#final-cta`}
             className="font-ui text-text-on-dark cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
             style={{
               fontSize: 14,
@@ -515,7 +511,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
             }}
           >
             {header.cta.demo}
-          </button>
+          </Link>
         </div>
       </div>
 

@@ -7,7 +7,6 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react';
 
 import type { HeaderContent } from '@/content/us-en/header';
 import { hrefFor, type Locale } from '@/lib/i18n';
-import { scrollToFinalCTA } from '@/lib/scroll';
 
 interface HeaderMobileProps {
   locale: Locale;
@@ -145,11 +144,6 @@ export function HeaderMobile({ locale, header, navOrder }: HeaderMobileProps) {
     return () => document.removeEventListener('keydown', onKey);
   }, [open, closeSheet]);
 
-  const handleScrollCta = useCallback(() => {
-    setOpen(false);
-    scrollToFinalCTA(locale);
-  }, [locale]);
-
   const handleLeafTap = useCallback(() => {
     setOpen(false);
   }, []);
@@ -180,9 +174,11 @@ export function HeaderMobile({ locale, header, navOrder }: HeaderMobileProps) {
       </Link>
 
       <div className="flex items-center" style={{ gap: 12 }}>
-        <button
-          type="button"
-          onClick={handleScrollCta}
+        {/* VM-456 D-S56-1: header CTA always routes to the Home Final
+            CTA on the active locale. The pathname change closes the
+            sheet via the usePathname() effect above. */}
+        <Link
+          href={`/${locale}/#final-cta`}
           className="font-ui text-text-on-dark cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
           style={{
             fontSize: 12,
@@ -194,7 +190,7 @@ export function HeaderMobile({ locale, header, navOrder }: HeaderMobileProps) {
           }}
         >
           {header.cta.demoMobile}
-        </button>
+        </Link>
         <button
           ref={triggerRef}
           type="button"

@@ -1,13 +1,56 @@
 'use client';
 
-// Section 5 CTA pill. Renders the conversion-path triplet label per
-// CONVERSION_CTA_LABELS and scrolls the user to the meeting-request
-// form anchored within Section 5 itself, then places keyboard focus
-// on the first form field. The form is the actual conversion target
-// of the pill; the pill is the visual handoff between the framing
-// copy above and the form below.
+import Link from 'next/link';
 
-export function Section5CtaPill({ label }: { label: string }) {
+import type { Locale } from '@/lib/i18n';
+
+// Section 5 CTA pill. Two variants:
+//
+//   - 'navy' (legacy, home-variant render path): brand-cyan fill on
+//     navy, white text, smooth-scrolls to the in-page meeting-request
+//     form anchored within Section 5 itself and focuses the first
+//     field. The form is the actual conversion target; the pill is
+//     the visual handoff between the framing copy above and the form
+//     below.
+//
+//   - 'light' (VM-456 D-S56-1, segment-variant render path): the
+//     contracted segment-page §F has no form. The pill is a plain
+//     anchor to /{locale}/#final-cta, deferring to the Home Final CTA
+//     as the single conversion destination site-wide. Brand-cyan fill
+//     on off-white, navy text.
+
+type Section5CtaPillProps =
+  | {
+      variant: 'navy';
+      label: string;
+    }
+  | {
+      variant: 'light';
+      label: string;
+      locale: Locale;
+    };
+
+export function Section5CtaPill(props: Section5CtaPillProps) {
+  if (props.variant === 'light') {
+    return (
+      <Link
+        href={`/${props.locale}/#final-cta`}
+        className="inline-flex items-center justify-center font-ui"
+        style={{
+          backgroundColor: '#20A2E2',
+          color: '#0A1628',
+          fontSize: 14,
+          fontWeight: 700,
+          letterSpacing: '0.02em',
+          padding: '16px 32px',
+          borderRadius: 8,
+        }}
+      >
+        {props.label}
+      </Link>
+    );
+  }
+
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     const anchor = document.querySelector<HTMLElement>(
@@ -33,7 +76,7 @@ export function Section5CtaPill({ label }: { label: string }) {
         letterSpacing: '0.02em',
       }}
     >
-      {label}
+      {props.label}
     </a>
   );
 }

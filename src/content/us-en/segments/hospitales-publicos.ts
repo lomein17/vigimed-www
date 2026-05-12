@@ -149,17 +149,8 @@ export const hospitalesPublicosFillUsEn: ChassisFill = {
         answer: p('[answer 3 pending]'),
       },
     ],
-    ctaEyebrow: p('[CTA eyebrow pending]'),
-    ctaHeadingLine1: {
-      'mx-es': [{ text: '[heading line 1 pending]' }],
-      'us-en': [{ text: '[heading line 1 pending]' }],
-    },
-    ctaHeadingLine2: {
-      'mx-es': [{ text: '[heading line 2 pending]' }],
-      'us-en': [{ text: '[heading line 2 pending]' }],
-    },
-    ctaFrame: p('[frame pending]'),
-    ctaReassurance: p('[reassurance pending]'),
+    heading: p('[S5.heading pending hospitales-publicos authoring]'),
+    reassurance: p('[S5.reassurance pending hospitales-publicos authoring]'),
   },
 
   sticky: {

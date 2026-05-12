@@ -326,25 +326,12 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         },
       },
     ],
-    ctaEyebrow: {
-      'mx-es': 'EL CICLO COMPLETO, EN SU HOSPITAL',
+    heading: {
+      'mx-es': '[S5.heading pending hospitales-publicos authoring]',
       'us-en': '[us-en pending]',
     },
-    ctaHeadingLine1: {
-      'mx-es': [{ text: 'Detectar, confirmar, coordinar.' }],
-      'us-en': [{ text: '[us-en pending]' }],
-    },
-    ctaHeadingLine2: {
-      'mx-es': [{ text: 'En el momento en que ocurre.' }],
-      'us-en': [{ text: '[us-en pending]' }],
-    },
-    ctaFrame: {
-      'mx-es':
-        'Cada evento crítico recorre el mismo ciclo, confirmado por un analista en nuestro Centro de Revisión y coordinado hasta el cierre. Solicite una evaluación institucional para activar el ciclo en su hospital.',
-      'us-en': '[us-en pending]',
-    },
-    ctaReassurance: {
-      'mx-es': 'Respuesta en menos de 24 horas hábiles',
+    reassurance: {
+      'mx-es': '[S5.reassurance pending hospitales-publicos authoring]',
       'us-en': '[us-en pending]',
     },
   },

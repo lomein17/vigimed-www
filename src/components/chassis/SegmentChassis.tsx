@@ -36,10 +36,15 @@ export function SegmentChassis({
       <Section2OperationalReality locale={locale} fill={fill.section2} />
       <Section3PerBuyerChainProof locale={locale} fill={fill.section3} />
       <Section4ProofLegitimacy locale={locale} fill={fill.section4} />
+      {/* SegmentChassis is the segment-page orchestrator and always
+          passes variant="segment" (VM-456 D-S56-1). A future
+          HomeChassis (or direct Home page wiring) would pass
+          variant="home" to opt into the form-embedded composition. */}
       <Section5FinalCta
         locale={locale}
         fill={fill.section5}
         ctaLabel={ctaLabel}
+        variant="segment"
       />
       <StickyCta locale={locale} fill={fill.sticky} />
     </>

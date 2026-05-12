@@ -852,25 +852,13 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         },
       },
     ],
-    ctaEyebrow: {
-      'mx-es': '[S5 cta eyebrow pending]',
+    heading: {
+      'mx-es': 'Hablemos del caso de su institución.',
       'us-en': '[us-en pending]',
     },
-    ctaHeadingLine1: {
-      'mx-es': [{ text: '[S5 cta heading line 1 pending]' }],
-      'us-en': [{ text: '[us-en pending]' }],
-    },
-    ctaHeadingLine2: {
-      'mx-es': [{ text: '[S5 cta heading line 2 pending]' }],
-      'us-en': [{ text: '[us-en pending]' }],
-    },
-    ctaFrame: {
-      'mx-es': '[S5 cta frame pending]',
-      'us-en': '[S5 cta frame pending]',
-    },
-    ctaReassurance: {
-      'mx-es': '[S5 cta reassurance pending]',
-      'us-en': '[S5 cta reassurance pending]',
+    reassurance: {
+      'mx-es': 'Treinta minutos con el equipo que diseña VigiMed.',
+      'us-en': '[us-en pending]',
     },
   },
 

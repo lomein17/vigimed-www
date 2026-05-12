@@ -1230,6 +1230,33 @@ h1, h2, h3 {
   padding-bottom: var(--site-section);
 }
 
+/* VM-456 D-S56-1: contracted segment-page §F variant. Off-white
+ * register, navy text, 880px inner container. Inherits min-height +
+ * flex column + justify-content: center from the shared chassis-fill
+ * rule so the contracted content vertical-centers in the viewport. */
+.vm-segment-final-cta-section--segment {
+  background: #F5F3EE;
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+@media (max-width: 768px) {
+  .vm-segment-final-cta-section--segment {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+
+.vm-segment-final-cta-heading {
+  font-size: 32px;
+}
+
+@media (max-width: 768px) {
+  .vm-segment-final-cta-heading {
+    font-size: 24px;
+  }
+}
+
 /* Section 2 -- Operational Reality. Off-white per Brief §9.1. */
 
 .vm-segment-section-2 {
