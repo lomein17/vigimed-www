@@ -20,9 +20,19 @@ export function Section5FinalCta({
   const frame = fill.ctaFrame[locale];
   const reassurance = fill.ctaReassurance[locale];
 
+  // VM-453 D-S62-2: chassis-wide opt-out from the shared chassis-fill
+  // flex-center invariant. 'naturalHeight' anchors §E heading to
+  // section-top + padding-top via `.vm-segment-natural-height`; the
+  // default (omitted slot, or explicit 'centered') keeps the legacy
+  // flex-center behavior for naturally-short §E fills.
+  const faqSectionClass =
+    fill.chassisFillBehavior === 'naturalHeight'
+      ? 'vm-segment-faq-section vm-segment-natural-height'
+      : 'vm-segment-faq-section';
+
   return (
     <>
-      {/* §E -- FAQ accordion (Slot Map v1.6 §8.2; VM-451 UAT r1).
+      {/* §E -- FAQ accordion (Slot Map v1.7 §8.2; VM-451 UAT r1, VM-453).
           Own snap section so spacebar scroll anchors the FAQ to the
           viewport top with full-screen min-height, parallel to every
           other chassis section. Heading + grid + closing line live here;
@@ -30,7 +40,7 @@ export function Section5FinalCta({
       <section
         id="segment-faq"
         aria-labelledby="segment-faq-heading"
-        className="vm-segment-faq-section"
+        className={faqSectionClass}
       >
         <div className="mx-auto" style={{ maxWidth: 1200 }}>
           {fill.faqHeading ? (

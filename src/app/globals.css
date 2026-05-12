@@ -1103,6 +1103,32 @@ h1, h2, h3 {
 }
 
 /* =======================================================================
+ * Chassis fill-behavior modifier (VM-453 D-S62-2).
+ * -----------------------------------------------------------------------
+ * Opt-out from the shared `justify-content: center` invariant for any
+ * section whose authored content naturally fills (or exceeds) the
+ * chassis content-box, so the heading anchors at section-top +
+ * padding-top rather than absorbing flex slack. min-height is preserved
+ * by the rule above; when content is shorter than the chassis
+ * content-box, the section still fills the viewport with the slack
+ * sitting below the content rather than above the heading. When content
+ * overflows the viewport, the section grows past it cleanly and the
+ * scroll-snap rules below still anchor section-top to viewport-top on
+ * keyboard advance.
+ *
+ * Applied chassis-wide so future "naturally-short" or
+ * "naturally-overflow" sections opt in via the section's slot fill,
+ * without new CSS. Authored as a separate selector to keep the shared
+ * rule unmodified; the §E FAQ chassis-fill regression that drove
+ * VM-453 originated in flex-slack distribution and the shared rule
+ * must stay invariant for sister sections.
+ * ======================================================================= */
+
+.vm-segment-natural-height {
+  justify-content: flex-start;
+}
+
+/* =======================================================================
  * Scroll-snap (VM-413; VM-447 UAT r1 chassis-wide)
  * -----------------------------------------------------------------------
  * Anchors top-level sections to viewport top with a 75px offset matching
