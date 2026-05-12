@@ -13,9 +13,13 @@
 //                with 90deg rotation; answer expands via
 //                grid-template-rows 0fr -> 1fr.
 //
-// Layout: CSS grid in .vm-faq-grid. Single column below 1024px, 1fr 1fr
-// at >=1024px with align-items: start so adjacent cells in the same row
-// stay at rest height when one expands (independent accordions).
+// Layout: flex columns in .vm-faq-grid (UAT r2). Mobile collapses to a
+// single column via `display: contents` on .vm-faq-column so items flow
+// in source order 1-6. At >=1024px the grid becomes a flex row with two
+// .vm-faq-column children, each a vertical flex column with independent
+// row heights so opening a cell in col A does not push col B's cells
+// down. Replaces the prior CSS grid, where row heights were the max of
+// each row's cells and asymmetric expansion left dead whitespace.
 //
 // Keyboard: each cell's trigger is a native button (Enter/Space toggle).
 // defaultOpen seeds initial state to the 1-indexed item; 'none' opens
@@ -40,17 +44,30 @@ export function FaqAccordion(props: {
   // Section5 fills it from fill.faqMotionStagger without an interim
   // chassis bump; no current consumer until the follow-on patch lands.
   void props.motionStagger;
+  // UAT r2: split items into two halves and render each half inside its
+  // own .vm-faq-column so columns flow independently at >=1024px. Mobile
+  // collapses both columns to source order via `display: contents` in
+  // CSS. With 6 items: colA = items[0..2], colB = items[3..5].
+  const half = Math.ceil(items.length / 2);
+  const colA = items.slice(0, half);
+  const colB = items.slice(half);
+  const renderCell = (item: FaqItem, globalIndex: number) => (
+    <FaqAccordionItem
+      key={`${item.kind}-${item.question[locale]}`}
+      item={item}
+      locale={locale}
+      index={globalIndex}
+      initiallyOpen={defaultOpen !== 'none' && defaultOpen - 1 === globalIndex}
+    />
+  );
   return (
     <div className="vm-faq-grid">
-      {items.map((item, i) => (
-        <FaqAccordionItem
-          key={`${item.kind}-${item.question[locale]}`}
-          item={item}
-          locale={locale}
-          index={i}
-          initiallyOpen={defaultOpen !== 'none' && defaultOpen - 1 === i}
-        />
-      ))}
+      <div className="vm-faq-column">
+        {colA.map((item, i) => renderCell(item, i))}
+      </div>
+      <div className="vm-faq-column">
+        {colB.map((item, i) => renderCell(item, half + i))}
+      </div>
     </div>
   );
 }

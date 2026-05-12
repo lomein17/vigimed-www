@@ -1136,6 +1136,13 @@ h1, h2, h3 {
   footer {
     scroll-snap-align: start;
   }
+
+  /* VM-451 UAT r2: force a stop at §E and §F so fast spacebar input
+   * cannot carry the viewport past these snap points under proximity. */
+  .vm-segment-faq-section,
+  .vm-segment-final-cta-section {
+    scroll-snap-stop: always;
+  }
 }
 
 /* =======================================================================
@@ -2814,17 +2821,31 @@ h1, h2, h3 {
   }
 }
 
+/* VM-451 UAT r2: two independent flex columns. A CSS grid took the row
+ * height from the tallest cell in each row, so opening a cell in column A
+ * pushed column B's matching row down equally and inserted dead
+ * whitespace. Flex columns let each column flow independently. */
 .vm-faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  column-gap: 32px;
-  row-gap: 0;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile: column wrappers vanish so items flatten to source order 1-6. */
+.vm-faq-column {
+  display: contents;
 }
 
 @media (min-width: 1024px) {
   .vm-faq-grid {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+    gap: 32px;
+    align-items: flex-start;
+  }
+  .vm-faq-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-width: 0;
   }
 }
 
@@ -2834,19 +2855,22 @@ h1, h2, h3 {
   border-bottom: 1px solid rgba(32, 162, 226, 0.15);
 }
 
-/* Mobile (single column): only the first cell carries a top hairline. */
-.vm-faq-cell:first-child {
-  border-top: 1px solid rgba(32, 162, 226, 0.15);
-}
-
 @media (min-width: 1024px) {
   .vm-faq-cell {
     padding: 20px 16px 20px 0;
   }
-  /* Desktop 2-column grid: cells 1 and 2 (row 1, columns A and B) carry
-   * top hairlines. nth-child(-n+2) overlaps cleanly with the mobile
-   * :first-child rule above for cell 1, so no cascade conflict. */
-  .vm-faq-cell:nth-child(-n + 2) {
+}
+
+/* Mobile: top hairline on the very first cell (item 1 only). */
+@media (max-width: 1023px) {
+  .vm-faq-grid > .vm-faq-column:first-child > .vm-faq-cell:first-child {
+    border-top: 1px solid rgba(32, 162, 226, 0.15);
+  }
+}
+
+/* Desktop: top hairline on the first cell of each column (items 1 and 4). */
+@media (min-width: 1024px) {
+  .vm-faq-column > .vm-faq-cell:first-child {
     border-top: 1px solid rgba(32, 162, 226, 0.15);
   }
 }
