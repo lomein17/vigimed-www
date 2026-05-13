@@ -26,14 +26,14 @@ export function Section4Header({
   // against the same container the frame uses.
   return (
     <header className="vm-section-4-header">
-      <p
-        id="segment-section-4-heading"
-        className="vm-section-4-header-eyebrow font-ui"
-      >
+      <p className="vm-section-4-header-eyebrow font-ui">
         {fill.eyebrow[locale]}
       </p>
       <div className="vm-section-4-header-heading-wrap">
-        <h2 className="vm-section-4-header-heading font-display">
+        <h2
+          id="segment-section-4-heading"
+          className="vm-section-4-header-heading font-display"
+        >
           <span className="vm-section-4-header-heading-line">
             <RichText segments={fill.headingLine1[locale]} />
           </span>
