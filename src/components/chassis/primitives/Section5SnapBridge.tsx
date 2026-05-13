@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { easeOutCubic } from '@/lib/easing';
 
 /**
- * VM-453 AC6 / VM-464 corrective 3. Bridges Space and PageDown advance
- * from §D to §E with a hand-rolled RAF animation. Native
+ * VM-453 AC6 / VM-464 corrective 3 / VM-465. Bridges Space and PageDown
+ * advance from §D to §E with a hand-rolled RAF animation. Native
  * `window.scrollTo({behavior: 'smooth'})` does not animate at all under
  * this codebase's scroll-snap configuration (verified empirically on
  * staging during VM-464 follow-up), so the bridge cannot delegate the
@@ -32,7 +32,12 @@ import { easeOutCubic } from '@/lib/easing';
  *      are not silently no-op'd by the snap engine.
  *   3. Drive scrollY from current to (§E absoluteTop - NAV_H) using
  *      easeOutCubic over 400 ms, calling
- *      `window.scrollTo({behavior: 'auto'})` per frame.
+ *      `window.scrollTo({behavior: 'instant'})` per frame. `'instant'`
+ *      (not `'auto'`) is required because globals.css sets
+ *      `html { scroll-behavior: smooth }` for HeroCta and other anchor
+ *      consumers, and `'auto'` defers to that CSS value, routing every
+ *      per-frame call through the browser's smooth-scroll engine and
+ *      producing the §4→§5 hesitation flagged in VM-465 UAT.
  *   4. Restore the original scrollSnapType after the final frame.
  *
  * Re-entrancy guard: ignores Space/PageDown while an animation is in
@@ -74,7 +79,7 @@ export function Section5SnapBridge() {
 
     function jumpTo(targetY: number, done: () => void) {
       withSnapDisabled((restore) => {
-        window.scrollTo({ top: targetY, behavior: 'auto' });
+        window.scrollTo({ top: targetY, behavior: 'instant' });
         requestAnimationFrame(() => {
           restore();
           done();
@@ -95,7 +100,7 @@ export function Section5SnapBridge() {
           const elapsed = now - startTime;
           const t = Math.min(elapsed / DURATION_MS, 1);
           const y = startY + distance * easeOutCubic(t);
-          window.scrollTo({ top: y, behavior: 'auto' });
+          window.scrollTo({ top: y, behavior: 'instant' });
           if (t < 1) {
             requestAnimationFrame(step);
           } else {
