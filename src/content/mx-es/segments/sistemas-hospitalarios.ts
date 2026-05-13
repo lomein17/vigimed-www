@@ -317,7 +317,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         ],
       },
     },
-    defaultPersona: 'medica',
+    defaultPersona: 'jefeUveh',
     ucSupplement: {
       'mx-es':
         'Además de 13 casos de uso adicionales en el catálogo VigiMed, más la inteligencia documentada que emerge de VigiMed Insights.',
@@ -346,7 +346,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
     // CSS governs wrap.
     heading: {
       'mx-es':
-        'Dos casos de bacteriemia en hospitales distintos. El brote contenido antes de que un tercer paciente se infectara.',
+        'Dos bacteriemias en hospitales distintos.\nBrote contenido antes del tercer paciente.',
       'us-en': '[us-en pending]',
     },
     // VM-471 headingFrame: chain noun phrase rendered in bold-amber with
@@ -373,11 +373,11 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
       // labelMobile shortens for the accordion trigger.
       {
         label: {
-          'mx-es': 'Jefe de Vigilancia Epidemiológica de Red',
+          'mx-es': 'Jefe de Vigilancia Epidemiológica',
           'us-en': '[us-en pending]',
         },
         labelMobile: {
-          'mx-es': 'Jefe Vig. Epi. Red',
+          'mx-es': 'Jefe Vig. Epi.',
           'us-en': '[us-en pending]',
         },
         tier: {
@@ -388,12 +388,12 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         chainTiers: ['senal', 'patron'],
         body: {
           'mx-es':
-            'VigiMed detectó la primera bacteriemia asociada a catéter venoso central en el Hospital Cumbres y la registró como señal con cepa y antibiograma confirmados. Tres semanas después, una segunda bacteriemia en el Hospital Saltillo coincidió en tiempo, lugar y persona con la primera. La señal escaló a vigilancia de red antes de que un tercer paciente se infectara, y el evento entró al registro corporativo como patrón de bacteriemia documentado entre hospitales.',
+            'VigiMed detectó la primera bacteriemia asociada a catéter venoso central en el Hospital y la registró como señal con cepa y antibiograma confirmados. Tres semanas después, una segunda bacteriemia en otro Hospital coincidió en tiempo, lugar y persona con la primera. La señal escaló a vigilancia de red antes de que un tercer paciente se infectara, y el evento entró al registro corporativo como patrón de bacteriemia documentado entre hospitales.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin la correlación entre hospitales, ese segundo caso queda como evento aislado en Saltillo. Para cuando aparece el tercero en otro hospital, ya tenemos un brote nacional sin trazabilidad."',
+            '"Sin la correlación entre hospitales, ese segundo caso queda como evento aislado. Para cuando aparece el tercero en otro hospital, ya tenemos un brote nacional sin trazabilidad."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
@@ -628,8 +628,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
             'us-en': '[us-en pending]',
           },
           label: {
-            'mx-es':
-              'Certificación CSG de establecimientos hospitalarios bajo 273 estándares',
+            'mx-es': 'Certificación CSG de hospitales bajo estándares.',
             'us-en': '[us-en pending]',
           },
           frequency: {
@@ -682,7 +681,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Notificación inmediata de brotes y eventos epidemiológicos al SINAVE desde cada hospital de la red, con cadena de evidencia trazable por unidad y por turno conforme al criterio MAPEVE.',
+              'Notificación inmediata de brotes al SINAVE desde cada hospital, con evidencia trazable por unidad y por turno conforme al criterio MAPEVE.',
             'us-en': '[us-en pending]',
           },
           evidence: {
@@ -694,7 +693,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Expediente clínico íntegro y trazable por cada paciente, con cadena de decisión documentada en cualquier hospital de la red donde el paciente reciba atención.',
+              'Expediente clínico íntegro y trazable por paciente, con cadena de decisión documentada en cualquier hospital donde reciba atención.',
             'us-en': '[us-en pending]',
           },
           evidence: {
@@ -706,7 +705,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Atención médica hospitalaria con calidad equivalente en cada unidad de la red, con cadena de evidencia que sustente el criterio corporativo ante consejo y reguladores.',
+              'Atención médica hospitalaria con calidad equivalente en cada unidad, con evidencia que sustente el criterio ante consejo y reguladores.',
             'us-en': '[us-en pending]',
           },
           evidence: {
@@ -718,7 +717,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Análisis posterior de eventos críticos que sustente revisión institucional consolidada, aprendizaje organizacional cruzado entre hospitales y defensa ante reclamación.',
+              'Análisis posterior de eventos críticos que sustente revisión consolidada, aprendizaje organizacional y defensa ante reclamación.',
             'us-en': '[us-en pending]',
           },
           evidence: {
