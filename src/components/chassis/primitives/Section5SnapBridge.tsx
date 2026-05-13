@@ -70,6 +70,11 @@ import { easeOutCubic } from '@/lib/easing';
  *   - §E top below the nav band (still approaching).
  *   - §D top at or above the nav band (§D is the current section);
  *     preserves §1-§3 step-through.
+ * Anchors are intentionally NOT in the interactive selector because
+ * Space has no default action on `<a>` (only Enter activates them);
+ * including `a` caused the bridge to bail after client-side navigation
+ * when anchor focus persisted from the clicked nav link, letting
+ * native scroll-by-page halt mid-§D (VM-465 corrective 3).
  *
  * Refs: section4 and section5 are re-queried inside onKeyDown on every
  * keypress, not captured once at mount. The bridge listener is bound
@@ -162,7 +167,7 @@ export function Section5SnapBridge() {
       if (
         active &&
         (active.matches(
-          'input, textarea, select, button, a, [contenteditable="true"]',
+          'input, textarea, select, button, [contenteditable="true"]',
         ) ||
           active.isContentEditable)
       ) {
