@@ -134,21 +134,25 @@
   --site-gutter: 1rem;
   --site-section: 3rem;
 
-  /* Segment-Hero page-title (VM-458). Single-purpose token consumed by
-   * Section1Hero. Sized for the page-title job at ~60% column width with
-   * VigiMed para {Segment} title strings; mass roughly 2x --text-h1.
-   * Clamp handles fluid scaling 320px to 1920px; no breakpoint overrides
-   * needed. Does NOT cascade to Home Hero (Home uses utility classes,
-   * not the token chain). */
-  --text-page-title: clamp(3.5rem, 7vw, 6.5rem);
+  /* Segment-Hero page-title (VM-458, retuned VM-459 v1.13). Single-purpose
+   * token consumed by Section1Hero. Sized for the page-title job at ~60%
+   * column width with VigiMed para {Segment} title strings. Ceiling 5rem
+   * (80px) matches the Palantir Foundry for Energy vertical page-title
+   * rendered size; floor 2rem (32px) ensures the 28-character "VigiMed
+   * para Centros Médicos" wraps gracefully at 320px mobile without
+   * overflow. Clamp handles fluid scaling 320px to 1920px; no
+   * breakpoint overrides needed. Does NOT cascade to Home Hero (Home
+   * uses utility classes, not the token chain). */
+  --text-page-title: clamp(2rem, 5vw, 5rem);
 
-  /* Segment-Hero claim prose (VM-459). Single-purpose token consumed by
-   * Section1Hero claim <p>. Sized to hold visual register against
-   * --text-page-title at the new H1 scale. Clamp handles fluid scaling
-   * 320px to 1920px; no breakpoint overrides needed. Mirrors the
-   * --text-page-title pattern for chassis symmetry. Does NOT cascade
-   * to other claim/body prose surfaces. */
-  --text-page-claim: clamp(1.5rem, 4vw, 2.625rem);
+  /* Segment-Hero claim prose (VM-459, retuned VM-459 v1.13). Single-
+   * purpose token consumed by Section1Hero claim <p>. Ceiling 1.625rem
+   * (26px) matches the Palantir Foundry for Energy claim rendered size;
+   * floor 1.125rem (18px) keeps mobile readable. Clamp handles fluid
+   * scaling 320px to 1920px; no breakpoint overrides needed. Mirrors
+   * the --text-page-title pattern for chassis symmetry. Does NOT
+   * cascade to other claim/body prose surfaces. */
+  --text-page-claim: clamp(1.125rem, 1.8vw, 1.625rem);
 }
 
 /* Responsive H1, H2, gutter, section-y (§4.2 and §4.4) */

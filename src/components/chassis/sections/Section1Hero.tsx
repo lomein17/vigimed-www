@@ -3,7 +3,7 @@ import type { HeroSlots } from '@/lib/chassis/slots';
 import { RichText } from '../primitives/RichText';
 
 // Section 1 -- Hero (VM-457 Palantir two-column composition).
-// Slot Map v1.12 §4 / Chassis Brief v1.12 §3.
+// Slot Map v1.13 §4 / Chassis Brief v1.13 §3.
 //
 // Left column (~60% desktop) renders the page-title H1; right column
 // (~40% desktop) renders the claim body prose with inline emphasis.
@@ -16,8 +16,17 @@ import { RichText } from '../primitives/RichText';
 //
 // VM-459 round 2: page-title weight downgrades to 400 (mass from size,
 // not weight, per Palantir reference); claim consumes --text-page-claim
-// token with max-width: 30ch and lineHeight: 1.3; section horizontal
-// gutters are bilateral-symmetric.
+// token with lineHeight: 1.3; section horizontal gutters are bilateral-
+// symmetric.
+//
+// VM-459 v1.13: --text-page-title and --text-page-claim retuned to
+// Palantir Foundry for Energy reference sizes (5rem / 1.625rem ceilings).
+// The claim no longer carries a max-width: 30ch lock; the 40% flex
+// column on .vm-segment-hero-claim-col is the sole binding constraint
+// on the claim's right edge, which aligns with the asset bed's right
+// edge by construction (both are children of the same padded inner
+// wrapper). Asset bed adds an optional image branch that takes
+// precedence over video.
 //
 // VM-456 closed the conversion-path triplet on segment pages (Hero
 // primary CTA removed; Sticky + Final CTA pill remain). ctaLabel stays
@@ -74,7 +83,6 @@ export function Section1Hero({
                 fontSize: 'var(--text-page-claim)',
                 fontWeight: 400,
                 lineHeight: 1.3,
-                maxWidth: '30ch',
               }}
             >
               <RichText segments={fill.claim[locale]} />
@@ -83,7 +91,19 @@ export function Section1Hero({
         </div>
 
         <div className="vm-segment-hero-asset-bed" aria-hidden="true">
-          {hasVideo ? (
+          {fill.image ? (
+            <picture>
+              <source
+                media="(min-width: 1024px)"
+                srcSet={fill.image.desktop}
+              />
+              <img
+                src={fill.image.mobile}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </picture>
+          ) : hasVideo ? (
             <video
               autoPlay
               muted

@@ -42,6 +42,13 @@ export const centrosMedicosFillMxEs: ChassisFill = {
       'us-en': [{ text: '[us-en pending]' }],
     },
     video: { desktop: '', mobile: '', poster: '' },
+    // VM-459 v1.13: optional S1.image takes precedence over video in
+    // the asset bed render branch. WebP variants optimized from a
+    // 8192x4608 source at quality 80 (Slot Map v1.13 §4.2).
+    image: {
+      desktop: '/images/segments/centros-medicos/hero.webp',
+      mobile: '/images/segments/centros-medicos/hero-mobile.webp',
+    },
   },
 
   // ---------------------------------------------------------------------------

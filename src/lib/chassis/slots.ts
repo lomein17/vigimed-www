@@ -1,6 +1,6 @@
 // Typed-slot schema for the universal segment-page chassis.
-// Authority: Slot Map v1.12 (slug 9fb768019127), Chassis Design Brief
-// v1.12 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
+// Authority: Slot Map v1.13 (slug 9fb768019127), Chassis Design Brief
+// v1.13 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
 // triggers, FAQ step-indicator labels) are intentionally absent from
 // the fill interfaces and live in constants.ts.
 
@@ -71,6 +71,14 @@ export interface Video {
   readonly desktop: string;
   readonly mobile: string;
   readonly poster: string;
+}
+
+// Slot Map v1.13 §3 heroImage: paired desktop/mobile WebP for the
+// Section 1 asset bed. LocaleAgnostic because segment-evocative imagery
+// reads the same in mx-es and us-en (VM-459 v1.13 addition).
+export interface HeroImage {
+  readonly desktop: string;
+  readonly mobile: string;
 }
 
 // Slot Map v1.1 §6.2 / v1.3 §6.2: composite per buyer-chain role
@@ -162,7 +170,7 @@ export interface ChainAnchor {
 // Section slot interfaces
 // ---------------------------------------------------------------------------
 
-// Slot Map v1.10 §4 -- Section 1 Hero (3 slots).
+// Slot Map v1.13 §4 -- Section 1 Hero (3 slots + optional image).
 // VM-457 D-S57-1 Palantir two-column composition: page-title (left ~60%),
 // claim (right ~40%), asset bed full-bleed below. The Slot Map v1.9 §A
 // overlay -- contextBar, eyebrow, h1Line1, h1Line2, subhead,
@@ -171,6 +179,8 @@ export interface ChainAnchor {
 // S2.framing) under D-S57-4. S1.cta.primary.label is a chassis constant
 // (D-S25-1); intentionally absent. Read from CONVERSION_CTA_LABELS at
 // render time.
+// VM-459 v1.13: optional S1.image slot lets segments author a still
+// hero image. Render priority is image > video > gradient placeholder.
 export interface HeroSlots {
   // Slot Map v1.10 §4.2 S1.page.title -- left column, ~60% desktop.
   readonly pageTitle: Paired<string>;
@@ -180,6 +190,10 @@ export interface HeroSlots {
   // Slot Map v1.10 §4.2 S1.video.bed -- preserved slot, render position
   // changed from full-bleed-behind to full-bleed-below the title-claim row.
   readonly video: LocaleAgnostic<Video>;
+  // Slot Map v1.13 §4.2 S1.image -- optional still hero image. When
+  // present, takes precedence over video; when absent, video (if any)
+  // renders, then gradient placeholder.
+  readonly image?: LocaleAgnostic<HeroImage>;
 }
 
 // Slot Map v1.1 §5.2 S2.uc.{N} composite.
