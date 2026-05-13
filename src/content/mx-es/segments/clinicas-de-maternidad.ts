@@ -1,4 +1,4 @@
-// Hospitales Públicos mx-es segment fill. Scaffolded from
+// Clínicas de Maternidad mx-es segment fill. Scaffolded from
 // src/content/mx-es/segments/centros-medicos.ts on 2026-05-13.
 // Localized strings and asset paths are placeholders carried over
 // verbatim from CM at scaffold time; per-segment content authoring
@@ -7,7 +7,7 @@
 
 import type { ChassisFill } from '@/lib/chassis/slots';
 
-export const hospitalesPublicosFillMxEs: ChassisFill = {
+export const clinicasDeMaternidadFillMxEs: ChassisFill = {
   // ---------------------------------------------------------------------------
   // Section 1 -- Hero (VM-457 Palantir two-column restructure, 2026-05-12).
   // 3-slot composition: pageTitle (left ~60%) + claim (right ~40%) +
@@ -35,8 +35,8 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
     // the asset bed render branch. WebP variants optimized from a
     // 8192x4608 source at quality 80 (Slot Map v1.13 §4.2).
     image: {
-      desktop: '/images/segments/hospitales-publicos/hero.webp',
-      mobile: '/images/segments/hospitales-publicos/hero-mobile.webp',
+      desktop: '/images/segments/clinicas-de-maternidad/hero.webp',
+      mobile: '/images/segments/clinicas-de-maternidad/hero-mobile.webp',
     },
   },
 
@@ -359,7 +359,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
           'mx-es': 'Vigilancia epidemiológica',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/hospitales-publicos/uveh.png',
+        headshot: '/headshots/clinicas-de-maternidad/uveh.png',
         chainTiers: ['senal', 'patron'],
         body: {
           'mx-es':
@@ -399,7 +399,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
           'mx-es': 'Calidad y acreditación',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/hospitales-publicos/calidad.webp',
+        headshot: '/headshots/clinicas-de-maternidad/calidad.webp',
         chainTiers: ['patron', 'tendencia'],
         body: {
           'mx-es':
@@ -432,7 +432,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
           'mx-es': 'Decisión clínica institucional',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/hospitales-publicos/medica.png',
+        headshot: '/headshots/clinicas-de-maternidad/medica.png',
         chainTiers: ['tendencia', 'criterio'],
         body: {
           'mx-es':
@@ -464,7 +464,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
           'mx-es': 'Posición institucional',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/hospitales-publicos/general.png',
+        headshot: '/headshots/clinicas-de-maternidad/general.png',
         chainTiers: ['criterio', 'estandar'],
         body: {
           'mx-es':
