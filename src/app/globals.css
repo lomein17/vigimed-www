@@ -135,20 +135,21 @@
   --site-section: 3rem;
 
   /* Segment-Hero page-title (VM-458, retuned VM-459 v1.13, middle
-   * retuned VM-466 corrective 1). Single-purpose token consumed by
-   * Section1Hero. Sized for the page-title job at ~60% column width with
-   * VigiMed para {Segment} title strings. Ceiling 5rem (80px) matches
-   * the Palantir Foundry for Energy vertical page-title rendered size;
-   * floor 2rem (32px) ensures the 28-character "VigiMed para Centros
-   * Médicos" wraps gracefully at 320px mobile without overflow. Middle
-   * term retuned from 5vw to 3.2vw (VM-466 corrective 1) so the longest
-   * 22-character segment name fits on its own line at all desktop
-   * viewports >=1024px once the amber span is forced to its own line
-   * (see #segment-hero-headline rule below). Clamp handles fluid
-   * scaling 320px to 1920px; no breakpoint overrides needed. Does NOT
-   * cascade to Home Hero (Home uses utility classes, not the token
-   * chain). */
-  --text-page-title: clamp(2rem, 3.2vw, 5rem);
+   * retuned VM-466 corrective 1, then VM-466 corrective 2). Single-
+   * purpose token consumed by Section1Hero. Sized for the page-title
+   * job at ~60% column width with VigiMed para {Segment} title strings.
+   * Ceiling 5rem (80px) matches the Palantir Foundry for Energy
+   * vertical page-title rendered size; floor 2rem (32px) ensures the
+   * 28-character "VigiMed para Centros Médicos" wraps gracefully at
+   * 320px mobile without overflow. Middle term retuned from 5vw to
+   * 3.2vw (VM-466 corrective 1), then 3.2vw to 3.4vw (VM-466
+   * corrective 2) for perceived size +2pt at typical desktop viewports
+   * while preserving the one-line amber-name fit at all desktop widths
+   * >=1024px once the amber span is forced to its own line (see
+   * #segment-hero-headline rule below). Clamp handles fluid scaling
+   * 320px to 1920px; no breakpoint overrides needed. Does NOT cascade
+   * to Home Hero (Home uses utility classes, not the token chain). */
+  --text-page-title: clamp(2rem, 3.4vw, 5rem);
 
   /* Segment-Hero claim prose (VM-459, retuned VM-459 v1.13). Single-
    * purpose token consumed by Section1Hero claim <p>. Ceiling 1.625rem
