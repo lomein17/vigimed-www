@@ -1,9 +1,35 @@
-// Hospitales Públicos mx-es segment fill. Scaffolded from
-// src/content/mx-es/segments/centros-medicos.ts on 2026-05-13.
-// Localized strings and asset paths are placeholders carried over
-// verbatim from CM at scaffold time; per-segment content authoring
-// lands in a follow-up ticket. Do not invent Linear references
-// inside this header until a real content lock is recorded.
+// Hospitales Públicos mx-es segment fill.
+// Locked content authored under VM-468 in Linear doc slug 81650e3174b5
+// (Session 58, 2026-05-13). Engineering fill landed under VM-472
+// (2026-05-13): pure mechanical replacement against the locked SSOT.
+// §F (section5.heading + reassurance) and sticky prompts stay
+// chassis-constant / placeholder per ticket non-goals.
+//
+// Locale handling: mx-es-only per D-S36-2. us-en values stay at
+// '[us-en pending]' and never render (route guard returns notFound()
+// for non-mx-es requests).
+//
+// D-VM468-eng-1: §C headshot filenames stay at the CM-pattern files
+// already on disk (uveh.png / calidad.webp / medica.png / general.png
+// under /public/headshots/hospitales-publicos/). The authoring doc
+// cites HP-specific filenames (epidemiologia.webp, medica.webp,
+// general.webp) that have not yet been produced; rename deferred
+// until those assets land.
+//
+// D-VM468-eng-2: §B and §C Tab 4 carry asymmetric role labels
+// intentionally. §B Tab 4 displays `Dirección de Coordinación de
+// Hospitales` (network-layer buyer); §C Tab 4 displays `Dirección
+// General del Hospital` (single-incident chain anchor at hospital
+// scope). The TS shape allows different role labels at §B and §C
+// because they live in separate fixture sections.
+//
+// Persona-matrix mapping (D-VM468-4): chassis PERSONA_ORDER is fixed
+// at jefeUveh → calidad → medica → general. HP content maps by
+// functional analog: jefeUveh ← Jefe de Epidemiología Hospitalaria,
+// calidad ← Subdirección de Calidad, medica ← Dirección Médica,
+// general ← Dirección de Coordinación de Hospitales. defaultPersona
+// = 'jefeUveh' so the chain-origin role is the leftmost-rendered
+// load-active default.
 
 import type { ChassisFill } from '@/lib/chassis/slots';
 
@@ -25,7 +51,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
     claim: {
       'mx-es': [
         {
-          text: 'La inteligencia que su institución ya produce, sostenida en cada turno, en cada área crítica, sin omisión.',
+          text: 'Su equipo humano sostiene la atención segura cada minuto. La analítica de VigiMed la convierte en mejora continua demostrable.',
         },
       ],
       'us-en': [{ text: '[us-en pending]' }],
@@ -41,29 +67,35 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 2 -- Operational Reality (VM-447 D-S52-2 locked mx-es content)
+  // Section 2 -- Operational Reality (VM-472 mx-es content fill 2026-05-13).
   // Persona x domain matrix: four buyer-chain personas, four UCs each.
+  // Persona keys map by functional analog per D-VM468-4; chassis
+  // PERSONA_ORDER is fixed (jefeUveh → calidad → medica → general),
+  // so tabs render visually as Epidemiología (default active) →
+  // Calidad → Médica → Coordinación de Hospitales.
   // ---------------------------------------------------------------------------
   section2: {
     eyebrow: {
       'mx-es': 'LA REALIDAD OPERATIVA',
       'us-en': '[us-en pending]',
     },
-    // VM-457 D-S57-4: heading absorbs the migrated §A H1 verbatim.
+    // VM-457 D-S57-4: heading absorbs the migrated §A H1 semantic.
+    // Inherited verbatim from CM per doc §B.2.
     heading: {
       'mx-es': 'Un incidente, una decisión que su institución toma una vez.',
       'us-en': '[us-en pending]',
     },
-    // VM-457 D-S57-4: framing carries the migrated §A subhead. The `\n`
-    // literals are preserved verbatim; Section2OperationalReality.tsx
-    // applies `whiteSpace: 'pre-line'` so they render as hard breaks.
+    // VM-457 D-S57-4: framing slot is RichParagraph for inline emphasis.
+    // HP authors two-sentence prose without literal \n; chassis applies
+    // `whiteSpace: 'pre-line'` so any author-side \n would render as
+    // a hard break.
     framing: {
       'mx-es': [
         {
-          text: 'Detección continua, confirmación humana, y análisis de\ncada evento crítico en sus áreas de mayor riesgo.\n',
+          text: 'Detección continua, confirmación humana, y análisis de cada evento crítico en sus áreas de mayor riesgo. ',
         },
         {
-          text: 'Inteligencia operativa requerida para mejorar, no para vigilar.',
+          text: 'Inteligencia operativa para sostener la atención segura, no para reconstruirla.',
           emphasis: 'bold-amber',
         },
       ],
@@ -71,8 +103,12 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
     },
     pressures: [],
     ucByPersona: {
+      // jefeUveh ← Jefe de Epidemiología Hospitalaria (D-VM468-4).
       jefeUveh: {
-        roleLabel: { 'mx-es': 'Jefe UVEH', 'us-en': '[us-en pending]' },
+        roleLabel: {
+          'mx-es': 'Jefe de Epidemiología Hospitalaria',
+          'us-en': '[us-en pending]',
+        },
         tierLabel: {
           'mx-es': 'Vigilancia epidemiológica',
           'us-en': '[us-en pending]',
@@ -80,23 +116,23 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         cards: [
           {
             name: {
-              'mx-es': 'Campo Estéril',
+              'mx-es': 'Brote Intrahospitalario',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed detecta cada infección de sitio quirúrgico, la confirma contra el criterio vigente, y consolida el patrón por servicio antes del reporte mensual.',
+                'VigiMed detecta cada caso sospechoso en el momento, lo confirma contra el criterio epidemiológico vigente, y consolida el patrón por servicio antes de que escale a brote declarable.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Puerta de Aislamiento',
+              'mx-es': 'IAAS Notificación RHOVE',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed registra cada apertura fuera de protocolo, la confirma contra el caso activo, y construye el patrón de quiebres por turno antes de que escale a brote.',
+                'VigiMed registra cada infección asociada a la atención de la salud al cierre del evento, la confirma contra el criterio NOM-045, y consolida el reporte mensual RHOVE sin reconstrucción retrospectiva.',
               'us-en': '[us-en pending]',
             },
           },
@@ -107,7 +143,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed verifica la cobertura de limpieza terminal en áreas críticas, confirma cada hallazgo contra el ciclo del paciente, y deja documentada la cadena de evidencia ante auditoría.',
+                'VigiMed verifica la cobertura de limpieza terminal en áreas críticas, confirma cada hallazgo contra el ciclo del paciente, y deja documentada la cadena de evidencia antes de la siguiente alta.',
               'us-en': '[us-en pending]',
             },
           },
@@ -118,12 +154,13 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed detecta segregación incorrecta en el punto de generación, confirma cada evento contra el criterio normativo, y consolida el patrón por servicio antes de que se vuelva hallazgo.',
+                'VigiMed detecta segregación incorrecta en el punto de generación, confirma cada evento contra el criterio normativo, y consolida el patrón por servicio antes de que se vuelva hallazgo de auditoría sanitaria.',
               'us-en': '[us-en pending]',
             },
           },
         ],
       },
+      // calidad ← Subdirección de Calidad (D-VM468-4).
       calidad: {
         roleLabel: {
           'mx-es': 'Subdirección de Calidad',
@@ -136,34 +173,23 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         cards: [
           {
             name: {
-              'mx-es': 'Proporción Personal-Paciente',
+              'mx-es': 'Brote Intrahospitalario',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed registra el ratio enfermería-paciente turno a turno, lo confirma contra el umbral institucional, y consolida la tendencia que el Plan de Mejora sintetiza en un cierre.',
+                'VigiMed sostiene la trazabilidad del brote desde la primera señal, documenta cada decisión institucional contra el criterio de calidad, y entrega evidencia continua para el comité antes de la siguiente reunión.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Puerta de Aislamiento',
+              'mx-es': 'IAAS Notificación RHOVE',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed mapea cada quiebre de aislamiento contra el estándar institucional, lo cruza con los marcos acreditadores concurrentes, y produce un solo plan de acción en lugar de tres.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Tiempo Fuera',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed documenta la adherencia al tiempo fuera por sala y procedimiento, confirma el cumplimiento del protocolo, y consolida la tendencia que sustenta la firma del Plan ante junta directiva.',
+                'VigiMed convierte cada notificación en evidencia sostenida, alineada al Modelo de Gestión de Calidad en Salud, y disponible para acreditación CSG sin reconstrucción del expediente.',
               'us-en': '[us-en pending]',
             },
           },
@@ -174,12 +200,24 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed valida cada ciclo de limpieza terminal contra el estándar institucional, lo mapea contra los marcos acreditadores en una sola lectura, y produce una sola tendencia institucional.',
+                'VigiMed produce la evidencia continua de cumplimiento de limpieza terminal, la consolida por servicio y por turno, y la deja lista para la cédula de acreditación antes de la visita.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'Segregación RPBI',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed deja constancia documentada de cada evento de segregación, lo vincula al expediente del servicio responsable, y sostiene el patrón para el seguimiento de mejora continua del comité.',
               'us-en': '[us-en pending]',
             },
           },
         ],
       },
+      // medica ← Dirección Médica (D-VM468-4).
       medica: {
         roleLabel: {
           'mx-es': 'Dirección Médica',
@@ -192,90 +230,34 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         cards: [
           {
             name: {
-              'mx-es': 'Campo Estéril',
+              'mx-es': 'Brote Intrahospitalario',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed cierra el ciclo mensual de la junta médica con la tendencia de infecciones de sitio quirúrgico ya consolidada por servicio y campus, lo que convierte la decisión clínica en lectura, no reconstrucción.',
+                'VigiMed entrega el patrón confirmado al cierre del turno, documenta la decisión médica institucional adoptada, y deja constancia del criterio aplicado antes de la siguiente comunicación a coordinación.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Proporción Personal-Paciente',
+              'mx-es': 'IAAS Notificación RHOVE',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed traduce la tendencia turno a turno en una decisión de asignación clínica, con la evidencia ya cruzada contra resultados de paciente, y permite fijar criterio sin esperar al cierre.',
+                'VigiMed sostiene la trazabilidad clínica de cada IAAS, la liga al expediente del paciente, y produce el criterio médico institucional que respalda la decisión registrada en RHOVE.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Carro Rojo',
+              'mx-es': 'Limpieza Ambiental',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed verifica disposición y caducidad de cada carro rojo turno a turno, consolida la tendencia institucional de eventos centinela, y entrega un criterio de readiness clínico documentado, no inferido.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Tiempo Fuera',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed documenta cada cirugía de sitio incorrecto evitada en el tiempo fuera, consolida la tendencia por sala y equipo quirúrgico, y entrega criterio sobre cuál servicio requiere intervención.',
-              'us-en': '[us-en pending]',
-            },
-          },
-        ],
-      },
-      general: {
-        roleLabel: {
-          'mx-es': 'Dirección General',
-          'us-en': '[us-en pending]',
-        },
-        tierLabel: {
-          'mx-es': 'Posición institucional',
-          'us-en': '[us-en pending]',
-        },
-        cards: [
-          {
-            name: {
-              'mx-es': 'Campo Estéril',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed convierte la tasa institucional de infección de sitio quirúrgico en estándar reportable ante consejo, ya consolidada y firmada, y permite llegar a la conferencia de apertura con un Plan leído.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Proporción Personal-Paciente',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed eleva el ratio enfermería-paciente a indicador institucional reportable trimestre a trimestre, ya cruzado con resultados clínicos, y sostiene la decisión de asignación de capital ante consejo.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Carro Rojo',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed convierte el readiness de carros rojos en evidencia institucional documentada por campus, lo que protege la firma de la dirección general ante eventos centinela y aseguradora.',
+                'VigiMed conecta cada hallazgo de limpieza al ciclo clínico del paciente, documenta la decisión médica asociada, y sostiene la evidencia para la junta clínica antes del cierre del caso.',
               'us-en': '[us-en pending]',
             },
           },
@@ -286,7 +268,68 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed produce evidencia institucional de cumplimiento RPBI lista para reporte externo, consolidada y firmada, lo que protege a la dirección general ante hallazgo regulatorio o exposición pública.',
+                'VigiMed liga cada evento de segregación al expediente del servicio que lo generó, documenta la decisión médica de contención, y sostiene la evidencia para revisión institucional.',
+              'us-en': '[us-en pending]',
+            },
+          },
+        ],
+      },
+      // general ← Dirección de Coordinación de Hospitales (D-VM468-4).
+      // D-VM468-eng-2: §B Tab 4 label is the network-layer buyer
+      // (`Dirección de Coordinación de Hospitales`); §C Tab 4 label
+      // is the single-incident chain anchor at hospital scope
+      // (`Dirección General del Hospital`). Asymmetry is intentional.
+      general: {
+        roleLabel: {
+          'mx-es': 'Dirección de Coordinación de Hospitales',
+          'us-en': '[us-en pending]',
+        },
+        tierLabel: {
+          'mx-es': 'Posición institucional',
+          'us-en': '[us-en pending]',
+        },
+        cards: [
+          {
+            name: {
+              'mx-es': 'Brote Intrahospitalario',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed consolida el reporte agregado de cada brote por unidad, lo confirma contra el criterio institucional de la coordinación, y produce la posición defendible antes de la siguiente comunicación federal.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'IAAS Notificación RHOVE',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed entrega el reporte RHOVE por unidad de la red, consolidado y verificable contra el criterio nacional, listo para sostener la posición institucional ante la Dirección General de Epidemiología.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'Limpieza Ambiental',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed produce la evidencia agregada de cumplimiento de limpieza por unidad, alineada al criterio de la coordinación, y disponible para la rendición de cuentas ante el órgano de control correspondiente.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'Segregación RPBI',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed consolida el patrón de segregación por unidad de la red, lo confirma contra el criterio normativo aplicable, y sostiene la posición institucional ante la autoridad sanitaria al momento del requerimiento.',
               'us-en': '[us-en pending]',
             },
           },
@@ -302,15 +345,17 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant;
-  // S55 prevention-frame rewrite per VM-448 punch-list 2026-05-08).
-  // Tab 1 catches a real breach in real time and prevents that
-  // patient's infection. Tabs 2-4 work the recurring breach pattern
-  // across multiple OR sessions, feed Insights, and produce governance
-  // change. Word-cap discipline (50w body / 30w quote / 50w citation)
-  // is fixture-only: chassis enforces no runtime caps.
-  // tabCount: 4 (Jefe de UVEH, Subdirección de Calidad, Dirección
-  // Médica, Dirección General); tabDefault: 1.
+  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant
+  // shape; VM-472 mx-es content fill 2026-05-13). Single-incident
+  // walkthrough per D-VM468-7: brote intrahospitalario por bacteria
+  // multirresistente en UCI, contenido antes de cruzar el umbral de
+  // brote declarable bajo NOM-045. Tab 1 detects the index case in
+  // real time and prevents the second infection; Tabs 2-4 consolidate
+  // the response into institutional evidence and supra-institutional
+  // position. tabCount: 4; tabDefault: 1. D-VM468-eng-2: §C Tab 4
+  // role is `Dirección General del Hospital`, NOT the §B `Dirección
+  // de Coordinación de Hospitales` (asymmetry preserved per the
+  // single-incident chain-anchor reading at hospital scope).
   // ---------------------------------------------------------------------------
   section3: {
     eyebrow: {
@@ -318,24 +363,20 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         'VIGIMED EN LA PRÁCTICA: EL CAMINO DE RESOLUCIÓN DE UN INCIDENTE',
       'us-en': '[us-en pending]',
     },
-    // S57 FIX 2: heading rewritten on the same prevention-frame as S55
-    // but tightened: "brecha" (feminine) replaces "quiebre"; "evitada"
-    // replaces "que no ocurrió"; trailing clause restated as "lo que
-    // impidió que volviera a ocurrir." Adjective concord follows
-    // "brecha" (feminine), so "detectada".
+    // VM-472 mx-es heading per doc §C.2: two-sentence prose with
+    // explicit \n preserved between sentences (matches CM precedent
+    // pattern). Section3PerBuyerChainProof.tsx applies
+    // whiteSpace: 'pre-line'.
     heading: {
       'mx-es':
-        'Brecha de campo estéril detectada en el momento.\nLa infección evitada, y lo que impidió se repitiera.',
+        'Un caso índice detectado en el momento.\nEl brote contenido antes de declararse, y la cadena de decisión documentada.',
       'us-en': '[us-en pending]',
     },
-    // S56 FIX 3 + 4: trailing period moves into the bold-amber span so it
-    // renders amber alongside the rest of the chain.
-    // S59 FIX 1: explicit \n line breaks dropped so wrap is governed by
-    // CSS, not string literals. At >=1440px the entire frame line
-    // renders single-line via white-space: nowrap on .vm-section-3-
-    // heading-frame; below that, segments wrap naturally based on
-    // container width while the bold-amber span stays unbroken at
-    // >=1280px (S55 FIX 1).
+    // headingFrame inherited verbatim from CM per doc §C.2; chain noun
+    // phrase rendered in bold-amber with trailing period inside the
+    // span. No \n; CSS wraps the surrounding segments while
+    // .vm-section-3-heading-frame keeps the bold-amber span unbroken
+    // at >=1280px.
     headingFrame: {
       'mx-es': [
         { text: 'Cada rol institucional opera en un punto distinto de la cadena ' },
@@ -350,25 +391,36 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
     tabCount: 4,
     tabDefault: 1,
     tabs: [
-      // Tab 1 -- Jefe de UVEH. Chain origin: signal detected in real
-      // time, escalated, infection prevented. body 48w / quote 28w /
-      // citation 28w (NOM-045 §3.1 trimmed verbatim to fit 50w cap).
+      // Tab 1 -- Jefe de Epidemiología Hospitalaria. Chain origin:
+      // first index case detected at culture confirmation, escalated
+      // to hospital surveillance, cohort isolated, second case
+      // prevented. Doc label is 35 chars; labelMobile shortens for
+      // the accordion trigger.
       {
-        label: { 'mx-es': 'Jefe de UVEH', 'us-en': '[us-en pending]' },
+        label: {
+          'mx-es': 'Jefe de Epidemiología Hospitalaria',
+          'us-en': '[us-en pending]',
+        },
+        labelMobile: {
+          'mx-es': 'Jefe Epi. Hosp.',
+          'us-en': '[us-en pending]',
+        },
         tier: {
           'mx-es': 'Vigilancia epidemiológica',
           'us-en': '[us-en pending]',
         },
+        // D-VM468-eng-1: CM-pattern filename retained until HP-
+        // specific headshot asset (epidemiologia.webp) lands.
         headshot: '/headshots/hospitales-publicos/uveh.png',
         chainTiers: ['senal', 'patron'],
         body: {
           'mx-es':
-            'VigiMed detectó el ingreso de personal sin vestimenta estéril al quirófano cardiotorácico en tiempo real. La señal escaló a la jefatura antes del cierre del campo. La infección que ese paciente habría desarrollado en siete días no ocurrió, y el evento entró al registro institucional como señal documentada.',
+            'VigiMed detectó el primer caso sospechoso de infección por bacteria multirresistente en UCI al cierre del turno, en el momento del cultivo confirmatorio. La señal escaló a vigilancia hospitalaria antes del siguiente ingreso al servicio. La cohorte se aisló, el segundo caso no apareció, y el evento entró al registro institucional como señal documentada lista para notificación RHOVE.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin la alerta en tiempo real, ese paciente regresa a los siete días con infección de sitio quirúrgico, y nosotros abrimos dos semanas reconstruyendo si hubo más casos."',
+            '"Sin la alerta en tiempo real, el segundo caso aparece la siguiente semana, y nosotros declarando brote contra reloj sin saber dónde empezó."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
@@ -377,22 +429,17 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'RHOVE · NOM-045 · NOM-016',
+          'mx-es': 'RHOVE · NOM-045 · SINAVE',
           'us-en': '[us-en pending]',
         },
       },
-      // Tab 2 -- Subdirección de Calidad. Pattern consolidation from
-      // recurring sterile-field breaches; one tendency read by all
-      // concurrent regulatory frames. body 45w / quote 25w / citation
-      // 28w (NOM-004 §1 trimmed verbatim; same trim point as Tab 3,
-      // duplication acknowledged per S54-1 lock).
+      // Tab 2 -- Subdirección de Calidad. Pattern consolidated into a
+      // single trazabilidad chain, evidence ready for committee and
+      // for next CSG accreditation visit. Doc label fits desktop tab
+      // budget; no labelMobile needed.
       {
         label: {
           'mx-es': 'Subdirección de Calidad',
-          'us-en': '[us-en pending]',
-        },
-        labelMobile: {
-          'mx-es': 'Subdir. Calidad',
           'us-en': '[us-en pending]',
         },
         tier: {
@@ -403,29 +450,29 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         chainTiers: ['patron', 'tendencia'],
         body: {
           'mx-es':
-            'La señal del primer evento no quedó aislada. VigiMed consolidó el patrón de quiebres de campo estéril en quirófano cardiotorácico a lo largo del trimestre, y la tendencia ya estaba documentada cuando la revisión institucional la pidió. Una sola evidencia, leída por todos los marcos concurrentes.',
+            'VigiMed sostuvo la trazabilidad de la cohorte desde la primera señal hasta el cierre del caso. Cada decisión institucional quedó documentada contra el criterio de calidad institucional. El comité de Calidad y Seguridad del Paciente recibió la evidencia consolidada antes de la siguiente reunión, alineada al Modelo de Gestión de Calidad en Salud y disponible para la siguiente visita de acreditación CSG.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin tendencia documentada, llego a junta con tres reportes en tres formatos distintos y dedico la primera hora a explicar de dónde sale cada cifra."',
+            '"La acreditación se gana o se pierde por lo que se puede demostrar el día que llega la visita, no por lo que recordamos haber hecho."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'NOM-004-SSA3-2012, §1: "Esta norma establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
+            'DGCES, Modelo de Gestión de Calidad en Salud: "atención médica segura" como uno de los cinco resultados de valor del Sistema Nacional de Salud, alineado a las acciones esenciales para la seguridad del paciente.',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'NOM-004 · CONAMED · CSG',
+          'mx-es': 'DGCES · MGCS · CSG',
           'us-en': '[us-en pending]',
         },
       },
       // Tab 3 -- Dirección Médica. Tendency arrives at clinical
-      // committee already crossed with patient outcomes and root
-      // cause; institutional criterion (double-verify protocol) signed
-      // in one session. body 43w / quote 24w / citation 28w (same
-      // NOM-004 §1 trim as Tab 2).
+      // leadership with confirmed pattern; institutional clinical
+      // decision (isolation + antibiotic protocol review) signed and
+      // documented in the expediente. Doc label fits desktop tab
+      // budget; no labelMobile needed.
       {
         label: { 'mx-es': 'Dirección Médica', 'us-en': '[us-en pending]' },
         tier: {
@@ -436,30 +483,40 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         chainTiers: ['tendencia', 'criterio'],
         body: {
           'mx-es':
-            'La tendencia llegó al comité clínico ya cruzada con resultados de paciente y causa raíz. El criterio institucional sobre acceso al quirófano cardiotorácico se firmó en una sola sesión: protocolo de doble verificación al cierre de campo, vinculante para todo el servicio.',
+            'VigiMed entregó el patrón confirmado al cierre del turno de UCI. La Dirección Médica adoptó la decisión clínica institucional de aislamiento y revisión de protocolo antibiótico, con criterio aplicado documentado y firmado al expediente. La cadena de decisión quedó trazable por turno y por servicio, lista para la junta clínica y para la comunicación a la coordinación correspondiente sin reconstrucción retrospectiva.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin criterio derivado de tendencia documentada, el comité abre la sesión alineando interpretación. Salimos con acuerdos individuales que el siguiente caso vuelve a discutir."',
+            '"La decisión médica institucional ante un brote no se discute después: se documenta en el momento, o no se documenta nunca."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'NOM-004-SSA3-2012, §1: "Esta norma establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
+            'NOM-016-SSA3-2012: "Esta norma es de observancia obligatoria para todos los establecimientos hospitalarios de los sectores público, social y privado... que tengan como finalidad la atención de pacientes que se internen para su diagnóstico, tratamiento médico, quirúrgico o rehabilitación."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'CONAMED · NOM-004 · CSG',
+          'mx-es': 'NOM-016 · NOM-004 · Expediente Clínico',
           'us-en': '[us-en pending]',
         },
       },
-      // Tab 4 -- Dirección General. Signed criterion elevated to
-      // institutional standard with full chain (signal -> operational
-      // change) documented as evidence-of-response in VigiMed
-      // Insights. body 46w / quote 23w / citation 19w.
+      // Tab 4 -- Dirección General del Hospital. Consolidated
+      // institutional report on the contained event; institutional
+      // position sustained ante coordinación federal y autoridad
+      // sanitaria. D-VM468-eng-2: §C Tab 4 substitutes the
+      // single-incident hospital-scope role for the §B
+      // network-layer role label. Doc label is 31 chars;
+      // labelMobile shortens for the accordion trigger.
       {
-        label: { 'mx-es': 'Dirección General', 'us-en': '[us-en pending]' },
+        label: {
+          'mx-es': 'Dirección General del Hospital',
+          'us-en': '[us-en pending]',
+        },
+        labelMobile: {
+          'mx-es': 'Dir. Gen. Hosp.',
+          'us-en': '[us-en pending]',
+        },
         tier: {
           'mx-es': 'Posición institucional',
           'us-en': '[us-en pending]',
@@ -468,21 +525,21 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         chainTiers: ['criterio', 'estandar'],
         body: {
           'mx-es':
-            'El criterio firmado por el comité subió al consejo como estándar institucional con respaldo en VigiMed Insights: la cadena completa, desde la señal de quiebre hasta el cambio operativo, documentada como evidencia de respuesta. La posición ante aseguradora y CONAMED se sostuvo antes de cualquier llamada.',
+            'VigiMed entregó el reporte institucional consolidado del evento: caso índice, cohorte, decisiones documentadas y patrón confirmado. La Dirección General sostuvo la posición institucional ante la coordinación federal en la siguiente comunicación, con evidencia verificable lista para la autoridad sanitaria al momento del requerimiento, sin reconstrucción del expediente.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin evidencia de respuesta institucional documentada, una infección con reingreso es crisis reputacional. Defiendes operación, no decisión. Llegas a aseguradora explicando, no respondiendo."',
+            '"Cuando la autoridad sanitaria pregunta, el reloj corre. La diferencia entre defender la institución y reconstruir lo ocurrido se mide en horas."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'Reglamento de Procedimientos CONAMED: "el criterio institucional, pues no se trata de la mera apreciación de perito persona física."',
+            'Ley General de Salud, Art. 393: "Corresponde a la Secretaría de Salud y a los gobiernos de las entidades federativas, en el ámbito de sus respectivas competencias, la vigilancia del cumplimiento de esta Ley y demás disposiciones que se dicten con base en ella."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'CONAMED · CSG · COFEPRIS',
+          'mx-es': 'LGS Art. 393 · Coordinación Federal · OIC',
           'us-en': '[us-en pending]',
         },
       },
@@ -518,11 +575,15 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
             'us-en': '[us-en pending]',
           },
         },
+        // D-VM468-9: estándar tier definition adapted for public-system
+        // scope. Public-sector accountability surface is coordinación
+        // federal + órgano de control, not patronato + private
+        // regulators (the CM-inherit definition).
         estandar: {
           label: { 'mx-es': 'Estándar', 'us-en': '[us-en pending]' },
           description: {
             'mx-es':
-              'Compromiso institucional firmado ante consejo y reguladores',
+              'Compromiso institucional firmado ante coordinación federal y órgano de control',
             'us-en': '[us-en pending]',
           },
         },
@@ -535,11 +596,17 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 4 -- Proof + Legitimacy (VM-450 D-S56-2 §D Acta de
-  // Cumplimiento lock). regulatoryDocument theme, navy background.
-  // Content per issue Scope §2 table (Carro Rojo anchor, NOM-019-
-  // SSA3-2013). Zone A is the 4-card obligation grid; Zone B is the
-  // Acta itself; Zone C is the chip rail on navy.
+  // Section 4 -- Proof + Legitimacy (VM-450 D-S56-2 shipped the
+  // regulatoryDocument theme; VM-472 mx-es content fill 2026-05-13).
+  // Anchor: NOM-045 §5 vigilance-and-notification obligation per
+  // D-VM468-12. Top-row tile set per D-VM468-11 (vigilancia-anchor
+  // mix: NOM-045 / NOM-016 / NOM-004 / DGCES). Acta panel anchored
+  // on NOM-045 §5 with `[Establecimiento hospitalario del Sistema
+  // Nacional de Salud]` per D-VM468-13 (maximum-addressability frame
+  // across federal-tertiary / HG-regional / IMSS-Bienestar /
+  // Secretarías Estatales). Amber lead-in per D-VM468-14 drops `más`
+  // and flips `no en` → `sin`. sealLabel preserves the slash form
+  // (`EVIDENCIA / SOSTENIDA`) for cross-segment visual consistency.
   // ---------------------------------------------------------------------------
   section4: {
     theme: 'offwhite',
@@ -563,9 +630,9 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
       },
       frame: {
         'mx-es': [
-          { text: 'Su hospital ya opera bajo obligaciones regulatorias medibles. ' },
+          { text: 'Su hospital opera bajo obligaciones regulatorias medibles. ' },
           {
-            text: 'VigiMed las verifica en tiempo real, no en reconstrucción.',
+            text: 'VigiMed las verifica en tiempo real, sin reconstrucción.',
             emphasis: 'bold-amber',
           },
         ],
@@ -577,25 +644,14 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
       cards: [
         {
           articleAnchor: {
-            'mx-es': 'NOM-019-SSA3-2013',
+            'mx-es': 'NOM-045-SSA2-2005',
             'us-en': '[us-en pending]',
           },
           label: {
-            'mx-es': 'Práctica de enfermería en respuesta de emergencia',
+            'mx-es': 'Vigilancia epidemiológica y notificación de IAAS',
             'us-en': '[us-en pending]',
           },
-          frequency: { 'mx-es': 'POR TURNO', 'us-en': '[us-en pending]' },
-        },
-        {
-          articleAnchor: {
-            'mx-es': 'NOM-004-SSA3-2012 §1',
-            'us-en': '[us-en pending]',
-          },
-          label: {
-            'mx-es': 'Expediente clínico íntegro y trazable',
-            'us-en': '[us-en pending]',
-          },
-          frequency: { 'mx-es': 'POR EVENTO', 'us-en': '[us-en pending]' },
+          frequency: { 'mx-es': 'MENSUAL', 'us-en': '[us-en pending]' },
         },
         {
           articleAnchor: {
@@ -609,12 +665,23 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
           frequency: { 'mx-es': 'CONTINUA', 'us-en': '[us-en pending]' },
         },
         {
-          articleAnchor: { 'mx-es': 'CSG', 'us-en': '[us-en pending]' },
-          label: {
-            'mx-es': 'Acreditación institucional',
+          articleAnchor: {
+            'mx-es': 'NOM-004-SSA3-2012 §1',
             'us-en': '[us-en pending]',
           },
-          frequency: { 'mx-es': 'TRIENAL', 'us-en': '[us-en pending]' },
+          label: {
+            'mx-es': 'Expediente clínico íntegro y trazable',
+            'us-en': '[us-en pending]',
+          },
+          frequency: { 'mx-es': 'POR EVENTO', 'us-en': '[us-en pending]' },
+        },
+        {
+          articleAnchor: { 'mx-es': 'DGCES', 'us-en': '[us-en pending]' },
+          label: {
+            'mx-es': 'Acciones Esenciales para la Seguridad del Paciente',
+            'us-en': '[us-en pending]',
+          },
+          frequency: { 'mx-es': 'OPERATIVA', 'us-en': '[us-en pending]' },
         },
       ],
     },
@@ -624,61 +691,61 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         'mx-es': 'VIGIMED · ACTA DE CUMPLIMIENTO REGULATORIO',
         'us-en': '[us-en pending]',
       },
-      folio: { 'mx-es': 'FOLIO VM-MX-04127', 'us-en': '[us-en pending]' },
+      folio: { 'mx-es': 'FOLIO VM-MX-04128', 'us-en': '[us-en pending]' },
       establecimientoLabel: {
-        'mx-es': '[Centro Médico, tercer nivel]',
+        'mx-es': '[Establecimiento hospitalario del Sistema Nacional de Salud]',
         'us-en': '[us-en pending]',
       },
       marcoNormativo: {
-        'mx-es': 'NOM-019-SSA3-2013, §6',
+        'mx-es': 'NOM-045-SSA2-2005, §5',
         'us-en': '[us-en pending]',
       },
       obligationClauses: [
         {
           text: {
             'mx-es':
-              'Preparación, verificación y reposición del carro rojo conforme a estándar institucional, con responsable identificado por turno y trazabilidad de contenido.',
+              'Notificación inmediata de casos sospechosos de IAAS y eventos centinela a la UVEH o equivalente, conforme a los criterios establecidos en los manuales de procedimientos para la vigilancia epidemiológica de infecciones nosocomiales.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Verificación documentada por turno, contenido y caducidades registradas en tiempo real, alerta automática ante inconformidad.',
+              'Notificación generada al cierre del evento con criterio confirmado, escalada automáticamente a la UVEH antes del siguiente turno, sin recompilación de expediente.',
             'us-en': '[us-en pending]',
           },
         },
         {
           text: {
             'mx-es':
-              'Verificación funcional del desfibrilador y equipo de vía aérea por turno, con prueba documentada por dispositivo y escalamiento inmediato ante hallazgo de falla.',
+              'Notificación mensual de casos de infección nosocomial a través de la plataforma RHOVE conforme a los formatos institucionales vigentes, con información validada por la UVEH y disponible para la Dirección General de Epidemiología.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Prueba funcional registrada por turno y por dispositivo, hallazgo escalado en tiempo real, último mantenimiento verificable al día.',
+              'Reporte mensual RHOVE consolidado por servicio y por turno, validado contra registro institucional, listo para envío sin reconstrucción del periodo.',
             'us-en': '[us-en pending]',
           },
         },
         {
           text: {
             'mx-es':
-              'Activación oportuna de la respuesta de emergencia, con tiempo de respuesta medible y cadena de decisión documentada por participante.',
+              'Estudio epidemiológico de brote ante situaciones que así lo requieran, con cadena de decisión documentada y evidencia disponible para revisión institucional y para la autoridad sanitaria competente.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Tiempo de activación registrado al segundo, equipo respondiente identificado, cadena de decisión trazable por turno y por servicio.',
+              'Cadena de decisión registrada en el momento de cada acción, trazable por turno y por servicio, con expediente del brote disponible para junta clínica y para coordinación al cierre del evento.',
             'us-en': '[us-en pending]',
           },
         },
         {
           text: {
             'mx-es':
-              'Análisis posterior del evento que sustente revisión institucional, aprendizaje organizacional y defensa ante reclamación.',
+              'Acceso, disponibilidad y conservación de las fuentes de información necesarias para el estudio y seguimiento de las infecciones nosocomiales, así como del análisis del uso de antimicrobianos y la evolución de la resistencia antimicrobiana.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Reconstrucción minuto a minuto disponible para junta clínica al cierre del evento, sin reconstrucción retrospectiva.',
+              'Repositorio institucional sostenido en tiempo real, con acceso por rol y por servicio, verificable ante autoridad sanitaria al momento del requerimiento sin reconstrucción retrospectiva.',
             'us-en': '[us-en pending]',
           },
         },
@@ -690,13 +757,19 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
     },
     zoneCEyebrow: { 'mx-es': 'OPERAMOS BAJO', 'us-en': '[us-en pending]' },
     zoneCChips: {
-      'mx-es': ['NOM-019', 'NOM-004', 'CONAMED', 'CSG'],
+      'mx-es': ['NOM-045', 'NOM-016', 'NOM-004', 'DGCES'],
       'us-en': ['[us-en pending]'],
     },
   },
 
   // ---------------------------------------------------------------------------
-  // Section 5 -- Final CTA (placeholder; VM-441 fills)
+  // Section 5 -- FAQ + final CTA (VM-472 mx-es content fill 2026-05-13).
+  // §F (heading + reassurance) stays chassis-constant per ticket
+  // non-goal. faqItems render in doc-literal order with steps
+  // [1, 2, 3, 4, 6, 6]; Step 6 appears twice (Items 5 + 6) per
+  // WF-VM468-10. Item 5 addresses adverse-event audit audience
+  // (coordinación federal + OIC), Item 6 addresses continuous
+  // notification + acreditación cycle (RHOVE).
   // ---------------------------------------------------------------------------
   section5: {
     faqHeading: {
@@ -710,6 +783,28 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
       'us-en': '[us-en pending]',
     },
     faqItems: [
+      // Item 1 -- Step 1 DESPLEGAR. Budget / PEF / saturación
+      // adoption-precondition question (D-VM468-16).
+      {
+        kind: 'withStep',
+        step: 1,
+        question: {
+          'mx-es':
+            'Estamos en presión de presupuesto con recortes recientes al sector. ¿Es este el momento?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'Es el momento, justamente porque su hospital opera bajo más presión que nunca con la misma estructura.',
+          'us-en': '[us-en pending]',
+        },
+        answer: {
+          'mx-es':
+            'Es el momento, justamente porque su hospital opera bajo más presión que nunca con la misma estructura. VigiMed no agrega plazas ni reemplaza personal: convierte el trabajo que su equipo ya hace en evidencia continua y defendible, sin reconstrucción retrospectiva.',
+          'us-en': '[us-en pending]',
+        },
+      },
+      // Item 2 -- Step 2 DETECTAR. Camera scope question.
       {
         kind: 'withStep',
         step: 2,
@@ -720,15 +815,17 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         },
         preview: {
           'mx-es':
-            'VigiMed instala cámaras dedicadas en áreas críticas: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de su institución.',
+            'VigiMed instala cámaras dedicadas en áreas críticas: UCI, quirófanos, salas de procedimientos, urgencias, otras áreas de mayor riesgo según el perfil de su institución.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'VigiMed instala cámaras dedicadas en áreas críticas: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de su institución. La detección cubre eventos de seguridad del paciente y de calidad de la atención que ocurren dentro del campo de visión configurado, no consultas, no áreas administrativas, no espacios privados del paciente. La selección de áreas se hace con su institución durante la configuración inicial, no con un catálogo fijo.',
+            'VigiMed instala cámaras dedicadas en áreas críticas: UCI, quirófanos, salas de procedimientos, urgencias, otras áreas de mayor riesgo según el perfil de su institución. Las cámaras detectan eventos de proceso institucional: ingreso, vestimenta, cumplimiento de protocolo, segregación. No reemplazan vigilancia clínica ni reconocen pacientes.',
           'us-en': '[us-en pending]',
         },
       },
+      // Item 3 -- Step 3 CONFIRMAR. Compliance Review Center human
+      // confirmation question.
       {
         kind: 'withStep',
         step: 3,
@@ -744,16 +841,18 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución. El CRC opera 24/7 y existe precisamente para eliminar falsos positivos: el equipo clínico recibe eventos verificados, no señales crudas. La confirmación humana es lo que convierte la detección en evidencia accionable, no un paso opcional ni un proceso automatizado.',
+            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución. La señal viaja con criterio aplicado, no sin filtrar. Los falsos positivos no llegan a su equipo, y los eventos confirmados llegan con expediente listo.',
           'us-en': '[us-en pending]',
         },
       },
+      // Item 4 -- Step 4 COORDINAR. Notification-matrix configurability
+      // question with public-sector saturation tail (D-VM468-17).
       {
         kind: 'withStep',
         step: 4,
         question: {
           'mx-es':
-            'Si VigiMed notifica a la persona equivocada en el momento equivocado, nuestros cirujanos no toleran un segundo más de interrupción. ¿Quién decide cómo se coordina la respuesta?',
+            'Si VigiMed notifica a la persona equivocada en el momento equivocado, nuestros equipos en UCI y urgencias no toleran un segundo más de interrupción bajo saturación. ¿Quién decide cómo se coordina la respuesta?',
           'us-en': '[us-en pending]',
         },
         preview: {
@@ -763,29 +862,12 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con su institución por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor. Cada coordinación queda registrada con tiempo de respuesta y persona que actuó, de manera que su institución puede ajustar la matriz cuando el patrón muestre que está mal calibrada. La coordinación no interrumpe el flujo clínico; lo documenta.',
+            'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con su institución por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor. La saturación se respeta como condición operativa, no como excusa para silenciar la señal.',
           'us-en': '[us-en pending]',
         },
       },
-      {
-        kind: 'withStep',
-        step: 1,
-        question: {
-          'mx-es':
-            'El equipo está saturado entre MAPEVE, MOCEBPASS, y el cambio de subdirección. ¿Es este el momento?',
-          'us-en': '[us-en pending]',
-        },
-        preview: {
-          'mx-es':
-            'Es el momento, justamente porque su institución está saturada.',
-          'us-en': '[us-en pending]',
-        },
-        answer: {
-          'mx-es':
-            'Es el momento, justamente porque su institución está saturada. VigiMed es un servicio gestionado: la instalación, la red, las cámaras, y la operación del Compliance Review Center los opera VigiMed, no su área de sistemas ni su equipo de calidad. La evidencia documentada empieza a producirse desde la primera semana, sin retirar a ningún equipo de sus transiciones actuales. El equipo nuevo de calidad llega a un sistema que ya está produciendo tendencia, no a uno que está empezando.',
-          'us-en': '[us-en pending]',
-        },
-      },
+      // Item 5 -- Step 6 DOCUMENTAR. Evento adverso grave audit
+      // audience: coordinación federal + OIC (D-VM468-18).
       {
         kind: 'withStep',
         step: 6,
@@ -796,31 +878,35 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         },
         preview: {
           'mx-es':
-            'La institución llega a la conversación regulatoria con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva.',
+            'La institución llega a la coordinación federal y al órgano de control con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'La institución llega a la conversación regulatoria con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva. Los datos son de su institución; VigiMed los procesa bajo contrato de tratamiento, no los reutiliza, no los comparte con terceros, ni los hace disponibles a procesos jurídicos sin instrucción de su institución. Ante aseguradora, CONAMED, o consejo, la pregunta deja de ser qué ocurrió y se vuelve cómo respondió la institución.',
+            'La institución llega a la coordinación federal y al órgano de control con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva. La autoridad sanitaria revisa el expediente clínico; VigiMed deposita su evidencia ahí, no en un sistema paralelo.',
           'us-en': '[us-en pending]',
         },
       },
+      // Item 6 -- Step 6 DOCUMENTAR. RHOVE notification + acreditación
+      // cycle continuity (D-VM468-19). Same step indicator as Item 5
+      // per WF-VM468-10; distinct institutional fear (continuous
+      // reporting cycle vs adverse-event audit).
       {
         kind: 'withStep',
         step: 6,
         question: {
           'mx-es':
-            'Estamos en ciclo de re-acreditación. ¿Adoptar VigiMed nos arriesga la auditoría?',
+            'Estamos en ciclo de actualización RHOVE y de acreditación. ¿Adoptar VigiMed nos arriesga la notificación en curso?',
           'us-en': '[us-en pending]',
         },
         preview: {
           'mx-es':
-            'La auditoría revisa el expediente clínico. VigiMed deposita su evidencia ahí, no en un sistema paralelo.',
+            'La notificación RHOVE y la acreditación revisan el expediente clínico institucional, no un sistema paralelo.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'La auditoría revisa el expediente clínico. VigiMed deposita su evidencia ahí, no en un sistema paralelo. Cada evento crítico queda confirmado por un humano, documentado en el formato que su institución usa, y disponible como tendencia institucional cuando el evaluador la pida. El equipo de calidad llega a la auditoría leyendo, no reconstruyendo.',
+            'La notificación RHOVE y la acreditación revisan el expediente clínico institucional, no un sistema paralelo. VigiMed deposita su evidencia ahí, leyendo lo que ya existe en lugar de reconstruirlo, lo que mantiene la continuidad del reporte sin abrir un frente paralelo durante el ciclo.',
           'us-en': '[us-en pending]',
         },
       },
@@ -836,7 +922,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Sticky CTA (placeholder; VM-441 fills)
+  // Sticky CTA (placeholder; ticket non-goal at V1).
   // ---------------------------------------------------------------------------
   sticky: {
     promptMobile: {
