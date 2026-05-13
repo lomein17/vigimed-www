@@ -40,14 +40,15 @@ import { RichText } from '../primitives/RichText';
 // .vm-segment-hero-content-frame wrapper; the viewport-fit max-width
 // math moved up to that wrapper so all three elements share one
 // horizontal envelope and their left/right edges align by construction.
-// Claim <p> reinstates max-width: 26ch + lg:ml-auto: the 26ch cap caps
-// wrap width at <=34 chars per line for Spanish body text (VM-466
+// Claim <p> reinstates max-width: 27ch + lg:ml-auto: the 27ch cap caps
+// wrap width at ~34-35 chars per line for Spanish body text (VM-466
 // corrective 3 took it 30ch->28ch, corrective 5 took it 28ch->26ch
-// after measuring 1ch = ~1.29 actual chars in this body font), and
-// ml-auto pushes the <p> to the right edge of its 40% column at
-// >=1024px so the claim right edge aligns with the asset-bed right
-// edge. Below 1024px the auto margin is inert and the claim sits at
-// its column's natural left.
+// after measuring 1ch = ~1.29 actual chars in this body font,
+// corrective 6 nudged 26ch->27ch for slightly looser, more even
+// wrap), and ml-auto pushes the <p> to the right edge of its 40%
+// column at >=1024px so the claim right edge aligns with the
+// asset-bed right edge. Below 1024px the auto margin is inert and
+// the claim sits at its column's natural left.
 //
 // VM-456 closed the conversion-path triplet on segment pages (Hero
 // primary CTA removed; Sticky + Final CTA pill remain). ctaLabel stays
@@ -105,12 +106,13 @@ export function Section1Hero({
                   fontSize: 'var(--text-page-claim)',
                   fontWeight: 400,
                   lineHeight: 1.3,
-                  // VM-466 corrective 3 / 5: 26ch (was 30ch in corrective
-                  // 1, 28ch in corrective 3) so Spanish body text wraps
-                  // at <=34 chars per line. Empirical 1ch = ~1.29 actual
-                  // chars in this body font, so 26ch gives ~33-34
-                  // chars/line.
-                  maxWidth: '26ch',
+                  // VM-466 corrective 3 / 5 / 6: 27ch (was 30ch in
+                  // corrective 1, 28ch in corrective 3, 26ch in
+                  // corrective 5) so Spanish body text wraps at ~34-35
+                  // chars per line. Empirical 1ch = ~1.29 actual chars
+                  // in this body font; corrective 6 nudged 26ch->27ch
+                  // after corrective 5 wrapped too tight.
+                  maxWidth: '27ch',
                 }}
               >
                 <RichText segments={fill.claim[locale]} />
