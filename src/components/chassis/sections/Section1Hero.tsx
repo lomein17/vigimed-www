@@ -3,13 +3,16 @@ import type { HeroSlots } from '@/lib/chassis/slots';
 import { RichText } from '../primitives/RichText';
 
 // Section 1 -- Hero (VM-457 Palantir two-column composition).
-// Slot Map v1.13 §4 / Chassis Brief v1.13 §3.
+// Slot Map v1.14 §4 / Chassis Brief v1.14 §3.
 //
 // Left column (~60% desktop) renders the page-title H1; right column
 // (~40% desktop) renders the claim body prose with inline emphasis.
-// Below the title-claim row sits a full-bleed asset bed (16:6 desktop,
-// 16:9 mobile). Below 1024px the columns stack and the asset bed
-// preserves 16:9.
+// Below the title-claim row sits a full-bleed asset bed at 16:9 across
+// breakpoints (VM-459 corrective 2; was 16:6 desktop / 16:9 mobile
+// under VM-457). Below 1024px the columns stack; on desktop the bed
+// applies a viewport-fit max-width cap and centers with auto margins
+// (equal left/right buffers) when the 100svh envelope forces a
+// horizontal shrink. CSS rules live in globals.css L1276-L1318.
 //
 // VM-458 value tuning: page-title sizing uses --text-page-title (not
 // --text-h1) so the H1 carries page-title mass at ~60% column width.

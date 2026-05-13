@@ -1,6 +1,6 @@
 // Typed-slot schema for the universal segment-page chassis.
-// Authority: Slot Map v1.13 (slug 9fb768019127), Chassis Design Brief
-// v1.13 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
+// Authority: Slot Map v1.14 (slug 9fb768019127), Chassis Design Brief
+// v1.14 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
 // triggers, FAQ step-indicator labels) are intentionally absent from
 // the fill interfaces and live in constants.ts.
 
