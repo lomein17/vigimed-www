@@ -697,11 +697,6 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           },
         },
       ],
-      closingLine: {
-        'mx-es':
-          'CADENA DE EVIDENCIA SOSTENIDA EN TIEMPO REAL POR VIGIMED · NO REQUIERE RECONSTRUCCIÓN RETROSPECTIVA',
-        'us-en': '[us-en pending]',
-      },
       sealLabel: {
         'mx-es': 'EVIDENCIA / SOSTENIDA',
         'us-en': '[us-en pending]',

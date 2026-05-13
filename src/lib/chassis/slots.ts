@@ -401,7 +401,6 @@ export type Section4ZoneB =
         readonly text: Paired<string>;
         readonly evidence: Paired<string>;
       }[];
-      readonly closingLine: Paired<string>;
       readonly sealLabel: Paired<string>;
     };
 

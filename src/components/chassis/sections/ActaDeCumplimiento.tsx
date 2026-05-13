@@ -1,17 +1,17 @@
 // VM-450 Section 4 Zone B regulatoryDocument variant — the Acta de
-// Cumplimiento. Cream document tile on navy section background.
-// Renders eight content fields from the zoneB.regulatoryDocument
-// branch: actaHeader, folio, establecimientoLabel, marcoNormativo,
-// obligationClauses[], closingLine, sealLabel. Each obligation clause
-// carries an inline VIGIMED pill preceding the evidence text.
+// Cumplimiento. Cream document tile on the §4 section background.
+// Renders the zoneB.regulatoryDocument fields and, when supplied,
+// folds the OPERAMOS BAJO eyebrow + chip rail into the Acta footer
+// (Slot Map zoneCEyebrow / zoneCChips). The amber seal is absolute-
+// positioned in the top-right of the tile.
 //
 // Mobile composition: the two-column establecimiento/marco grid
 // stacks to a single column; each clause's evidence pill stacks above
-// the full-width evidence text. The amber seal stays in the lower
-// right of the closing row.
+// the full-width evidence text. The seal scales down below 480px so
+// it doesn't crowd the FOLIO line.
 
 import type { Locale } from '@/lib/i18n';
-import type { Section4ZoneB } from '@/lib/chassis/slots';
+import type { Chip, Paired, Section4ZoneB } from '@/lib/chassis/slots';
 
 type RegulatoryDocument = Extract<
   Section4ZoneB,
@@ -21,9 +21,13 @@ type RegulatoryDocument = Extract<
 export function ActaDeCumplimiento({
   locale,
   fill,
+  marcoEyebrow,
+  marcoChips,
 }: {
   locale: Locale;
   fill: RegulatoryDocument;
+  marcoEyebrow?: Paired<string>;
+  marcoChips?: Paired<readonly Chip[]>;
 }) {
   return (
     <article className="vm-acta">
@@ -51,6 +55,19 @@ export function ActaDeCumplimiento({
         </div>
       </div>
 
+      <span
+        className="vm-acta-seal font-mono"
+        aria-label={fill.sealLabel[locale]}
+      >
+        {fill.sealLabel[locale]
+          .split('/')
+          .map((line, i) => (
+            <span key={i} className="vm-acta-seal-line">
+              {line.trim()}
+            </span>
+          ))}
+      </span>
+
       <p className="vm-acta-clauses-eyebrow font-ui">
         OBLIGACIÓN Y EVIDENCIA SOSTENIDA
       </p>
@@ -70,24 +87,20 @@ export function ActaDeCumplimiento({
         ))}
       </ol>
 
-      <footer className="vm-acta-closing">
-        <span className="vm-acta-closing-line font-ui">
-          {fill.closingLine[locale]}
-        </span>
-        <span
-          className="vm-acta-seal font-mono"
-          aria-label={fill.sealLabel[locale]}
-        >
-          {fill.sealLabel[locale]
-            .split('/')
-            .map((line, i, arr) => (
-              <span key={i} className="vm-acta-seal-line">
-                {line.trim()}
-                {i < arr.length - 1 ? null : null}
-              </span>
+      {marcoEyebrow && marcoChips ? (
+        <footer className="vm-acta-marco-bar">
+          <p className="vm-acta-marco-eyebrow font-ui">
+            {marcoEyebrow[locale]}
+          </p>
+          <ul className="vm-acta-marco-chips">
+            {marcoChips[locale].map((chip, i) => (
+              <li key={`${i}-${chip}`} className="vm-regulatory-chip">
+                {chip}
+              </li>
             ))}
-        </span>
-      </footer>
+          </ul>
+        </footer>
+      ) : null}
     </article>
   );
 }

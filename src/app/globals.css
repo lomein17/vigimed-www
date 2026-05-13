@@ -2766,7 +2766,9 @@ h1, h2, h3 {
    * VM-450 UAT r2: 1px hairline border so the cream tile reads as a
    * distinct regulatory-document surface against the offwhite section
    * background (the two surfaces are near-identical lightness). Same
-   * 0.18 opacity as .vm-stat-strip-cell separators. */
+   * 0.18 opacity as .vm-stat-strip-cell separators.
+   * position: relative anchors .vm-acta-seal in the top-right corner. */
+  position: relative;
   width: 100%;
   margin: 0 auto;
   padding: 24px;
@@ -2915,25 +2917,10 @@ h1, h2, h3 {
   margin: 0;
 }
 
-.vm-acta-closing {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  border-top: 0.5px solid rgba(10, 22, 40, 0.25);
-  padding-top: 14px;
-}
-
-.vm-acta-closing-line {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  line-height: 1.45;
-  flex: 1;
-}
-
 .vm-acta-seal {
+  position: absolute;
+  top: 16px;
+  right: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2949,11 +2936,60 @@ h1, h2, h3 {
   line-height: 1.15;
 }
 
+@media (min-width: 768px) {
+  .vm-acta-seal {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 479px) {
+  .vm-acta-seal {
+    width: 56px;
+    height: 56px;
+  }
+}
+
 .vm-acta-seal-line {
   display: block;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.1em;
+}
+
+@media (max-width: 479px) {
+  .vm-acta-seal-line {
+    font-size: 8px;
+  }
+}
+
+.vm-acta-marco-bar {
+  border-top: 0.5px solid rgba(10, 22, 40, 0.25);
+  margin-top: 8px;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.vm-acta-marco-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brand-500);
+  margin: 0;
+}
+
+.vm-acta-marco-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
 }
 
 /* Section 5 FAQ accordion (Slot Map v1.6 §8.2; VM-451; UAT r1).

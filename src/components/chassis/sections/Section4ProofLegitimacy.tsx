@@ -136,23 +136,33 @@ export function Section4ProofLegitimacy({
               </p>
             </>
           ) : (
-            <ActaDeCumplimiento locale={locale} fill={fill.zoneB} />
+            <ActaDeCumplimiento
+              locale={locale}
+              fill={fill.zoneB}
+              marcoEyebrow={fill.zoneCEyebrow}
+              marcoChips={fill.zoneCChips}
+            />
           )}
         </div>
 
-        {/* Zone C -- Regulatory chip rail */}
-        <div className="vm-section-4-zone-c">
-          <p className="vm-section-4-zone-c-eyebrow font-ui text-brand-500">
-            {fill.zoneCEyebrow[locale]}
-          </p>
-          <ul className="vm-regulatory-chip-rail">
-            {fill.zoneCChips[locale].map((chip, i) => (
-              <li key={`${i}-${chip}`} className="vm-regulatory-chip">
-                {chip}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* Zone C -- Regulatory chip rail. Folded into the Acta footer
+         * for the regulatoryDocument variant; rendered standalone for
+         * every other Zone B variant (videoMontage on hospitales-
+         * publicos). */}
+        {fill.zoneB.kind !== 'regulatoryDocument' ? (
+          <div className="vm-section-4-zone-c">
+            <p className="vm-section-4-zone-c-eyebrow font-ui text-brand-500">
+              {fill.zoneCEyebrow[locale]}
+            </p>
+            <ul className="vm-regulatory-chip-rail">
+              {fill.zoneCChips[locale].map((chip, i) => (
+                <li key={`${i}-${chip}`} className="vm-regulatory-chip">
+                  {chip}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
     </section>
   );
