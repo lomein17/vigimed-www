@@ -3248,6 +3248,13 @@ h1, h2, h3 {
 
 .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-question {
   font-weight: 400;
+  font-size: 14px;
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-question {
+    font-size: 16px;
+  }
 }
 
 .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-toggle {
@@ -3257,7 +3264,7 @@ h1, h2, h3 {
   gap: 6px;
   color: var(--color-brand-500);
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -3266,7 +3273,7 @@ h1, h2, h3 {
 
 @media (min-width: 1024px) {
   .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-toggle {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
 
@@ -3278,6 +3285,8 @@ h1, h2, h3 {
   margin-top: 0;
   color: var(--color-brand-500);
   opacity: 1;
+  width: 11px;
+  height: 11px;
 }
 
 .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-closing-line {
