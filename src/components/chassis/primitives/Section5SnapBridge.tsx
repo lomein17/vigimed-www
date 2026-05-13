@@ -18,9 +18,16 @@ import { easeOutCubic } from '@/lib/easing';
  * velocity and decelerates into the landing, which matches the
  * gesture's intent.
  *
- * Duration: 400 ms. Calibrated against §1→§2 etc. native scroll-snap
- * animations on staging; longer durations (450, 600 ms) read as
- * sluggish for the ~1000 px distance involved.
+ * Duration: 600 ms. Calibrated under VM-465 corrective 1 to match the
+ * perceived total time of the native Space-key scroll-by-page plus
+ * scroll-snap-proximity settle observed on §1→§2 / §2→§3 / §3→§4
+ * (biphasic, roughly 450-650 ms end to end). The earlier 400 ms value
+ * carried a JSDoc claim that it was calibrated against those native
+ * transitions; that claim was empirically wrong. A 400 ms monolithic
+ * easeOutCubic over the ~1038 px §4→§5 distance averaged ~2,600 px/s,
+ * faster than the native sequences and flagged in UAT as such. 600 ms
+ * brings the average down to ~1,700 px/s and lines the bridge up with
+ * the native perceived pace.
  *
  * Reduced motion: when prefers-reduced-motion: reduce is set, the
  * bridge jumps instantly via the same snap-disable + scrollTo path
@@ -65,7 +72,7 @@ export function Section5SnapBridge() {
     if (!section5 || !section4) return;
 
     const NAV_H = 75;
-    const DURATION_MS = 400;
+    const DURATION_MS = 600;
     let animating = false;
 
     function withSnapDisabled(action: (restore: () => void) => void) {
