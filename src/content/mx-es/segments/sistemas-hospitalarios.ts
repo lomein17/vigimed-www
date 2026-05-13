@@ -624,7 +624,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         },
         {
           articleAnchor: {
-            'mx-es': 'Acuerdo MOCEBPASS · DOF 25-IX-2025',
+            'mx-es': 'MOCEBPASS · DOF 25-IX-2025',
             'us-en': '[us-en pending]',
           },
           label: {
@@ -799,7 +799,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         step: 4,
         question: {
           'mx-es':
-            'Si VigiMed notifica a la persona equivocada en el momento equivocado, los equipos en cada hospital de la red no toleran un segundo más de interrupción. ¿Quién decide cómo se coordina la respuesta?',
+            'Si VigiMed notifica a la persona equivocada en el momento equivocado, los equipos de la red no toleran un segundo más de interrupción. ¿Quién decide cómo se coordina la respuesta?',
           'us-en': '[us-en pending]',
         },
         preview: {
