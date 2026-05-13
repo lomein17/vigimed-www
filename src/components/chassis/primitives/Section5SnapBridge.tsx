@@ -71,19 +71,29 @@ import { easeOutCubic } from '@/lib/easing';
  *   - §D top at or above the nav band (§D is the current section);
  *     preserves §1-§3 step-through.
  *
+ * Refs: section4 and section5 are re-queried inside onKeyDown on every
+ * keypress, not captured once at mount. The bridge listener is bound
+ * to window, which persists across App Router client-side navigation;
+ * the section DOM elements do not. Capturing the refs once would let
+ * a sister-segment-page transition leave the handler operating on
+ * detached or null elements, causing the activation guards to fall
+ * through and native scroll-by-page to take over (VM-465 corrective
+ * 3). Re-querying ensures the handler always operates on the current
+ * page's sections.
+ *
+ * Cleanup: in addition to removing the listener, the cleanup also
+ * restores inline scrollSnapType if it is stuck at 'none'. An
+ * animation interrupted by unmount (e.g., the component unmounting
+ * mid-flight on a client-side route change) would otherwise leave the
+ * html element's snap state polluted across the next route, since the
+ * html element persists across App Router navigation (VM-465
+ * corrective 3).
+ *
  * Listener registered in capture phase, mounted once via
  * Section5FinalCta.
  */
 export function Section5SnapBridge() {
   useEffect(() => {
-    const section5 = document.querySelector<HTMLElement>(
-      '.vm-segment-faq-section',
-    );
-    const section4 = document.querySelector<HTMLElement>(
-      '.vm-segment-section-4',
-    );
-    if (!section5 || !section4) return;
-
     const NAV_H = 75;
     const DURATION_MS = 600;
     let animating = false;
@@ -140,6 +150,14 @@ export function Section5SnapBridge() {
       if (e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) return;
       if (e.code !== 'Space' && e.code !== 'PageDown') return;
 
+      const section5 = document.querySelector<HTMLElement>(
+        '.vm-segment-faq-section',
+      );
+      const section4 = document.querySelector<HTMLElement>(
+        '.vm-segment-section-4',
+      );
+      if (!section5 || !section4) return;
+
       const active = document.activeElement as HTMLElement | null;
       if (
         active &&
@@ -180,8 +198,16 @@ export function Section5SnapBridge() {
     };
 
     window.addEventListener('keydown', onKeyDown, { capture: true });
-    return () =>
+    return () => {
       window.removeEventListener('keydown', onKeyDown, { capture: true });
+      // Defensive: if an in-flight bridge animation was interrupted by
+      // unmount, the inline scroll-snap-type can be left stuck at 'none'.
+      // The html element persists across client-side route changes, so
+      // a stuck value would bleed into the next page. Restore it here.
+      if (document.documentElement.style.scrollSnapType === 'none') {
+        document.documentElement.style.scrollSnapType = '';
+      }
+    };
   }, []);
 
   return null;
