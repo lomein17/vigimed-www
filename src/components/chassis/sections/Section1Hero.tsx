@@ -40,11 +40,12 @@ import { RichText } from '../primitives/RichText';
 // .vm-segment-hero-content-frame wrapper; the viewport-fit max-width
 // math moved up to that wrapper so all three elements share one
 // horizontal envelope and their left/right edges align by construction.
-// Claim <p> reinstates max-width: 30ch + lg:ml-auto: the 30ch cap caps
-// wrap width at ~4 lines for current copy, and ml-auto pushes the <p>
-// to the right edge of its 40% column at >=1024px so the claim right
-// edge aligns with the asset-bed right edge. Below 1024px the auto
-// margin is inert and the claim sits at its column's natural left.
+// Claim <p> reinstates max-width: 28ch + lg:ml-auto: the 28ch cap caps
+// wrap width at <=34 chars per line for Spanish body text (VM-466
+// corrective 3, was 30ch), and ml-auto pushes the <p> to the right
+// edge of its 40% column at >=1024px so the claim right edge aligns
+// with the asset-bed right edge. Below 1024px the auto margin is
+// inert and the claim sits at its column's natural left.
 //
 // VM-456 closed the conversion-path triplet on segment pages (Hero
 // primary CTA removed; Sticky + Final CTA pill remain). ctaLabel stays
@@ -102,7 +103,10 @@ export function Section1Hero({
                   fontSize: 'var(--text-page-claim)',
                   fontWeight: 400,
                   lineHeight: 1.3,
-                  maxWidth: '30ch',
+                  // VM-466 corrective 3: 28ch (was 30ch) so Spanish body
+                  // text (avg ~0.83 of the 0-glyph) wraps at <=34 chars
+                  // per line, keeping the claim block visually tighter.
+                  maxWidth: '28ch',
                 }}
               >
                 <RichText segments={fill.claim[locale]} />

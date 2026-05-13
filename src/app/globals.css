@@ -1289,9 +1289,12 @@ h1, h2, h3 {
 }
 
 @media (min-width: 1024px) {
+  /* VM-466 corrective 3: bottom-align the claim's last line with the
+   * amber segment-name line at desktop widths. Mobile rule (above)
+   * preserves natural top-stack when the columns stack vertically. */
   .vm-segment-hero-title-claim-row {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 48px;
   }
 }
@@ -1321,10 +1324,14 @@ h1, h2, h3 {
    * segment name is long (e.g. "Clínicas de Maternidad", "Sistemas
    * Hospitalarios"). H1-scoped via #segment-hero-headline so other
    * .text-brand-amber spans in S2/S3 keep their inline rendering.
-   * Below 1024px the columns stack and natural wrap is preserved. */
+   * Below 1024px the columns stack and natural wrap is preserved.
+   * VM-466 corrective 3: amber span scales +6.25% em-relative to lift
+   * the segment name above the "VigiMed para" prefix without disturbing
+   * the prefix's H1 base size. */
   #segment-hero-headline .text-brand-amber {
     display: block;
     white-space: nowrap;
+    font-size: 1.0625em;
   }
 }
 
