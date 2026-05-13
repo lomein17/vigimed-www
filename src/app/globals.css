@@ -3221,6 +3221,69 @@ h1, h2, h3 {
   text-align: center;
 }
 
+/* VM-461: Centros Médicos §E polish (auto-scoped via [data-faq-kind='withStep']).
+ * Five changes: heading recentered/scaled, PASO eyebrow hidden,
+ * question weight 400, MÁS+chevron toggle group in cyan, closing line 18px.
+ * Hospitales Públicos §E renders [data-faq-kind='basic'] and inherits
+ * the unscoped defaults above. */
+
+.vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-heading {
+  text-align: center;
+  font-size: var(--text-h2);
+  font-weight: 500;
+  line-height: 1.15;
+  max-width: 680px;
+  margin: 0 auto 32px auto;
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-heading {
+    margin-bottom: 40px;
+  }
+}
+
+.vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-step {
+  display: none;
+}
+
+.vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-question {
+  font-weight: 400;
+}
+
+.vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-brand-500);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-toggle {
+    font-size: 12px;
+  }
+}
+
+/* Reset the prior 22px nudge: the toggle sits at the top-right corner,
+ * not aligned to a multi-line content stack. Closed-state chevron is
+ * cyan; the existing [data-open='true'] rule already keeps it cyan
+ * when open. */
+.vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-chevron {
+  margin-top: 0;
+  color: var(--color-brand-500);
+  opacity: 1;
+}
+
+.vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-closing-line {
+  font-size: 18px;
+}
+
 /* Sticky CTA (Slot Map v1.1 §9 / Brief §6.2 Sticky mechanic).
  * Desktop renders the right-rail card at >=1024; mobile renders the
  * bottom bar at <1024. Visibility toggles via data-visible: opacity

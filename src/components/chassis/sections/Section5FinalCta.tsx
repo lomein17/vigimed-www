@@ -38,6 +38,7 @@ export function Section5FinalCta({
         id="segment-faq"
         aria-labelledby="segment-faq-heading"
         className="vm-segment-faq-section"
+        data-faq-kind={fill.faqItems[0]?.kind ?? 'basic'}
       >
         <div className="mx-auto" style={{ maxWidth: 1200 }}>
           {fill.faqHeading ? (

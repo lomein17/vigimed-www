@@ -28,7 +28,6 @@
 
 import { useState } from 'react';
 
-import { FAQ_STEP_LABELS } from '@/lib/chassis/constants';
 import type { FaqItem } from '@/lib/chassis/slots';
 import type { Locale } from '@/lib/i18n';
 
@@ -139,8 +138,6 @@ function FaqAccordionItem({
     );
   }
 
-  const stepLabel = FAQ_STEP_LABELS[item.step][locale];
-
   return (
     <div className="vm-faq-cell" data-kind="withStep" data-open={open}>
       <span className="vm-faq-rail" aria-hidden="true" />
@@ -153,13 +150,13 @@ function FaqAccordionItem({
         onClick={() => setOpen((prev) => !prev)}
       >
         <span className="vm-faq-content">
-          <span className="vm-faq-step" aria-hidden="true">
-            {`PASO ${item.step} · ${stepLabel}`}
-          </span>
           <span className="vm-faq-question">{item.question[locale]}</span>
           <span className="vm-faq-preview">{item.preview[locale]}</span>
         </span>
-        <Chevron />
+        <span className="vm-faq-toggle" aria-hidden="true">
+          <span className="vm-faq-toggle-label">MÁS</span>
+          <Chevron />
+        </span>
       </button>
       <div
         id={panelId}

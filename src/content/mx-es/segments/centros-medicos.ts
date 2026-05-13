@@ -725,7 +725,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
     faqCount: 6,
     faqDefaultOpen: 'none',
     faqClosingLine: {
-      'mx-es': 'Lo demás vive en la conversación.',
+      'mx-es': 'Resolvamos cualquier duda en una conversación.',
       'us-en': '[us-en pending]',
     },
     faqItems: [
