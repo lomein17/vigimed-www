@@ -1313,9 +1313,15 @@ h1, h2, h3 {
     max-width: 60%;
   }
 
+  /* VM-466 corrective 4: claim col's flex-basis subtracts the row gap
+   * so col1 (60%) + gap (48px) + col2 (40% - 48px) = 100% exactly.
+   * Without the subtraction the cols total 100% + gap = overflow,
+   * pushing the claim's right edge ~48px past the asset-bed right
+   * edge. 48px duplicates the row gap value locally rather than
+   * introducing a custom property for one-off math. */
   .vm-segment-hero-claim-col {
-    flex: 0 0 40%;
-    max-width: 40%;
+    flex: 0 0 calc(40% - 48px);
+    max-width: calc(40% - 48px);
   }
 
   /* VM-466 corrective 1: force the amber segment-name span onto its
