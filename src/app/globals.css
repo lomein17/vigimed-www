@@ -134,16 +134,21 @@
   --site-gutter: 1rem;
   --site-section: 3rem;
 
-  /* Segment-Hero page-title (VM-458, retuned VM-459 v1.13). Single-purpose
-   * token consumed by Section1Hero. Sized for the page-title job at ~60%
-   * column width with VigiMed para {Segment} title strings. Ceiling 5rem
-   * (80px) matches the Palantir Foundry for Energy vertical page-title
-   * rendered size; floor 2rem (32px) ensures the 28-character "VigiMed
-   * para Centros Médicos" wraps gracefully at 320px mobile without
-   * overflow. Clamp handles fluid scaling 320px to 1920px; no
-   * breakpoint overrides needed. Does NOT cascade to Home Hero (Home
-   * uses utility classes, not the token chain). */
-  --text-page-title: clamp(2rem, 5vw, 5rem);
+  /* Segment-Hero page-title (VM-458, retuned VM-459 v1.13, middle
+   * retuned VM-466 corrective 1). Single-purpose token consumed by
+   * Section1Hero. Sized for the page-title job at ~60% column width with
+   * VigiMed para {Segment} title strings. Ceiling 5rem (80px) matches
+   * the Palantir Foundry for Energy vertical page-title rendered size;
+   * floor 2rem (32px) ensures the 28-character "VigiMed para Centros
+   * Médicos" wraps gracefully at 320px mobile without overflow. Middle
+   * term retuned from 5vw to 3.2vw (VM-466 corrective 1) so the longest
+   * 22-character segment name fits on its own line at all desktop
+   * viewports >=1024px once the amber span is forced to its own line
+   * (see #segment-hero-headline rule below). Clamp handles fluid
+   * scaling 320px to 1920px; no breakpoint overrides needed. Does NOT
+   * cascade to Home Hero (Home uses utility classes, not the token
+   * chain). */
+  --text-page-title: clamp(2rem, 3.2vw, 5rem);
 
   /* Segment-Hero claim prose (VM-459, retuned VM-459 v1.13). Single-
    * purpose token consumed by Section1Hero claim <p>. Ceiling 1.625rem
@@ -1307,6 +1312,18 @@ h1, h2, h3 {
   .vm-segment-hero-claim-col {
     flex: 0 0 40%;
     max-width: 40%;
+  }
+
+  /* VM-466 corrective 1: force the amber segment-name span onto its
+   * own line at desktop widths so the H1 always renders as two lines
+   * ("VigiMed para" / amber name), preventing mid-name wrap when the
+   * segment name is long (e.g. "Clínicas de Maternidad", "Sistemas
+   * Hospitalarios"). H1-scoped via #segment-hero-headline so other
+   * .text-brand-amber spans in S2/S3 keep their inline rendering.
+   * Below 1024px the columns stack and natural wrap is preserved. */
+  #segment-hero-headline .text-brand-amber {
+    display: block;
+    white-space: nowrap;
   }
 }
 
