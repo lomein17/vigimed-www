@@ -1,27 +1,43 @@
 'use client';
 
 import { useEffect } from 'react';
+import { easeOutCubic } from '@/lib/easing';
 
 /**
- * VM-453 AC6 / VM-464 corrective 2. Bridges Space and PageDown advance
- * from §D to §E with a hand-rolled easeInOutCubic RAF animation. Native
+ * VM-453 AC6 / VM-464 corrective 3. Bridges Space and PageDown advance
+ * from §D to §E with a hand-rolled RAF animation. Native
  * `window.scrollTo({behavior: 'smooth'})` does not animate at all under
  * this codebase's scroll-snap configuration (verified empirically on
- * staging during VM-464 corrective 1 follow-up), so the bridge cannot
- * delegate the animation to the browser.
+ * staging during VM-464 follow-up), so the bridge cannot delegate the
+ * animation to the browser.
+ *
+ * Easing: easeOutCubic. The bridge fires in response to a discrete
+ * user gesture; the user pressed Space expecting forward motion. An
+ * easeInOut curve starts at zero velocity and reads as hesitation
+ * (round-2 / corrective-2 UAT). easeOutCubic starts at maximum
+ * velocity and decelerates into the landing, which matches the
+ * gesture's intent.
+ *
+ * Duration: 400 ms. Calibrated against §1→§2 etc. native scroll-snap
+ * animations on staging; longer durations (450, 600 ms) read as
+ * sluggish for the ~1000 px distance involved.
+ *
+ * Reduced motion: when prefers-reduced-motion: reduce is set, the
+ * bridge jumps instantly via the same snap-disable + scrollTo path
+ * the round-1 corrective uses. No animation.
  *
  * Mechanism per Space press:
  *   1. Verify §D is the current section and §E is still below the nav.
- *   2. Set html.scrollSnapType = 'none' so per-frame scrollTo calls are
- *      not silently no-op'd by the snap engine.
- *   3. Drive scrollY from current to (§E absoluteTop - NAV_H) over
- *      450ms with easeInOutCubic, calling `window.scrollTo({behavior:
- *      'auto'})` on each animation frame.
+ *   2. Set html.scrollSnapType = 'none' so per-frame scrollTo calls
+ *      are not silently no-op'd by the snap engine.
+ *   3. Drive scrollY from current to (§E absoluteTop - NAV_H) using
+ *      easeOutCubic over 400 ms, calling
+ *      `window.scrollTo({behavior: 'auto'})` per frame.
  *   4. Restore the original scrollSnapType after the final frame.
  *
  * Re-entrancy guard: ignores Space/PageDown while an animation is in
- * flight so rapid presses do not stack overlapping animations or
- * leave scroll-snap permanently disabled.
+ * flight; rapid presses cannot stack overlapping animations or leak
+ * the snap-disabled state.
  *
  * Activation guards unchanged:
  *   - No modifier keys.
@@ -44,11 +60,26 @@ export function Section5SnapBridge() {
     if (!section5 || !section4) return;
 
     const NAV_H = 75;
-    const DURATION_MS = 450;
+    const DURATION_MS = 400;
     let animating = false;
 
-    function easeInOutCubic(t: number): number {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    function withSnapDisabled(action: (restore: () => void) => void) {
+      const htmlEl = document.documentElement;
+      const prevSnap = htmlEl.style.scrollSnapType;
+      htmlEl.style.scrollSnapType = 'none';
+      action(() => {
+        htmlEl.style.scrollSnapType = prevSnap;
+      });
+    }
+
+    function jumpTo(targetY: number, done: () => void) {
+      withSnapDisabled((restore) => {
+        window.scrollTo({ top: targetY, behavior: 'auto' });
+        requestAnimationFrame(() => {
+          restore();
+          done();
+        });
+      });
     }
 
     function animateScrollTo(targetY: number, done: () => void) {
@@ -58,29 +89,27 @@ export function Section5SnapBridge() {
         done();
         return;
       }
-      const startTime = performance.now();
-
-      function step(now: number) {
-        const elapsed = now - startTime;
-        const t = Math.min(elapsed / DURATION_MS, 1);
-        const y = startY + distance * easeInOutCubic(t);
-        window.scrollTo({ top: y, behavior: 'auto' });
-        if (t < 1) {
-          requestAnimationFrame(step);
-        } else {
-          done();
+      withSnapDisabled((restore) => {
+        const startTime = performance.now();
+        function step(now: number) {
+          const elapsed = now - startTime;
+          const t = Math.min(elapsed / DURATION_MS, 1);
+          const y = startY + distance * easeOutCubic(t);
+          window.scrollTo({ top: y, behavior: 'auto' });
+          if (t < 1) {
+            requestAnimationFrame(step);
+          } else {
+            restore();
+            done();
+          }
         }
-      }
-      requestAnimationFrame(step);
+        requestAnimationFrame(step);
+      });
     }
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (animating) {
-        // An in-flight animation already owns this gesture; swallow
-        // the input so it does not queue native scroll behind us.
-        if (e.code === 'Space' || e.code === 'PageDown') {
-          e.preventDefault();
-        }
+        if (e.code === 'Space' || e.code === 'PageDown') e.preventDefault();
         return;
       }
       if (e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -111,15 +140,18 @@ export function Section5SnapBridge() {
         Math.round(window.scrollY + r5.top - NAV_H),
       );
 
-      const htmlEl = document.documentElement;
-      const prevSnap = htmlEl.style.scrollSnapType;
-      htmlEl.style.scrollSnapType = 'none';
       animating = true;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      animateScrollTo(targetY, () => {
-        htmlEl.style.scrollSnapType = prevSnap;
-        animating = false;
-      });
+      if (reduce) {
+        jumpTo(targetY, () => {
+          animating = false;
+        });
+      } else {
+        animateScrollTo(targetY, () => {
+          animating = false;
+        });
+      }
     };
 
     window.addEventListener('keydown', onKeyDown, { capture: true });

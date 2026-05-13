@@ -1,13 +1,10 @@
 'use client';
 
 import type { MouseEvent } from 'react';
+import { easeInOutCubic } from '@/lib/easing';
 
 const SCROLL_DURATION_MS = 1000;
 const SCROLL_OFFSET_PX = 96;
-
-function easeInOutCubic(t: number): number {
-  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-}
 
 export function HeroCta({
   label,
