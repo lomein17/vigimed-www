@@ -413,7 +413,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es': 'Calidad y acreditación',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/centros-medicos/calidad.png',
+        headshot: '/headshots/centros-medicos/calidad.webp',
         chainTiers: ['patron', 'tendencia'],
         body: {
           'mx-es':
