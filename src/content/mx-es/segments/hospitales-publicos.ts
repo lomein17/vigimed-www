@@ -92,7 +92,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
     framing: {
       'mx-es': [
         {
-          text: 'Detección continua, confirmación humana, y análisis de cada evento crítico en sus áreas de mayor riesgo. ',
+          text: 'Detección continua, confirmación humana, y análisis de cada evento crítico en sus áreas de mayor riesgo.\n',
         },
         {
           text: 'Inteligencia operativa para sostener la atención segura, no para reconstruirla.',
@@ -704,7 +704,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Notificación inmediata de casos sospechosos de IAAS y eventos centinela a la UVEH o equivalente, conforme a los criterios establecidos en los manuales de procedimientos para la vigilancia epidemiológica de infecciones nosocomiales.',
+              'Notificación inmediata de casos sospechosos de IAAS y eventos centinela a la UVEH, conforme a los criterios de los manuales de vigilancia epidemiológica de infecciones nosocomiales vigentes.',
             'us-en': '[us-en pending]',
           },
           evidence: {
@@ -716,7 +716,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Notificación mensual de casos de infección nosocomial a través de la plataforma RHOVE conforme a los formatos institucionales vigentes, con información validada por la UVEH y disponible para la Dirección General de Epidemiología.',
+              'Notificación mensual de casos de infección nosocomial vía RHOVE conforme a los formatos institucionales vigentes, validada por la UVEH y disponible para la Dirección General de Epidemiología.',
             'us-en': '[us-en pending]',
           },
           evidence: {
@@ -740,7 +740,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Acceso, disponibilidad y conservación de las fuentes de información necesarias para el estudio y seguimiento de las infecciones nosocomiales, así como del análisis del uso de antimicrobianos y la evolución de la resistencia antimicrobiana.',
+              'Acceso, disponibilidad y conservación de las fuentes de información para el estudio de infecciones nosocomiales, el uso de antimicrobianos y la evolución de la resistencia antimicrobiana.',
             'us-en': '[us-en pending]',
           },
           evidence: {

@@ -64,9 +64,17 @@ export function Section2OperationalReality({
         {/* VM-457 D-S57-4: optional framing paragraph below the section
             heading. Carries the migrated §A subhead when authored;
             `whiteSpace: 'pre-line'` honors literal `\n` characters in
-            segment text as hard breaks. */}
+            segment text as hard breaks.
+            VM-472 corrective 1: maxWidth widened 820 -> 980 to fit the
+            longest authored single-sentence framing across segments
+            (SH sentence 1 at 107 chars / 973.63px in Inter 19px at
+            1440-viewport per puppeteer measurement against production).
+            Side-effect: CM/clinicas/labs framings preserve their
+            authored `\n` breaks and render visually unchanged (3
+            lines); SH renders cleanly as 2 lines; HP renders 2 lines
+            per VM-472 §B target. */}
         {fill.framing ? (
-          <div style={{ maxWidth: 820, marginBottom: 48 }}>
+          <div style={{ maxWidth: 980, marginBottom: 48 }}>
             <p
               className="font-body"
               style={{
