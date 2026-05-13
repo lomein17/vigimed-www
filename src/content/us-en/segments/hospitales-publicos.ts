@@ -20,8 +20,8 @@ export const hospitalesPublicosFillUsEn: ChassisFill = {
   // route can render the same shape under both locales.
   hero: {
     pageTitle: {
-      'mx-es': 'VigiMed para Hospitales Públicos',
-      'us-en': 'VigiMed for Public Hospitals',
+      'mx-es': [{ text: 'VigiMed para Hospitales Públicos' }],
+      'us-en': [{ text: 'VigiMed for Public Hospitals' }],
     },
     claim: {
       'mx-es': [{ text: '[claim pending]' }],

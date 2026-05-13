@@ -30,8 +30,11 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   // ---------------------------------------------------------------------------
   hero: {
     pageTitle: {
-      'mx-es': 'VigiMed para Centros Médicos',
-      'us-en': '[us-en pending]',
+      'mx-es': [
+        { text: 'VigiMed para ' },
+        { text: 'Centros Médicos', emphasis: 'amber' },
+      ],
+      'us-en': [{ text: '[us-en pending]' }],
     },
     claim: {
       'mx-es': [

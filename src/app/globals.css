@@ -1248,17 +1248,32 @@ h1, h2, h3 {
  * 2026-05-12), so object-fit: cover at 21:9 renders the authored
  * frame without secondary crop.
  *
- * Viewport-fit math (mirrors .vm-pim-scene at L1206-L1208). Because a
- * 21:9 bed at width: 100% exceeds available vertical room at common
- * desktop viewports (1920x1080 with nav and title-claim row above),
- * the @media block below caps max-width by a height-derived value so
- * the bed shrinks horizontally to stay inside the chassis-fill
- * envelope (100svh - var(--vm-nav-h)). aspect-ratio + width: 100%
- * still apply as the inner-wrapper-relative ceiling; auto margins
- * center the bed with equal left/right buffers when the height cap
- * wins. Reservation breakdown is unchanged from corrective 2 (450px
- * total: section padding + title-claim row + gap + bottom padding);
- * only the bed aspect and max-width numerator change. */
+ * VM-459 corrective 4 (v1.16): viewport-fit max-width math hoisted from
+ * the asset bed up to a shared .vm-segment-hero-content-frame wrapper.
+ * Title-claim row and asset bed are now siblings inside that wrapper,
+ * so all three elements (H1 left edge, claim right edge, asset-bed
+ * left+right edges) share one horizontal envelope and align by
+ * construction. The reservation math (450px = section padding + title-
+ * claim row at worst case + gap + bottom padding + buffer) is unchanged
+ * from corrective 3; only the host of the max-width rule moved. */
+
+.vm-segment-hero-content-frame {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .vm-segment-hero-content-frame {
+    margin-left: auto;
+    margin-right: auto;
+    /* VM-459 corrective 4: shared horizontal envelope for title-claim
+     * row + asset bed so title/claim edges align with asset-bed edges
+     * per Palantir reference. Same 450px reservation as v1.15 (96
+     * section padding-top + 173 title-claim row at H1 5rem two-line
+     * worst case + 64 gap + 96 section padding-bottom + ~21 buffer).
+     * Numerator 21/9 matches v1.15 cinematic asset-bed aspect. */
+    max-width: min(100%, calc((100svh - var(--vm-nav-h) - 450px) * 21 / 9));
+  }
+}
 
 .vm-segment-hero-title-claim-row {
   display: flex;
@@ -1314,27 +1329,13 @@ h1, h2, h3 {
   .vm-segment-hero-asset-bed {
     margin-top: 64px;
     aspect-ratio: 21 / 9;
-    margin-left: auto;
-    margin-right: auto;
-    /* VM-459 corrective 3: viewport-fit math mirroring .vm-pim-scene
-     * (globals.css L1206-L1208). Asset bed must fit within the section's
-     * chassis-fill envelope (100svh - var(--vm-nav-h)) alongside the
-     * title-claim row above. Reservation breakdown is unchanged from
-     * corrective 2 (only the bed aspect changed):
-     *   96  section padding-top (--site-section at >=1024px)
-     *  173  title-claim row at worst case (H1 at 5rem ceiling,
-     *       two-line wrap, line-height 1.08)
-     *   64  gap from title-claim row to asset bed
-     *   96  section padding-bottom
-     *   21  breathing room
-     *   ---
-     *  450, rounded for headroom.
-     * Numerator updated 16 -> 21 for the new cinematic aspect; for the
-     * same available height the bed is now ~31% wider, shrinking side
-     * buffers. Width derives from aspect-ratio + max-height; we express
-     * the cap as max-width so aspect-ratio + width: 100% (mobile base)
-     * still applies as the inner-wrapper-relative ceiling. */
-    max-width: min(100%, calc((100svh - var(--vm-nav-h) - 450px) * 21 / 9));
+    /* VM-459 corrective 4 (v1.16): viewport-fit max-width math moved
+     * up to .vm-segment-hero-content-frame so the title-claim row and
+     * asset bed share one horizontal envelope. width: 100% inherits
+     * from the base rule above; the bed fills the content-frame and
+     * its left/right edges align with the title-claim row by
+     * construction. Reservation math (450px) and aspect (21:9) live
+     * on the content-frame rule. */
   }
 }
 

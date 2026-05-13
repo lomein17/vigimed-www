@@ -18,6 +18,18 @@ export function RichText({ segments }: { segments: readonly RichSegment[] }) {
             </span>
           );
         }
+        if (seg.emphasis === 'amber') {
+          // VM-459 v1.16: color-only amber span. No font-weight override
+          // and no <strong> semantic; weight inherits from the parent so
+          // a page-title H1 at fontWeight: 400 keeps the amber segment at
+          // regular weight. Distinct from 'bold-amber' which carries
+          // semantic emphasis + font-semibold.
+          return (
+            <span key={i} className="text-brand-amber">
+              {seg.text}
+            </span>
+          );
+        }
         return <span key={i}>{seg.text}</span>;
       })}
     </>

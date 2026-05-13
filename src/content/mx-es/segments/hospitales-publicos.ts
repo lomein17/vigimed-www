@@ -27,8 +27,8 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
   // ---------------------------------------------------------------------------
   hero: {
     pageTitle: {
-      'mx-es': 'VigiMed para Hospitales Públicos',
-      'us-en': '[us-en pending]',
+      'mx-es': [{ text: 'VigiMed para Hospitales Públicos' }],
+      'us-en': [{ text: '[us-en pending]' }],
     },
     claim: {
       'mx-es': [{ text: '[claim pending hospitales-publicos authoring]' }],

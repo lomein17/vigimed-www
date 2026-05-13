@@ -1,6 +1,6 @@
 // Typed-slot schema for the universal segment-page chassis.
-// Authority: Slot Map v1.15 (slug 9fb768019127), Chassis Design Brief
-// v1.15 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
+// Authority: Slot Map v1.16 (slug 9fb768019127), Chassis Design Brief
+// v1.16 (slug 7c5e7054002b). Chassis-constant slots (CTA labels, render
 // triggers, FAQ step-indicator labels) are intentionally absent from
 // the fill interfaces and live in constants.ts.
 
@@ -21,7 +21,12 @@ export type LocaleAgnostic<T> = T;
 // Content type vocabulary (Slot Map v1.1 §3)
 // ---------------------------------------------------------------------------
 
-export type EmphasisKind = 'bold-amber' | 'brand-cyan';
+// VM-459 v1.16: 'amber' is a color-only visual highlight (text-brand-amber
+// class, no font-weight change, no <strong> semantic). Distinct from
+// 'bold-amber' which carries semantic emphasis + font-semibold; reserve
+// 'bold-amber' for argumentative emphasis in body prose. Use 'amber' for
+// purely visual color highlighting, e.g. the page-title segment-name span.
+export type EmphasisKind = 'bold-amber' | 'brand-cyan' | 'amber';
 
 export interface RichSegment {
   readonly text: string;
@@ -181,9 +186,16 @@ export interface ChainAnchor {
 // render time.
 // VM-459 v1.13: optional S1.image slot lets segments author a still
 // hero image. Render priority is image > video > gradient placeholder.
+// VM-459 v1.16: pageTitle widens from Paired<string> to Paired<RichString>
+// so segments can author inline emphasis spans on the page-title parallel
+// to the claim. Centros Médicos authors a no-emphasis prefix segment plus
+// an 'amber' segment on the segment-name; segments without inline emphasis
+// author a single no-emphasis segment.
 export interface HeroSlots {
-  // Slot Map v1.10 §4.2 S1.page.title -- left column, ~60% desktop.
-  readonly pageTitle: Paired<string>;
+  // Slot Map v1.16 §4.2 S1.page.title -- left column, ~60% desktop.
+  // RichString carries inline emphasis spans (color-only 'amber' or the
+  // weight-bearing 'bold-amber' / 'brand-cyan' variants).
+  readonly pageTitle: Paired<RichString>;
   // Slot Map v1.10 §4.2 S1.claim -- right column, ~40% desktop. Body
   // prose with inline emphasis spans.
   readonly claim: Paired<RichParagraph>;
