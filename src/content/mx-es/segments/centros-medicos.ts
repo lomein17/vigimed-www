@@ -579,7 +579,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         'mx-es': [
           { text: 'Su hospital ya opera bajo obligaciones regulatorias medibles. ' },
           {
-            text: 'VigiMed las cumple en tiempo real, no en reconstrucción.',
+            text: 'VigiMed las verifica en tiempo real, no en reconstrucción.',
             emphasis: 'bold-amber',
           },
         ],

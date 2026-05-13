@@ -2430,7 +2430,7 @@ h1, h2, h3 {
 
 /* VM-450 UAT r2: brand-amber #FBBF24 fails AA on offwhite #F5F3EE
  * (~1.4:1). Darken the bold-amber emphasis within the §D header frame
- * to #BA7517 so "VigiMed las cumple en tiempo real, no en
+ * to #BA7517 so "VigiMed las verifica en tiempo real, no en
  * reconstrucción." reads cleanly. Scoped to .vm-section-4-header-frame
  * so the universal RichText brand-amber treatment elsewhere is
  * unaffected. */
@@ -2912,6 +2912,7 @@ h1, h2, h3 {
 
 .vm-acta-evidence-text {
   font-size: 13.5px;
+  font-weight: 600;
   line-height: 1.5;
   color: #0891A8;
   margin: 0;
