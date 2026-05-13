@@ -18,7 +18,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
     pageTitle: {
       'mx-es': [
         { text: 'VigiMed para ' },
-        { text: 'Centros Médicos', emphasis: 'amber' },
+        { text: 'Sistemas Hospitalarios', emphasis: 'amber' },
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },

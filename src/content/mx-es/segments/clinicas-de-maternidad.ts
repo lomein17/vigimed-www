@@ -18,7 +18,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
     pageTitle: {
       'mx-es': [
         { text: 'VigiMed para ' },
-        { text: 'Centros Médicos', emphasis: 'amber' },
+        { text: 'Clínicas de Maternidad', emphasis: 'amber' },
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },

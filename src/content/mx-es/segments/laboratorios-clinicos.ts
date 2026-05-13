@@ -18,7 +18,7 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
     pageTitle: {
       'mx-es': [
         { text: 'VigiMed para ' },
-        { text: 'Centros Médicos', emphasis: 'amber' },
+        { text: 'Laboratorios Clínicos', emphasis: 'amber' },
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },

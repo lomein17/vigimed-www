@@ -18,7 +18,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
     pageTitle: {
       'mx-es': [
         { text: 'VigiMed para ' },
-        { text: 'Centros Médicos', emphasis: 'amber' },
+        { text: 'Hospitales Públicos', emphasis: 'amber' },
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },
