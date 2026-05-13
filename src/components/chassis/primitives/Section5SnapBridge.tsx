@@ -51,6 +51,19 @@ import { easeOutCubic } from '@/lib/easing';
  * flight; rapid presses cannot stack overlapping animations or leak
  * the snap-disabled state.
  *
+ * Target offset: targetY lands 1 px short of the §E snap target. The
+ * FAQ section measures at sub-pixel layout positions on common
+ * viewports (e.g., §E top at doc y 4127.57 instead of 4128 on a
+ * 1920x1080 Retina), leaving §F's off-white top edge 0.43 px inside
+ * the viewport at the exact snap target. The bridge committing to
+ * that exact target for one frame before snap-proximity pulls back
+ * produces a momentary flicker at the viewport bottom (VM-465
+ * corrective 2 UAT). Landing 1 px short keeps §F fully off-screen
+ * throughout the tail of the animation; snap-proximity considers the
+ * position already satisfied, so there is no post-bridge motion
+ * either. §E lands 0.5-1 px below the nav band, which is
+ * imperceptible.
+ *
  * Activation guards unchanged:
  *   - No modifier keys.
  *   - No interactive control or contentEditable element focused.
@@ -149,7 +162,7 @@ export function Section5SnapBridge() {
 
       const targetY = Math.max(
         0,
-        Math.round(window.scrollY + r5.top - NAV_H),
+        Math.round(window.scrollY + r5.top - NAV_H) - 1,
       );
 
       animating = true;
