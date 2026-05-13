@@ -1233,27 +1233,32 @@ h1, h2, h3 {
 
 /* VM-457 Palantir two-column hero composition. Title-claim row stacks
  * below 1024px, runs as a row at >=1024px with the page-title at ~60%
- * and the claim at ~40%. The asset bed sits below the row at 16:9
- * across breakpoints (VM-459 corrective 2; was 16:6 desktop / 16:9
- * mobile under VM-457). The chassis-wide min-height rule (line ~1124)
- * keeps the whole composition centered in one viewport envelope.
+ * and the claim at ~40%. The asset bed sits below the row at 21:9
+ * across breakpoints (VM-459 corrective 3; was 16:9 unified under
+ * VM-459 corrective 2, originally 16:6 desktop / 16:9 mobile under
+ * VM-457). The chassis-wide min-height rule (line ~1124) keeps the
+ * whole composition centered in one viewport envelope.
  *
- * Asset-bed aspect: unified 16:9 across all breakpoints. The earlier
- * 16:6 desktop override was authored against a hypothetical wider
- * cinematic asset; the actual hero imagery (Pablo's hero.webp source)
- * is 16:9 native, so object-fit: cover at 16:6 cropped top and bottom.
- * Unifying to 16:9 removes the crop without changing any other render
- * rule.
+ * Asset-bed aspect: unified 21:9 across all breakpoints. Pablo's UAT
+ * against the Palantir Foundry reference at full 1920x1080 measured
+ * the reference bed in the 12:5 to 21:9 cinematic-ultrawide range;
+ * v1.14's 16:9 read as undersized vs reference (overshoot-correction
+ * from the original 16:6 attempt but undershot the target). The hero
+ * source has been re-cropped at source from full-frame to 21:9 (Pablo
+ * 2026-05-12), so object-fit: cover at 21:9 renders the authored
+ * frame without secondary crop.
  *
  * Viewport-fit math (mirrors .vm-pim-scene at L1206-L1208). Because a
- * 16:9 bed at width: 100% exceeds available vertical room at common
+ * 21:9 bed at width: 100% exceeds available vertical room at common
  * desktop viewports (1920x1080 with nav and title-claim row above),
  * the @media block below caps max-width by a height-derived value so
  * the bed shrinks horizontally to stay inside the chassis-fill
  * envelope (100svh - var(--vm-nav-h)). aspect-ratio + width: 100%
  * still apply as the inner-wrapper-relative ceiling; auto margins
  * center the bed with equal left/right buffers when the height cap
- * wins. Reservation breakdown is documented at the @media rule. */
+ * wins. Reservation breakdown is unchanged from corrective 2 (450px
+ * total: section padding + title-claim row + gap + bottom padding);
+ * only the bed aspect and max-width numerator change. */
 
 .vm-segment-hero-title-claim-row {
   display: flex;
@@ -1294,7 +1299,7 @@ h1, h2, h3 {
   position: relative;
   width: 100%;
   margin-top: 48px;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 21 / 9;
   overflow: hidden;
   border-radius: 4px;
   background: linear-gradient(
@@ -1308,13 +1313,14 @@ h1, h2, h3 {
 @media (min-width: 1024px) {
   .vm-segment-hero-asset-bed {
     margin-top: 64px;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 21 / 9;
     margin-left: auto;
     margin-right: auto;
-    /* VM-459 corrective 2: viewport-fit math mirroring .vm-pim-scene
+    /* VM-459 corrective 3: viewport-fit math mirroring .vm-pim-scene
      * (globals.css L1206-L1208). Asset bed must fit within the section's
      * chassis-fill envelope (100svh - var(--vm-nav-h)) alongside the
-     * title-claim row above. Reservation breakdown:
+     * title-claim row above. Reservation breakdown is unchanged from
+     * corrective 2 (only the bed aspect changed):
      *   96  section padding-top (--site-section at >=1024px)
      *  173  title-claim row at worst case (H1 at 5rem ceiling,
      *       two-line wrap, line-height 1.08)
@@ -1323,10 +1329,12 @@ h1, h2, h3 {
      *   21  breathing room
      *   ---
      *  450, rounded for headroom.
-     * Width derives from aspect-ratio + max-height; we express the
-     * cap as max-width so aspect-ratio + width: 100% (mobile base)
+     * Numerator updated 16 -> 21 for the new cinematic aspect; for the
+     * same available height the bed is now ~31% wider, shrinking side
+     * buffers. Width derives from aspect-ratio + max-height; we express
+     * the cap as max-width so aspect-ratio + width: 100% (mobile base)
      * still applies as the inner-wrapper-relative ceiling. */
-    max-width: min(100%, calc((100svh - var(--vm-nav-h) - 450px) * 16 / 9));
+    max-width: min(100%, calc((100svh - var(--vm-nav-h) - 450px) * 21 / 9));
   }
 }
 
