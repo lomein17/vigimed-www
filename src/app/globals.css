@@ -133,6 +133,14 @@
   /* Responsive spacing (§4.4), mobile baseline */
   --site-gutter: 1rem;
   --site-section: 3rem;
+
+  /* Segment-Hero page-title (VM-458). Single-purpose token consumed by
+   * Section1Hero. Sized for the page-title job at ~60% column width with
+   * VigiMed para {Segment} title strings; mass roughly 2x --text-h1.
+   * Clamp handles fluid scaling 320px to 1920px; no breakpoint overrides
+   * needed. Does NOT cascade to Home Hero (Home uses utility classes,
+   * not the token chain). */
+  --text-page-title: clamp(3.5rem, 7vw, 6.5rem);
 }
 
 /* Responsive H1, H2, gutter, section-y (§4.2 and §4.4) */
@@ -1261,10 +1269,10 @@ h1, h2, h3 {
   overflow: hidden;
   border-radius: 4px;
   background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.02) 50%,
-    rgba(255, 255, 255, 0.06) 100%
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.02) 55%,
+    rgba(255, 255, 255, 0.10) 100%
   );
 }
 

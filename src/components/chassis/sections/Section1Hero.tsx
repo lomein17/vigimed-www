@@ -3,13 +3,16 @@ import type { HeroSlots } from '@/lib/chassis/slots';
 import { RichText } from '../primitives/RichText';
 
 // Section 1 -- Hero (VM-457 Palantir two-column composition).
-// Slot Map v1.10 §4 / Chassis Brief v1.10 §3.
+// Slot Map v1.11 §4 / Chassis Brief v1.11 §3.
 //
 // Left column (~60% desktop) renders the page-title H1; right column
 // (~40% desktop) renders the claim body prose with inline emphasis.
 // Below the title-claim row sits a full-bleed asset bed (16:6 desktop,
 // 16:9 mobile). Below 1024px the columns stack and the asset bed
 // preserves 16:9.
+//
+// VM-458 value tuning: page-title sizing uses --text-page-title (not
+// --text-h1) so the H1 carries page-title mass at ~60% column width.
 //
 // VM-456 closed the conversion-path triplet on segment pages (Hero
 // primary CTA removed; Sticky + Final CTA pill remain). ctaLabel stays
@@ -47,7 +50,7 @@ export function Section1Hero({
               id="segment-hero-headline"
               className="font-display text-text-on-dark"
               style={{
-                fontSize: 'var(--text-h1)',
+                fontSize: 'var(--text-page-title)',
                 fontWeight: 600,
                 letterSpacing: '-0.02em',
                 lineHeight: 1.08,
