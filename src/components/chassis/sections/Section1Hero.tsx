@@ -3,7 +3,7 @@ import type { HeroSlots } from '@/lib/chassis/slots';
 import { RichText } from '../primitives/RichText';
 
 // Section 1 -- Hero (VM-457 Palantir two-column composition).
-// Slot Map v1.11 §4 / Chassis Brief v1.11 §3.
+// Slot Map v1.12 §4 / Chassis Brief v1.12 §3.
 //
 // Left column (~60% desktop) renders the page-title H1; right column
 // (~40% desktop) renders the claim body prose with inline emphasis.
@@ -13,6 +13,11 @@ import { RichText } from '../primitives/RichText';
 //
 // VM-458 value tuning: page-title sizing uses --text-page-title (not
 // --text-h1) so the H1 carries page-title mass at ~60% column width.
+//
+// VM-459 round 2: page-title weight downgrades to 400 (mass from size,
+// not weight, per Palantir reference); claim consumes --text-page-claim
+// token with max-width: 30ch and lineHeight: 1.3; section horizontal
+// gutters are bilateral-symmetric.
 //
 // VM-456 closed the conversion-path triplet on segment pages (Hero
 // primary CTA removed; Sticky + Final CTA pill remain). ctaLabel stays
@@ -40,8 +45,11 @@ export function Section1Hero({
         style={{
           // VM-445 UAT 2026-05-07: clamp anchor preserved verbatim per
           // VM-457 brief §2.1 so Hero left edge aligns with Home Hero.
+          // VM-459 D-S58: paddingRight mirrors paddingLeft for bilateral
+          // symmetry per Palantir composition reference. Cross-section
+          // width drift accepted per WF-S58-1.
           paddingLeft: 'clamp(var(--site-gutter), 15vw, 208px)',
-          paddingRight: 'var(--site-gutter)',
+          paddingRight: 'clamp(var(--site-gutter), 15vw, 208px)',
         }}
       >
         <div className="vm-segment-hero-title-claim-row">
@@ -51,7 +59,7 @@ export function Section1Hero({
               className="font-display text-text-on-dark"
               style={{
                 fontSize: 'var(--text-page-title)',
-                fontWeight: 600,
+                fontWeight: 400,
                 letterSpacing: '-0.02em',
                 lineHeight: 1.08,
               }}
@@ -63,9 +71,10 @@ export function Section1Hero({
             <p
               className="font-body text-text-on-dark"
               style={{
-                fontSize: '1.3125rem',
+                fontSize: 'var(--text-page-claim)',
                 fontWeight: 400,
-                lineHeight: 1.5,
+                lineHeight: 1.3,
+                maxWidth: '30ch',
               }}
             >
               <RichText segments={fill.claim[locale]} />
