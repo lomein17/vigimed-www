@@ -395,7 +395,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         chainTiers: ['senal', 'patron'],
         body: {
           'mx-es':
-            'VigiMed detectó el paso del recién nacido por el punto de control del cunero sin la pulsera materno-neonatal validada y sin acompañamiento autorizado registrado en el momento del intento de egreso. La señal escaló al equipo de seguridad institucional antes del segundo perímetro. El recién nacido regresó con su madre, la cohorte materno-neonatal quedó verificada intacta, y el evento entró al registro institucional como activación de Código Rosa documentada con cadena de identificación trazable por turno.',
+            'VigiMed detectó el paso del recién nacido por el punto de control del cunero sin pulsera materno-neonatal validada ni acompañamiento autorizado. La señal escaló a seguridad antes del segundo perímetro. El recién nacido regresó con su madre, la cohorte materno-neonatal verificada intacta, y el evento entró al registro como Código Rosa con cadena trazable por turno.',
           'us-en': '[us-en pending]',
         },
         quote: {
@@ -686,7 +686,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Identificación inequívoca de la persona recién nacida desde el momento del nacimiento, con brazalete de identificación con los datos de la madre colocado en presencia de ésta antes de salir de la sala de expulsión o quirófano, conservándolo durante toda la estancia hospitalaria.',
+              'Identificación inequívoca del recién nacido desde el nacimiento, con brazalete con datos de la madre colocado en presencia de ésta antes de salir de la sala de expulsión y conservado durante toda la estancia.',
             'us-en': '[us-en pending]',
           },
           evidence: {
@@ -699,7 +699,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Activación, capacitación y simulacro periódico del protocolo Código Rosa bajo la coordinación del Comité Hospitalario de Emergencias y Desastres, conforme a los lineamientos del Programa Hospital Seguro y a las Acciones Esenciales para la Seguridad del Paciente.',
+              'Activación, capacitación y simulacro periódico del Código Rosa bajo el Comité Hospitalario de Emergencias y Desastres, conforme al Programa Hospital Seguro y a las Acciones Esenciales para la Seguridad del Paciente.',
             'us-en': '[us-en pending]',
           },
           evidence: {
@@ -712,7 +712,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Integridad y verificación continua de rutas de evacuación y salidas de emergencia en áreas de atención obstétrica y neonatal, conforme al Programa Interno de Protección Civil y a la normativa de infraestructura aplicable a establecimientos hospitalarios.',
+              'Integridad y verificación continua de rutas de evacuación y salidas de emergencia en áreas obstétrica y neonatal, conforme al Programa Interno de Protección Civil y a la normativa de infraestructura aplicable.',
             'us-en': '[us-en pending]',
           },
           evidence: {
@@ -725,7 +725,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Control de apertura y cierre de la puerta de aislamiento conforme al protocolo de cohorte para pacientes con sospecha o confirmación de infección asociada a la atención, con trazabilidad de cada quiebre y vinculación al expediente clínico del paciente activo.',
+              'Control de apertura y cierre de la puerta de aislamiento conforme al protocolo de cohorte para pacientes con infección asociada a la atención, con trazabilidad de cada quiebre y vinculación al expediente.',
             'us-en': '[us-en pending]',
           },
           evidence: {
@@ -800,12 +800,12 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         },
         preview: {
           'mx-es':
-            'VigiMed detecta tres clases de evento institucional en tiempo real: aperturas de la puerta de aislamiento fuera de protocolo de cohorte (UC6), obstrucciones o quiebres de integridad en rutas de evacuación obstétrica y neonatal (UC7), y pasos del recién nacido por los puntos de control del cunero sin identificación validada ni acompañamiento autorizado (UC12).',
+            'VigiMed detecta tres clases de evento institucional en tiempo real bajo tres casos de uso: aislamiento (UC6), evacuación (UC7), control del cunero (UC12).',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'VigiMed detecta tres clases de evento institucional en tiempo real: aperturas de la puerta de aislamiento fuera de protocolo de cohorte (UC6), obstrucciones o quiebres de integridad en rutas de evacuación obstétrica y neonatal (UC7), y pasos del recién nacido por los puntos de control del cunero sin identificación validada ni acompañamiento autorizado (UC12). Cada detección es continua, opera al segundo, y no depende de reporte manual posterior.',
+            'VigiMed detecta tres clases de evento institucional en tiempo real bajo tres casos de uso: aislamiento (UC6), evacuación (UC7), control del cunero (UC12). Cubre aperturas de la puerta de aislamiento fuera de protocolo de cohorte, obstrucciones o quiebres de integridad en rutas de evacuación obstétrica y neonatal, y pasos del recién nacido por los puntos de control del cunero sin identificación validada ni acompañamiento autorizado. Cada detección es continua, opera al segundo, y no depende de reporte manual posterior.',
           'us-en': '[us-en pending]',
         },
       },
@@ -845,12 +845,12 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         },
         preview: {
           'mx-es':
-            'VigiMed se acopla a la cadena de decisión que su clínica ya tiene: el Director Médico mantiene la autoridad clínica institucional, la Jefa de Enfermería Obstétrica mantiene la operación clínica de piso, la Coordinación de Calidad y Seguridad del Paciente mantiene el ciclo de acreditación, y la Dirección General mantiene la posición institucional ante familia y autoridad sanitaria.',
+            'VigiMed se acopla a la cadena de decisión institucional que su clínica ya tiene; no agrega un nuevo rol, entrega la evidencia continua que cada rol necesita.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'VigiMed se acopla a la cadena de decisión que su clínica ya tiene: el Director Médico mantiene la autoridad clínica institucional, la Jefa de Enfermería Obstétrica mantiene la operación clínica de piso, la Coordinación de Calidad y Seguridad del Paciente mantiene el ciclo de acreditación, y la Dirección General mantiene la posición institucional ante familia y autoridad sanitaria. VigiMed no agrega un nuevo rol institucional; entrega la evidencia continua que cada rol necesita en su punto de la cadena señal → patrón → tendencia → criterio → estándar, de modo que la decisión institucional se documenta en el momento, no se reconstruye después.',
+            'VigiMed se acopla a la cadena de decisión institucional que su clínica ya tiene; no agrega un nuevo rol, entrega la evidencia continua que cada rol necesita. El Director Médico mantiene la autoridad clínica institucional; la Jefa de Enfermería Obstétrica, la operación clínica de piso; la Coordinación de Calidad y Seguridad del Paciente, el ciclo de acreditación; y la Dirección General, la posición institucional ante familia y autoridad sanitaria. Cada rol opera en su punto de la cadena señal → patrón → tendencia → criterio → estándar, de modo que la decisión institucional se documenta en el momento, no se reconstruye después.',
           'us-en': '[us-en pending]',
         },
       },
@@ -866,12 +866,12 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         },
         preview: {
           'mx-es':
-            'VigiMed produce el Acta de Cumplimiento Regulatorio institucional, con cadena de decisión documentada al segundo y obligación verificada contra cuatro anclas regulatorias del segmento: NOM-007-SSA2-2016 (atención materno-perinatal e identificación del recién nacido), Ley General de Salud Art. 64 (atención materno-infantil y seguridad institucional), Programa Hospital Seguro (protocolos de respuesta y simulacro institucional), y NOM-016-SSA3-2012 (atención médica hospitalaria y aislamiento).',
+            'VigiMed produce el Acta de Cumplimiento Regulatorio institucional, con obligación verificada contra cuatro anclas regulatorias del segmento.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'VigiMed produce el Acta de Cumplimiento Regulatorio institucional, con cadena de decisión documentada al segundo y obligación verificada contra cuatro anclas regulatorias del segmento: NOM-007-SSA2-2016 (atención materno-perinatal e identificación del recién nacido), Ley General de Salud Art. 64 (atención materno-infantil y seguridad institucional), Programa Hospital Seguro (protocolos de respuesta y simulacro institucional), y NOM-016-SSA3-2012 (atención médica hospitalaria y aislamiento). La evidencia queda disponible al cierre del evento, sin reconstrucción del expediente operativo, lista para la próxima visita de acreditación, para requerimiento de autoridad sanitaria, y para CONAMED en su caso.',
+            'VigiMed produce el Acta de Cumplimiento Regulatorio institucional, con obligación verificada contra cuatro anclas regulatorias del segmento. Las anclas son NOM-007-SSA2-2016 (atención materno-perinatal e identificación del recién nacido), Ley General de Salud Art. 64 (atención materno-infantil y seguridad institucional), Programa Hospital Seguro (protocolos de respuesta y simulacro institucional), y NOM-016-SSA3-2012 (atención médica hospitalaria y aislamiento). La evidencia queda disponible al cierre del evento, sin reconstrucción del expediente operativo, lista para la próxima visita de acreditación, para requerimiento de autoridad sanitaria, y para CONAMED en su caso.',
           'us-en': '[us-en pending]',
         },
       },
@@ -887,12 +887,12 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         },
         preview: {
           'mx-es':
-            'VigiMed Insights consolida el patrón institucional de cada uno de los tres perímetros a lo largo del tiempo: quiebres recurrentes de protocolo de aislamiento por turno y por área, hallazgos repetidos en rutas de evacuación, y patrón de activaciones y simulacros de Código Rosa.',
+            'VigiMed Insights consolida el patrón institucional de los tres perímetros a lo largo del tiempo.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'VigiMed Insights consolida el patrón institucional de cada uno de los tres perímetros a lo largo del tiempo: quiebres recurrentes de protocolo de aislamiento por turno y por área, hallazgos repetidos en rutas de evacuación, y patrón de activaciones y simulacros de Código Rosa. La inteligencia documentada que emerge alimenta el criterio institucional aplicado y el estándar que la clínica firma ante familia, autoridad sanitaria y responsable sanitario. La operación sostenida no entrega más eventos; entrega menos eventos, con evidencia mejor.',
+            'VigiMed Insights consolida el patrón institucional de los tres perímetros a lo largo del tiempo. Quiebres recurrentes de protocolo de aislamiento por turno y por área, hallazgos repetidos en rutas de evacuación, y patrón de activaciones y simulacros de Código Rosa. La inteligencia documentada que emerge alimenta el criterio institucional aplicado y el estándar que la clínica firma ante familia, autoridad sanitaria y responsable sanitario. La operación sostenida no entrega más eventos; entrega menos eventos, con evidencia mejor.',
           'us-en': '[us-en pending]',
         },
       },
