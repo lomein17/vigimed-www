@@ -14,7 +14,7 @@
 // tab order per VM-469 doc §B (D-VM469-5):
 //   - jefeUveh ← Director Médico (Tab 1, default-active per D-VM469-8)
 //   - calidad  ← Jefa de Enfermería Obstétrica (Tab 2, chain-origin in §C)
-//   - medica   ← Coordinación de Calidad y Seguridad del Paciente (Tab 3)
+//   - medica   ← Coordinación de Calidad (Tab 3)
 //   - general  ← Dirección General (Tab 4)
 // defaultPersona = 'jefeUveh' so Director Médico is the leftmost-
 // rendered cold-load default. §B/§C tab default asymmetry is
@@ -93,8 +93,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
   // Emergencia, UC12 Código Rosa). Persona keys map by D-VM473-1;
   // chassis PERSONA_ORDER is fixed (jefeUveh → calidad → medica →
   // general), so tabs render visually as Director Médico (default
-  // active) → Jefa de Enfermería Obstétrica → Coordinación de Calidad
-  // y Seguridad del Paciente → Dirección General.
+  // active) → Jefa de Enfermería Obstétrica → Coordinación de Calidad → Dirección General.
   // ---------------------------------------------------------------------------
   section2: {
     eyebrow: {
@@ -220,11 +219,11 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
           },
         ],
       },
-      // medica ← Coordinación de Calidad y Seguridad del Paciente
+      // medica ← Coordinación de Calidad
       // (D-VM473-1). Tab 3.
       medica: {
         roleLabel: {
-          'mx-es': 'Coordinación de Calidad y Seguridad del Paciente',
+          'mx-es': 'Coordinación de Calidad',
           'us-en': '[us-en pending]',
         },
         tierLabel: {
@@ -350,7 +349,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
     // governs the break point.
     heading: {
       'mx-es':
-        'Un intento de sustracción detectado en primer punto.\nEl recién nacido en brazos de su madre antes del segundo.',
+        'Un intento de sustracción detectado en primer punto.\nEl recién nacido devuelto a su madre antes del segundo.',
       'us-en': '[us-en pending]',
     },
     // headingFrame inherited verbatim from CM/HP per doc §C.2; chain
@@ -445,7 +444,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
       },
-      // Tab 3 -- Coordinación de Calidad y Seguridad del Paciente.
+      // Tab 3 -- Coordinación de Calidad.
       // Trazabilidad from first signal through institutional close;
       // evidence consolidated for the Comité Hospitalario de
       // Emergencias y Desastres and the next acreditación visit. Doc
@@ -453,7 +452,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
       // trigger.
       {
         label: {
-          'mx-es': 'Coordinación de Calidad y Seguridad del Paciente',
+          'mx-es': 'Coordinación de Calidad',
           'us-en': '[us-en pending]',
         },
         labelMobile: {
@@ -850,7 +849,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'VigiMed se acopla a la cadena de decisión institucional que su clínica ya tiene; no agrega un nuevo rol, entrega la evidencia continua que cada rol necesita. El Director Médico mantiene la autoridad clínica institucional; la Jefa de Enfermería Obstétrica, la operación clínica de piso; la Coordinación de Calidad y Seguridad del Paciente, el ciclo de acreditación; y la Dirección General, la posición institucional ante familia y autoridad sanitaria. Cada rol opera en su punto de la cadena señal → patrón → tendencia → criterio → estándar, de modo que la decisión institucional se documenta en el momento, no se reconstruye después.',
+            'VigiMed se acopla a la cadena de decisión institucional que su clínica ya tiene; no agrega un nuevo rol, entrega la evidencia continua que cada rol necesita. El Director Médico mantiene la autoridad clínica institucional; la Jefa de Enfermería Obstétrica, la operación clínica de piso; la Coordinación de Calidad, el ciclo de acreditación; y la Dirección General, la posición institucional ante familia y autoridad sanitaria. Cada rol opera en su punto de la cadena señal → patrón → tendencia → criterio → estándar, de modo que la decisión institucional se documenta en el momento, no se reconstruye después.',
           'us-en': '[us-en pending]',
         },
       },
