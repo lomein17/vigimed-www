@@ -1,9 +1,61 @@
-// Laboratorios Clínicos mx-es segment fill. Scaffolded from
-// src/content/mx-es/segments/centros-medicos.ts on 2026-05-13.
-// Localized strings and asset paths are placeholders carried over
-// verbatim from CM at scaffold time; per-segment content authoring
-// lands in a follow-up ticket. Do not invent Linear references
-// inside this header until a real content lock is recorded.
+// Laboratorios Clínicos mx-es segment fill.
+// Locked content authored under VM-470 in Linear doc slug a82cd7777a33
+// (Done 2026-05-14). Engineering fill landed under VM-474
+// (2026-05-14): pure mechanical replacement against the locked SSOT.
+// §F (section5.heading + reassurance) and sticky prompts stay
+// chassis-constant / placeholder per ticket non-goals.
+//
+// Locale handling: mx-es-only per D-S36-2. us-en values stay at
+// '[us-en pending]' and never render (route guard returns notFound()
+// for non-mx-es requests).
+//
+// D-VM474-1: §B PersonaKey mapping. Chassis PERSONA_ORDER is fixed at
+// jefeUveh → calidad → medica → general. Labs content maps by visual
+// tab order per VM-470 doc §B:
+//   - jefeUveh ← Director Técnico (Tab 1, default-active)
+//   - calidad  ← Jefe de Calidad ISO 15189 (Tab 2, chain-origin in §C)
+//   - medica   ← Director de Operaciones (Tab 3)
+//   - general  ← Director General (Tab 4)
+// defaultPersona = 'jefeUveh' so Director Técnico is the leftmost-
+// rendered cold-load default.
+//
+// D-VM474-2: §B/§C tab default asymmetry is intentional, mirroring
+// the VM-469 D-VM469-10 precedent. §B default = Director Técnico
+// (institutional-authority frame for the matrix); §C default = Jefe
+// de Calidad ISO 15189 (chain-origin role for the §C campana de
+// bioseguridad walkthrough).
+//
+// §B matrix shape is 4×4 (four personas × four UCs). UC scope inside
+// this matrix is the eight-UC Labs set: UC4 Llenado de Punzocortantes,
+// UC5 Segregación RPBI, UC7 Salidas de Emergencia, UC11 Control de
+// Accesos, UC14 EPP Laboratorios, UC15 Campana de Bioseguridad,
+// UC16 Custodia de Muestras, UC17 Higiene Flebotomía. Each persona's
+// four-card subset is curated against the buyer-chain priority for
+// the role.
+//
+// D-VM474-3: §D Acta establecimientoLabel ships as `[Laboratorio
+// Clínico]`. marcoNormativo anchors on Ley General de Salud, Art. 200
+// (federal statute, not norma), parallel to CdM's LGS Art. 64 anchor.
+//
+// §B ucSupplement is segment-specific (`Ocho puntos de control
+// sostenidos en tiempo real, más la inteligencia documentada que
+// emerge de VigiMed Insights.`). The CM catalog-supplement lineage
+// drops here because the eight-UC scope is the entire Labs offering,
+// not a subset of a larger catalog.
+//
+// §C chain-anchor `estandar` tier description substitutes Labs-
+// specific four-surface institutional accountability (COFEPRIS, EMA,
+// cliente referente, responsable sanitario), replacing the
+// private-sector consejo-and-reguladores lineage carried by CM/HP/SH.
+//
+// §F section5.heading + reassurance and sticky prompts stay chassis-
+// constant / placeholder per VM-474 non-goal.
+//
+// sealLabel: ships in slash form (`EVIDENCIA / SOSTENIDA`) per
+// cross-segment visual precedent (CM/SH/HP/CdM). The VM-470 doc
+// renders the badge space-separated; the slash separator is a
+// chassis-render convention preserved for visual consistency across
+// the v1 slate.
 
 import type { ChassisFill } from '@/lib/chassis/slots';
 
@@ -25,7 +77,7 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
     claim: {
       'mx-es': [
         {
-          text: 'La inteligencia que su institución ya produce, sostenida en cada turno, en cada área crítica, sin omisión.',
+          text: 'Cada protocolo de bioseguridad que su laboratorio ya implementa, ahora con un par de ojos que no parpadea durante el turno.',
         },
       ],
       'us-en': [{ text: '[us-en pending]' }],
@@ -41,8 +93,13 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 2 -- Operational Reality (VM-447 D-S52-2 locked mx-es content)
-  // Persona x domain matrix: four buyer-chain personas, four UCs each.
+  // Section 2 -- Operational Reality (VM-474 mx-es content fill 2026-05-14).
+  // 4×4 persona x UC matrix: four buyer-chain personas, four UCs each
+  // drawn from the eight-UC Labs set. Persona keys map by D-VM474-1;
+  // chassis PERSONA_ORDER is fixed (jefeUveh → calidad → medica →
+  // general), so tabs render visually as Director Técnico (default
+  // active) → Jefe de Calidad ISO 15189 → Director de Operaciones →
+  // Director General.
   // ---------------------------------------------------------------------------
   section2: {
     eyebrow: {
@@ -57,13 +114,15 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
     // VM-457 D-S57-4: framing carries the migrated §A subhead. The `\n`
     // literals are preserved verbatim; Section2OperationalReality.tsx
     // applies `whiteSpace: 'pre-line'` so they render as hard breaks.
+    // Bold-amber sentence 2 carries the segment biosafety spine per
+    // VM-470 doc §B.
     framing: {
       'mx-es': [
         {
           text: 'Detección continua, confirmación humana, y análisis de\ncada evento crítico en sus áreas de mayor riesgo.\n',
         },
         {
-          text: 'Inteligencia operativa requerida para mejorar, no para vigilar.',
+          text: 'Bioseguridad sostenida en el turno, no recordada en la capacitación.',
           emphasis: 'bold-amber',
         },
       ],
@@ -71,43 +130,25 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
     },
     pressures: [],
     ucByPersona: {
+      // jefeUveh ← Director Técnico (D-VM474-1). Tab 1, default-active.
       jefeUveh: {
-        roleLabel: { 'mx-es': 'Jefe UVEH', 'us-en': '[us-en pending]' },
+        roleLabel: {
+          'mx-es': 'Director Técnico',
+          'us-en': '[us-en pending]',
+        },
         tierLabel: {
-          'mx-es': 'Vigilancia epidemiológica',
+          'mx-es': 'Autoridad técnica institucional',
           'us-en': '[us-en pending]',
         },
         cards: [
           {
             name: {
-              'mx-es': 'Campo Estéril',
+              'mx-es': 'Llenado de Punzocortantes',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed detecta cada infección de sitio quirúrgico, la confirma contra el criterio vigente, y consolida el patrón por servicio antes del reporte mensual.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Puerta de Aislamiento',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed registra cada apertura fuera de protocolo, la confirma contra el caso activo, y construye el patrón de quiebres por turno antes de que escale a brote.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Limpieza Ambiental',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed verifica la cobertura de limpieza terminal en áreas críticas, confirma cada hallazgo contra el ciclo del paciente, y deja documentada la cadena de evidencia ante auditoría.',
+                'VigiMed detecta cada contenedor de punzocortantes que rebasa la línea de llenado en el momento que ocurre, lo confirma contra la posición del bench y el turno activo, y deja documentada la cadena de responsabilidad técnica antes del siguiente cambio de turno.',
               'us-en': '[us-en pending]',
             },
           },
@@ -118,15 +159,38 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed detecta segregación incorrecta en el punto de generación, confirma cada evento contra el criterio normativo, y consolida el patrón por servicio antes de que se vuelva hallazgo.',
+                'VigiMed detecta cada segregación incorrecta en el punto de generación, la confirma contra el criterio NOM-087, y consolida el patrón por bench y por turno antes de que el hallazgo escale a auditoría sanitaria.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'Campana de Bioseguridad',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed registra cada operación de la campana fuera de protocolo (sash position, flujo de aire interrumpido, manipulación sin EPP completo), la confirma contra el caso técnico activo, y sostiene la evidencia institucional antes del cierre del lote.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'Custodia de Muestras',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed sostiene la trazabilidad de cada muestra desde recepción hasta destino final, confirma cada quiebre de custodia en tiempo real, y deja constancia de la decisión técnica institucional antes del cierre del expediente analítico.',
               'us-en': '[us-en pending]',
             },
           },
         ],
       },
+      // calidad ← Jefe de Calidad ISO 15189 (D-VM474-1). Tab 2.
       calidad: {
         roleLabel: {
-          'mx-es': 'Subdirección de Calidad',
+          'mx-es': 'Jefe de Calidad ISO 15189',
           'us-en': '[us-en pending]',
         },
         tierLabel: {
@@ -136,109 +200,111 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
         cards: [
           {
             name: {
-              'mx-es': 'Proporción Personal-Paciente',
+              'mx-es': 'Segregación RPBI',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed registra el ratio enfermería-paciente turno a turno, lo confirma contra el umbral institucional, y consolida la tendencia que el Plan de Mejora sintetiza en un cierre.',
+                'VigiMed produce la evidencia continua de cumplimiento del protocolo NOM-087 en cada punto de generación, la consolida por bench y por turno, y la deja lista para la cédula de acreditación antes de la visita de COFEPRIS.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Puerta de Aislamiento',
+              'mx-es': 'EPP Laboratorios',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed mapea cada quiebre de aislamiento contra el estándar institucional, lo cruza con los marcos acreditadores concurrentes, y produce un solo plan de acción en lugar de tres.',
+                'VigiMed convierte cada hallazgo de uso incorrecto o ausencia de EPP en evidencia sostenida, alineada al programa institucional de bioseguridad ISO 15189, y disponible para acreditación sin reconstrucción del expediente operativo.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Tiempo Fuera',
+              'mx-es': 'Campana de Bioseguridad',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed documenta la adherencia al tiempo fuera por sala y procedimiento, confirma el cumplimiento del protocolo, y consolida la tendencia que sustenta la firma del Plan ante junta directiva.',
+                'VigiMed deja constancia documentada de cada operación de la campana, vinculada al ciclo de calibración y al expediente institucional de bioseguridad, y sostiene el patrón para el seguimiento de mejora continua del comité de bioseguridad.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Limpieza Ambiental',
+              'mx-es': 'Higiene Flebotomía',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed valida cada ciclo de limpieza terminal contra el estándar institucional, lo mapea contra los marcos acreditadores en una sola lectura, y produce una sola tendencia institucional.',
+                'VigiMed verifica el cumplimiento del protocolo de higiene en cada acto de flebotomía, la confirma contra el criterio institucional aplicable, y sostiene la evidencia continua para acreditación ISO 15189 sin reconstrucción retrospectiva.',
               'us-en': '[us-en pending]',
             },
           },
         ],
       },
+      // medica ← Director de Operaciones (D-VM474-1). Tab 3.
       medica: {
         roleLabel: {
-          'mx-es': 'Dirección Médica',
+          'mx-es': 'Director de Operaciones',
           'us-en': '[us-en pending]',
         },
         tierLabel: {
-          'mx-es': 'Decisión clínica institucional',
+          'mx-es': 'Operación clínica de piso',
           'us-en': '[us-en pending]',
         },
         cards: [
           {
             name: {
-              'mx-es': 'Campo Estéril',
+              'mx-es': 'Salidas de Emergencia',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed cierra el ciclo mensual de la junta médica con la tendencia de infecciones de sitio quirúrgico ya consolidada por servicio y campus, lo que convierte la decisión clínica en lectura, no reconstrucción.',
+                'VigiMed verifica la integridad de cada ruta de evacuación al inicio de cada turno, confirma cada obstrucción contra el Programa Interno de Protección Civil, y deja documentada la evidencia operativa antes de la siguiente entrega.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Proporción Personal-Paciente',
+              'mx-es': 'Control de Accesos',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed traduce la tendencia turno a turno en una decisión de asignación clínica, con la evidencia ya cruzada contra resultados de paciente, y permite fijar criterio sin esperar al cierre.',
+                'VigiMed registra cada paso por los accesos institucionales fuera de horario o sin credencial validada, confirma el contexto operativo del turno, y consolida el patrón por acceso y por banda horaria antes de que escale a hallazgo de seguridad.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Carro Rojo',
+              'mx-es': 'EPP Laboratorios',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed verifica disposición y caducidad de cada carro rojo turno a turno, consolida la tendencia institucional de eventos centinela, y entrega un criterio de readiness clínico documentado, no inferido.',
+                'VigiMed detecta cada bench operado sin EPP completo en el momento que ocurre, lo confirma contra el protocolo institucional vigente, y consolida el patrón por área y por turno antes de la junta operativa semanal.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Tiempo Fuera',
+              'mx-es': 'Higiene Flebotomía',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed documenta cada cirugía de sitio incorrecto evitada en el tiempo fuera, consolida la tendencia por sala y equipo quirúrgico, y entrega criterio sobre cuál servicio requiere intervención.',
+                'VigiMed registra cada acto de flebotomía contra el protocolo de higiene institucional, confirma el cumplimiento operativo del turno, y deja documentada la evidencia para la trazabilidad de cada paciente atendido.',
               'us-en': '[us-en pending]',
             },
           },
         ],
       },
+      // general ← Director General (D-VM474-1). Tab 4.
       general: {
         roleLabel: {
-          'mx-es': 'Dirección General',
+          'mx-es': 'Director General',
           'us-en': '[us-en pending]',
         },
         tierLabel: {
@@ -248,45 +314,45 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
         cards: [
           {
             name: {
-              'mx-es': 'Campo Estéril',
+              'mx-es': 'Llenado de Punzocortantes',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed convierte la tasa institucional de infección de sitio quirúrgico en estándar reportable ante consejo, ya consolidada y firmada, y permite llegar a la conferencia de apertura con un Plan leído.',
+                'VigiMed consolida el reporte institucional de cumplimiento del protocolo de punzocortantes, lo confirma contra el criterio NOM-087 aplicable, y produce la posición defendible ante COFEPRIS al momento del requerimiento.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Proporción Personal-Paciente',
+              'mx-es': 'Salidas de Emergencia',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed eleva el ratio enfermería-paciente a indicador institucional reportable trimestre a trimestre, ya cruzado con resultados clínicos, y sostiene la decisión de asignación de capital ante consejo.',
+                'VigiMed entrega la evidencia agregada de integridad de rutas de evacuación, alineada al Programa Interno de Protección Civil, y disponible para la rendición de cuentas institucional ante Protección Civil y autoridad sanitaria.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Carro Rojo',
+              'mx-es': 'Control de Accesos',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed convierte el readiness de carros rojos en evidencia institucional documentada por campus, lo que protege la firma de la dirección general ante eventos centinela y aseguradora.',
+                'VigiMed sostiene el reporte institucional de cada quiebre de control de accesos, con cadena de decisión documentada y respuesta verificable, lista para sostener la posición institucional ante COFEPRIS, cliente referente y reclamación legal.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Segregación RPBI',
+              'mx-es': 'Custodia de Muestras',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed produce evidencia institucional de cumplimiento RPBI lista para reporte externo, consolidada y firmada, lo que protege a la dirección general ante hallazgo regulatorio o exposición pública.',
+                'VigiMed produce la posición institucional ante cada quiebre de cadena de custodia, con cohorte de muestras verificada al cierre y evidencia continua disponible para el hospital referente y la autoridad sanitaria sin reconstrucción retrospectiva.',
               'us-en': '[us-en pending]',
             },
           },
@@ -294,23 +360,29 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
       },
     },
     defaultPersona: 'jefeUveh',
+    // ucSupplement: segment-specific footer for the eight-UC Labs
+    // scope. The CM catalog-supplement lineage does not apply because
+    // the eight-UC set is the entire Labs offering, not a subset.
     ucSupplement: {
       'mx-es':
-        'Además de 13 casos de uso adicionales en el catálogo VigiMed, más la inteligencia documentada que emerge de VigiMed Insights.',
+        'Ocho puntos de control sostenidos en tiempo real, más la inteligencia documentada que emerge de VigiMed Insights.',
       'us-en': '[us-en pending]',
     },
   },
 
   // ---------------------------------------------------------------------------
-  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant;
-  // S55 prevention-frame rewrite per VM-448 punch-list 2026-05-08).
-  // Tab 1 catches a real breach in real time and prevents that
-  // patient's infection. Tabs 2-4 work the recurring breach pattern
-  // across multiple OR sessions, feed Insights, and produce governance
-  // change. Word-cap discipline (50w body / 30w quote / 50w citation)
-  // is fixture-only: chassis enforces no runtime caps.
-  // tabCount: 4 (Jefe de UVEH, Subdirección de Calidad, Dirección
-  // Médica, Dirección General); tabDefault: 1.
+  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant
+  // shape; VM-474 mx-es content fill 2026-05-14). Single-incident
+  // walkthrough: quiebre de protocolo en campana de bioseguridad
+  // detectado durante turno nocturno; cohorte de personal sin
+  // exposición y muestra procesada sin contaminación cruzada. Tab 1
+  // detects the index event in real time at the campana de
+  // bioseguridad and prevents propagation across the bench adjacent;
+  // Tabs 2-4 consolidate the response into institutional evidence and
+  // the position ante COFEPRIS, EMA, cliente referente y responsable
+  // sanitario. tabCount: 4; tabDefault: 1. D-VM474-2: §C default =
+  // chain-origin role (Jefe de Calidad ISO 15189), intentionally
+  // asymmetric with §B default (Director Técnico).
   // ---------------------------------------------------------------------------
   section3: {
     eyebrow: {
@@ -318,24 +390,17 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
         'VIGIMED EN LA PRÁCTICA: EL CAMINO DE RESOLUCIÓN DE UN INCIDENTE',
       'us-en': '[us-en pending]',
     },
-    // S57 FIX 2: heading rewritten on the same prevention-frame as S55
-    // but tightened: "brecha" (feminine) replaces "quiebre"; "evitada"
-    // replaces "que no ocurrió"; trailing clause restated as "lo que
-    // impidió que volviera a ocurrir." Adjective concord follows
-    // "brecha" (feminine), so "detectada".
+    // VM-474 mx-es heading per VM-470 doc §C.title. Two-sentence prose
+    // with literal `\n` mid-string; chassis applies
+    // `whiteSpace: 'pre-line'` to render as hard line break.
     heading: {
       'mx-es':
-        'Brecha de campo estéril detectada en el momento.\nLa infección evitada, y lo que impidió se repitiera.',
+        'Quiebre de protocolo en campana de bioseguridad detectado durante turno nocturno.\nLa cohorte de personal sin exposición, y la muestra procesada sin contaminación cruzada.',
       'us-en': '[us-en pending]',
     },
-    // S56 FIX 3 + 4: trailing period moves into the bold-amber span so it
-    // renders amber alongside the rest of the chain.
-    // S59 FIX 1: explicit \n line breaks dropped so wrap is governed by
-    // CSS, not string literals. At >=1440px the entire frame line
-    // renders single-line via white-space: nowrap on .vm-section-3-
-    // heading-frame; below that, segments wrap naturally based on
-    // container width while the bold-amber span stays unbroken at
-    // >=1280px (S55 FIX 1).
+    // headingFrame inherited verbatim from CM/HP/CdM; chain noun phrase
+    // rendered in bold-amber with trailing period inside the span
+    // (S56 FIX 3+4).
     headingFrame: {
       'mx-es': [
         { text: 'Cada rol institucional opera en un punto distinto de la cadena ' },
@@ -350,49 +415,19 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
     tabCount: 4,
     tabDefault: 1,
     tabs: [
-      // Tab 1 -- Jefe de UVEH. Chain origin: signal detected in real
-      // time, escalated, infection prevented. body 48w / quote 28w /
-      // citation 28w (NOM-045 §3.1 trimmed verbatim to fit 50w cap).
-      {
-        label: { 'mx-es': 'Jefe de UVEH', 'us-en': '[us-en pending]' },
-        tier: {
-          'mx-es': 'Vigilancia epidemiológica',
-          'us-en': '[us-en pending]',
-        },
-        headshot: '/headshots/laboratorios-clinicos/uveh.png',
-        chainTiers: ['senal', 'patron'],
-        body: {
-          'mx-es':
-            'VigiMed detectó el ingreso de personal sin vestimenta estéril al quirófano cardiotorácico en tiempo real. La señal escaló a la jefatura antes del cierre del campo. La infección que ese paciente habría desarrollado en siete días no ocurrió, y el evento entró al registro institucional como señal documentada.',
-          'us-en': '[us-en pending]',
-        },
-        quote: {
-          'mx-es':
-            '"Sin la alerta en tiempo real, ese paciente regresa a los siete días con infección de sitio quirúrgico, y nosotros abrimos dos semanas reconstruyendo si hubo más casos."',
-          'us-en': '[us-en pending]',
-        },
-        regulatoryCitation: {
-          'mx-es':
-            'NOM-045-SSA2-2005, §3.1: "Vigilancia Epidemiológica de Infecciones Nosocomiales: a la observación y análisis sistemáticos, continuos y activos de la ocurrencia y distribución de las infecciones nosocomiales."',
-          'us-en': '[us-en pending]',
-        },
-        regulatory: {
-          'mx-es': 'RHOVE · NOM-045 · NOM-016',
-          'us-en': '[us-en pending]',
-        },
-      },
-      // Tab 2 -- Subdirección de Calidad. Pattern consolidation from
-      // recurring sterile-field breaches; one tendency read by all
-      // concurrent regulatory frames. body 45w / quote 25w / citation
-      // 28w (NOM-004 §1 trimmed verbatim; same trim point as Tab 3,
-      // duplication acknowledged per S54-1 lock).
+      // Tab 1 -- Jefe de Calidad ISO 15189. Chain origin: VigiMed
+      // detects the sash position fuera del límite protocolizado
+      // durante la manipulación de muestra infectocontagiosa en turno
+      // nocturno; escalation routed to Calidad ISO before the next
+      // sampling; cohort of personnel verified intact. Doc label is 25
+      // chars; labelMobile shortens for the accordion trigger.
       {
         label: {
-          'mx-es': 'Subdirección de Calidad',
+          'mx-es': 'Jefe de Calidad ISO 15189',
           'us-en': '[us-en pending]',
         },
         labelMobile: {
-          'mx-es': 'Subdir. Calidad',
+          'mx-es': 'Jefe Calidad ISO',
           'us-en': '[us-en pending]',
         },
         tier: {
@@ -400,89 +435,126 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
         headshot: '/headshots/laboratorios-clinicos/calidad.webp',
+        chainTiers: ['senal', 'patron'],
+        body: {
+          'mx-es':
+            'VigiMed detectó la posición del sash de la campana de bioseguridad fuera del límite protocolizado durante la manipulación de muestra infectocontagiosa en turno nocturno. La señal escaló al Jefe de Calidad antes del siguiente muestreo del lote. El técnico cerró el sash a la posición correcta antes de continuar la manipulación, la cohorte de personal del turno quedó sin exposición documentada, y el evento entró al expediente institucional de bioseguridad como activación del protocolo con cadena de decisión técnica trazable por bench y por turno, lista para la siguiente cédula de acreditación ISO 15189.',
+          'us-en': '[us-en pending]',
+        },
+        quote: {
+          'mx-es':
+            '"El sash en la posición incorrecta a las tres de la mañana, sin nadie supervisando, es exactamente el evento que el programa de bioseguridad no puede atrapar por sí solo."',
+          'us-en': '[us-en pending]',
+        },
+        regulatoryCitation: {
+          'mx-es':
+            'ISO 15189:2022, §6.3.4 Instalaciones y condiciones ambientales: "El laboratorio deberá disponer de instalaciones que permitan la correcta ejecución de los procedimientos analíticos, incluyendo equipos de protección colectiva como campanas de bioseguridad operados conforme a sus especificaciones técnicas y protocolos institucionales documentados."',
+          'us-en': '[us-en pending]',
+        },
+        regulatory: {
+          'mx-es': 'ISO 15189 · NOM-087 · Bioseguridad',
+          'us-en': '[us-en pending]',
+        },
+      },
+      // Tab 2 -- Director Técnico. Chain consolidated into the
+      // technical-authority institutional decision recorded at lot
+      // close: sash position, técnico identificado, muestra trazada,
+      // cohorte verificada, contaminación cruzada confirmada evitada.
+      // Doc label is 16 chars; no labelMobile needed.
+      {
+        label: { 'mx-es': 'Director Técnico', 'us-en': '[us-en pending]' },
+        tier: {
+          'mx-es': 'Autoridad técnica institucional',
+          'us-en': '[us-en pending]',
+        },
+        headshot: '/headshots/laboratorios-clinicos/tecnico.webp',
         chainTiers: ['patron', 'tendencia'],
         body: {
           'mx-es':
-            'La señal del primer evento no quedó aislada. VigiMed consolidó el patrón de quiebres de campo estéril en quirófano cardiotorácico a lo largo del trimestre, y la tendencia ya estaba documentada cuando la revisión institucional la pidió. Una sola evidencia, leída por todos los marcos concurrentes.',
+            'VigiMed entregó al Director Técnico la cadena completa del evento al cierre del lote: posición del sash registrada al segundo, técnico identificado por turno, muestra infectocontagiosa trazada desde recepción hasta procesamiento, cohorte de personal del turno verificada sin exposición, contaminación cruzada hacia el bench adjacente confirmada como evitada. La decisión técnica institucional sobre la liberación del lote quedó documentada con la cadena de responsabilidad trazable, sin reconstrucción retrospectiva del expediente analítico.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin tendencia documentada, llego a junta con tres reportes en tres formatos distintos y dedico la primera hora a explicar de dónde sale cada cifra."',
+            '"La decisión técnica sobre liberar un lote después de un quiebre de bioseguridad no se sostiene en la memoria del turno; se sostiene en lo que quedó documentado al segundo."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'NOM-004-SSA3-2012, §1: "Esta norma establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
+            'NOM-087-ECOL-SSA1-2002, §6.3: "El manejo de los residuos peligrosos biológico-infecciosos deberá realizarse conforme a los procedimientos establecidos institucionalmente, garantizando la trazabilidad desde el punto de generación hasta su disposición final, con responsable identificado por turno y por área de generación."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'NOM-004 · CONAMED · CSG',
+          'mx-es': 'NOM-087 · ISO 15189 · COFEPRIS',
           'us-en': '[us-en pending]',
         },
       },
-      // Tab 3 -- Dirección Médica. Tendency arrives at clinical
-      // committee already crossed with patient outcomes and root
-      // cause; institutional criterion (double-verify protocol) signed
-      // in one session. body 43w / quote 24w / citation 28w (same
-      // NOM-004 §1 trim as Tab 2).
+      // Tab 3 -- Director de Operaciones. Trazabilidad operativa del
+      // turno nocturno sin interrupción del lote; cadena consolidada
+      // disponible para la posición ante el cliente referente sin
+      // reconstrucción del expediente. Doc label is 23 chars.
       {
-        label: { 'mx-es': 'Dirección Médica', 'us-en': '[us-en pending]' },
-        tier: {
-          'mx-es': 'Decisión clínica institucional',
+        label: {
+          'mx-es': 'Director de Operaciones',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/laboratorios-clinicos/medica.png',
+        tier: {
+          'mx-es': 'Operación clínica de piso',
+          'us-en': '[us-en pending]',
+        },
+        headshot: '/headshots/laboratorios-clinicos/operaciones.webp',
         chainTiers: ['tendencia', 'criterio'],
         body: {
           'mx-es':
-            'La tendencia llegó al comité clínico ya cruzada con resultados de paciente y causa raíz. El criterio institucional sobre acceso al quirófano cardiotorácico se firmó en una sola sesión: protocolo de doble verificación al cierre de campo, vinculante para todo el servicio.',
+            'VigiMed sostuvo la continuidad operativa del turno nocturno sin interrupción del lote. El Director de Operaciones recibió la cadena consolidada al cierre del turno: evento detectado, escalación documentada, decisión técnica adoptada, lote procesado dentro del compromiso institucional. La evidencia operativa quedó alineada al programa de bioseguridad institucional y disponible para la posición ante el cliente referente sin reconstrucción del expediente del lote.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin criterio derivado de tendencia documentada, el comité abre la sesión alineando interpretación. Salimos con acuerdos individuales que el siguiente caso vuelve a discutir."',
+            '"El cliente referente no pregunta si tuvimos un evento; pregunta si lo manejamos en el momento o si nos enteramos al día siguiente."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'NOM-004-SSA3-2012, §1: "Esta norma establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
+            'NOM-007-SSA3-2011, §10: "El responsable sanitario del laboratorio clínico es el profesional responsable de la operación técnica del establecimiento, debiendo garantizar el cumplimiento de los procedimientos institucionales en todos los turnos de operación, así como la continuidad y trazabilidad de los procesos analíticos."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'CONAMED · NOM-004 · CSG',
+          'mx-es': 'NOM-007 · Responsable Sanitario · Continuidad',
           'us-en': '[us-en pending]',
         },
       },
-      // Tab 4 -- Dirección General. Signed criterion elevated to
-      // institutional standard with full chain (signal -> operational
-      // change) documented as evidence-of-response in VigiMed
-      // Insights. body 46w / quote 23w / citation 19w.
+      // Tab 4 -- Director General. Institutional position sostenida
+      // ante COFEPRIS (expediente íntegro al requerimiento), EMA
+      // (evidencia continua para el ciclo de acreditación ISO 15189),
+      // cliente referente (cronología verificable al segundo), y
+      // responsable sanitario (criterio institucional firmado). Doc
+      // label is 16 chars; no labelMobile needed.
       {
-        label: { 'mx-es': 'Dirección General', 'us-en': '[us-en pending]' },
+        label: { 'mx-es': 'Director General', 'us-en': '[us-en pending]' },
         tier: {
           'mx-es': 'Posición institucional',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/laboratorios-clinicos/general.png',
+        headshot: '/headshots/laboratorios-clinicos/general.webp',
         chainTiers: ['criterio', 'estandar'],
         body: {
           'mx-es':
-            'El criterio firmado por el comité subió al consejo como estándar institucional con respaldo en VigiMed Insights: la cadena completa, desde la señal de quiebre hasta el cambio operativo, documentada como evidencia de respuesta. La posición ante aseguradora y CONAMED se sostuvo antes de cualquier llamada.',
+            'VigiMed entregó a la Dirección General el reporte institucional consolidado del evento: punto de detección, cadena de decisión técnica documentada, protocolo de bioseguridad aplicado, cohorte de personal del turno verificada sin exposición, contaminación cruzada evitada al bench adjacente. La institución sostuvo la posición ante COFEPRIS con expediente íntegro al momento del requerimiento, ante EMA con evidencia continua para el ciclo de acreditación ISO 15189, ante el cliente referente con cronología verificable al segundo, y ante el responsable sanitario con criterio institucional firmado, sin reconstrucción retrospectiva.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin evidencia de respuesta institucional documentada, una infección con reingreso es crisis reputacional. Defiendes operación, no decisión. Llegas a aseguradora explicando, no respondiendo."',
+            '"Cuando COFEPRIS o el cliente referente preguntan qué pasó esa noche, la diferencia entre defender la institución y reconstruir el lote se mide en horas de archivo."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'Reglamento de Procedimientos CONAMED: "el criterio institucional, pues no se trata de la mera apreciación de perito persona física."',
+            'Ley General de Salud, Art. 200: "Para los efectos de esta Ley, se entiende por establecimientos los locales y sus instalaciones, dependencias y anexos, sean fijos o móviles, en donde se desarrollen los procesos a que ella se refiere, los cuales deberán cumplir con las disposiciones que la Secretaría de Salud establezca para garantizar la protección de la salud."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'CONAMED · CSG · COFEPRIS',
+          'mx-es': 'LGS Art. 200 · COFEPRIS · EMA',
           'us-en': '[us-en pending]',
         },
       },
@@ -518,11 +590,16 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
             'us-en': '[us-en pending]',
           },
         },
+        // VM-474: estándar tier description adapted to the Labs four-
+        // surface institutional accountability set (COFEPRIS, EMA,
+        // cliente referente, responsable sanitario), replacing the
+        // private-sector consejo-and-reguladores lineage from CM/HP/SH
+        // and the maternity surface from CdM.
         estandar: {
           label: { 'mx-es': 'Estándar', 'us-en': '[us-en pending]' },
           description: {
             'mx-es':
-              'Compromiso institucional firmado ante consejo y reguladores',
+              'Compromiso institucional firmado ante COFEPRIS, EMA, cliente referente y responsable sanitario',
             'us-en': '[us-en pending]',
           },
         },
@@ -535,11 +612,15 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 4 -- Proof + Legitimacy (VM-450 D-S56-2 §D Acta de
-  // Cumplimiento lock). regulatoryDocument theme, navy background.
-  // Content per issue Scope §2 table (Carro Rojo anchor, NOM-019-
-  // SSA3-2013). Zone A is the 4-card obligation grid; Zone B is the
-  // Acta itself; Zone C is the chip rail on navy.
+  // Section 4 -- Proof + Legitimacy (VM-450 D-S56-2 shipped the
+  // regulatoryDocument theme; VM-474 mx-es content fill 2026-05-14).
+  // Top-row tile set: NOM-087 / NOM-007 / ISO 15189 / LGS Art. 200.
+  // Acta panel anchored on Ley General de Salud Art. 200 per D-VM474-3
+  // (federal statute, not norma). establecimientoLabel ships as
+  // `[Laboratorio Clínico]`. Header frame uses Labs noun-swap variant
+  // (`Su laboratorio` → `VigiMed las verifica en tiempo real, sin
+  // reconstrucción.`). sealLabel preserves the slash form
+  // (`EVIDENCIA / SOSTENIDA`) for cross-segment visual consistency.
   // ---------------------------------------------------------------------------
   section4: {
     theme: 'offwhite',
@@ -563,9 +644,9 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
       },
       frame: {
         'mx-es': [
-          { text: 'Su hospital ya opera bajo obligaciones regulatorias medibles. ' },
+          { text: 'Su laboratorio opera bajo obligaciones regulatorias medibles. ' },
           {
-            text: 'VigiMed las verifica en tiempo real, no en reconstrucción.',
+            text: 'VigiMed las verifica en tiempo real, sin reconstrucción.',
             emphasis: 'bold-amber',
           },
         ],
@@ -577,44 +658,50 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
       cards: [
         {
           articleAnchor: {
-            'mx-es': 'NOM-019-SSA3-2013',
+            'mx-es': 'NOM-087-ECOL-SSA1-2002',
             'us-en': '[us-en pending]',
           },
           label: {
-            'mx-es': 'Práctica de enfermería en respuesta de emergencia',
-            'us-en': '[us-en pending]',
-          },
-          frequency: { 'mx-es': 'POR TURNO', 'us-en': '[us-en pending]' },
-        },
-        {
-          articleAnchor: {
-            'mx-es': 'NOM-004-SSA3-2012 §1',
-            'us-en': '[us-en pending]',
-          },
-          label: {
-            'mx-es': 'Expediente clínico íntegro y trazable',
-            'us-en': '[us-en pending]',
-          },
-          frequency: { 'mx-es': 'POR EVENTO', 'us-en': '[us-en pending]' },
-        },
-        {
-          articleAnchor: {
-            'mx-es': 'NOM-016-SSA3-2012',
-            'us-en': '[us-en pending]',
-          },
-          label: {
-            'mx-es': 'Atención médica hospitalaria',
+            'mx-es':
+              'Manejo de residuos peligrosos biológico-infecciosos',
             'us-en': '[us-en pending]',
           },
           frequency: { 'mx-es': 'CONTINUA', 'us-en': '[us-en pending]' },
         },
         {
-          articleAnchor: { 'mx-es': 'CSG', 'us-en': '[us-en pending]' },
+          articleAnchor: {
+            'mx-es': 'NOM-007-SSA3-2011',
+            'us-en': '[us-en pending]',
+          },
           label: {
-            'mx-es': 'Acreditación institucional',
+            'mx-es':
+              'Organización y funcionamiento de laboratorios clínicos',
+            'us-en': '[us-en pending]',
+          },
+          frequency: { 'mx-es': 'CONTINUA', 'us-en': '[us-en pending]' },
+        },
+        {
+          articleAnchor: {
+            'mx-es': 'ISO 15189:2022',
+            'us-en': '[us-en pending]',
+          },
+          label: {
+            'mx-es':
+              'Calidad y competencia de laboratorios clínicos',
             'us-en': '[us-en pending]',
           },
           frequency: { 'mx-es': 'TRIENAL', 'us-en': '[us-en pending]' },
+        },
+        {
+          articleAnchor: {
+            'mx-es': 'LGS Art. 200',
+            'us-en': '[us-en pending]',
+          },
+          label: {
+            'mx-es': 'Regulación de establecimientos de atención médica',
+            'us-en': '[us-en pending]',
+          },
+          frequency: { 'mx-es': 'CONTINUA', 'us-en': '[us-en pending]' },
         },
       ],
     },
@@ -624,61 +711,65 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
         'mx-es': 'VIGIMED · ACTA DE CUMPLIMIENTO REGULATORIO',
         'us-en': '[us-en pending]',
       },
-      folio: { 'mx-es': 'FOLIO VM-MX-04127', 'us-en': '[us-en pending]' },
+      folio: { 'mx-es': 'FOLIO VM-MX-04130', 'us-en': '[us-en pending]' },
       establecimientoLabel: {
-        'mx-es': '[Centro Médico, tercer nivel]',
+        'mx-es': '[Laboratorio Clínico]',
         'us-en': '[us-en pending]',
       },
       marcoNormativo: {
-        'mx-es': 'NOM-019-SSA3-2013, §6',
+        'mx-es': 'Ley General de Salud, Art. 200',
         'us-en': '[us-en pending]',
       },
       obligationClauses: [
+        // Cuadrant 1 -- UC15 Campana de Bioseguridad.
         {
           text: {
             'mx-es':
-              'Preparación, verificación y reposición del carro rojo conforme a estándar institucional, con responsable identificado por turno y trazabilidad de contenido.',
+              'Operación de campanas de bioseguridad conforme a las especificaciones técnicas del equipo y a los protocolos institucionales documentados, garantizando la protección colectiva del personal del laboratorio durante la manipulación de muestras biológicas, con responsable identificado por turno y por bench.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Verificación documentada por turno, contenido y caducidades registradas en tiempo real, alerta automática ante inconformidad.',
+              'Registro continuo de la posición del sash y del estado operativo de la campana por bench y por turno, con quiebre de protocolo escalado en tiempo real y cohorte de personal del turno verificada sin exposición, lista para el ciclo de acreditación ISO 15189 sin reconstrucción retrospectiva.',
             'us-en': '[us-en pending]',
           },
         },
+        // Cuadrant 2 -- UC5 Segregación RPBI.
         {
           text: {
             'mx-es':
-              'Verificación funcional del desfibrilador y equipo de vía aérea por turno, con prueba documentada por dispositivo y escalamiento inmediato ante hallazgo de falla.',
+              'Segregación correcta de los residuos peligrosos biológico-infecciosos en el punto de generación conforme a la clasificación NOM-087, con trazabilidad desde el bench hasta la disposición final y responsable identificado por área y por turno de generación.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Prueba funcional registrada por turno y por dispositivo, hallazgo escalado en tiempo real, último mantenimiento verificable al día.',
+              'Detección de segregación incorrecta en el momento que ocurre, confirmada contra el criterio NOM-087 y consolidada por bench y por turno, con patrón disponible para la cédula de acreditación antes de la visita de COFEPRIS sin reconstrucción del expediente operativo.',
             'us-en': '[us-en pending]',
           },
         },
+        // Cuadrant 3 -- UC16 Custodia de Muestras.
         {
           text: {
             'mx-es':
-              'Activación oportuna de la respuesta de emergencia, con tiempo de respuesta medible y cadena de decisión documentada por participante.',
+              'Trazabilidad continua de la cadena de custodia de cada muestra desde recepción hasta destino final, conforme a las obligaciones del responsable sanitario sobre la operación técnica del establecimiento y la continuidad de los procesos analíticos en todos los turnos.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Tiempo de activación registrado al segundo, equipo respondiente identificado, cadena de decisión trazable por turno y por servicio.',
+              'Registro de cada quiebre de cadena de custodia en el momento que ocurre, cohorte de muestras verificada al cierre de cada cambio de turno, y decisión técnica institucional documentada por bench y por servicio, disponible para el cliente referente y la autoridad sanitaria sin reconstrucción retrospectiva.',
             'us-en': '[us-en pending]',
           },
         },
+        // Cuadrant 4 -- UC11 Control de Accesos.
         {
           text: {
             'mx-es':
-              'Análisis posterior del evento que sustente revisión institucional, aprendizaje organizacional y defensa ante reclamación.',
+              'Control y registro del paso por los accesos institucionales del laboratorio conforme a las disposiciones aplicables a establecimientos de atención médica, garantizando la integridad operativa del establecimiento ante COFEPRIS y la protección de la cadena de custodia de muestras y resultados.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Reconstrucción minuto a minuto disponible para junta clínica al cierre del evento, sin reconstrucción retrospectiva.',
+              'Registro de cada paso por los accesos institucionales con credencial validada y banda horaria, quiebre de control escalado en tiempo real, y patrón consolidado por acceso y por turno disponible para la posición institucional ante COFEPRIS, cliente referente y reclamación legal.',
             'us-en': '[us-en pending]',
           },
         },
@@ -690,13 +781,17 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
     },
     zoneCEyebrow: { 'mx-es': 'OPERAMOS BAJO', 'us-en': '[us-en pending]' },
     zoneCChips: {
-      'mx-es': ['NOM-019', 'NOM-004', 'CONAMED', 'CSG'],
+      'mx-es': ['NOM-087', 'NOM-007', 'ISO 15189', 'LGS Art. 200'],
       'us-en': ['[us-en pending]'],
     },
   },
 
   // ---------------------------------------------------------------------------
-  // Section 5 -- Final CTA (placeholder; VM-441 fills)
+  // Section 5 -- FAQ + final CTA (VM-474 mx-es content fill 2026-05-14).
+  // §F (heading + reassurance) stays chassis-constant per ticket
+  // non-goal. faqItems render in doc-literal order with steps
+  // [1, 2, 3, 4, 6, 7]. AC-F6: preview = first sentence of answer
+  // verbatim.
   // ---------------------------------------------------------------------------
   section5: {
     faqHeading: {
@@ -710,117 +805,127 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
       'us-en': '[us-en pending]',
     },
     faqItems: [
-      {
-        kind: 'withStep',
-        step: 2,
-        question: {
-          'mx-es':
-            '¿Qué ven exactamente las cámaras de VigiMed, y qué no ven?',
-          'us-en': '[us-en pending]',
-        },
-        preview: {
-          'mx-es':
-            'VigiMed instala cámaras dedicadas en áreas críticas: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de su institución.',
-          'us-en': '[us-en pending]',
-        },
-        answer: {
-          'mx-es':
-            'VigiMed instala cámaras dedicadas en áreas críticas: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de su institución. La detección cubre eventos de seguridad del paciente y de calidad de la atención que ocurren dentro del campo de visión configurado, no consultas, no áreas administrativas, no espacios privados del paciente. La selección de áreas se hace con su institución durante la configuración inicial, no con un catálogo fijo.',
-          'us-en': '[us-en pending]',
-        },
-      },
-      {
-        kind: 'withStep',
-        step: 3,
-        question: {
-          'mx-es':
-            '¿Cómo funciona la confirmación humana? ¿Hay alguien revisando todo lo que detectan las cámaras?',
-          'us-en': '[us-en pending]',
-        },
-        preview: {
-          'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución.',
-          'us-en': '[us-en pending]',
-        },
-        answer: {
-          'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución. El CRC opera 24/7 y existe precisamente para eliminar falsos positivos: el equipo clínico recibe eventos verificados, no señales crudas. La confirmación humana es lo que convierte la detección en evidencia accionable, no un paso opcional ni un proceso automatizado.',
-          'us-en': '[us-en pending]',
-        },
-      },
-      {
-        kind: 'withStep',
-        step: 4,
-        question: {
-          'mx-es':
-            'Si VigiMed notifica a la persona equivocada en el momento equivocado, nuestros cirujanos no toleran un segundo más de interrupción. ¿Quién decide cómo se coordina la respuesta?',
-          'us-en': '[us-en pending]',
-        },
-        preview: {
-          'mx-es':
-            'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con su institución por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor.',
-          'us-en': '[us-en pending]',
-        },
-        answer: {
-          'mx-es':
-            'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con su institución por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor. Cada coordinación queda registrada con tiempo de respuesta y persona que actuó, de manera que su institución puede ajustar la matriz cuando el patrón muestre que está mal calibrada. La coordinación no interrumpe el flujo clínico; lo documenta.',
-          'us-en': '[us-en pending]',
-        },
-      },
+      // Item 1 -- Step 1 DESPLEGAR. Installation question without
+      // interrupting analytical processing.
       {
         kind: 'withStep',
         step: 1,
         question: {
           'mx-es':
-            'El equipo está saturado entre MAPEVE, MOCEBPASS, y el cambio de subdirección. ¿Es este el momento?',
+            '¿Cómo se instala VigiMed en un laboratorio clínico sin interrumpir el procesamiento de muestras?',
           'us-en': '[us-en pending]',
         },
         preview: {
           'mx-es':
-            'Es el momento, justamente porque su institución está saturada.',
+            'VigiMed se despliega sobre la infraestructura física que su laboratorio ya opera: bench de procesamiento, campanas de bioseguridad, áreas de flebotomía, accesos institucionales, rutas de evacuación y zonas de generación de RPBI.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'Es el momento, justamente porque su institución está saturada. VigiMed es un servicio gestionado: la instalación, la red, las cámaras, y la operación del Compliance Review Center los opera VigiMed, no su área de sistemas ni su equipo de calidad. La evidencia documentada empieza a producirse desde la primera semana, sin retirar a ningún equipo de sus transiciones actuales. El equipo nuevo de calidad llega a un sistema que ya está produciendo tendencia, no a uno que está empezando.',
+            'VigiMed se despliega sobre la infraestructura física que su laboratorio ya opera: bench de procesamiento, campanas de bioseguridad, áreas de flebotomía, accesos institucionales, rutas de evacuación y zonas de generación de RPBI. La instalación es no intrusiva, no requiere obra civil, y no interrumpe el procesamiento analítico ni la operación por turno. El equipo institucional trabaja con su responsable sanitario y su comité de bioseguridad para alinear el despliegue al protocolo de bioseguridad institucional, al ciclo de acreditación ISO 15189 y al Programa Interno de Protección Civil vigentes. La cobertura opera de forma continua en todos los turnos sin depender de supervisión adicional.',
           'us-en': '[us-en pending]',
         },
       },
+      // Item 2 -- Step 2 DETECTAR. Eight-UC scope question.
+      {
+        kind: 'withStep',
+        step: 2,
+        question: {
+          'mx-es':
+            '¿Qué eventos críticos detecta VigiMed dentro del alcance de los ocho casos de uso?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'VigiMed detecta ocho clases de evento institucional en tiempo real: contenedores de punzocortantes que rebasan la línea de llenado (UC4), segregación incorrecta de RPBI en el punto de generación contra el criterio NOM-087 (UC5), obstrucciones o quiebres de integridad en rutas de evacuación (UC7), pasos por accesos institucionales fuera de horario o sin credencial validada (UC11), bench operado sin EPP completo (UC14), operación de campana de bioseguridad fuera de protocolo (UC15), quiebres de cadena de custodia de muestras (UC16) y actos de flebotomía fuera del protocolo de higiene institucional (UC17).',
+          'us-en': '[us-en pending]',
+        },
+        answer: {
+          'mx-es':
+            'VigiMed detecta ocho clases de evento institucional en tiempo real: contenedores de punzocortantes que rebasan la línea de llenado (UC4), segregación incorrecta de RPBI en el punto de generación contra el criterio NOM-087 (UC5), obstrucciones o quiebres de integridad en rutas de evacuación (UC7), pasos por accesos institucionales fuera de horario o sin credencial validada (UC11), bench operado sin EPP completo (UC14), operación de campana de bioseguridad fuera de protocolo (UC15), quiebres de cadena de custodia de muestras (UC16) y actos de flebotomía fuera del protocolo de higiene institucional (UC17). Cada detección es continua, opera al segundo, y no depende de reporte manual posterior.',
+          'us-en': '[us-en pending]',
+        },
+      },
+      // Item 3 -- Step 3 CONFIRMAR. Real-event confirmation question.
+      {
+        kind: 'withStep',
+        step: 3,
+        question: {
+          'mx-es':
+            '¿Cómo confirma VigiMed que una detección es un evento real y no un falso positivo?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'Cada señal pasa por confirmación humana antes de escalar a registro institucional.',
+          'us-en': '[us-en pending]',
+        },
+        answer: {
+          'mx-es':
+            'Cada señal pasa por confirmación humana antes de escalar a registro institucional. El personal técnico del turno recibe la señal en el momento que ocurre, valida contra el contexto operativo (bench activo, muestra en procesamiento, técnico identificado, protocolo institucional vigente), y la decisión técnica institucional queda documentada con la cadena de responsabilidad trazable por bench y por turno. La detección continua y la confirmación humana operan en paralelo: VigiMed no decide en lugar del equipo técnico; entrega evidencia para que la decisión institucional se tome en el momento, sin interrumpir el procesamiento del lote.',
+          'us-en': '[us-en pending]',
+        },
+      },
+      // Item 4 -- Step 4 DECIDIR. Integration with the existing
+      // institutional decision chain.
+      {
+        kind: 'withStep',
+        step: 4,
+        question: {
+          'mx-es':
+            '¿Cómo se integra VigiMed a la cadena de decisión institucional existente?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'VigiMed se acopla a la cadena de decisión que su laboratorio ya tiene: el Director Técnico mantiene la autoridad técnica institucional sobre la liberación del lote, el Jefe de Calidad ISO 15189 mantiene el ciclo de acreditación y el programa de bioseguridad, el Director de Operaciones mantiene la continuidad operativa del turno y la posición ante el cliente referente, y el Director General mantiene la posición institucional ante COFEPRIS, EMA, cliente referente y responsable sanitario.',
+          'us-en': '[us-en pending]',
+        },
+        answer: {
+          'mx-es':
+            'VigiMed se acopla a la cadena de decisión que su laboratorio ya tiene: el Director Técnico mantiene la autoridad técnica institucional sobre la liberación del lote, el Jefe de Calidad ISO 15189 mantiene el ciclo de acreditación y el programa de bioseguridad, el Director de Operaciones mantiene la continuidad operativa del turno y la posición ante el cliente referente, y el Director General mantiene la posición institucional ante COFEPRIS, EMA, cliente referente y responsable sanitario. VigiMed no agrega un nuevo rol institucional; entrega la evidencia continua que cada rol necesita en su punto de la cadena señal → patrón → tendencia → criterio → estándar, de modo que la decisión institucional se documenta en el momento, no se reconstruye después.',
+          'us-en': '[us-en pending]',
+        },
+      },
+      // Item 5 -- Step 6 DOCUMENTAR. Institutional evidence for
+      // acreditación and defense ante autoridad sanitaria.
       {
         kind: 'withStep',
         step: 6,
         question: {
           'mx-es':
-            '¿Qué pasa si ocurre un evento adverso grave teniendo VigiMed implementado?',
+            '¿Qué evidencia institucional produce VigiMed para acreditación y para defensa ante autoridad sanitaria?',
           'us-en': '[us-en pending]',
         },
         preview: {
           'mx-es':
-            'La institución llega a la conversación regulatoria con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva.',
+            'VigiMed produce el Acta de Cumplimiento Regulatorio institucional, con cadena de decisión técnica documentada al segundo y obligación verificada contra cuatro anclas regulatorias del segmento: NOM-087-ECOL-SSA1-2002 (manejo de residuos peligrosos biológico-infecciosos), NOM-007-SSA3-2011 (organización y funcionamiento de laboratorios clínicos), ISO 15189:2022 (calidad y competencia de laboratorios clínicos), y Ley General de Salud Art. 200 (regulación de establecimientos de atención médica).',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'La institución llega a la conversación regulatoria con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva. Los datos son de su institución; VigiMed los procesa bajo contrato de tratamiento, no los reutiliza, no los comparte con terceros, ni los hace disponibles a procesos jurídicos sin instrucción de su institución. Ante aseguradora, CONAMED, o consejo, la pregunta deja de ser qué ocurrió y se vuelve cómo respondió la institución.',
+            'VigiMed produce el Acta de Cumplimiento Regulatorio institucional, con cadena de decisión técnica documentada al segundo y obligación verificada contra cuatro anclas regulatorias del segmento: NOM-087-ECOL-SSA1-2002 (manejo de residuos peligrosos biológico-infecciosos), NOM-007-SSA3-2011 (organización y funcionamiento de laboratorios clínicos), ISO 15189:2022 (calidad y competencia de laboratorios clínicos), y Ley General de Salud Art. 200 (regulación de establecimientos de atención médica). La evidencia queda disponible al cierre del lote, sin reconstrucción del expediente operativo, lista para la próxima visita de COFEPRIS, para el ciclo de acreditación ante EMA, y para el requerimiento del cliente referente o de la reclamación legal en su caso.',
           'us-en': '[us-en pending]',
         },
       },
+      // Item 6 -- Step 7 EMERGER. Institutional intelligence from
+      // sustained operation (VigiMed Insights).
       {
         kind: 'withStep',
-        step: 6,
+        step: 7,
         question: {
           'mx-es':
-            'Estamos en ciclo de re-acreditación. ¿Adoptar VigiMed nos arriesga la auditoría?',
+            '¿Qué inteligencia institucional emerge cuando VigiMed opera de forma sostenida?',
           'us-en': '[us-en pending]',
         },
         preview: {
           'mx-es':
-            'La auditoría revisa el expediente clínico. VigiMed deposita su evidencia ahí, no en un sistema paralelo.',
+            'VigiMed Insights consolida el patrón institucional de cada uno de los ocho puntos de control a lo largo del tiempo: quiebres recurrentes de protocolo de bioseguridad por bench y por turno, hallazgos repetidos en rutas de evacuación, patrón de quiebres de cadena de custodia, recurrencia de EPP incompleto por área, y trayectoria de cumplimiento del protocolo de higiene en flebotomía.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'La auditoría revisa el expediente clínico. VigiMed deposita su evidencia ahí, no en un sistema paralelo. Cada evento crítico queda confirmado por un humano, documentado en el formato que su institución usa, y disponible como tendencia institucional cuando el evaluador la pida. El equipo de calidad llega a la auditoría leyendo, no reconstruyendo.',
+            'VigiMed Insights consolida el patrón institucional de cada uno de los ocho puntos de control a lo largo del tiempo: quiebres recurrentes de protocolo de bioseguridad por bench y por turno, hallazgos repetidos en rutas de evacuación, patrón de quiebres de cadena de custodia, recurrencia de EPP incompleto por área, y trayectoria de cumplimiento del protocolo de higiene en flebotomía. La inteligencia documentada que emerge alimenta el criterio institucional aplicado y el estándar que el laboratorio firma ante COFEPRIS, EMA, cliente referente y responsable sanitario. La operación sostenida no entrega más eventos; entrega menos eventos, con evidencia mejor.',
           'us-en': '[us-en pending]',
         },
       },
@@ -836,7 +941,7 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Sticky CTA (placeholder; VM-441 fills)
+  // Sticky CTA (placeholder; ticket non-goal at V1).
   // ---------------------------------------------------------------------------
   sticky: {
     promptMobile: {
