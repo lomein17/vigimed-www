@@ -350,7 +350,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
     // governs the break point.
     heading: {
       'mx-es':
-        'Un intento de sustracción detectado en el punto de control. El recién nacido en brazos de su madre antes del segundo perímetro.',
+        'Un intento de sustracción detectado en primer punto.\nEl recién nacido en brazos de su madre antes del segundo.',
       'us-en': '[us-en pending]',
     },
     // headingFrame inherited verbatim from CM/HP per doc §C.2; chain
