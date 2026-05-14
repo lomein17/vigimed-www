@@ -27,10 +27,12 @@
 // offering for this segment (UC6 Puerta de Aislamiento, UC7 Salidas
 // de Emergencia, UC12 Código Rosa); not a register choice.
 //
-// VM-473 Decision 6: hero.image key omitted entirely so the chassis
-// renders its navy-gradient fallback. No `image` slot ships for this
-// fixture until the maternity asset workstream produces a final hero
-// frame.
+// VM-473 Decision 6 (superseded 2026-05-14): hero.image key was
+// originally omitted so the chassis rendered its navy-gradient
+// fallback while the maternity asset workstream was outstanding. The
+// final maternity hero shipped to public/images/segments/clinicas-de-
+// maternidad/ on 2026-05-14 (commit f4e924c); the image slot is now
+// wired below.
 //
 // D-VM469-15: §D Acta establecimientoLabel ships as `[Clínica de
 // Maternidad]` per the maternity-context placeholder shape.
@@ -63,9 +65,10 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
   // asset bed below. Migrated §A H1 and subhead moved to §2 per
   // D-S57-4 (see section2.heading and section2.framing below).
   //
-  // VM-473 Decision 6: `image` slot omitted entirely. Chassis falls
-  // back to the navy-gradient asset bed until maternity-segment hero
-  // imagery is produced.
+  // VM-473 Decision 6 (superseded 2026-05-14): image slot wired to
+  // the maternity hero shipped on 2026-05-14 (commit f4e924c).
+  // Originally omitted to trigger the chassis navy-gradient fallback
+  // while the asset was outstanding.
   // ---------------------------------------------------------------------------
   hero: {
     pageTitle: {
@@ -82,6 +85,10 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         },
       ],
       'us-en': [{ text: '[us-en pending]' }],
+    },
+    image: {
+      desktop: '/images/segments/clinicas-de-maternidad/hero.webp',
+      mobile: '/images/segments/clinicas-de-maternidad/hero-mobile.webp',
     },
     video: { desktop: '', mobile: '', poster: '' },
   },
