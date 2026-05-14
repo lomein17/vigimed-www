@@ -717,7 +717,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
           },
           evidence: {
             'mx-es':
-              'Verificación documentada al inicio de cada turno y ante cada simulacro institucional, con hallazgo escalado en tiempo real y evidencia lista para autoridad sanitaria y Protección Civil al momento.',
+              'Documentación al inicio de cada turno y ante cada simulacro institucional, con hallazgo escalado en tiempo real y evidencia lista para autoridad sanitaria y Protección Civil al momento.',
             'us-en': '[us-en pending]',
           },
         },
@@ -730,7 +730,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
           },
           evidence: {
             'mx-es':
-              'Registro de cada apertura en el momento que ocurre, confirmado contra el caso clínico, con patrón de quiebres por turno y área disponible para junta clínica y para acreditar sin reconstrucción retrospectiva.',
+              'Registro de cada apertura al momento que ocurre, confirmado contra el caso clínico, con patrón de quiebres para junta clínica y para acreditar sin reconstrucción retrospectiva.',
             'us-en': '[us-en pending]',
           },
         },
