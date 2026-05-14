@@ -13,7 +13,10 @@ export interface SharedContent {
   footer: {
     columns: readonly [FooterColumn, FooterColumn];
     copyright: { prefix: string; suffix: string };
-    legalLinks: readonly [{ label: string }, { label: string }];
+    legalLinks: readonly [
+      { label: string; slug?: string },
+      { label: string; slug?: string },
+    ];
   };
   comingSoon: {
     positioning: string;

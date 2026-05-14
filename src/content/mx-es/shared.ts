@@ -32,8 +32,8 @@ export const sharedContent: SharedContent = {
       suffix: 'Todos los derechos reservados.',
     },
     legalLinks: [
-      { label: 'Política de Privacidad' },
-      { label: 'Términos de Uso' },
+      { label: 'Aviso de Privacidad', slug: '/mx-es/aviso-de-privacidad' },
+      { label: 'Términos y Condiciones de Uso', slug: '/mx-es/terminos-y-condiciones-de-uso' },
     ],
   },
   comingSoon: {

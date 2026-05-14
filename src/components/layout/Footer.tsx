@@ -72,21 +72,39 @@ export function Footer({ locale }: { locale: Locale }) {
           className="h-[3px] bg-brand-pulse mt-12 mb-5 md:mt-16 md:mb-6"
         />
 
-        <div className="flex flex-col gap-3 text-left text-[11px] md:grid md:grid-cols-3 md:items-end md:gap-4 md:text-xs text-text-on-dark-muted">
-          <p className="md:text-left">
+        <div className="flex flex-col gap-3 text-left text-[11px] md:flex md:flex-row md:items-end md:gap-4 md:text-xs text-text-on-dark-muted">
+          <p>
             {copyright.prefix}
             <br className="md:hidden" />
             {' '}
             {copyright.suffix}
           </p>
-          <p className="md:text-center">
-            <span>{legalLinks[0].label}</span>
+          <p className="md:mx-auto md:text-center">
+            {legalLinks[0].slug !== undefined ? (
+              <Link
+                href={legalLinks[0].slug}
+                className="text-text-on-dark-muted hover:text-brand-500 transition-colors"
+              >
+                {legalLinks[0].label}
+              </Link>
+            ) : (
+              <span className="text-text-on-dark-muted">{legalLinks[0].label}</span>
+            )}
             <span aria-hidden="true" className="text-white/30 px-2">
               |
             </span>
-            <span>{legalLinks[1].label}</span>
+            {legalLinks[1].slug !== undefined ? (
+              <Link
+                href={legalLinks[1].slug}
+                className="text-text-on-dark-muted hover:text-brand-500 transition-colors"
+              >
+                {legalLinks[1].label}
+              </Link>
+            ) : (
+              <span className="text-text-on-dark-muted">{legalLinks[1].label}</span>
+            )}
           </p>
-          <div className="md:flex md:justify-end">
+          <div>
             <CountryPicker
               locale={locale}
               currentLabel={shared.localeSelector.currentLabel}
