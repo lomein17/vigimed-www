@@ -699,12 +699,12 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Activación, capacitación y simulacro periódico del Código Rosa bajo el Comité Hospitalario de Emergencias y Desastres, conforme al Programa Hospital Seguro y a las Acciones Esenciales para la Seguridad del Paciente.',
+              'Activación, capacitación y simulacro del Código Rosa bajo el Comité Hospitalario de Emergencias y Desastres, conforme al Programa Hospital Seguro y a las Acciones Esenciales para la Seguridad del Paciente.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Registro institucional de cada activación y cada simulacro con cadena de decisión documentada al segundo, vinculado al expediente del comité y disponible para revisión institucional al cierre del evento.',
+              'Registro de cada activación y cada simulacro con cadena de decisión documentada, vinculado al expediente del comité y disponible para revisión institucional al cierre del evento.',
             'us-en': '[us-en pending]',
           },
         },
@@ -717,7 +717,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
           },
           evidence: {
             'mx-es':
-              'Verificación documentada al inicio de cada turno y ante cada simulacro institucional, con hallazgo escalado en tiempo real y evidencia agregada lista para autoridad sanitaria y Protección Civil al momento del requerimiento.',
+              'Verificación documentada al inicio de cada turno y ante cada simulacro institucional, con hallazgo escalado en tiempo real y evidencia lista para autoridad sanitaria y Protección Civil al momento.',
             'us-en': '[us-en pending]',
           },
         },
@@ -730,7 +730,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
           },
           evidence: {
             'mx-es':
-              'Registro de cada apertura en el momento que ocurre, confirmado contra el caso clínico activo, con patrón de quiebres por turno y por área disponible para junta clínica y para acreditación institucional sin reconstrucción retrospectiva.',
+              'Registro de cada apertura en el momento que ocurre, confirmado contra el caso clínico, con patrón de quiebres por turno y área disponible para junta clínica y para acreditar sin reconstrucción retrospectiva.',
             'us-en': '[us-en pending]',
           },
         },
