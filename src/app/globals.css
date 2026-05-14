@@ -1275,11 +1275,16 @@ h1, h2, h3 {
     margin-right: auto;
     /* VM-459 corrective 4: shared horizontal envelope for title-claim
      * row + asset bed so title/claim edges align with asset-bed edges
-     * per Palantir reference. Same 450px reservation as v1.15 (96
-     * section padding-top + 173 title-claim row at H1 5rem two-line
-     * worst case + 64 gap + 96 section padding-bottom + ~21 buffer).
+     * per Palantir reference. Reservation lowered from 450px to 316px
+     * (empirically calibrated via live DevTools preview at 1920×963)
+     * to reduce segment-page Hero side-buffer ~35% on typical wide
+     * desktop. This deliberately tightens below the v1.15 "no-overflow
+     * worst-case" sizing (96 + ~147 title-claim row at the post-1de69aa
+     * H1 4.25rem ceiling + 64 + 96 + buffer); the asset bed may push
+     * slightly past the fold at short laptop viewports (e.g. 1366×768),
+     * which is accepted in exchange for the wider asset on desktop.
      * Numerator 21/9 matches v1.15 cinematic asset-bed aspect. */
-    max-width: min(100%, calc((100svh - var(--vm-nav-h) - 450px) * 21 / 9));
+    max-width: min(100%, calc((100svh - var(--vm-nav-h) - 316px) * 21 / 9));
   }
 }
 
