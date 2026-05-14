@@ -134,31 +134,33 @@
   --site-gutter: 1rem;
   --site-section: 3rem;
 
-  /* Segment-Hero page-title (VM-458, retuned VM-459 v1.13, middle
-   * retuned VM-466 corrective 1, then VM-466 corrective 2). Single-
-   * purpose token consumed by Section1Hero. Sized for the page-title
-   * job at ~60% column width with VigiMed para {Segment} title strings.
-   * Ceiling 5rem (80px) matches the Palantir Foundry for Energy
-   * vertical page-title rendered size; floor 2rem (32px) ensures the
-   * 28-character "VigiMed para Centros Médicos" wraps gracefully at
-   * 320px mobile without overflow. Middle term retuned from 5vw to
-   * 3.2vw (VM-466 corrective 1), then 3.2vw to 3.4vw (VM-466
-   * corrective 2) for perceived size +2pt at typical desktop viewports
-   * while preserving the one-line amber-name fit at all desktop widths
-   * >=1024px once the amber span is forced to its own line (see
+  /* Segment-Hero page-title. Single-purpose token consumed by
+   * Section1Hero. Sized for the page-title job at ~60% column width
+   * with VigiMed para {Segment} title strings. Entire clamp curve
+   * shifted down ~15% from the prior (2rem, 3.4vw, 5rem) values to
+   * reduce visual weight of segment-page Heroes at desktop; the
+   * Palantir Foundry for Energy reference is no longer the anchor.
+   * Middle/ceiling ratio preserved (2.9/4.25 ≈ 0.68, was 3.4/5 = 0.68)
+   * so the fluid scaling shape is unchanged; the whole curve simply
+   * sits lower. Floor 1.75rem (28px) keeps the 28-character "VigiMed
+   * para Centros Médicos" wrapping gracefully at 320px mobile without
+   * overflow. One-line amber-name fit at desktop widths >=1024px is
+   * preserved once the amber span is forced to its own line (see
    * #segment-hero-headline rule below). Clamp handles fluid scaling
    * 320px to 1920px; no breakpoint overrides needed. Does NOT cascade
    * to Home Hero (Home uses utility classes, not the token chain). */
-  --text-page-title: clamp(2rem, 3.4vw, 5rem);
+  --text-page-title: clamp(1.75rem, 2.9vw, 4.25rem);
 
-  /* Segment-Hero claim prose (VM-459, retuned VM-459 v1.13). Single-
-   * purpose token consumed by Section1Hero claim <p>. Ceiling 1.625rem
-   * (26px) matches the Palantir Foundry for Energy claim rendered size;
-   * floor 1.125rem (18px) keeps mobile readable. Clamp handles fluid
-   * scaling 320px to 1920px; no breakpoint overrides needed. Mirrors
-   * the --text-page-title pattern for chassis symmetry. Does NOT
-   * cascade to other claim/body prose surfaces. */
-  --text-page-claim: clamp(1.125rem, 1.8vw, 1.625rem);
+  /* Segment-Hero claim prose. Single-purpose token consumed by
+   * Section1Hero claim <p>. Entire clamp curve shifted down ~15% from
+   * the prior (1.125rem, 1.8vw, 1.625rem) values to match the title
+   * downsize and keep claim weight in proportion to the page-title at
+   * desktop; the Palantir Foundry for Energy reference is no longer
+   * the anchor. Floor 1rem (16px) keeps mobile readable. Clamp handles
+   * fluid scaling 320px to 1920px; no breakpoint overrides needed.
+   * Mirrors the --text-page-title pattern for chassis symmetry. Does
+   * NOT cascade to other claim/body prose surfaces. */
+  --text-page-claim: clamp(1rem, 1.5vw, 1.375rem);
 }
 
 /* Responsive H1, H2, gutter, section-y (§4.2 and §4.4) */
