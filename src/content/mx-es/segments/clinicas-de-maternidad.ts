@@ -1,9 +1,58 @@
-// Clínicas de Maternidad mx-es segment fill. Scaffolded from
-// src/content/mx-es/segments/centros-medicos.ts on 2026-05-13.
-// Localized strings and asset paths are placeholders carried over
-// verbatim from CM at scaffold time; per-segment content authoring
-// lands in a follow-up ticket. Do not invent Linear references
-// inside this header until a real content lock is recorded.
+// Clínicas de Maternidad mx-es segment fill.
+// Locked content authored under VM-469 in Linear doc slug efd4b4af79ae
+// (Session 59, 2026-05-13). Engineering fill landed under VM-473
+// (2026-05-13): pure mechanical replacement against the locked SSOT.
+// §F (section5.heading + reassurance) and sticky prompts stay
+// chassis-constant / placeholder per ticket non-goals.
+//
+// Locale handling: mx-es-only per D-S36-2. us-en values stay at
+// '[us-en pending]' and never render (route guard returns notFound()
+// for non-mx-es requests).
+//
+// D-VM473-1: §B PersonaKey mapping. Chassis PERSONA_ORDER is fixed at
+// jefeUveh → calidad → medica → general. CdM content maps by visual
+// tab order per VM-469 doc §B (D-VM469-5):
+//   - jefeUveh ← Director Médico (Tab 1, default-active per D-VM469-8)
+//   - calidad  ← Jefa de Enfermería Obstétrica (Tab 2, chain-origin in §C)
+//   - medica   ← Coordinación de Calidad y Seguridad del Paciente (Tab 3)
+//   - general  ← Dirección General (Tab 4)
+// defaultPersona = 'jefeUveh' so Director Médico is the leftmost-
+// rendered cold-load default. §B/§C tab default asymmetry is
+// intentional per D-VM469-10 (§B default = Director Médico for the
+// institutional-decision frame; §C default = Jefa de Enfermería
+// Obstétrica as chain-origin for the UC12 walkthrough).
+//
+// D-VM469-4: §B matrix shape is 4×3 (four personas × three UCs),
+// divergent from CM/SH/HP 4×4. Bounded by the three-UC product
+// offering for this segment (UC6 Puerta de Aislamiento, UC7 Salidas
+// de Emergencia, UC12 Código Rosa); not a register choice.
+//
+// VM-473 Decision 6: hero.image key omitted entirely so the chassis
+// renders its navy-gradient fallback. No `image` slot ships for this
+// fixture until the maternity asset workstream produces a final hero
+// frame.
+//
+// D-VM469-15: §D Acta establecimientoLabel ships as `[Clínica de
+// Maternidad]` per the maternity-context placeholder shape.
+// marcoNormativo anchors on Ley General de Salud, Art. 64 (federal
+// statute, not norma) per D-VM469-14.
+//
+// D-VM469-7: §B ucSupplement substituted to `Tres perímetros
+// institucionales sostenidos en tiempo real, más la inteligencia
+// documentada que emerge de VigiMed Insights.` The chassis catalog-
+// supplement lineage is dropped because the three-UC scope is the
+// entire offering for this segment, not a subset.
+//
+// D-VM469-11: §C chain-anchor `estandar` tier description substituted
+// for owner-clinician institutional accountability surface (`familia,
+// autoridad sanitaria y responsable sanitario`), replacing the
+// private-sector and public-system lineages carried by sister
+// segments.
+//
+// sealLabel: ships in slash form (`EVIDENCIA / SOSTENIDA`) per cross-
+// segment visual precedent (CM/SH/HP). The VM-469 doc renders the
+// badge space-separated; the slash separator is a chassis-render
+// convention preserved for visual consistency across the v1 slate.
 
 import type { ChassisFill } from '@/lib/chassis/slots';
 
@@ -13,6 +62,10 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
   // 3-slot composition: pageTitle (left ~60%) + claim (right ~40%) +
   // asset bed below. Migrated §A H1 and subhead moved to §2 per
   // D-S57-4 (see section2.heading and section2.framing below).
+  //
+  // VM-473 Decision 6: `image` slot omitted entirely. Chassis falls
+  // back to the navy-gradient asset bed until maternity-segment hero
+  // imagery is produced.
   // ---------------------------------------------------------------------------
   hero: {
     pageTitle: {
@@ -25,45 +78,48 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
     claim: {
       'mx-es': [
         {
-          text: 'La inteligencia que su institución ya produce, sostenida en cada turno, en cada área crítica, sin omisión.',
+          text: 'Tres puertas. Una salida. Un recién nacido. La evidencia continua de que cada perímetro se sostuvo cuando la institución no podía fallar.',
         },
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },
     video: { desktop: '', mobile: '', poster: '' },
-    // VM-459 v1.13: optional S1.image takes precedence over video in
-    // the asset bed render branch. WebP variants optimized from a
-    // 8192x4608 source at quality 80 (Slot Map v1.13 §4.2).
-    image: {
-      desktop: '/images/segments/clinicas-de-maternidad/hero.webp',
-      mobile: '/images/segments/clinicas-de-maternidad/hero-mobile.webp',
-    },
   },
 
   // ---------------------------------------------------------------------------
-  // Section 2 -- Operational Reality (VM-447 D-S52-2 locked mx-es content)
-  // Persona x domain matrix: four buyer-chain personas, four UCs each.
+  // Section 2 -- Operational Reality (VM-473 mx-es content fill 2026-05-13).
+  // 4×3 persona x UC matrix per D-VM469-4: four buyer-chain personas,
+  // three UCs each (UC6 Puerta de Aislamiento, UC7 Salidas de
+  // Emergencia, UC12 Código Rosa). Persona keys map by D-VM473-1;
+  // chassis PERSONA_ORDER is fixed (jefeUveh → calidad → medica →
+  // general), so tabs render visually as Director Médico (default
+  // active) → Jefa de Enfermería Obstétrica → Coordinación de Calidad
+  // y Seguridad del Paciente → Dirección General.
   // ---------------------------------------------------------------------------
   section2: {
     eyebrow: {
       'mx-es': 'LA REALIDAD OPERATIVA',
       'us-en': '[us-en pending]',
     },
-    // VM-457 D-S57-4: heading absorbs the migrated §A H1 verbatim.
+    // VM-457 D-S57-4: heading absorbs the migrated §A H1 semantic.
+    // Inherited verbatim from CM/SH/HP per doc §B.2.
     heading: {
       'mx-es': 'Un incidente, una decisión que su institución toma una vez.',
       'us-en': '[us-en pending]',
     },
-    // VM-457 D-S57-4: framing carries the migrated §A subhead. The `\n`
-    // literals are preserved verbatim; Section2OperationalReality.tsx
-    // applies `whiteSpace: 'pre-line'` so they render as hard breaks.
+    // VM-457 D-S57-4: framing slot is RichParagraph for inline emphasis.
+    // Plain sentence 1 inherited verbatim from CM/SH/HP; bold-amber
+    // sentence 2 carries the segment perimeter-integrity spine per
+    // D-VM469-6. Trailing \n on sentence 1 preserved so
+    // `whiteSpace: 'pre-line'` renders a hard break before the amber
+    // line, matching CM precedent.
     framing: {
       'mx-es': [
         {
-          text: 'Detección continua, confirmación humana, y análisis de\ncada evento crítico en sus áreas de mayor riesgo.\n',
+          text: 'Detección continua, confirmación humana, y análisis de cada evento crítico en sus áreas de mayor riesgo.\n',
         },
         {
-          text: 'Inteligencia operativa requerida para mejorar, no para vigilar.',
+          text: 'Inteligencia operativa para sostener cada perímetro, no para reconstruir lo ocurrido.',
           emphasis: 'bold-amber',
         },
       ],
@@ -71,118 +127,11 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
     },
     pressures: [],
     ucByPersona: {
+      // jefeUveh ← Director Médico (D-VM473-1). Tab 1, default-active
+      // per D-VM469-8.
       jefeUveh: {
-        roleLabel: { 'mx-es': 'Jefe UVEH', 'us-en': '[us-en pending]' },
-        tierLabel: {
-          'mx-es': 'Vigilancia epidemiológica',
-          'us-en': '[us-en pending]',
-        },
-        cards: [
-          {
-            name: {
-              'mx-es': 'Campo Estéril',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed detecta cada infección de sitio quirúrgico, la confirma contra el criterio vigente, y consolida el patrón por servicio antes del reporte mensual.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Puerta de Aislamiento',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed registra cada apertura fuera de protocolo, la confirma contra el caso activo, y construye el patrón de quiebres por turno antes de que escale a brote.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Limpieza Ambiental',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed verifica la cobertura de limpieza terminal en áreas críticas, confirma cada hallazgo contra el ciclo del paciente, y deja documentada la cadena de evidencia ante auditoría.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Segregación RPBI',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed detecta segregación incorrecta en el punto de generación, confirma cada evento contra el criterio normativo, y consolida el patrón por servicio antes de que se vuelva hallazgo.',
-              'us-en': '[us-en pending]',
-            },
-          },
-        ],
-      },
-      calidad: {
         roleLabel: {
-          'mx-es': 'Subdirección de Calidad',
-          'us-en': '[us-en pending]',
-        },
-        tierLabel: {
-          'mx-es': 'Calidad y acreditación',
-          'us-en': '[us-en pending]',
-        },
-        cards: [
-          {
-            name: {
-              'mx-es': 'Proporción Personal-Paciente',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed registra el ratio enfermería-paciente turno a turno, lo confirma contra el umbral institucional, y consolida la tendencia que el Plan de Mejora sintetiza en un cierre.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Puerta de Aislamiento',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed mapea cada quiebre de aislamiento contra el estándar institucional, lo cruza con los marcos acreditadores concurrentes, y produce un solo plan de acción en lugar de tres.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Tiempo Fuera',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed documenta la adherencia al tiempo fuera por sala y procedimiento, confirma el cumplimiento del protocolo, y consolida la tendencia que sustenta la firma del Plan ante junta directiva.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Limpieza Ambiental',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed valida cada ciclo de limpieza terminal contra el estándar institucional, lo mapea contra los marcos acreditadores en una sola lectura, y produce una sola tendencia institucional.',
-              'us-en': '[us-en pending]',
-            },
-          },
-        ],
-      },
-      medica: {
-        roleLabel: {
-          'mx-es': 'Dirección Médica',
+          'mx-es': 'Director Médico',
           'us-en': '[us-en pending]',
         },
         tierLabel: {
@@ -192,50 +141,133 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         cards: [
           {
             name: {
-              'mx-es': 'Campo Estéril',
+              'mx-es': 'Puerta de Aislamiento',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed cierra el ciclo mensual de la junta médica con la tendencia de infecciones de sitio quirúrgico ya consolidada por servicio y campus, lo que convierte la decisión clínica en lectura, no reconstrucción.',
+                'VigiMed registra cada apertura de la puerta de aislamiento fuera de protocolo, la confirma contra el caso clínico activo, y deja documentada la cadena de decisión médica institucional antes del siguiente cambio de turno.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Proporción Personal-Paciente',
+              'mx-es': 'Salidas de Emergencia',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed traduce la tendencia turno a turno en una decisión de asignación clínica, con la evidencia ya cruzada contra resultados de paciente, y permite fijar criterio sin esperar al cierre.',
+                'VigiMed verifica la integridad de cada ruta de evacuación obstétrica y neonatal en tiempo real, confirma cada obstrucción contra el protocolo institucional, y sostiene la evidencia médica para la junta antes del siguiente simulacro.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Carro Rojo',
+              'mx-es': 'Código Rosa',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed verifica disposición y caducidad de cada carro rojo turno a turno, consolida la tendencia institucional de eventos centinela, y entrega un criterio de readiness clínico documentado, no inferido.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Tiempo Fuera',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed documenta cada cirugía de sitio incorrecto evitada en el tiempo fuera, consolida la tendencia por sala y equipo quirúrgico, y entrega criterio sobre cuál servicio requiere intervención.',
+                'VigiMed sostiene la trazabilidad de cada activación de Código Rosa desde el primer punto de control, confirma la decisión médica institucional adoptada, y deja constancia del criterio aplicado antes del cierre del evento.',
               'us-en': '[us-en pending]',
             },
           },
         ],
       },
+      // calidad ← Jefa de Enfermería Obstétrica (D-VM473-1). Tab 2.
+      calidad: {
+        roleLabel: {
+          'mx-es': 'Jefa de Enfermería Obstétrica',
+          'us-en': '[us-en pending]',
+        },
+        tierLabel: {
+          'mx-es': 'Operación clínica de piso',
+          'us-en': '[us-en pending]',
+        },
+        cards: [
+          {
+            name: {
+              'mx-es': 'Puerta de Aislamiento',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed detecta cada apertura de la puerta de aislamiento en el momento que ocurre, confirma el cumplimiento del protocolo de cohorte, y consolida el patrón de quiebres por turno antes de que escale a hallazgo clínico.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'Salidas de Emergencia',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed verifica que cada ruta de evacuación esté despejada al inicio de cada turno, confirma cada hallazgo contra el protocolo de protección civil institucional, y deja documentada la evidencia operativa antes de la siguiente entrega.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'Código Rosa',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed registra cada paso del recién nacido por los puntos de control del cunero, confirma la identidad y el acompañamiento autorizado, y consolida la trazabilidad operativa antes del egreso documentado.',
+              'us-en': '[us-en pending]',
+            },
+          },
+        ],
+      },
+      // medica ← Coordinación de Calidad y Seguridad del Paciente
+      // (D-VM473-1). Tab 3.
+      medica: {
+        roleLabel: {
+          'mx-es': 'Coordinación de Calidad y Seguridad del Paciente',
+          'us-en': '[us-en pending]',
+        },
+        tierLabel: {
+          'mx-es': 'Calidad y acreditación',
+          'us-en': '[us-en pending]',
+        },
+        cards: [
+          {
+            name: {
+              'mx-es': 'Puerta de Aislamiento',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed produce la evidencia continua de cumplimiento del protocolo de aislamiento, la consolida por turno y por área, y la deja lista para la cédula de acreditación antes de la visita de auditoría.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'Salidas de Emergencia',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed convierte cada verificación de ruta en evidencia sostenida, alineada al Programa Interno de Protección Civil, y disponible para acreditación institucional sin reconstrucción del expediente operativo.',
+              'us-en': '[us-en pending]',
+            },
+          },
+          {
+            name: {
+              'mx-es': 'Código Rosa',
+              'us-en': '[us-en pending]',
+            },
+            framing: {
+              'mx-es':
+                'VigiMed deja constancia documentada de cada activación y cada simulacro de Código Rosa, lo vincula al expediente institucional de seguridad del recién nacido, y sostiene el patrón para el seguimiento de mejora continua del comité.',
+              'us-en': '[us-en pending]',
+            },
+          },
+        ],
+      },
+      // general ← Dirección General (D-VM473-1). Tab 4.
       general: {
         roleLabel: {
           'mx-es': 'Dirección General',
@@ -248,45 +280,34 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         cards: [
           {
             name: {
-              'mx-es': 'Campo Estéril',
+              'mx-es': 'Puerta de Aislamiento',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed convierte la tasa institucional de infección de sitio quirúrgico en estándar reportable ante consejo, ya consolidada y firmada, y permite llegar a la conferencia de apertura con un Plan leído.',
+                'VigiMed consolida el reporte institucional de cumplimiento del protocolo de aislamiento, lo confirma contra el criterio normativo aplicable, y produce la posición defendible ante la autoridad sanitaria al momento del requerimiento.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Proporción Personal-Paciente',
+              'mx-es': 'Salidas de Emergencia',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed eleva el ratio enfermería-paciente a indicador institucional reportable trimestre a trimestre, ya cruzado con resultados clínicos, y sostiene la decisión de asignación de capital ante consejo.',
+                'VigiMed entrega la evidencia agregada de integridad de rutas de evacuación, alineada al Programa Interno de Protección Civil, y disponible para la rendición de cuentas institucional ante Protección Civil y autoridad sanitaria.',
               'us-en': '[us-en pending]',
             },
           },
           {
             name: {
-              'mx-es': 'Carro Rojo',
+              'mx-es': 'Código Rosa',
               'us-en': '[us-en pending]',
             },
             framing: {
               'mx-es':
-                'VigiMed convierte el readiness de carros rojos en evidencia institucional documentada por campus, lo que protege la firma de la dirección general ante eventos centinela y aseguradora.',
-              'us-en': '[us-en pending]',
-            },
-          },
-          {
-            name: {
-              'mx-es': 'Segregación RPBI',
-              'us-en': '[us-en pending]',
-            },
-            framing: {
-              'mx-es':
-                'VigiMed produce evidencia institucional de cumplimiento RPBI lista para reporte externo, consolidada y firmada, lo que protege a la dirección general ante hallazgo regulatorio o exposición pública.',
+                'VigiMed sostiene el reporte institucional de cada activación de Código Rosa, con cadena de decisión documentada y respuesta verificable, lista para sostener la posición institucional ante familia, autoridad sanitaria y reclamación legal.',
               'us-en': '[us-en pending]',
             },
           },
@@ -294,23 +315,29 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
       },
     },
     defaultPersona: 'jefeUveh',
+    // D-VM469-7: footer substituted for the bounded three-UC scope.
+    // The chassis catalog-supplement lineage does not apply to this
+    // segment because the three-UC perimeter set is the entire
+    // product offering for Clínicas de Maternidad.
     ucSupplement: {
       'mx-es':
-        'Además de 13 casos de uso adicionales en el catálogo VigiMed, más la inteligencia documentada que emerge de VigiMed Insights.',
+        'Tres perímetros institucionales sostenidos en tiempo real, más la inteligencia documentada que emerge de VigiMed Insights.',
       'us-en': '[us-en pending]',
     },
   },
 
   // ---------------------------------------------------------------------------
-  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant;
-  // S55 prevention-frame rewrite per VM-448 punch-list 2026-05-08).
-  // Tab 1 catches a real breach in real time and prevents that
-  // patient's infection. Tabs 2-4 work the recurring breach pattern
-  // across multiple OR sessions, feed Insights, and produce governance
-  // change. Word-cap discipline (50w body / 30w quote / 50w citation)
-  // is fixture-only: chassis enforces no runtime caps.
-  // tabCount: 4 (Jefe de UVEH, Subdirección de Calidad, Dirección
-  // Médica, Dirección General); tabDefault: 1.
+  // Section 3 -- Per-Buyer-Chain Proof (VM-448 D-S49-3 chain variant
+  // shape; VM-473 mx-es content fill 2026-05-13). Single-incident
+  // walkthrough per D-VM469-9: intento de sustracción de recién
+  // nacido detectado en el punto de control del cunero (UC12 Código
+  // Rosa). Tab 1 detects the index event in real time at the cunero
+  // control point and prevents the second perimeter from being
+  // crossed; Tabs 2-4 consolidate the response into institutional
+  // evidence and the position ante familia / autoridad sanitaria.
+  // tabCount: 4; tabDefault: 1. D-VM469-10: §C default = chain-origin
+  // role (Jefa de Enfermería Obstétrica), intentionally asymmetric
+  // with §B default (Director Médico).
   // ---------------------------------------------------------------------------
   section3: {
     eyebrow: {
@@ -318,24 +345,19 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         'VIGIMED EN LA PRÁCTICA: EL CAMINO DE RESOLUCIÓN DE UN INCIDENTE',
       'us-en': '[us-en pending]',
     },
-    // S57 FIX 2: heading rewritten on the same prevention-frame as S55
-    // but tightened: "brecha" (feminine) replaces "quiebre"; "evitada"
-    // replaces "que no ocurrió"; trailing clause restated as "lo que
-    // impidió que volviera a ocurrir." Adjective concord follows
-    // "brecha" (feminine), so "detectada".
+    // VM-473 mx-es heading per VM-469 doc §C.title. Two-sentence prose
+    // with no `\n`; chassis applies whiteSpace: 'pre-line' and CSS
+    // governs the break point.
     heading: {
       'mx-es':
-        'Brecha de campo estéril detectada en el momento.\nLa infección evitada, y lo que impidió se repitiera.',
+        'Un intento de sustracción detectado en el punto de control. El recién nacido en brazos de su madre antes del segundo perímetro.',
       'us-en': '[us-en pending]',
     },
-    // S56 FIX 3 + 4: trailing period moves into the bold-amber span so it
-    // renders amber alongside the rest of the chain.
-    // S59 FIX 1: explicit \n line breaks dropped so wrap is governed by
-    // CSS, not string literals. At >=1440px the entire frame line
-    // renders single-line via white-space: nowrap on .vm-section-3-
-    // heading-frame; below that, segments wrap naturally based on
-    // container width while the bold-amber span stays unbroken at
-    // >=1280px (S55 FIX 1).
+    // headingFrame inherited verbatim from CM/HP per doc §C.2; chain
+    // noun phrase rendered in bold-amber with trailing period inside
+    // the span (S56 FIX 3+4). No `\n`; CSS wraps surrounding segments
+    // while .vm-section-3-heading-frame keeps the bold-amber span
+    // unbroken at >=1280px (S55 FIX 1).
     headingFrame: {
       'mx-es': [
         { text: 'Cada rol institucional opera en un punto distinto de la cadena ' },
@@ -350,49 +372,92 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
     tabCount: 4,
     tabDefault: 1,
     tabs: [
-      // Tab 1 -- Jefe de UVEH. Chain origin: signal detected in real
-      // time, escalated, infection prevented. body 48w / quote 28w /
-      // citation 28w (NOM-045 §3.1 trimmed verbatim to fit 50w cap).
+      // Tab 1 -- Jefa de Enfermería Obstétrica. Chain origin: signal
+      // detected at the cunero control point when the recién nacido is
+      // attempted to be moved without the validated brazalete and
+      // authorized acompañamiento. Cohort verified intact at close,
+      // event registered as Código Rosa activation. Doc label is 29
+      // chars; labelMobile shortens for the accordion trigger.
       {
-        label: { 'mx-es': 'Jefe de UVEH', 'us-en': '[us-en pending]' },
-        tier: {
-          'mx-es': 'Vigilancia epidemiológica',
+        label: {
+          'mx-es': 'Jefa de Enfermería Obstétrica',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/clinicas-de-maternidad/uveh.png',
+        labelMobile: {
+          'mx-es': 'Jefa Enf. Obstétrica',
+          'us-en': '[us-en pending]',
+        },
+        tier: {
+          'mx-es': 'Operación clínica de piso',
+          'us-en': '[us-en pending]',
+        },
+        headshot: '/headshots/clinicas-de-maternidad/enfermeria-obstetrica.webp',
         chainTiers: ['senal', 'patron'],
         body: {
           'mx-es':
-            'VigiMed detectó el ingreso de personal sin vestimenta estéril al quirófano cardiotorácico en tiempo real. La señal escaló a la jefatura antes del cierre del campo. La infección que ese paciente habría desarrollado en siete días no ocurrió, y el evento entró al registro institucional como señal documentada.',
+            'VigiMed detectó el paso del recién nacido por el punto de control del cunero sin la pulsera materno-neonatal validada y sin acompañamiento autorizado registrado en el momento del intento de egreso. La señal escaló al equipo de seguridad institucional antes del segundo perímetro. El recién nacido regresó con su madre, la cohorte materno-neonatal quedó verificada intacta, y el evento entró al registro institucional como activación de Código Rosa documentada con cadena de identificación trazable por turno.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin la alerta en tiempo real, ese paciente regresa a los siete días con infección de sitio quirúrgico, y nosotros abrimos dos semanas reconstruyendo si hubo más casos."',
+            '"Sin el control en el momento, el bebé sale por el acceso lateral, y nosotros nos enteramos cuando la madre pregunta dónde está."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'NOM-045-SSA2-2005, §3.1: "Vigilancia Epidemiológica de Infecciones Nosocomiales: a la observación y análisis sistemáticos, continuos y activos de la ocurrencia y distribución de las infecciones nosocomiales."',
+            'NOM-007-SSA2-2016, §5.5.10: "Identificación de la persona recién nacida: se debe colocar al recién nacido un brazalete de identificación con los datos de la madre, en presencia de ésta, antes de salir de la sala de expulsión o quirófano, conservándolo durante toda la estancia hospitalaria."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'RHOVE · NOM-045 · NOM-016',
+          'mx-es': 'NOM-007 · Hospital Seguro · Código Rosa',
           'us-en': '[us-en pending]',
         },
       },
-      // Tab 2 -- Subdirección de Calidad. Pattern consolidation from
-      // recurring sterile-field breaches; one tendency read by all
-      // concurrent regulatory frames. body 45w / quote 25w / citation
-      // 28w (NOM-004 §1 trimmed verbatim; same trim point as Tab 3,
-      // duplication acknowledged per S54-1 lock).
+      // Tab 2 -- Director Médico. Chain consolidated into institutional
+      // decision recorded in the expediente: validated identification,
+      // Código Rosa activation, perimeter closure, cohort verification.
+      // Doc label is 15 chars; no labelMobile needed.
+      {
+        label: { 'mx-es': 'Director Médico', 'us-en': '[us-en pending]' },
+        tier: {
+          'mx-es': 'Decisión clínica institucional',
+          'us-en': '[us-en pending]',
+        },
+        headshot: '/headshots/clinicas-de-maternidad/medico.webp',
+        chainTiers: ['patron', 'tendencia'],
+        body: {
+          'mx-es':
+            'VigiMed entregó al Director Médico la cadena completa del evento al cierre del intento: identificación del recién nacido validada en el punto de control, decisión institucional de activación de Código Rosa adoptada y documentada, protocolo de cierre de accesos institucionales aplicado, cohorte materno-neonatal verificada al cierre. La decisión clínica institucional quedó firmada al expediente, lista para la junta clínica y para la comunicación a la familia sin reconstrucción retrospectiva.',
+          'us-en': '[us-en pending]',
+        },
+        quote: {
+          'mx-es':
+            '"La decisión institucional ante un intento de sustracción no se discute después: se documenta en el momento, o no se documenta nunca."',
+          'us-en': '[us-en pending]',
+        },
+        regulatoryCitation: {
+          'mx-es':
+            'Ley General de Salud, Art. 64, fracción II: "Establecer acciones contra los padecimientos prevenibles y curables, en favor de los menores con discapacidad y de quienes la atienden, así como acciones para la atención de la mujer durante el embarazo, parto y puerperio y del recién nacido, con énfasis en la atención del riesgo perinatal."',
+          'us-en': '[us-en pending]',
+        },
+        regulatory: {
+          'mx-es': 'LGS Art. 64 · NOM-007 · Expediente Clínico',
+          'us-en': '[us-en pending]',
+        },
+      },
+      // Tab 3 -- Coordinación de Calidad y Seguridad del Paciente.
+      // Trazabilidad from first signal through institutional close;
+      // evidence consolidated for the Comité Hospitalario de
+      // Emergencias y Desastres and the next acreditación visit. Doc
+      // label is 50 chars; labelMobile shortens for the accordion
+      // trigger.
       {
         label: {
-          'mx-es': 'Subdirección de Calidad',
+          'mx-es': 'Coordinación de Calidad y Seguridad del Paciente',
           'us-en': '[us-en pending]',
         },
         labelMobile: {
-          'mx-es': 'Subdir. Calidad',
+          'mx-es': 'Coord. Calidad',
           'us-en': '[us-en pending]',
         },
         tier: {
@@ -400,89 +465,57 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
         headshot: '/headshots/clinicas-de-maternidad/calidad.webp',
-        chainTiers: ['patron', 'tendencia'],
-        body: {
-          'mx-es':
-            'La señal del primer evento no quedó aislada. VigiMed consolidó el patrón de quiebres de campo estéril en quirófano cardiotorácico a lo largo del trimestre, y la tendencia ya estaba documentada cuando la revisión institucional la pidió. Una sola evidencia, leída por todos los marcos concurrentes.',
-          'us-en': '[us-en pending]',
-        },
-        quote: {
-          'mx-es':
-            '"Sin tendencia documentada, llego a junta con tres reportes en tres formatos distintos y dedico la primera hora a explicar de dónde sale cada cifra."',
-          'us-en': '[us-en pending]',
-        },
-        regulatoryCitation: {
-          'mx-es':
-            'NOM-004-SSA3-2012, §1: "Esta norma establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
-          'us-en': '[us-en pending]',
-        },
-        regulatory: {
-          'mx-es': 'NOM-004 · CONAMED · CSG',
-          'us-en': '[us-en pending]',
-        },
-      },
-      // Tab 3 -- Dirección Médica. Tendency arrives at clinical
-      // committee already crossed with patient outcomes and root
-      // cause; institutional criterion (double-verify protocol) signed
-      // in one session. body 43w / quote 24w / citation 28w (same
-      // NOM-004 §1 trim as Tab 2).
-      {
-        label: { 'mx-es': 'Dirección Médica', 'us-en': '[us-en pending]' },
-        tier: {
-          'mx-es': 'Decisión clínica institucional',
-          'us-en': '[us-en pending]',
-        },
-        headshot: '/headshots/clinicas-de-maternidad/medica.png',
         chainTiers: ['tendencia', 'criterio'],
         body: {
           'mx-es':
-            'La tendencia llegó al comité clínico ya cruzada con resultados de paciente y causa raíz. El criterio institucional sobre acceso al quirófano cardiotorácico se firmó en una sola sesión: protocolo de doble verificación al cierre de campo, vinculante para todo el servicio.',
+            'VigiMed sostuvo la trazabilidad de la activación de Código Rosa desde la primera señal en el punto de control hasta el cierre institucional del evento. Cada decisión quedó documentada contra el criterio del Programa Hospital Seguro y alineada a las Acciones Esenciales para la Seguridad del Paciente. El Comité Hospitalario de Emergencias y Desastres recibió la evidencia consolidada antes de la siguiente reunión, disponible para la próxima visita de acreditación institucional sin reconstrucción del expediente operativo.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin criterio derivado de tendencia documentada, el comité abre la sesión alineando interpretación. Salimos con acuerdos individuales que el siguiente caso vuelve a discutir."',
+            '"La acreditación se gana o se pierde por lo que se puede demostrar el día que llega la visita, no por lo que recordamos haber hecho."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'NOM-004-SSA3-2012, §1: "Esta norma establece los criterios científicos, éticos, tecnológicos y administrativos obligatorios en la elaboración, integración, uso, manejo, archivo, conservación, propiedad, titularidad y confidencialidad del expediente clínico."',
+            'Programa Hospital Seguro (CSG/SSA): "El Comité Hospitalario de Emergencias y Desastres es la instancia institucional responsable de la planeación, capacitación, simulacro y operación de los protocolos de respuesta ante emergencias hospitalarias, incluyendo la activación de códigos de seguridad como el Código Rosa."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'CONAMED · NOM-004 · CSG',
+          'mx-es': 'Hospital Seguro · AESP · CSG',
           'us-en': '[us-en pending]',
         },
       },
-      // Tab 4 -- Dirección General. Signed criterion elevated to
-      // institutional standard with full chain (signal -> operational
-      // change) documented as evidence-of-response in VigiMed
-      // Insights. body 46w / quote 23w / citation 19w.
+      // Tab 4 -- Dirección General. Institutional position sostenida
+      // ante familia (cronología verificable al segundo), autoridad
+      // sanitaria (expediente íntegro al requerimiento), and any
+      // posterior reclamación (criterio institucional firmado). Doc
+      // label is 17 chars; no labelMobile needed.
       {
         label: { 'mx-es': 'Dirección General', 'us-en': '[us-en pending]' },
         tier: {
           'mx-es': 'Posición institucional',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/clinicas-de-maternidad/general.png',
+        headshot: '/headshots/clinicas-de-maternidad/general.webp',
         chainTiers: ['criterio', 'estandar'],
         body: {
           'mx-es':
-            'El criterio firmado por el comité subió al consejo como estándar institucional con respaldo en VigiMed Insights: la cadena completa, desde la señal de quiebre hasta el cambio operativo, documentada como evidencia de respuesta. La posición ante aseguradora y CONAMED se sostuvo antes de cualquier llamada.',
+            'VigiMed entregó a la Dirección General el reporte institucional consolidado del evento: punto de detección, cadena de decisión documentada, protocolo aplicado, cohorte materno-neonatal verificada al cierre. La institución sostuvo la posición ante la familia con cronología verificable al segundo, ante la autoridad sanitaria con expediente íntegro al momento del requerimiento, y ante cualquier reclamación posterior con criterio institucional firmado, sin reconstrucción retrospectiva.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"Sin evidencia de respuesta institucional documentada, una infección con reingreso es crisis reputacional. Defiendes operación, no decisión. Llegas a aseguradora explicando, no respondiendo."',
+            '"Cuando la familia pregunta, el reloj corre. La diferencia entre defender la institución y reconstruir lo ocurrido se mide en horas."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
           'mx-es':
-            'Reglamento de Procedimientos CONAMED: "el criterio institucional, pues no se trata de la mera apreciación de perito persona física."',
+            'Reglamento de Procedimientos para la Atención de Quejas Médicas y Gestión Pericial de la CONAMED, Art. 49: "En la valoración pericial debe prevalecer el criterio institucional, pues no se trata de la mera apreciación de perito persona física, sino del análisis técnico-científico que la institución sostiene."',
           'us-en': '[us-en pending]',
         },
         regulatory: {
-          'mx-es': 'CONAMED · CSG · COFEPRIS',
+          'mx-es': 'LGS Art. 64 · CONAMED · Responsable Sanitario',
           'us-en': '[us-en pending]',
         },
       },
@@ -518,11 +551,16 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
             'us-en': '[us-en pending]',
           },
         },
+        // D-VM469-11: estándar tier description adapted to the owner-
+        // clinician institutional accountability surface for maternity
+        // (familia, autoridad sanitaria y responsable sanitario),
+        // replacing the private-sector and public-system lineages
+        // carried by sister segments.
         estandar: {
           label: { 'mx-es': 'Estándar', 'us-en': '[us-en pending]' },
           description: {
             'mx-es':
-              'Compromiso institucional firmado ante consejo y reguladores',
+              'Compromiso institucional firmado ante familia, autoridad sanitaria y responsable sanitario',
             'us-en': '[us-en pending]',
           },
         },
@@ -535,11 +573,16 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Section 4 -- Proof + Legitimacy (VM-450 D-S56-2 §D Acta de
-  // Cumplimiento lock). regulatoryDocument theme, navy background.
-  // Content per issue Scope §2 table (Carro Rojo anchor, NOM-019-
-  // SSA3-2013). Zone A is the 4-card obligation grid; Zone B is the
-  // Acta itself; Zone C is the chip rail on navy.
+  // Section 4 -- Proof + Legitimacy (VM-450 D-S56-2 shipped the
+  // regulatoryDocument theme; VM-473 mx-es content fill 2026-05-13).
+  // Top-row tile set per D-VM469-13: NOM-007 / LGS Art. 64 / Programa
+  // Hospital Seguro / NOM-016. Acta panel anchored on Ley General de
+  // Salud Art. 64 per D-VM469-14 (federal statute, not norma).
+  // establecimientoLabel ships as `[Clínica de Maternidad]` per
+  // D-VM469-15. Amber lead-in per D-VM469-16: `Su hospital` → `Su
+  // clínica`, preserves `sin reconstrucción`. sealLabel preserves the
+  // slash form (`EVIDENCIA / SOSTENIDA`) for cross-segment visual
+  // consistency.
   // ---------------------------------------------------------------------------
   section4: {
     theme: 'offwhite',
@@ -563,9 +606,9 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
       },
       frame: {
         'mx-es': [
-          { text: 'Su hospital ya opera bajo obligaciones regulatorias medibles. ' },
+          { text: 'Su clínica opera bajo obligaciones regulatorias medibles. ' },
           {
-            text: 'VigiMed las verifica en tiempo real, no en reconstrucción.',
+            text: 'VigiMed las verifica en tiempo real, sin reconstrucción.',
             emphasis: 'bold-amber',
           },
         ],
@@ -577,25 +620,38 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
       cards: [
         {
           articleAnchor: {
-            'mx-es': 'NOM-019-SSA3-2013',
+            'mx-es': 'NOM-007-SSA2-2016',
             'us-en': '[us-en pending]',
           },
           label: {
-            'mx-es': 'Práctica de enfermería en respuesta de emergencia',
-            'us-en': '[us-en pending]',
-          },
-          frequency: { 'mx-es': 'POR TURNO', 'us-en': '[us-en pending]' },
-        },
-        {
-          articleAnchor: {
-            'mx-es': 'NOM-004-SSA3-2012 §1',
-            'us-en': '[us-en pending]',
-          },
-          label: {
-            'mx-es': 'Expediente clínico íntegro y trazable',
+            'mx-es':
+              'Atención materno-perinatal e identificación del recién nacido',
             'us-en': '[us-en pending]',
           },
           frequency: { 'mx-es': 'POR EVENTO', 'us-en': '[us-en pending]' },
+        },
+        {
+          articleAnchor: {
+            'mx-es': 'LGS Art. 64',
+            'us-en': '[us-en pending]',
+          },
+          label: {
+            'mx-es': 'Atención materno-infantil y seguridad institucional',
+            'us-en': '[us-en pending]',
+          },
+          frequency: { 'mx-es': 'CONTINUA', 'us-en': '[us-en pending]' },
+        },
+        {
+          articleAnchor: {
+            'mx-es': 'Programa Hospital Seguro',
+            'us-en': '[us-en pending]',
+          },
+          label: {
+            'mx-es':
+              'Protocolos de respuesta y simulacro institucional',
+            'us-en': '[us-en pending]',
+          },
+          frequency: { 'mx-es': 'OPERATIVA', 'us-en': '[us-en pending]' },
         },
         {
           articleAnchor: {
@@ -603,18 +659,10 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
             'us-en': '[us-en pending]',
           },
           label: {
-            'mx-es': 'Atención médica hospitalaria',
+            'mx-es': 'Atención médica hospitalaria y aislamiento',
             'us-en': '[us-en pending]',
           },
           frequency: { 'mx-es': 'CONTINUA', 'us-en': '[us-en pending]' },
-        },
-        {
-          articleAnchor: { 'mx-es': 'CSG', 'us-en': '[us-en pending]' },
-          label: {
-            'mx-es': 'Acreditación institucional',
-            'us-en': '[us-en pending]',
-          },
-          frequency: { 'mx-es': 'TRIENAL', 'us-en': '[us-en pending]' },
         },
       ],
     },
@@ -624,61 +672,65 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         'mx-es': 'VIGIMED · ACTA DE CUMPLIMIENTO REGULATORIO',
         'us-en': '[us-en pending]',
       },
-      folio: { 'mx-es': 'FOLIO VM-MX-04127', 'us-en': '[us-en pending]' },
+      folio: { 'mx-es': 'FOLIO VM-MX-04129', 'us-en': '[us-en pending]' },
       establecimientoLabel: {
-        'mx-es': '[Centro Médico, tercer nivel]',
+        'mx-es': '[Clínica de Maternidad]',
         'us-en': '[us-en pending]',
       },
       marcoNormativo: {
-        'mx-es': 'NOM-019-SSA3-2013, §6',
+        'mx-es': 'Ley General de Salud, Art. 64',
         'us-en': '[us-en pending]',
       },
       obligationClauses: [
+        // Cuadrant 1 -- UC12 Identificación del recién nacido.
         {
           text: {
             'mx-es':
-              'Preparación, verificación y reposición del carro rojo conforme a estándar institucional, con responsable identificado por turno y trazabilidad de contenido.',
+              'Identificación inequívoca de la persona recién nacida desde el momento del nacimiento, con brazalete de identificación con los datos de la madre colocado en presencia de ésta antes de salir de la sala de expulsión o quirófano, conservándolo durante toda la estancia hospitalaria.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Verificación documentada por turno, contenido y caducidades registradas en tiempo real, alerta automática ante inconformidad.',
+              'Cadena de identificación trazable por turno y por punto de control, con cohorte materno-neonatal verificada al cierre de cada cambio de servicio, sin reconstrucción del expediente operativo.',
             'us-en': '[us-en pending]',
           },
         },
+        // Cuadrant 2 -- UC12 Código Rosa simulacro y activación.
         {
           text: {
             'mx-es':
-              'Verificación funcional del desfibrilador y equipo de vía aérea por turno, con prueba documentada por dispositivo y escalamiento inmediato ante hallazgo de falla.',
+              'Activación, capacitación y simulacro periódico del protocolo Código Rosa bajo la coordinación del Comité Hospitalario de Emergencias y Desastres, conforme a los lineamientos del Programa Hospital Seguro y a las Acciones Esenciales para la Seguridad del Paciente.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Prueba funcional registrada por turno y por dispositivo, hallazgo escalado en tiempo real, último mantenimiento verificable al día.',
+              'Registro institucional de cada activación y cada simulacro con cadena de decisión documentada al segundo, vinculado al expediente del comité y disponible para revisión institucional al cierre del evento.',
             'us-en': '[us-en pending]',
           },
         },
+        // Cuadrant 3 -- UC7 Rutas de evacuación / salidas de emergencia.
         {
           text: {
             'mx-es':
-              'Activación oportuna de la respuesta de emergencia, con tiempo de respuesta medible y cadena de decisión documentada por participante.',
+              'Integridad y verificación continua de rutas de evacuación y salidas de emergencia en áreas de atención obstétrica y neonatal, conforme al Programa Interno de Protección Civil y a la normativa de infraestructura aplicable a establecimientos hospitalarios.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Tiempo de activación registrado al segundo, equipo respondiente identificado, cadena de decisión trazable por turno y por servicio.',
+              'Verificación documentada al inicio de cada turno y ante cada simulacro institucional, con hallazgo escalado en tiempo real y evidencia agregada lista para autoridad sanitaria y Protección Civil al momento del requerimiento.',
             'us-en': '[us-en pending]',
           },
         },
+        // Cuadrant 4 -- UC6 Puerta de aislamiento.
         {
           text: {
             'mx-es':
-              'Análisis posterior del evento que sustente revisión institucional, aprendizaje organizacional y defensa ante reclamación.',
+              'Control de apertura y cierre de la puerta de aislamiento conforme al protocolo de cohorte para pacientes con sospecha o confirmación de infección asociada a la atención, con trazabilidad de cada quiebre y vinculación al expediente clínico del paciente activo.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Reconstrucción minuto a minuto disponible para junta clínica al cierre del evento, sin reconstrucción retrospectiva.',
+              'Registro de cada apertura en el momento que ocurre, confirmado contra el caso clínico activo, con patrón de quiebres por turno y por área disponible para junta clínica y para acreditación institucional sin reconstrucción retrospectiva.',
             'us-en': '[us-en pending]',
           },
         },
@@ -690,13 +742,19 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
     },
     zoneCEyebrow: { 'mx-es': 'OPERAMOS BAJO', 'us-en': '[us-en pending]' },
     zoneCChips: {
-      'mx-es': ['NOM-019', 'NOM-004', 'CONAMED', 'CSG'],
+      'mx-es': ['NOM-007', 'LGS Art. 64', 'Hospital Seguro', 'NOM-016'],
       'us-en': ['[us-en pending]'],
     },
   },
 
   // ---------------------------------------------------------------------------
-  // Section 5 -- Final CTA (placeholder; VM-441 fills)
+  // Section 5 -- FAQ + final CTA (VM-473 mx-es content fill 2026-05-13).
+  // §F (heading + reassurance) stays chassis-constant per ticket
+  // non-goal. faqItems render in doc-literal order with steps
+  // [1, 2, 3, 4, 6, 7] per D-VM469-17. Step 5 folded into Item 4
+  // (decision-chain integration); Step 8 implicit in Item 6 (surface).
+  // D-VM469-18: Q4 confrontational phrasing from CM/HP precedent
+  // dropped for maternity-context register discipline.
   // ---------------------------------------------------------------------------
   section5: {
     faqHeading: {
@@ -710,117 +768,131 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
       'us-en': '[us-en pending]',
     },
     faqItems: [
-      {
-        kind: 'withStep',
-        step: 2,
-        question: {
-          'mx-es':
-            '¿Qué ven exactamente las cámaras de VigiMed, y qué no ven?',
-          'us-en': '[us-en pending]',
-        },
-        preview: {
-          'mx-es':
-            'VigiMed instala cámaras dedicadas en áreas críticas: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de su institución.',
-          'us-en': '[us-en pending]',
-        },
-        answer: {
-          'mx-es':
-            'VigiMed instala cámaras dedicadas en áreas críticas: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de su institución. La detección cubre eventos de seguridad del paciente y de calidad de la atención que ocurren dentro del campo de visión configurado, no consultas, no áreas administrativas, no espacios privados del paciente. La selección de áreas se hace con su institución durante la configuración inicial, no con un catálogo fijo.',
-          'us-en': '[us-en pending]',
-        },
-      },
-      {
-        kind: 'withStep',
-        step: 3,
-        question: {
-          'mx-es':
-            '¿Cómo funciona la confirmación humana? ¿Hay alguien revisando todo lo que detectan las cámaras?',
-          'us-en': '[us-en pending]',
-        },
-        preview: {
-          'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución.',
-          'us-en': '[us-en pending]',
-        },
-        answer: {
-          'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución. El CRC opera 24/7 y existe precisamente para eliminar falsos positivos: el equipo clínico recibe eventos verificados, no señales crudas. La confirmación humana es lo que convierte la detección en evidencia accionable, no un paso opcional ni un proceso automatizado.',
-          'us-en': '[us-en pending]',
-        },
-      },
-      {
-        kind: 'withStep',
-        step: 4,
-        question: {
-          'mx-es':
-            'Si VigiMed notifica a la persona equivocada en el momento equivocado, nuestros cirujanos no toleran un segundo más de interrupción. ¿Quién decide cómo se coordina la respuesta?',
-          'us-en': '[us-en pending]',
-        },
-        preview: {
-          'mx-es':
-            'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con su institución por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor.',
-          'us-en': '[us-en pending]',
-        },
-        answer: {
-          'mx-es':
-            'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con su institución por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor. Cada coordinación queda registrada con tiempo de respuesta y persona que actuó, de manera que su institución puede ajustar la matriz cuando el patrón muestre que está mal calibrada. La coordinación no interrumpe el flujo clínico; lo documenta.',
-          'us-en': '[us-en pending]',
-        },
-      },
+      // Item 1 -- Step 1 DESPLEGAR. Installation question without
+      // interrupting obstetric care.
       {
         kind: 'withStep',
         step: 1,
         question: {
           'mx-es':
-            'El equipo está saturado entre MAPEVE, MOCEBPASS, y el cambio de subdirección. ¿Es este el momento?',
+            '¿Cómo se instala VigiMed en una clínica de maternidad sin interrumpir la atención obstétrica?',
           'us-en': '[us-en pending]',
         },
         preview: {
           'mx-es':
-            'Es el momento, justamente porque su institución está saturada.',
+            'VigiMed se despliega sobre la infraestructura física que su clínica ya opera: cunero, salas de aislamiento, accesos institucionales, y rutas de evacuación.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'Es el momento, justamente porque su institución está saturada. VigiMed es un servicio gestionado: la instalación, la red, las cámaras, y la operación del Compliance Review Center los opera VigiMed, no su área de sistemas ni su equipo de calidad. La evidencia documentada empieza a producirse desde la primera semana, sin retirar a ningún equipo de sus transiciones actuales. El equipo nuevo de calidad llega a un sistema que ya está produciendo tendencia, no a uno que está empezando.',
+            'VigiMed se despliega sobre la infraestructura física que su clínica ya opera: cunero, salas de aislamiento, accesos institucionales, y rutas de evacuación. La instalación es no intrusiva, no requiere obra civil, y no interrumpe la atención obstétrica ni neonatal. El equipo institucional trabaja con su responsable sanitario y su Comité Hospitalario de Emergencias y Desastres para alinear el despliegue al protocolo de cohorte y al Programa Interno de Protección Civil vigentes.',
           'us-en': '[us-en pending]',
         },
       },
+      // Item 2 -- Step 2 DETECTAR. Three-UC scope question.
+      {
+        kind: 'withStep',
+        step: 2,
+        question: {
+          'mx-es':
+            '¿Qué eventos críticos detecta VigiMed dentro del alcance de tres casos de uso?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'VigiMed detecta tres clases de evento institucional en tiempo real: aperturas de la puerta de aislamiento fuera de protocolo de cohorte (UC6), obstrucciones o quiebres de integridad en rutas de evacuación obstétrica y neonatal (UC7), y pasos del recién nacido por los puntos de control del cunero sin identificación validada ni acompañamiento autorizado (UC12).',
+          'us-en': '[us-en pending]',
+        },
+        answer: {
+          'mx-es':
+            'VigiMed detecta tres clases de evento institucional en tiempo real: aperturas de la puerta de aislamiento fuera de protocolo de cohorte (UC6), obstrucciones o quiebres de integridad en rutas de evacuación obstétrica y neonatal (UC7), y pasos del recién nacido por los puntos de control del cunero sin identificación validada ni acompañamiento autorizado (UC12). Cada detección es continua, opera al segundo, y no depende de reporte manual posterior.',
+          'us-en': '[us-en pending]',
+        },
+      },
+      // Item 3 -- Step 3 CONFIRMAR. Real-event confirmation question.
+      {
+        kind: 'withStep',
+        step: 3,
+        question: {
+          'mx-es':
+            '¿Cómo confirma VigiMed que una detección es un evento real y no un falso positivo?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'Cada señal pasa por confirmación humana antes de escalar a registro institucional.',
+          'us-en': '[us-en pending]',
+        },
+        answer: {
+          'mx-es':
+            'Cada señal pasa por confirmación humana antes de escalar a registro institucional. El personal clínico de piso recibe la señal en el momento que ocurre, valida contra el contexto operativo del turno (cohorte activa, paciente identificado, acompañamiento autorizado), y la decisión institucional queda documentada con la cadena de identificación trazable. La detección continua y la confirmación humana operan en paralelo: VigiMed no decide en lugar del equipo clínico; entrega evidencia para que la decisión institucional se tome en el momento.',
+          'us-en': '[us-en pending]',
+        },
+      },
+      // Item 4 -- Step 4 DECIDIR. Integration with the existing
+      // institutional decision chain (D-VM469-18: maternity-context
+      // register discipline drops the CM/HP confrontational phrasing).
+      // Chain spine rendered as plain text (the doc source uses
+      // markdown backticks; fixture stores plain prose since the slot
+      // is `Paired<string>`, not RichParagraph).
+      {
+        kind: 'withStep',
+        step: 4,
+        question: {
+          'mx-es':
+            '¿Cómo se integra VigiMed a la cadena de decisión institucional existente?',
+          'us-en': '[us-en pending]',
+        },
+        preview: {
+          'mx-es':
+            'VigiMed se acopla a la cadena de decisión que su clínica ya tiene: el Director Médico mantiene la autoridad clínica institucional, la Jefa de Enfermería Obstétrica mantiene la operación clínica de piso, la Coordinación de Calidad y Seguridad del Paciente mantiene el ciclo de acreditación, y la Dirección General mantiene la posición institucional ante familia y autoridad sanitaria.',
+          'us-en': '[us-en pending]',
+        },
+        answer: {
+          'mx-es':
+            'VigiMed se acopla a la cadena de decisión que su clínica ya tiene: el Director Médico mantiene la autoridad clínica institucional, la Jefa de Enfermería Obstétrica mantiene la operación clínica de piso, la Coordinación de Calidad y Seguridad del Paciente mantiene el ciclo de acreditación, y la Dirección General mantiene la posición institucional ante familia y autoridad sanitaria. VigiMed no agrega un nuevo rol institucional; entrega la evidencia continua que cada rol necesita en su punto de la cadena señal → patrón → tendencia → criterio → estándar, de modo que la decisión institucional se documenta en el momento, no se reconstruye después.',
+          'us-en': '[us-en pending]',
+        },
+      },
+      // Item 5 -- Step 6 DOCUMENTAR. Institutional evidence for
+      // acreditación and defense ante autoridad sanitaria.
       {
         kind: 'withStep',
         step: 6,
         question: {
           'mx-es':
-            '¿Qué pasa si ocurre un evento adverso grave teniendo VigiMed implementado?',
+            '¿Qué evidencia institucional produce VigiMed para acreditación y para defensa ante autoridad sanitaria?',
           'us-en': '[us-en pending]',
         },
         preview: {
           'mx-es':
-            'La institución llega a la conversación regulatoria con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva.',
+            'VigiMed produce el Acta de Cumplimiento Regulatorio institucional, con cadena de decisión documentada al segundo y obligación verificada contra cuatro anclas regulatorias del segmento: NOM-007-SSA2-2016 (atención materno-perinatal e identificación del recién nacido), Ley General de Salud Art. 64 (atención materno-infantil y seguridad institucional), Programa Hospital Seguro (protocolos de respuesta y simulacro institucional), y NOM-016-SSA3-2012 (atención médica hospitalaria y aislamiento).',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'La institución llega a la conversación regulatoria con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva. Los datos son de su institución; VigiMed los procesa bajo contrato de tratamiento, no los reutiliza, no los comparte con terceros, ni los hace disponibles a procesos jurídicos sin instrucción de su institución. Ante aseguradora, CONAMED, o consejo, la pregunta deja de ser qué ocurrió y se vuelve cómo respondió la institución.',
+            'VigiMed produce el Acta de Cumplimiento Regulatorio institucional, con cadena de decisión documentada al segundo y obligación verificada contra cuatro anclas regulatorias del segmento: NOM-007-SSA2-2016 (atención materno-perinatal e identificación del recién nacido), Ley General de Salud Art. 64 (atención materno-infantil y seguridad institucional), Programa Hospital Seguro (protocolos de respuesta y simulacro institucional), y NOM-016-SSA3-2012 (atención médica hospitalaria y aislamiento). La evidencia queda disponible al cierre del evento, sin reconstrucción del expediente operativo, lista para la próxima visita de acreditación, para requerimiento de autoridad sanitaria, y para CONAMED en su caso.',
           'us-en': '[us-en pending]',
         },
       },
+      // Item 6 -- Step 7 EMERGER. Institutional intelligence from
+      // sustained operation (VigiMed Insights).
       {
         kind: 'withStep',
-        step: 6,
+        step: 7,
         question: {
           'mx-es':
-            'Estamos en ciclo de re-acreditación. ¿Adoptar VigiMed nos arriesga la auditoría?',
+            '¿Qué inteligencia institucional emerge cuando VigiMed opera de forma sostenida?',
           'us-en': '[us-en pending]',
         },
         preview: {
           'mx-es':
-            'La auditoría revisa el expediente clínico. VigiMed deposita su evidencia ahí, no en un sistema paralelo.',
+            'VigiMed Insights consolida el patrón institucional de cada uno de los tres perímetros a lo largo del tiempo: quiebres recurrentes de protocolo de aislamiento por turno y por área, hallazgos repetidos en rutas de evacuación, y patrón de activaciones y simulacros de Código Rosa.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'La auditoría revisa el expediente clínico. VigiMed deposita su evidencia ahí, no en un sistema paralelo. Cada evento crítico queda confirmado por un humano, documentado en el formato que su institución usa, y disponible como tendencia institucional cuando el evaluador la pida. El equipo de calidad llega a la auditoría leyendo, no reconstruyendo.',
+            'VigiMed Insights consolida el patrón institucional de cada uno de los tres perímetros a lo largo del tiempo: quiebres recurrentes de protocolo de aislamiento por turno y por área, hallazgos repetidos en rutas de evacuación, y patrón de activaciones y simulacros de Código Rosa. La inteligencia documentada que emerge alimenta el criterio institucional aplicado y el estándar que la clínica firma ante familia, autoridad sanitaria y responsable sanitario. La operación sostenida no entrega más eventos; entrega menos eventos, con evidencia mejor.',
           'us-en': '[us-en pending]',
         },
       },
@@ -836,7 +908,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
   },
 
   // ---------------------------------------------------------------------------
-  // Sticky CTA (placeholder; VM-441 fills)
+  // Sticky CTA (placeholder; ticket non-goal at V1).
   // ---------------------------------------------------------------------------
   sticky: {
     promptMobile: {
