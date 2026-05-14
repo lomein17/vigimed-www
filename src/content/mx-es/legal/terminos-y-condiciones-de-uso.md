@@ -36,13 +36,22 @@ La marca "**VigiMed**" y cualquier otro signo distintivo utilizado en el sitio s
 
 El Usuario tiene permitido visualizar, navegar y consultar el sitio para fines personales o de evaluación institucional no comercial. Queda expresamente prohibido al Usuario, sin autorización previa y por escrito de VigiMed:
 
-a) Reproducir, distribuir, comunicar públicamente, transformar o explotar por cualquier medio el contenido del sitio para fines comerciales; b) Realizar actividades de extracción sistemática, *scraping*, *crawling* automatizado u otras técnicas análogas con el fin de obtener o compilar el contenido del sitio; c) Realizar ingeniería inversa, descompilación o desensamblado del código que sostiene el sitio o de cualquier elemento técnico relacionado; d) Utilizar las marcas, logotipos o signos distintivos de VigiMed en cualquier comunicación, sitio web, material o producto; e) Eliminar, modificar u ocultar avisos de derechos de autor, marcas comerciales u otros avisos de propiedad incluidos en el sitio; f) Cualquier otro uso que no esté expresamente autorizado por VigiMed o por la legislación aplicable.
+1. Reproducir, distribuir, comunicar públicamente, transformar o explotar por cualquier medio el contenido del sitio para fines comerciales;
+2. Realizar actividades de extracción sistemática, *scraping*, *crawling* automatizado u otras técnicas análogas con el fin de obtener o compilar el contenido del sitio;
+3. Realizar ingeniería inversa, descompilación o desensamblado del código que sostiene el sitio o de cualquier elemento técnico relacionado;
+4. Utilizar las marcas, logotipos o signos distintivos de VigiMed en cualquier comunicación, sitio web, material o producto;
+5. Eliminar, modificar u ocultar avisos de derechos de autor, marcas comerciales u otros avisos de propiedad incluidos en el sitio;
+6. Cualquier otro uso que no esté expresamente autorizado por VigiMed o por la legislación aplicable.
 
 ## 6. Conducta del Usuario y usos prohibidos
 
 El Usuario se obliga a hacer un uso lícito, diligente y de buena fe del sitio, y se compromete a abstenerse de:
 
-a) Utilizar el sitio para actividades ilegales, fraudulentas, lesivas a los derechos de terceros, contrarias al orden público o a las buenas costumbres; b) Introducir o difundir en el sitio o a través de él contenido difamatorio, obsceno, discriminatorio, amenazante, o que infrinja derechos de propiedad intelectual o industrial de terceros; c) Introducir virus informáticos, código malicioso, o realizar cualquier acto que pueda dañar, sobrecargar, deteriorar o impedir el funcionamiento normal del sitio o de los sistemas de VigiMed; d) Intentar acceder a áreas restringidas del sitio o a sistemas de VigiMed sin autorización; e) Suplantar la identidad de otra persona o entidad, o falsear su identidad o vinculación con cualquier persona o entidad al momento de proporcionar información a VigiMed.
+1. Utilizar el sitio para actividades ilegales, fraudulentas, lesivas a los derechos de terceros, contrarias al orden público o a las buenas costumbres;
+2. Introducir o difundir en el sitio o a través de él contenido difamatorio, obsceno, discriminatorio, amenazante, o que infrinja derechos de propiedad intelectual o industrial de terceros;
+3. Introducir virus informáticos, código malicioso, o realizar cualquier acto que pueda dañar, sobrecargar, deteriorar o impedir el funcionamiento normal del sitio o de los sistemas de VigiMed;
+4. Intentar acceder a áreas restringidas del sitio o a sistemas de VigiMed sin autorización;
+5. Suplantar la identidad de otra persona o entidad, o falsear su identidad o vinculación con cualquier persona o entidad al momento de proporcionar información a VigiMed.
 
 VigiMed se reserva el derecho de restringir, suspender o terminar el acceso al sitio a cualquier Usuario que incumpla los presentes Términos o que, a juicio razonable de VigiMed, ponga en riesgo la integridad, seguridad o reputación del sitio o de VigiMed.
 
@@ -50,7 +59,9 @@ VigiMed se reserva el derecho de restringir, suspender o terminar el acceso al s
 
 El contenido publicado en `https://vigimed.ai` constituye **comunicación comercial e informativa** sobre los servicios que VigiMed ofrece a instituciones del sector salud. Dicho contenido:
 
-a) No constituye asesoría médica, clínica, regulatoria, jurídica, fiscal o de cualquier otra naturaleza profesional; b) No debe ser utilizado como fundamento único para la toma de decisiones clínicas, asistenciales o de tratamiento de pacientes; c) Está dirigido a personas que toman decisiones institucionales o profesionales en organizaciones del sector salud, y no a pacientes o público general que pudiera buscar información de salud personal.
+1. No constituye asesoría médica, clínica, regulatoria, jurídica, fiscal o de cualquier otra naturaleza profesional;
+2. No debe ser utilizado como fundamento único para la toma de decisiones clínicas, asistenciales o de tratamiento de pacientes;
+3. Está dirigido a personas que toman decisiones institucionales o profesionales en organizaciones del sector salud, y no a pacientes o público general que pudiera buscar información de salud personal.
 
 VigiMed realiza esfuerzos razonables para que el contenido del sitio sea preciso, vigente y útil. No obstante, considerando la evolución continua de los campos en los que VigiMed opera y la variabilidad de los contextos institucionales, VigiMed no garantiza la exactitud, integridad, vigencia o utilidad absolutas del contenido, ni se hace responsable por las decisiones que el Usuario adopte con base en el mismo.
 

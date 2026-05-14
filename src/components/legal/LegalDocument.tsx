@@ -21,7 +21,7 @@ const components: Components = {
     </h1>
   ),
   h2: ({ children }) => (
-    <h2 className="font-display text-xl md:text-2xl lg:text-[1.75rem] font-bold leading-[1.2] tracking-[-0.01em] text-text-primary mt-12 md:mt-16 mb-4">
+    <h2 className="font-display text-[1.0625rem] md:text-[1.3125rem] lg:text-[1.5625rem] font-bold leading-[1.2] tracking-[-0.01em] text-text-primary mt-12 md:mt-16 mb-4">
       {children}
     </h2>
   ),
@@ -46,7 +46,7 @@ const components: Components = {
     </ul>
   ),
   ol: ({ children }) => (
-    <ol className="font-body text-text-body text-[1rem] md:text-[1.0625rem] leading-relaxed mt-4 list-decimal list-outside pl-6 marker:text-text-muted">
+    <ol className="font-body text-text-body text-[1rem] md:text-[1.0625rem] leading-relaxed mt-4 list-[lower-alpha] list-outside pl-6 marker:text-text-muted">
       {children}
     </ol>
   ),
