@@ -7,6 +7,7 @@ const pageKeyToRouteKey: Record<PageKey, RouteKey> = {
   home: 'home',
   platform: 'platform',
   comingSoon: 'useCases',
+  careers: 'careers',
 };
 
 export function routeKeyFor(page: PageKey): RouteKey {

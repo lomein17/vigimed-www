@@ -24,5 +24,10 @@ export const seoContent: SeoContent = {
       description:
         'Esta sección estará disponible pronto. Mientras tanto, visita Plataforma o solicita una demostración para adelantarte en la planeación de cumplimiento.',
     },
+    careers: {
+      title: 'Oportunidades en VigiMed: Únete al equipo que construye la respuesta a eventos críticos en tiempo real',
+      description:
+        'No tenemos vacantes actualmente. VigiMed está construyendo la plataforma de respuesta a eventos críticos en tiempo real para hospitales; publicaremos posiciones aquí cuando se abran.',
+    },
   },
 };

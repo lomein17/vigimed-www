@@ -34,5 +34,10 @@ export const seoContent: SeoContent = {
       description:
         'This section will be available soon. In the meantime, visit Platform or request a demo to start planning compliance coverage at your hospital.',
     },
+    careers: {
+      title: 'VigiMed Careers: Join the team building real-time critical-event response',
+      description:
+        'No open positions right now. VigiMed is building the real-time critical-event response platform for hospitals; roles will be posted here as they open.',
+    },
   },
 };
