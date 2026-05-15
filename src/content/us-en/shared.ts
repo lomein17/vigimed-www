@@ -45,7 +45,6 @@ export const sharedContent: SharedContent = {
       {
         heading: 'About VigiMed',
         links: [
-          { label: 'Newsroom' },
           { label: 'Career Opportunities', route: 'careers' },
           { label: 'Contact Us', slug: '/us-en#final-cta' },
         ],
