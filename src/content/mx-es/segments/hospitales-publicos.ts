@@ -9,12 +9,14 @@
 // '[us-en pending]' and never render (route guard returns notFound()
 // for non-mx-es requests).
 //
-// D-VM468-eng-1: §C headshot filenames stay at the CM-pattern files
-// already on disk (uveh.png / calidad.webp / medica.png / general.png
-// under /public/headshots/hospitales-publicos/). The authoring doc
-// cites HP-specific filenames (epidemiologia.webp, medica.webp,
-// general.webp) that have not yet been produced; rename deferred
-// until those assets land.
+// D-VM468-eng-1 (resolved 2026-05-14): §C headshot filenames adopt the
+// authoring-doc spec now that the v1 assets have landed. Final
+// filenames: epidemiologia.webp / calidad.webp / medica.webp /
+// general.webp under /public/headshots/hospitales-publicos/. Tab 1
+// renamed from CM-pattern uveh.png to HP-specific epidemiologia.webp.
+// Tab 3 (medica) and Tab 4 (general) flipped from .png to .webp.
+// Legacy uveh.png deleted. The persona-key chassis mapping is
+// unaffected (Tab 1 still maps to PERSONA_ORDER[0] = jefeUveh).
 //
 // D-VM468-eng-2: §B and §C Tab 4 carry asymmetric role labels
 // intentionally. §B Tab 4 displays `Dirección de Coordinación de
@@ -409,9 +411,9 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
           'mx-es': 'Vigilancia epidemiológica',
           'us-en': '[us-en pending]',
         },
-        // D-VM468-eng-1: CM-pattern filename retained until HP-
-        // specific headshot asset (epidemiologia.webp) lands.
-        headshot: '/headshots/hospitales-publicos/uveh.png',
+        // D-VM468-eng-1 (resolved 2026-05-14): adopted authoring-doc
+        // filename now that the HP-specific asset has landed.
+        headshot: '/headshots/hospitales-publicos/epidemiologia.webp',
         chainTiers: ['senal', 'patron'],
         body: {
           'mx-es':
@@ -479,7 +481,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
           'mx-es': 'Decisión clínica institucional',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/hospitales-publicos/medica.png',
+        headshot: '/headshots/hospitales-publicos/medica.webp',
         chainTiers: ['tendencia', 'criterio'],
         body: {
           'mx-es':
@@ -521,7 +523,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
           'mx-es': 'Posición institucional',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/hospitales-publicos/general.png',
+        headshot: '/headshots/hospitales-publicos/general.webp',
         chainTiers: ['criterio', 'estandar'],
         body: {
           'mx-es':
