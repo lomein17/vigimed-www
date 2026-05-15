@@ -384,7 +384,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
           'mx-es': 'Vigilancia epidemiológica',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/sistemas-hospitalarios/uveh.png',
+        headshot: '/headshots/sistemas-hospitalarios/uveh.webp',
         chainTiers: ['senal', 'patron'],
         body: {
           'mx-es':
@@ -456,7 +456,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
           'mx-es': 'Decisión clínica de red',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/sistemas-hospitalarios/medica.png',
+        headshot: '/headshots/sistemas-hospitalarios/medica.webp',
         chainTiers: ['tendencia', 'criterio'],
         body: {
           'mx-es':
@@ -490,7 +490,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
           'mx-es': 'Posición institucional',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/sistemas-hospitalarios/general.png',
+        headshot: '/headshots/sistemas-hospitalarios/general.webp',
         chainTiers: ['criterio', 'estandar'],
         body: {
           'mx-es':
