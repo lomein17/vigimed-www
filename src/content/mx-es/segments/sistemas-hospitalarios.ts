@@ -818,7 +818,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         step: 1,
         question: {
           'mx-es':
-            'El equipo de red está saturado entre MAPEVE, MOCEBPASS, y el implementación corporativa. ¿Es este el momento?',
+            'El equipo de red está saturado entre MAPEVE, MOCEBPASS, y la implementación corporativa. ¿Es este el momento?',
           'us-en': '[us-en pending]',
         },
         preview: {
@@ -827,7 +827,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'Es el momento, justamente porque su red está saturada. VigiMed opera como servicio gestionado por hospital, no como plataforma que su equipo corporativo tiene que implementar y mantener unidad por unidad. La activación inicia por el hospital piloto que su institución elija; el implementación corporativa escala según la cadencia que su Dirección de Operaciones de Red defina, no la nuestra.',
+            'Es el momento, justamente porque su red está saturada. VigiMed opera como servicio gestionado por hospital, no como plataforma que su equipo corporativo tiene que implementar y mantener unidad por unidad. La activación inicia por el hospital piloto que su institución elija; la implementación corporativa escala según la cadencia que su Dirección de Operaciones de Red defina, no la nuestra.',
           'us-en': '[us-en pending]',
         },
       },
