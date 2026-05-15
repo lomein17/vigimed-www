@@ -34,5 +34,10 @@ export const seoContent: SeoContent = {
       description:
         'This section will be available soon. In the meantime, visit Platform or request a demo to start planning compliance coverage at your hospital.',
     },
+    careers: {
+      title: 'VigiMed Careers: Join the Talent Network',
+      description:
+        'Help build the real-time critical-event response platform for hospitals. No open roles right now. Join the talent network and we will reach out when something opens.',
+    },
   },
 };
