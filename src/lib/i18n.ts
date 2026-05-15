@@ -54,8 +54,7 @@ export type RouteKey =
   | 'platform'
   | 'useCases'
   | 'whyVigimed'
-  | 'howItWorks'
-  | 'careers';
+  | 'howItWorks';
 
 export const routeSlugs: Record<Locale, Record<RouteKey, string>> = {
   'mx-es': {
@@ -64,7 +63,6 @@ export const routeSlugs: Record<Locale, Record<RouteKey, string>> = {
     useCases: 'proximamente',
     whyVigimed: 'proximamente',
     howItWorks: 'proximamente',
-    careers: 'oportunidades-laborales',
   },
   'us-en': {
     home: '',
@@ -72,7 +70,6 @@ export const routeSlugs: Record<Locale, Record<RouteKey, string>> = {
     useCases: 'coming-soon',
     whyVigimed: 'coming-soon',
     howItWorks: 'coming-soon',
-    careers: 'careers',
   },
 };
 

@@ -22,7 +22,7 @@ export const sharedContent: SharedContent = {
         heading: 'Acerca de VigiMed',
         links: [
           { label: 'Newsroom' },
-          { label: 'Oportunidades Laborales', route: 'careers' },
+          { label: 'Oportunidades Laborales' },
           { label: 'Contáctanos', slug: '/mx-es#final-cta' },
         ],
       },

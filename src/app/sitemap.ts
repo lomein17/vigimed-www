@@ -8,7 +8,6 @@ type SitemapEntryKey = { route: RouteKey; priority: number };
 const ENTRIES: SitemapEntryKey[] = [
   { route: 'home', priority: 1.0 },
   { route: 'platform', priority: 0.8 },
-  { route: 'careers', priority: 0.6 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

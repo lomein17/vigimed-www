@@ -24,10 +24,5 @@ export const seoContent: SeoContent = {
       description:
         'Esta sección estará disponible pronto. Mientras tanto, visita Plataforma o solicita una demostración para adelantarte en la planeación de cumplimiento.',
     },
-    careers: {
-      title: 'Oportunidades Laborales en VigiMed: Únete a la red de talento',
-      description:
-        'Ayúdanos a construir la plataforma de respuesta a eventos críticos para hospitales. Por ahora no tenemos vacantes abiertas. Únete a la red de talento y te contactaremos cuando se abra algo afín.',
-    },
   },
 };
