@@ -373,7 +373,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es': 'Vigilancia epidemiológica',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/centros-medicos/uveh.png',
+        headshot: '/headshots/centros-medicos/uveh.webp',
         chainTiers: ['senal', 'patron'],
         body: {
           'mx-es':
@@ -446,7 +446,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es': 'Decisión clínica institucional',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/centros-medicos/medica.png',
+        headshot: '/headshots/centros-medicos/medica.webp',
         chainTiers: ['tendencia', 'criterio'],
         body: {
           'mx-es':
@@ -478,7 +478,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es': 'Posición institucional',
           'us-en': '[us-en pending]',
         },
-        headshot: '/headshots/centros-medicos/general.png',
+        headshot: '/headshots/centros-medicos/general.webp',
         chainTiers: ['criterio', 'estandar'],
         body: {
           'mx-es':
