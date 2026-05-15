@@ -289,7 +289,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed convierte el readiness de carros rojos en evidencia institucional documentada por campus, lo que protege la firma de la dirección general ante eventos centinela y aseguradora.',
+                'VigiMed convierte el alistamiento de carros rojos en evidencia institucional documentada por campus, lo que protege la firma de la dirección general ante eventos centinela y aseguradora.',
               'us-en': '[us-en pending]',
             },
           },
@@ -663,12 +663,12 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         {
           text: {
             'mx-es':
-              'Verificación funcional del desfibrilador y equipo de vía aérea por turno, con prueba documentada por dispositivo y escalamiento inmediato ante hallazgo de falla.',
+              'Realización del tiempo fuera quirúrgico antes de la incisión, con verificación de identidad del paciente, procedimiento y sitio quirúrgico documentada por evento.',
             'us-en': '[us-en pending]',
           },
           evidence: {
             'mx-es':
-              'Prueba funcional registrada por turno y por dispositivo, hallazgo escalado en tiempo real, último mantenimiento verificable al día.',
+              'Tiempo fuera registrado por procedimiento, momento disponible en evidencia visual, cumplimiento del protocolo trazable sin depender de la nota postoperatoria.',
             'us-en': '[us-en pending]',
           },
         },
@@ -753,12 +753,12 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         },
         preview: {
           'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución.',
+            'Cada detección pasa por un analista entrenado en el Centro de Revisión de Eventos de VigiMed antes de que llegue una alerta a su institución.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución. El CRC opera 24/7 y existe precisamente para eliminar falsos positivos: el equipo clínico recibe eventos verificados, no señales crudas. La confirmación humana es lo que convierte la detección en evidencia accionable, no un paso opcional ni un proceso automatizado.',
+            'Cada detección pasa por un analista entrenado en el Centro de Revisión de Eventos de VigiMed antes de que llegue una alerta a su institución. El CRE opera 24/7 y existe precisamente para eliminar falsos positivos: el equipo clínico recibe eventos verificados, no señales crudas. La confirmación humana es lo que convierte la detección en evidencia accionable, no un paso opcional ni un proceso automatizado.',
           'us-en': '[us-en pending]',
         },
       },
@@ -767,7 +767,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         step: 4,
         question: {
           'mx-es':
-            'Si VigiMed notifica a la persona equivocada en el momento equivocado, nuestros cirujanos no toleran un segundo más de interrupción. ¿Quién decide cómo se coordina la respuesta?',
+            'Si VigiMed notifica a la persona o en el momento equivocado, los cirujanos no toleran un segundo más de interrupción. ¿Quién decide cómo se coordina la respuesta?',
           'us-en': '[us-en pending]',
         },
         preview: {
@@ -796,7 +796,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'Es el momento, justamente porque su institución está saturada. VigiMed es un servicio gestionado: la instalación, la red, las cámaras, y la operación del Compliance Review Center los opera VigiMed, no su área de sistemas ni su equipo de calidad. La evidencia documentada empieza a producirse desde la primera semana, sin retirar a ningún equipo de sus transiciones actuales. El equipo nuevo de calidad llega a un sistema que ya está produciendo tendencia, no a uno que está empezando.',
+            'Es el momento, justamente porque su institución está saturada. VigiMed es un servicio gestionado: la instalación, la red, las cámaras, y la operación del Centro de Revisión de Eventos los opera VigiMed, no su área de sistemas ni su equipo de calidad. La evidencia documentada empieza a producirse desde la primera semana, sin retirar a ningún equipo de sus transiciones actuales. El equipo nuevo de calidad llega a un sistema que ya está produciendo tendencia, no a uno que está empezando.',
           'us-en': '[us-en pending]',
         },
       },
@@ -829,12 +829,12 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         },
         preview: {
           'mx-es':
-            'La auditoría revisa el expediente clínico. VigiMed deposita su evidencia ahí, no en un sistema paralelo.',
+            'La auditoría revisa el expediente clínico. VigiMed prepara evidencia para revisión de su equipo operativo, y la deposita ahí, no en un sistema paralelo.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'La auditoría revisa el expediente clínico. VigiMed deposita su evidencia ahí, no en un sistema paralelo. Cada evento crítico queda confirmado por un humano, documentado en el formato que su institución usa, y disponible como tendencia institucional cuando el evaluador la pida. El equipo de calidad llega a la auditoría leyendo, no reconstruyendo.',
+            'La auditoría revisa el expediente clínico. VigiMed prepara evidencia para revisión de su equipo operativo, y la deposita ahí, no en un sistema paralelo. Cada evento crítico queda confirmado por un humano, documentado en el formato que su institución usa, y disponible como tendencia institucional cuando el evaluador la pida. El equipo de calidad llega a la auditoría leyendo, no reconstruyendo.',
           'us-en': '[us-en pending]',
         },
       },

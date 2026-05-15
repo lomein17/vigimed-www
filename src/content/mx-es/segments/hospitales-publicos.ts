@@ -371,7 +371,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
     // whiteSpace: 'pre-line'.
     heading: {
       'mx-es':
-        'Un caso índice detectado en el momento.\nEl brote contenido antes de declararse, y la cadena de decisión documentada.',
+        'Un caso índice detectado en el momento.\nBrote contenido y cadena de decisión documentada.',
       'us-en': '[us-en pending]',
     },
     // headingFrame inherited verbatim from CM per doc §C.2; chain noun
@@ -826,7 +826,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
       },
-      // Item 3 -- Step 3 CONFIRMAR. Compliance Review Center human
+      // Item 3 -- Step 3 CONFIRMAR. Centro de Revisión de Eventos human
       // confirmation question.
       {
         kind: 'withStep',
@@ -838,12 +838,12 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         },
         preview: {
           'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución.',
+            'Cada detección pasa por un analista entrenado en el Centro de Revisión de Eventos de VigiMed antes de que llegue una alerta a su institución.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su institución. La señal viaja con criterio aplicado, no sin filtrar. Los falsos positivos no llegan a su equipo, y los eventos confirmados llegan con expediente listo.',
+            'Cada detección pasa por un analista entrenado en el Centro de Revisión de Eventos de VigiMed antes de que llegue una alerta a su institución. La señal viaja con criterio aplicado, no sin filtrar. Los falsos positivos no llegan a su equipo, y los eventos confirmados llegan con expediente listo.',
           'us-en': '[us-en pending]',
         },
       },
@@ -854,7 +854,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         step: 4,
         question: {
           'mx-es':
-            'Si VigiMed notifica a la persona equivocada en el momento equivocado, nuestros equipos en UCI y urgencias no toleran un segundo más de interrupción bajo saturación. ¿Quién decide cómo se coordina la respuesta?',
+            'Si VigiMed notifica a la persona o en el momento equivocado, en UCI y urgencias no toleran un segundo más de interrupción bajo saturación. ¿Quién decide cómo se coordina la respuesta?',
           'us-en': '[us-en pending]',
         },
         preview: {
@@ -885,7 +885,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'La institución llega a la coordinación federal y al órgano de control con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva. La autoridad sanitaria revisa el expediente clínico; VigiMed deposita su evidencia ahí, no en un sistema paralelo.',
+            'La institución llega a la coordinación federal y al órgano de control con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva. La autoridad sanitaria revisa el expediente clínico; VigiMed prepara evidencia para revisión de su equipo operativo, y la deposita ahí, no en un sistema paralelo.',
           'us-en': '[us-en pending]',
         },
       },
@@ -908,7 +908,7 @@ export const hospitalesPublicosFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'La notificación RHOVE y la acreditación revisan el expediente clínico institucional, no un sistema paralelo. VigiMed deposita su evidencia ahí, leyendo lo que ya existe en lugar de reconstruirlo, lo que mantiene la continuidad del reporte sin abrir un frente paralelo durante el ciclo.',
+            'La notificación RHOVE y la acreditación revisan el expediente clínico institucional, no un sistema paralelo. VigiMed prepara evidencia para revisión de su equipo operativo, y la deposita ahí, leyendo lo que ya existe en lugar de reconstruirlo, lo que mantiene la continuidad del reporte sin abrir un frente paralelo durante el ciclo.',
           'us-en': '[us-en pending]',
         },
       },

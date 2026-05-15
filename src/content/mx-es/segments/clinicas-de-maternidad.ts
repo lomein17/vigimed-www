@@ -474,7 +474,7 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         chainTiers: ['tendencia', 'criterio'],
         body: {
           'mx-es':
-            'VigiMed sostuvo la trazabilidad de la activación de Código Rosa desde la primera señal en el punto de control hasta el cierre institucional del evento. Cada decisión quedó documentada contra el criterio del Programa Hospital Seguro y alineada a las Acciones Esenciales para la Seguridad del Paciente. El Comité Hospitalario de Emergencias y Desastres recibió la evidencia consolidada antes de la siguiente reunión, disponible para la próxima visita de acreditación institucional sin reconstrucción del expediente operativo.',
+            'VigiMed sostuvo la trazabilidad de la activación de Código Rosa desde la primera señal en el punto de control hasta el cierre institucional del evento. Cada decisión quedó documentada contra el criterio del Programa Hospital Seguro y alineada a las Acciones Esenciales para la Seguridad del Paciente. El Comité de Emergencias y Desastres recibió la evidencia consolidada antes de la siguiente reunión, disponible para la próxima visita de acreditación institucional sin reconstrucción del expediente operativo.',
           'us-en': '[us-en pending]',
         },
         quote: {

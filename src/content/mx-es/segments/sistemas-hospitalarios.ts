@@ -248,7 +248,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
           },
           {
             name: {
-              'mx-es': 'Evento Centinela Cross-Hospital',
+              'mx-es': 'Evento Centinela Entre Hospitales',
               'us-en': '[us-en pending]',
             },
             framing: {
@@ -406,7 +406,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
           'us-en': '[us-en pending]',
         },
       },
-      // Tab 2 -- Subdirección de Calidad Corporativa. Cross-hospital
+      // Tab 2 -- Subdirección de Calidad Corporativa. entre hospitales
       // pattern consolidated into a single MOCEBPASS evidence chain;
       // labelMobile shortens for the accordion trigger.
       {
@@ -565,7 +565,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
   // ---------------------------------------------------------------------------
   // Section 4 -- Proof + Legitimacy (VM-450 D-S56-2 shipped the
   // regulatoryDocument theme; VM-471 mx-es content fill 2026-05-13).
-  // Anchor: cross-hospital surveillance and corporate accreditation
+  // Anchor: entre hospitales surveillance and corporate accreditation
   // chain (NOM-017, MOCEBPASS, NOM-004, NOM-016). Zone A is the
   // 4-card obligation grid; Zone B is the Acta itself; Zone C is
   // the chip rail. D-VM471-2: zoneB sealLabel keeps the slash-form
@@ -771,7 +771,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'VigiMed instala cámaras dedicadas en áreas críticas de cada hospital de la red: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de cada unidad. La cobertura se configura por hospital, no como plantilla corporativa rígida, porque el riesgo varía entre unidades. Las cámaras no observan zonas de atención ambulatoria, áreas administrativas, ni espacios de descanso del personal. La consolidación cross-hospital opera sobre eventos detectados, no sobre video continuo entre unidades.',
+            'VigiMed instala cámaras dedicadas en áreas críticas de cada hospital de la red: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de cada unidad. La cobertura se configura por hospital, no como plantilla corporativa rígida, porque el riesgo varía entre unidades. Las cámaras no observan zonas de atención ambulatoria, áreas administrativas, ni espacios de descanso del personal. La consolidación entre hospitales opera sobre eventos detectados, no sobre video continuo entre unidades.',
           'us-en': '[us-en pending]',
         },
       },
@@ -785,12 +785,12 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         },
         preview: {
           'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su red.',
+            'Cada detección pasa por un analista entrenado en el Centro de Revisión de Eventos de VigiMed antes de que llegue una alerta a su red.',
           'us-en': '[us-en pending]',
         },
         answer: {
           'mx-es':
-            'Cada detección pasa por un analista entrenado en el Compliance Review Center de VigiMed antes de que llegue una alerta a su red. El analista confirma el evento contra el criterio corporativo, no contra reglas globales del vendor, y enruta la alerta al equipo del hospital donde ocurrió más al equipo de red según la matriz de coordinación configurada con su institución. La confirmación humana cierra el ciclo antes de que el corporativo reciba el dato como señal accionable.',
+            'Cada detección pasa por un analista entrenado en el Centro de Revisión de Eventos de VigiMed antes de que llegue una alerta a su red. El analista confirma el evento contra el criterio corporativo, no contra reglas globales del vendor, y enruta la alerta al equipo del hospital donde ocurrió más al equipo de red según la matriz de coordinación configurada con su institución. La confirmación humana cierra el ciclo antes de que el corporativo reciba el dato como señal accionable.',
           'us-en': '[us-en pending]',
         },
       },
@@ -799,7 +799,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         step: 4,
         question: {
           'mx-es':
-            'Si VigiMed notifica a la persona equivocada en el momento equivocado, los equipos de la red no toleran un segundo más de interrupción. ¿Quién decide cómo se coordina la respuesta?',
+            'Si VigiMed notifica a la persona o en el momento equivocado, los equipos de la red no toleran un segundo más de interrupción. ¿Quién decide cómo se coordina la respuesta?',
           'us-en': '[us-en pending]',
         },
         preview: {
@@ -809,7 +809,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con cada hospital de su red por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor. El corporativo establece el marco; cada hospital ajusta dentro del marco según su realidad operativa. La coordinación cross-hospital opera solo cuando el evento escala a patrón de red, no en cada detección individual.',
+            'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con cada hospital de su red por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor. El corporativo establece el marco; cada hospital ajusta dentro del marco según su realidad operativa. La coordinación entre hospitales opera solo cuando el evento escala a patrón de red, no en cada detección individual.',
           'us-en': '[us-en pending]',
         },
       },
@@ -818,7 +818,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         step: 1,
         question: {
           'mx-es':
-            'El equipo de red está saturado entre MAPEVE, MOCEBPASS, y el rollout corporativo. ¿Es este el momento?',
+            'El equipo de red está saturado entre MAPEVE, MOCEBPASS, y el implementación corporativa. ¿Es este el momento?',
           'us-en': '[us-en pending]',
         },
         preview: {
@@ -827,7 +827,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'Es el momento, justamente porque su red está saturada. VigiMed opera como servicio gestionado por hospital, no como plataforma que su equipo corporativo tiene que implementar y mantener unidad por unidad. La activación inicia por el hospital piloto que su institución elija; el rollout corporativo escala según la cadencia que su Dirección de Operaciones de Red defina, no la nuestra.',
+            'Es el momento, justamente porque su red está saturada. VigiMed opera como servicio gestionado por hospital, no como plataforma que su equipo corporativo tiene que implementar y mantener unidad por unidad. La activación inicia por el hospital piloto que su institución elija; el implementación corporativa escala según la cadencia que su Dirección de Operaciones de Red defina, no la nuestra.',
           'us-en': '[us-en pending]',
         },
       },
@@ -865,7 +865,7 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         },
         answer: {
           'mx-es':
-            'La auditoría revisa el expediente clínico de cada hospital y la cadena de evidencia consolidada por red. VigiMed deposita su evidencia ahí, no en un sistema paralelo, y mapea cada hallazgo contra los estándares MOCEBPASS aplicables al hospital y al alcance de red. La Subdirección de Calidad Corporativa llega al auditor con la cadena de evidencia ya consolidada entre unidades; el ciclo de re-acreditación no se interrumpe.',
+            'La auditoría revisa el expediente clínico de cada hospital y la cadena de evidencia consolidada por red. VigiMed prepara evidencia para revisión de su equipo operativo, y la deposita ahí, no en un sistema paralelo, y mapea cada hallazgo contra los estándares MOCEBPASS aplicables al hospital y al alcance de red. La Subdirección de Calidad Corporativa llega al auditor con la cadena de evidencia ya consolidada entre unidades; el ciclo de re-acreditación no se interrumpe.',
           'us-en': '[us-en pending]',
         },
       },

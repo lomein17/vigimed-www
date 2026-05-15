@@ -170,7 +170,7 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
             },
             framing: {
               'mx-es':
-                'VigiMed registra cada operación de la campana fuera de protocolo (sash position, flujo de aire interrumpido, manipulación sin EPP completo), la confirma contra el caso técnico activo, y sostiene la evidencia institucional antes del cierre del lote.',
+                'VigiMed registra cada operación de la campana fuera de protocolo (posición de la ventana frontal, flujo de aire interrumpido, manipulación sin EPP completo), la confirma contra el caso técnico activo, y sostiene la evidencia institucional antes del cierre del lote.',
               'us-en': '[us-en pending]',
             },
           },
@@ -416,7 +416,7 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
     tabDefault: 1,
     tabs: [
       // Tab 1 -- Jefe de Calidad ISO 15189. Chain origin: VigiMed
-      // detects the sash position fuera del límite protocolizado
+      // detects posición de la ventana frontal fuera del límite protocolizado
       // durante la manipulación de muestra infectocontagiosa en turno
       // nocturno; escalation routed to Calidad ISO before the next
       // sampling; cohort of personnel verified intact. Doc label is 25
@@ -438,12 +438,12 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
         chainTiers: ['senal', 'patron'],
         body: {
           'mx-es':
-            'VigiMed detectó la posición del sash fuera de protocolo en turno nocturno y escaló al Jefe de Calidad antes del siguiente muestreo del lote. La cohorte del turno quedó sin exposición y el evento entró al expediente institucional de bioseguridad con cadena de decisión técnica trazable, lista para la próxima cédula de acreditación ISO 15189.',
+            'VigiMed detectó la posición de la ventana frontal fuera de protocolo en turno nocturno y escaló al Jefe de Calidad antes del siguiente muestreo del lote. La cohorte del turno quedó sin exposición y el evento entró al expediente institucional de bioseguridad con cadena de decisión técnica trazable, lista para la próxima cédula de acreditación ISO 15189.',
           'us-en': '[us-en pending]',
         },
         quote: {
           'mx-es':
-            '"El sash en la posición incorrecta a las tres de la mañana, sin nadie supervisando, es exactamente el evento que el programa de bioseguridad no puede atrapar por sí solo."',
+            '"La ventana frontal en la posición incorrecta a las tres de la mañana, sin nadie supervisando, es exactamente el evento que el programa de bioseguridad no puede atrapar por sí solo."',
           'us-en': '[us-en pending]',
         },
         regulatoryCitation: {
@@ -458,7 +458,7 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
       },
       // Tab 2 -- Director Técnico. Chain consolidated into the
       // technical-authority institutional decision recorded at lot
-      // close: sash position, técnico identificado, muestra trazada,
+      // close: posición de la ventana frontal, técnico identificado, muestra trazada,
       // cohorte verificada, contaminación cruzada confirmada evitada.
       // Doc label is 16 chars; no labelMobile needed.
       {
@@ -471,7 +471,7 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
         chainTiers: ['patron', 'tendencia'],
         body: {
           'mx-es':
-            'VigiMed entregó al Director Técnico la cadena del evento al cierre del lote: posición del sash al segundo, técnico identificado, muestra trazada de recepción a procesamiento, cohorte sin exposición, contaminación al bench adjacente evitada. La decisión sobre la liberación del lote quedó documentada sin reconstrucción retrospectiva.',
+            'VigiMed entregó al Director Técnico la cadena del evento al cierre del lote: posición de la ventana frontal al segundo, técnico identificado, muestra trazada de recepción a procesamiento, cohorte sin exposición, contaminación al bench adjacente evitada. La decisión sobre la liberación del lote quedó documentada sin reconstrucción retrospectiva.',
           'us-en': '[us-en pending]',
         },
         quote: {
@@ -730,7 +730,7 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
           },
           evidence: {
             'mx-es':
-              'Posición del sash y estado de la campana registrados por bench y turno, quiebre escalado en tiempo real y cohorte sin exposición, lista para acreditación ISO 15189.',
+              'Posición de la ventana frontal y estado de la campana registrados por bench y turno, quiebre escalado en tiempo real y cohorte sin exposición, lista para acreditación ISO 15189.',
             'us-en': '[us-en pending]',
           },
         },
