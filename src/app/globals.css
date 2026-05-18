@@ -791,6 +791,63 @@ h1, h2, h3 {
   object-fit: contain;
 }
 
+/* Mobile integrations marquee (VM-503). Horizontal autoplay carousel that
+ * replaces the 2-column logo grid at < md. Tiles are duplicated 2x in the
+ * DOM for a seamless wrap; the JS RAF loop translates the track in px and
+ * wraps offset into [-setWidth, 0]. Mask-image fades the leading/trailing
+ * 24px ramps. touch-action: pan-y lets vertical page scroll pass through
+ * while horizontal pan is captured by the marquee. */
+.vm-integrations-marquee {
+  position: relative;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg,
+    transparent 0,
+    #000 24px,
+    #000 calc(100% - 24px),
+    transparent 100%);
+          mask-image: linear-gradient(90deg,
+    transparent 0,
+    #000 24px,
+    #000 calc(100% - 24px),
+    transparent 100%);
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+.vm-integrations-marquee.is-grabbing { cursor: grabbing; }
+.vm-integrations-marquee__track {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  will-change: transform;
+}
+.vm-integrations-marquee__tile {
+  flex: 0 0 auto;
+  width: 116px;
+  height: 116px;
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow:
+    0 1px 3px rgba(10, 22, 40, 0.06),
+    0 4px 12px rgba(10, 22, 40, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 430px) {
+  .vm-integrations-marquee__tile { width: 128px; height: 128px; padding: 20px; }
+}
+.vm-integrations-marquee__tile img {
+  max-width: 78%;
+  max-height: 60%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
 /* =======================================================================
  * Combined Moat + Integrations section (VM-422)
  * -----------------------------------------------------------------------
@@ -826,6 +883,16 @@ h1, h2, h3 {
   }
   .vm-moat-integrations-section .vm-integrations-section {
     padding-top: 32px;
+  }
+}
+
+/* Mobile-only restore: the combined-wrapper compression above zeroes
+ * padding-top on the inner Moat section, which leaves the eyebrow flush
+ * against the prior navy section's tail at < md. Restore breathing room
+ * at < md only; padding-bottom and >= md geometry stay unchanged. */
+@media (max-width: 767.98px) {
+  .vm-moat-integrations-section .vm-moat-section {
+    padding-top: 48px;
   }
 }
 

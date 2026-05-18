@@ -41,6 +41,8 @@ export interface MoatClaim {
   // two lines to avoid wrapping after "herramientas"; US claims omit it.
   headingLine2?: string;
   body: string;
+  // Mobile-only body fork (< md). Mirrors mobileH1 / mobileReveal precedents.
+  mobileBody?: string;
 }
 
 export interface MoatContent {
@@ -241,11 +243,13 @@ export const homeContent: HomeContent = {
         subEyebrow: 'THE ACCURACY LAYER',
         heading: 'Every detection is confirmed by a human.',
         body: 'A trained analyst in our Compliance Review Center reviews every detection before any alert fires. False positives stop here. When your team is notified, the event is verified. You never act on noise.',
+        mobileBody: 'TODO(VM-503): mobile copy pending. When your team is notified, the event is verified. You never act on noise.',
       },
       {
         subEyebrow: 'THE ARCHITECTURE LAYER',
         heading: 'One platform, not a stack to assemble.',
         body: 'Detection, confirmation, coordination, documentation, and analysis run on a single architecture. VigiMed installs and operates the cameras, the analytics, the Compliance Review Center, and the reporting layer. No hospital IT integration required to begin.',
+        mobileBody: 'TODO(VM-503): mobile copy pending. Detection, confirmation, coordination, documentation, and analysis operate on a single architecture.',
       },
     ],
   },

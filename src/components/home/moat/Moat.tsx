@@ -35,7 +35,8 @@ export function Moat({ locale }: { locale: Locale }) {
                   </>
                 ) : null}
               </h3>
-              <p className="vm-moat-body">{claim.body}</p>
+              <p className="vm-moat-body md:hidden">{claim.mobileBody ?? claim.body}</p>
+              <p className="vm-moat-body hidden md:block">{claim.body}</p>
             </div>
           ))}
         </div>

@@ -4,6 +4,7 @@ import { homeContent as usHome } from '@/content/us-en/home';
 import type { Locale } from '@/lib/i18n';
 
 import { IntegrationsMagnetic } from './IntegrationsMagnetic';
+import { IntegrationsMarquee } from './IntegrationsMarquee';
 
 const contentByLocale = {
   'mx-es': mxHome,
@@ -20,13 +21,16 @@ export function Integrations({ locale }: { locale: Locale }) {
         <h2 id="integrations-heading" className="vm-integrations-h2">
           {integrations.h2}
         </h2>
-        <IntegrationsMagnetic>
-          <div className="vm-integrations-grid">
-            {integrations.tiles.map((tile) => (
-              <IntegrationsTile key={tile.name} tile={tile} />
-            ))}
-          </div>
-        </IntegrationsMagnetic>
+        <IntegrationsMarquee tiles={integrations.tiles} className="md:hidden" />
+        <div className="hidden md:block">
+          <IntegrationsMagnetic>
+            <div className="vm-integrations-grid">
+              {integrations.tiles.map((tile) => (
+                <IntegrationsTile key={tile.name} tile={tile} />
+              ))}
+            </div>
+          </IntegrationsMagnetic>
+        </div>
       </div>
     </div>
   );
