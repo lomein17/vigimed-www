@@ -79,6 +79,7 @@ export const header: HeaderContent = {
   },
   utility: {
     login: 'Iniciar sesión',
+    regionName: 'México',
   },
   cta: {
     demo: 'Agende una demo',

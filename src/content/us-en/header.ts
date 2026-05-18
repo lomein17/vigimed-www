@@ -18,6 +18,7 @@ export interface HeaderContent {
   nav: Record<string, HeaderParent>;
   utility: {
     login: string;
+    regionName: string;
   };
   cta: {
     demo: string;
@@ -88,6 +89,7 @@ export const header: HeaderContent = {
   },
   utility: {
     login: 'Log in',
+    regionName: 'United States',
   },
   cta: {
     demo: 'Book a demo',
