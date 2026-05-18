@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-import { isLocale, type Locale } from '@/lib/i18n';
+import { isLiveLocale, type Locale } from '@/lib/i18n';
 import { OG_DIMENSIONS } from '@/lib/seo/constants';
 import { seoContent as mxSeo } from '@/content/mx-es/seo';
 import { seoContent as usSeo } from '@/content/us-en/seo';
@@ -66,7 +66,7 @@ export async function GET(req: Request) {
   const localeParam = searchParams.get('locale') ?? '';
   const pageParam = searchParams.get('page') ?? '';
 
-  if (!isLocale(localeParam)) {
+  if (!isLiveLocale(localeParam)) {
     return new Response('Invalid locale', { status: 400 });
   }
   if (!isPageKey(pageParam)) {

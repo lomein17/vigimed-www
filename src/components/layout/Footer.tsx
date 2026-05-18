@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { sharedContent as mxShared } from '@/content/mx-es/shared';
 import { sharedContent as usShared } from '@/content/us-en/shared';
-import { hrefFor, type Locale } from '@/lib/i18n';
+import { getLiveLocales, hrefFor, type Locale } from '@/lib/i18n';
 
 import { CountryPicker } from './CountryPicker';
 
@@ -14,6 +14,8 @@ const contentByLocale: Record<Locale, typeof mxShared> = {
 export function Footer({ locale }: { locale: Locale }) {
   const shared = contentByLocale[locale];
   const { columns, copyright, legalLinks } = shared.footer;
+  const live = getLiveLocales();
+  const showLocaleToggle = (live as readonly string[]).includes(shared.localeSelector.otherLocale);
 
   return (
     <footer data-site-footer className="bg-navy-900 text-text-on-dark">
@@ -105,12 +107,24 @@ export function Footer({ locale }: { locale: Locale }) {
             )}
           </p>
           <div>
-            <CountryPicker
-              locale={locale}
-              currentLabel={shared.localeSelector.currentLabel}
-              otherLabel={shared.localeSelector.otherLabel}
-              otherLocale={shared.localeSelector.otherLocale}
-            />
+            {showLocaleToggle ? (
+              <CountryPicker
+                locale={locale}
+                currentLabel={shared.localeSelector.currentLabel}
+                otherLabel={shared.localeSelector.otherLabel}
+                otherLocale={shared.localeSelector.otherLocale}
+              />
+            ) : (
+              // Locked-locale environments (e.g. production with
+              // LIVE_LOCALES=mx-es) render the current-locale label only.
+              // Skipping the client CountryPicker keeps the off-locale
+              // label and route code out of the RSC payload.
+              <div className="font-ui inline-flex items-end h-9">
+                <span className="text-[11px] md:text-xs text-text-on-dark-muted">
+                  {shared.localeSelector.currentLabel}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

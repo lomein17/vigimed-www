@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import { hrefFor, localeConfig, locales, type Locale, type RouteKey } from '@/lib/i18n';
+import { getLiveLocales, hrefFor, localeConfig, type RouteKey } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/seo/constants';
 
 type SitemapEntryKey = { route: RouteKey; priority: number };
@@ -14,14 +14,15 @@ const ENTRIES: SitemapEntryKey[] = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const rows: MetadataRoute.Sitemap = [];
-  for (const locale of locales) {
+  const live = getLiveLocales();
+  for (const locale of live) {
     for (const entry of ENTRIES) {
       const languages: Record<string, string> = {};
-      for (const l of locales) {
+      for (const l of live) {
         languages[localeConfig[l].hreflang] = `${SITE_URL}${hrefFor(l, entry.route)}`;
       }
       rows.push({
-        url: `${SITE_URL}${hrefFor(locale as Locale, entry.route)}`,
+        url: `${SITE_URL}${hrefFor(locale, entry.route)}`,
         lastModified: now,
         changeFrequency: 'monthly',
         priority: entry.priority,

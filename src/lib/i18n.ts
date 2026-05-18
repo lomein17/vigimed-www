@@ -40,6 +40,36 @@ export function isLocaleShaped(value: string): boolean {
 }
 
 // =======================================================================
+// Live locales (per-environment gating)
+// -----------------------------------------------------------------------
+// LIVE_LOCALES is a server-only env var (comma-separated locale codes)
+// that limits which locales are publicly accessible in a given Vercel
+// environment. Unset (or empty/invalid) means "all locales live", which
+// matches local-dev and staging behavior.
+//
+// Production sets LIVE_LOCALES=mx-es to keep the unfinished us-en content
+// out of the public site. The proxy, layout, sitemap, and hreflang map
+// all consult getLiveLocales() so the off-locales 404 cleanly and never
+// appear in metadata or sitemaps.
+// =======================================================================
+
+export function getLiveLocales(): readonly Locale[] {
+  const raw = process.env.LIVE_LOCALES;
+  if (raw === undefined || raw.trim() === '') {
+    return locales;
+  }
+  const parsed = raw
+    .split(',')
+    .map((s) => s.trim())
+    .filter((s): s is Locale => isLocale(s));
+  return parsed.length > 0 ? parsed : locales;
+}
+
+export function isLiveLocale(value: string): value is Locale {
+  return isLocale(value) && (getLiveLocales() as readonly string[]).includes(value);
+}
+
+// =======================================================================
 // Routing keys and slug map
 // -----------------------------------------------------------------------
 // RouteKey is a stable, locale-agnostic identifier for a page that nav and

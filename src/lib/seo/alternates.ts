@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { hrefFor, localeConfig, locales, type Locale, type RouteKey } from '@/lib/i18n';
+import { getLiveLocales, hrefFor, localeConfig, type Locale, type RouteKey } from '@/lib/i18n';
 import { SITE_URL, type PageKey } from '@/lib/seo/constants';
 
 const pageKeyToRouteKey: Record<PageKey, RouteKey> = {
@@ -21,17 +21,20 @@ export function routeKeyFor(page: PageKey): RouteKey {
 type AlternatesLanguages = NonNullable<NonNullable<Metadata['alternates']>['languages']>;
 
 // x-default points at the MX equivalent per spec §2.2 (MX is primary).
+// Only live locales receive hreflang entries so production HTML doesn't
+// advertise URLs the proxy would 404.
 export function generateAlternates(
   locale: Locale,
   page: PageKey,
 ): Metadata['alternates'] {
   const route = routeKeyFor(page);
   const canonical = `${SITE_URL}${hrefFor(locale, route)}`;
+  const live = getLiveLocales();
 
   const byKey: Record<string, string> = {
     'x-default': `${SITE_URL}${hrefFor('mx-es', route)}`,
   };
-  for (const l of locales) {
+  for (const l of live) {
     byKey[localeConfig[l].hreflang] = `${SITE_URL}${hrefFor(l, route)}`;
   }
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import localFont from 'next/font/local';
-import { isLocale, locales, localeConfig, type Locale } from '@/lib/i18n';
+import { getLiveLocales, isLiveLocale, localeConfig, type Locale } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/seo/constants';
 import '../globals.css';
 
@@ -52,7 +52,7 @@ const inter = localFont({
 });
 
 export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
+  return getLiveLocales().map((locale) => ({ locale }));
 }
 
 export default async function LocaleLayout({
@@ -63,7 +63,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  if (!isLocale(locale)) {
+  if (!isLiveLocale(locale)) {
     notFound();
   }
   const cfg = localeConfig[locale as Locale];
