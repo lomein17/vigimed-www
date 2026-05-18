@@ -23,6 +23,12 @@ const DIVIDER_HEIGHT_PX = 3;
 // notch on iOS while the navy header band stays flush to the screen
 // edge (the inset is consumed inside the chrome's own padding).
 const SHEET_TOP = `calc(${HEADER_HEIGHT_PX + DIVIDER_HEIGHT_PX}px + env(safe-area-inset-top, 0px))`;
+// Hide translate must clear top: SHEET_TOP, not just the sheet's own
+// height. translateY(-100%) shifts by the element's height only, leaving
+// the bottom edge at top: SHEET_TOP, which is where the chrome row's
+// bottom sits, so the last leaf paints over the chrome (VM-494 round-2
+// corrective). The extra offset moves the bottom edge to y=0.
+const SHEET_HIDE_TRANSFORM = `translateY(calc(-100% - ${HEADER_HEIGHT_PX + DIVIDER_HEIGHT_PX}px - env(safe-area-inset-top, 0px)))`;
 
 function ParentIcon({
   parentKey,
@@ -274,7 +280,7 @@ export function HeaderMobile({ locale, header, navOrder }: HeaderMobileProps) {
           overflowY: 'auto',
           background: '#0A1628',
           padding: 18,
-          transform: open ? 'translateY(0)' : 'translateY(-100%)',
+          transform: open ? 'translateY(0)' : SHEET_HIDE_TRANSFORM,
           transitionProperty: 'transform',
           transitionDuration: open ? '220ms' : '180ms',
           transitionTimingFunction: open ? 'ease-out' : 'ease-in',
