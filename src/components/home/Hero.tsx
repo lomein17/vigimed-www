@@ -3,6 +3,7 @@ import { homeContent as usHome } from '@/content/us-en/home';
 import { type Locale } from '@/lib/i18n';
 
 import { HeroCta } from './HeroCta';
+import { HeroMedia } from './HeroMedia';
 
 const contentByLocale = {
   'mx-es': mxHome,
@@ -16,7 +17,7 @@ export function Hero({ locale }: { locale: Locale }) {
 
   return (
     <section
-      aria-labelledby="hero-headline"
+      aria-labelledby="hero-headline-mobile hero-headline-desktop"
       className="vm-hero-section relative w-full overflow-hidden"
       style={{
         background: 'var(--color-navy-800)',
@@ -30,51 +31,17 @@ export function Hero({ locale }: { locale: Locale }) {
         )}
       </div>
 
-      <video
-        aria-hidden="true"
-        autoPlay
-        muted
-        playsInline
-        loop
-        preload="metadata"
-        poster={hero.heroVideo.poster}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center',
-          filter: 'saturate(0.6)',
-        }}
-      >
-        <source
-          src={hero.heroVideo.desktop}
-          type="video/mp4"
-          media="(min-width: 768px)"
-        />
-        <source src={hero.heroVideo.mobile} type="video/mp4" />
-      </video>
-
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background: 'rgba(0,0,0,0.30)',
-        }}
+      <HeroMedia
+        heroVideo={hero.heroVideo}
+        mobileH1={hero.mobileH1}
+        mobileH2={hero.mobileH2}
+        ctaLabel={hero.ctaLabel}
+        playLabel={hero.videoToggle.playLabel}
+        pauseLabel={hero.videoToggle.pauseLabel}
       />
 
       <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 25%, rgba(0,0,0,0) 100%)',
-        }}
-      />
-
-      <div
-        className="relative z-10 w-full py-section"
+        className="relative z-10 w-full py-section hidden md:block"
         style={{
           // VM-364: Hero-specific horizontal anchor. Left edge sits in the
           // left third of the composition on desktop (clamped to 208px at
@@ -101,7 +68,7 @@ export function Hero({ locale }: { locale: Locale }) {
 
           <div className="max-w-[1100px]">
             <h1
-              id="hero-headline"
+              id="hero-headline-desktop"
               className="text-text-on-dark text-[2.333rem] md:text-[2.833rem] lg:text-[3.583rem]"
               style={{
                 letterSpacing: '-0.015em',

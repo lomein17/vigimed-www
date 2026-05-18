@@ -5,6 +5,8 @@ export const homeContent: HomeContent = {
     eyebrow: 'LA PLATAFORMA DE RESPUESTA A EVENTOS CRÍTICOS',
     headlineLine1: 'Incidentes, detectados en vivo.',
     headlineLine2: 'Soluciones, coordinadas al cierre.',
+    mobileH1: 'Resolución digital a eventos de seguridad y atención al paciente, en vivo.',
+    mobileH2: 'VigiMed coordina su resolución y la convierte en inteligencia institucional.',
     subhead: [
       { text: 'Cámaras dedicadas en sus áreas críticas detectan eventos que comprometen la ' },
       { text: 'seguridad del paciente', emphasis: 'bold-amber' },
@@ -13,6 +15,10 @@ export const homeContent: HomeContent = {
       { text: ' al instante. Un analista confirma cada detección para que usted actúe sobre eventos verificados, documentados a detalle, con patrones que mejoran su operación.' },
     ],
     ctaLabel: 'Solicite una evaluación',
+    videoToggle: {
+      playLabel: 'Reproducir video',
+      pauseLabel: 'Pausar video',
+    },
     heroVideo: {
       desktop: '/videos/hero-mx-es-desktop.mp4',
       mobile: '/videos/hero-mx-es-mobile.mp4',

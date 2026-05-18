@@ -122,8 +122,14 @@ export interface HomeContent {
     eyebrow: string;
     headlineLine1: string;
     headlineLine2: string;
+    mobileH1: string;
+    mobileH2: string;
     subhead: SubheadSegment[];
     ctaLabel: string;
+    videoToggle: {
+      playLabel: string;
+      pauseLabel: string;
+    };
     heroVideo: {
       desktop: string;
       mobile: string;
@@ -143,6 +149,9 @@ export const homeContent: HomeContent = {
     eyebrow: 'THE CRITICAL-EVENT RESPONSE PLATFORM',
     headlineLine1: 'Incidents, detected in real time.',
     headlineLine2: 'Solutions, coordinated to closure.',
+    // TODO(VM-498): copy pending; us-en is not live.
+    mobileH1: 'Digital response to patient safety and care events, in real time.',
+    mobileH2: 'VigiMed coordinates the response and turns it into institutional intelligence.',
     subhead: [
       { text: 'Dedicated cameras in your critical care areas detect events that compromise ' },
       { text: 'patient safety', emphasis: 'bold-amber' },
@@ -151,6 +160,10 @@ export const homeContent: HomeContent = {
       { text: ' as they happen. An analyst confirms every detection so you act on verified events, documented in detail, with patterns that improve your operations.' },
     ],
     ctaLabel: 'Request an evaluation',
+    videoToggle: {
+      playLabel: 'Play video',
+      pauseLabel: 'Pause video',
+    },
     heroVideo: {
       desktop: '/videos/hero-us-en-desktop.mp4',
       mobile: '/videos/hero-us-en-mobile.mp4',
