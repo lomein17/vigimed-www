@@ -203,6 +203,27 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
     return () => document.removeEventListener('keydown', onKey);
   }, [isOpen, pane, closeSheet]);
 
+  // VM-495 R1: lock body scroll while drawer is open. The VM-494
+  // Headroom listener registered via useRegisterDrawerCloser fires on
+  // scrollY > 80 + downward delta; if the body scrolls behind the
+  // drawer, that listener closes the drawer mid-gesture. Locking the
+  // body keeps scrollY constant, so the listener can't trip. The
+  // registration itself stays in place so route-change, Escape, X,
+  // and future programmatic closers still work.
+  useEffect(() => {
+    if (pane === 'closed') return;
+    const html = document.documentElement;
+    const body = document.body;
+    const prevHtmlOverflow = html.style.overflow;
+    const prevBodyTouchAction = body.style.touchAction;
+    html.style.overflow = 'hidden';
+    body.style.touchAction = 'none';
+    return () => {
+      html.style.overflow = prevHtmlOverflow;
+      body.style.touchAction = prevBodyTouchAction;
+    };
+  }, [pane]);
+
   const visibleParents = navOrder.flatMap((key) => {
     const parent = header.nav[key];
     return parent ? [{ key, parent }] : [];
@@ -304,6 +325,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
           zIndex: 31,
           pointerEvents: isOpen ? 'auto' : 'none',
           overflowY: 'auto',
+          overscrollBehavior: 'contain',
           display: 'flex',
           flexDirection: 'column',
         }}
@@ -346,7 +368,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
                     className="font-display text-text-on-dark"
                     style={{
                       flex: 1,
-                      fontSize: 18,
+                      fontSize: 19,
                       fontWeight: 500,
                       letterSpacing: '-0.005em',
                     }}
@@ -375,7 +397,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
                     className="font-ui"
                     style={{
                       flex: 1,
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: 500,
                       color: 'rgba(255,255,255,0.92)',
                     }}
@@ -473,7 +495,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               style={{
                 whiteSpace: 'pre-line',
                 fontStyle: 'italic',
-                fontSize: 13,
+                fontSize: 15,
                 fontWeight: 400,
                 color: 'rgba(255,255,255,0.72)',
                 marginTop: 0,
@@ -539,7 +561,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
                           className="font-ui"
                           style={{
                             whiteSpace: 'pre-line',
-                            fontSize: 13,
+                            fontSize: 15,
                             fontWeight: 400,
                             lineHeight: 1.5,
                             color: 'rgba(255,255,255,0.72)',
