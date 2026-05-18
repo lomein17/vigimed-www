@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { notFound } from 'next/navigation';
 import localFont from 'next/font/local';
 import { getLiveLocales, isLiveLocale, localeConfig, type Locale } from '@/lib/i18n';
@@ -7,6 +7,13 @@ import '../globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+};
+
+// VM-494 A.2: viewport-fit=cover so env(safe-area-inset-top) resolves
+// to the device notch on iOS. Consumed by HeaderMobile to push chrome
+// below the inset while the navy band stays flush to the screen edge.
+export const viewport: Viewport = {
+  viewportFit: 'cover',
 };
 
 // Site typography (spec c3ea98927c84 §4.2, post-repositioning).

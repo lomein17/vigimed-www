@@ -16,7 +16,11 @@ interface HeaderMobileProps {
 
 const HEADER_HEIGHT_PX = 72;
 const DIVIDER_HEIGHT_PX = 3;
-const SHEET_TOP_PX = HEADER_HEIGHT_PX + DIVIDER_HEIGHT_PX;
+// VM-494 A.2: SHEET_TOP grew from the bare 75px constant to include
+// env(safe-area-inset-top) so the drawer scrim+sheet sit below the
+// notch on iOS while the navy header band stays flush to the screen
+// edge (the inset is consumed inside the chrome's own padding).
+const SHEET_TOP = `calc(${HEADER_HEIGHT_PX + DIVIDER_HEIGHT_PX}px + env(safe-area-inset-top, 0px))`;
 
 function ParentIcon({
   parentKey,
@@ -156,7 +160,13 @@ export function HeaderMobile({ locale, header, navOrder }: HeaderMobileProps) {
   return (
     <div
       className="md:hidden flex items-center justify-between"
-      style={{ padding: '14px 18px', minHeight: HEADER_HEIGHT_PX }}
+      style={{
+        paddingTop: 'calc(14px + env(safe-area-inset-top, 0px))',
+        paddingRight: 18,
+        paddingBottom: 14,
+        paddingLeft: 18,
+        minHeight: `calc(${HEADER_HEIGHT_PX}px + env(safe-area-inset-top, 0px))`,
+      }}
     >
       <Link
         href={hrefFor(locale, 'home')}
@@ -227,7 +237,7 @@ export function HeaderMobile({ locale, header, navOrder }: HeaderMobileProps) {
         onClick={closeSheet}
         className="fixed inset-x-0 bottom-0"
         style={{
-          top: SHEET_TOP_PX,
+          top: SHEET_TOP,
           background: 'transparent',
           border: 0,
           padding: 0,
@@ -245,8 +255,8 @@ export function HeaderMobile({ locale, header, navOrder }: HeaderMobileProps) {
         aria-hidden={!open}
         className="fixed left-0 right-0"
         style={{
-          top: SHEET_TOP_PX,
-          maxHeight: `calc(100vh - ${SHEET_TOP_PX}px)`,
+          top: SHEET_TOP,
+          maxHeight: `calc(100vh - ${HEADER_HEIGHT_PX + DIVIDER_HEIGHT_PX}px - env(safe-area-inset-top, 0px))`,
           overflowY: 'auto',
           background: '#0A1628',
           padding: 18,
