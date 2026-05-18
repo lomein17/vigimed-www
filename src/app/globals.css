@@ -800,6 +800,7 @@ h1, h2, h3 {
 .vm-integrations-marquee {
   position: relative;
   width: 100%;
+  overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg,
     transparent 0,
     #000 24px,
