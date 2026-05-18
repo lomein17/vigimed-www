@@ -8,6 +8,8 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import type { HeaderContent } from '@/content/us-en/header';
 import { hrefFor, type Locale } from '@/lib/i18n';
 
+import { useRegisterDrawerCloser } from './StickyNavShell';
+
 interface HeaderMobileProps {
   locale: Locale;
   header: HeaderContent;
@@ -135,6 +137,18 @@ export function HeaderMobile({ locale, header, navOrder }: HeaderMobileProps) {
     setOpen(false);
     requestAnimationFrame(() => triggerRef.current?.focus());
   }, []);
+
+  // VM-494 A.3: hand the shell a closer so a scroll-down hide while
+  // the drawer is open closes the drawer first; the hide defers to
+  // the next downward delta. Focus does not return to the trigger
+  // (this is a passive close, not user-initiated dismissal).
+  useRegisterDrawerCloser(
+    useCallback(() => {
+      if (!open) return false;
+      setOpen(false);
+      return true;
+    }, [open]),
+  );
 
   useEffect(() => {
     if (!open) return;

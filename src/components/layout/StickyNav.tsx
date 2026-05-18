@@ -4,6 +4,7 @@ import type { Locale } from '@/lib/i18n';
 
 import { HeaderDesktop } from './HeaderDesktop';
 import { HeaderMobile } from './HeaderMobile';
+import { StickyNavShell } from './StickyNavShell';
 
 const headerByLocale = {
   'mx-es': mxHeader,
@@ -20,10 +21,10 @@ export function StickyNav({ locale }: { locale: Locale }) {
   const navOrder = navOrderByLocale[locale];
 
   return (
-    <header className="sticky top-0 z-40 bg-navy-800">
+    <StickyNavShell>
       <HeaderDesktop locale={locale} header={header} navOrder={navOrder} />
       <HeaderMobile locale={locale} header={header} navOrder={navOrder} />
       <div aria-hidden="true" className="relative z-[32] h-[3px] bg-brand-pulse" />
-    </header>
+    </StickyNavShell>
   );
 }
