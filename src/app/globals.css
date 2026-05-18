@@ -1173,6 +1173,23 @@ h1, h2, h3 {
 .vm-hero-playpause[data-state="playing"] .vm-hero-playpause__pause { display: block; }
 
 /* =======================================================================
+ * VM-498 r2: Mobile hero video crop focal point
+ * -----------------------------------------------------------------------
+ * Source video is authored desktop-first with subjects in the right
+ * two-thirds of the frame. At < md the center crop clips subjects off
+ * the right edge, so shift the focal point right. Desktop stays at
+ * center; the wide aspect already shows the full frame.
+ * ======================================================================= */
+.vm-hero-video {
+  object-position: center;
+}
+@media (max-width: 767px) {
+  .vm-hero-video {
+    object-position: 75% center;
+  }
+}
+
+/* =======================================================================
  * Scroll-snap (VM-413; VM-447 UAT r1 chassis-wide)
  * -----------------------------------------------------------------------
  * Anchors top-level sections to viewport top with a 75px offset matching

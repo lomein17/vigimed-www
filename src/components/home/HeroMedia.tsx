@@ -78,13 +78,13 @@ export function HeroMedia({
         loop
         preload="metadata"
         poster={heroVideo.poster}
+        className="vm-hero-video"
         style={{
           position: 'absolute',
           inset: 0,
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          objectPosition: 'center',
           filter: 'saturate(0.6)',
         }}
       >
@@ -159,7 +159,7 @@ export function HeroMedia({
           id="hero-headline-mobile"
           style={{
             color: '#FFFFFF',
-            fontSize: 24,
+            fontSize: 26,
             fontWeight: 500,
             lineHeight: 1.16,
             letterSpacing: '-0.012em',
@@ -172,7 +172,7 @@ export function HeroMedia({
           className="font-body"
           style={{
             color: 'rgba(255,255,255,0.88)',
-            fontSize: 16,
+            fontSize: 18,
             fontWeight: 400,
             lineHeight: 1.42,
             letterSpacing: '-0.005em',
