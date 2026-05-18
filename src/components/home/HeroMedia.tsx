@@ -117,7 +117,7 @@ export function HeroMedia({
         className="lg:hidden absolute inset-0"
         style={{
           background:
-            'linear-gradient(180deg, rgba(10,22,40,0.30) 0%, rgba(10,22,40,0.45) 55%, rgba(10,22,40,0.78) 100%), linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 60%, rgba(0,0,0,0) 100%)',
+            'linear-gradient(180deg, rgba(10,22,40,0) 0%, rgba(10,22,40,0) 28%, rgba(10,22,40,0.35) 60%, rgba(10,22,40,0.88) 100%)',
         }}
       />
 
