@@ -98,14 +98,14 @@ export function HeroMedia({
 
       <div
         aria-hidden="true"
-        className="hidden md:block absolute inset-0"
+        className="hidden lg:block absolute inset-0"
         style={{
           background: 'rgba(0,0,0,0.30)',
         }}
       />
       <div
         aria-hidden="true"
-        className="hidden md:block absolute inset-0"
+        className="hidden lg:block absolute inset-0"
         style={{
           background:
             'linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 25%, rgba(0,0,0,0) 100%)',
@@ -114,7 +114,7 @@ export function HeroMedia({
 
       <div
         aria-hidden="true"
-        className="md:hidden absolute inset-0"
+        className="lg:hidden absolute inset-0"
         style={{
           background:
             'linear-gradient(180deg, rgba(10,22,40,0.30) 0%, rgba(10,22,40,0.45) 55%, rgba(10,22,40,0.78) 100%), linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 60%, rgba(0,0,0,0) 100%)',
@@ -123,7 +123,7 @@ export function HeroMedia({
 
       <button
         type="button"
-        className="md:hidden vm-hero-playpause"
+        className="lg:hidden vm-hero-playpause"
         data-state={state}
         aria-label={state === 'playing' ? pauseLabel : playLabel}
         onClick={handleToggle}
@@ -152,7 +152,7 @@ export function HeroMedia({
       </button>
 
       <div
-        className="md:hidden absolute inset-x-0 bottom-0 z-10 flex flex-col items-start gap-3 px-6 pb-7"
+        className="lg:hidden absolute inset-x-0 bottom-0 z-10 flex flex-col items-start gap-3 px-6 pb-7"
         style={{ top: '62%' }}
       >
         <h1

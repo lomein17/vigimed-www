@@ -11,7 +11,7 @@ import {
 
 // VM-494 A.3 Headroom auto-hide.
 //
-// Gating: (max-width: 767px) and prefers-reduced-motion: no-preference.
+// Gating: (max-width: 1023px) and prefers-reduced-motion: no-preference.
 // Outside the gate the shell renders inert: no listeners, no transform,
 // no console activity. The two media queries are observed live so a
 // device-rotation or settings change flips behavior without reload.
@@ -73,7 +73,7 @@ export function StickyNavShell({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    const mqMobile = window.matchMedia('(max-width: 767px)');
+    const mqMobile = window.matchMedia('(max-width: 1023px)');
     const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     let lastY = window.scrollY;

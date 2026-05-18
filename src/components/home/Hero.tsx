@@ -41,7 +41,7 @@ export function Hero({ locale }: { locale: Locale }) {
       />
 
       <div
-        className="relative z-10 w-full py-section hidden md:block"
+        className="relative z-10 w-full py-section hidden lg:block"
         style={{
           // VM-364: Hero-specific horizontal anchor. Left edge sits in the
           // left third of the composition on desktop (clamped to 208px at

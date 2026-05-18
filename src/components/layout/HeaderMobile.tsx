@@ -234,7 +234,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
 
   return (
     <div
-      className="md:hidden flex items-center justify-between"
+      className="lg:hidden flex items-center justify-between"
       style={{
         paddingTop: 'calc(14px + env(safe-area-inset-top, 0px))',
         paddingRight: 18,

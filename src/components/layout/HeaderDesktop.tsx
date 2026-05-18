@@ -384,7 +384,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
   return (
     <>
       <div
-        className="hidden md:grid items-center h-[72px] px-6 lg:px-8 bg-navy-800"
+        className="hidden lg:grid items-center h-[72px] px-6 lg:px-8 bg-navy-800"
         style={{ gridTemplateColumns: '1fr auto 1fr', position: 'relative', zIndex: 32 }}
       >
         <Link
@@ -518,7 +518,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
       <div
         aria-hidden={!drawerOpen}
         onClick={closeDrawer}
-        className="hidden md:block fixed inset-x-0 bottom-0"
+        className="hidden lg:block fixed inset-x-0 bottom-0"
         style={{
           top: DROPDOWN_OFFSET_PX,
           background: 'rgba(0, 0, 0, 0.35)',
@@ -537,7 +537,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
             ? `${activeParent.drawerName} ${locale === 'mx-es' ? 'menú' : 'menu'}`
             : undefined
         }
-        className="hidden md:block fixed left-1/2"
+        className="hidden lg:block fixed left-1/2"
         style={{
           top: DROPDOWN_OFFSET_PX,
           width: `min(${drawerWidthPx}px, calc(100vw - 32px))`,
