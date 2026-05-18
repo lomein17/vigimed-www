@@ -159,7 +159,7 @@ export function HeroMedia({
           id="hero-headline-mobile"
           style={{
             color: '#FFFFFF',
-            fontSize: 26,
+            fontSize: 28,
             fontWeight: 500,
             lineHeight: 1.16,
             letterSpacing: '-0.012em',

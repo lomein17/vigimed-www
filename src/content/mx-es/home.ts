@@ -75,8 +75,8 @@ export const homeContent: HomeContent = {
     headlineLine2: 'El daño, meses.',
     frame:
       'Ocurre en quirófanos bien gestionados, sin que nadie se entere a tiempo.',
-    sceneCaption:
-      'Cámara dedicada en Quirófano 1. Detección continua del campo estéril.',
+    sceneCaptionLine1: 'Cámara dedicada en Quirófano 1.',
+    sceneCaptionLine2: 'Detección continua del campo estéril.',
     banners: {
       green: 'Q1 · Campo estéril · OK',
       amber:

@@ -230,7 +230,11 @@ export function ProblemInMotion({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <p className="vm-pim-caption">{content.sceneCaption}</p>
+        <p className="vm-pim-caption">
+          {content.sceneCaptionLine1}
+          <br />
+          {content.sceneCaptionLine2}
+        </p>
       </div>
     </section>
   );
