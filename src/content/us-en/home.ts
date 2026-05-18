@@ -8,6 +8,7 @@ export type CapabilityIcon =
 export interface CapabilityCard {
   title: string;
   reveal: string;
+  mobileReveal?: string;
   icon: CapabilityIcon;
 }
 
@@ -192,18 +193,24 @@ export const homeContent: HomeContent = {
         title: 'Responds.',
         reveal:
           'The right person receives the alert on the right channel, their response is tracked to confirmation, and escalates if it stalls.',
+        mobileReveal:
+          'TODO(VM-500): mobile copy pending. The alert reaches the responder, is tracked to confirmation, and escalates if it stalls.',
         icon: 'Zap',
       },
       {
         title: 'Documents.',
         reveal:
           'Every event, response, and outcome becomes a legally defensible record, and the internal notification and approval process is automated.',
+        mobileReveal:
+          'TODO(VM-500): mobile copy pending. Every event, response, and outcome is recorded as a legally defensible record.',
         icon: 'FileText',
       },
       {
         title: 'Analyzes.',
         reveal:
           'Trends across events are detected and surfaced to the owner to advance patient safety and reduce clinical inefficiency.',
+        mobileReveal:
+          'TODO(VM-500): mobile copy pending. Trends across events are detected and surfaced to the owner to act on.',
         icon: 'TrendingUp',
       },
     ],

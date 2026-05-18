@@ -79,7 +79,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
                 {capabilities.heading}
               </h2>
             </div>
-            <div className="max-w-[940px] mx-auto">
+            <div className="max-w-[940px] mx-auto hidden md:block">
               <p
                 className="font-body"
                 style={{ color: '#2B2B2B', lineHeight: 1.6, fontSize: '1.0625rem' }}
@@ -100,6 +100,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
                 key={card.icon}
                 title={card.title}
                 reveal={card.reveal}
+                mobileReveal={card.mobileReveal}
                 icon={card.icon}
               />
             ))}

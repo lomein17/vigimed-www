@@ -47,18 +47,24 @@ export const homeContent: HomeContent = {
         title: 'Responde.',
         reveal:
           'La persona indicada recibe la alerta en el canal correcto, su respuesta se rastrea hasta confirmarse, y se escala si se detiene.',
+        mobileReveal:
+          'La alerta llega al responsable, se rastrea hasta confirmarse y escala si se detiene.',
         icon: 'Zap',
       },
       {
         title: 'Documenta.',
         reveal:
           'Cada evento, respuesta y resultado queda registrado de forma legalmente defensible, y el proceso de notificaciones y aprobaciones internas es automatizado.',
+        mobileReveal:
+          'Cada evento, respuesta y resultado queda registrado de forma legalmente defensible.',
         icon: 'FileText',
       },
       {
         title: 'Analiza.',
         reveal:
           'Las tendencias entre eventos son detectadas y se presentan al responsable para mejorar la seguridad del paciente y reducir ineficiencias clínicas.',
+        mobileReveal:
+          'Las tendencias entre eventos se detectan y se presentan al responsable para decidir.',
         icon: 'TrendingUp',
       },
     ],

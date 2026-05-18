@@ -13,10 +13,12 @@ const iconByKey = {
 export function CapabilityCard({
   title,
   reveal,
+  mobileReveal,
   icon,
 }: {
   title: string;
   reveal: string;
+  mobileReveal?: string;
   icon: CapabilityIcon;
 }) {
   const Icon = iconByKey[icon];
@@ -60,7 +62,7 @@ export function CapabilityCard({
             textAlign: 'center',
           }}
         >
-          {reveal}
+          {mobileReveal ?? reveal}
         </p>
       </div>
     </div>
