@@ -823,11 +823,11 @@ h1, h2, h3 {
 }
 .vm-integrations-marquee__tile {
   flex: 0 0 auto;
-  width: 116px;
-  height: 116px;
+  width: 162px;
+  height: 162px;
   background: #FFFFFF;
   border-radius: 14px;
-  padding: 18px;
+  padding: 25px;
   box-shadow:
     0 1px 3px rgba(10, 22, 40, 0.06),
     0 4px 12px rgba(10, 22, 40, 0.04);
@@ -836,7 +836,7 @@ h1, h2, h3 {
   justify-content: center;
 }
 @media (min-width: 430px) {
-  .vm-integrations-marquee__tile { width: 128px; height: 128px; padding: 20px; }
+  .vm-integrations-marquee__tile { width: 180px; height: 180px; padding: 28px; }
 }
 .vm-integrations-marquee__tile img {
   max-width: 78%;
@@ -887,12 +887,18 @@ h1, h2, h3 {
 }
 
 /* Mobile-only restore: the combined-wrapper compression above zeroes
- * padding-top on the inner Moat section, which leaves the eyebrow flush
- * against the prior navy section's tail at < md. Restore breathing room
- * at < md only; padding-bottom and >= md geometry stay unchanged. */
+ * padding-top on the inner Moat section and padding-bottom on the inner
+ * Integrations section. At < md the outer chassis no longer absorbs that
+ * slack, so the Moat eyebrow runs flush against the prior navy section's
+ * tail and the Integrations marquee runs flush against the next navy
+ * Final CTA section. Restore symmetric breathing room on both inner
+ * edges at < md only; >= md geometry stays unchanged. */
 @media (max-width: 767.98px) {
   .vm-moat-integrations-section .vm-moat-section {
     padding-top: 48px;
+  }
+  .vm-moat-integrations-section .vm-integrations-section {
+    padding-bottom: 48px;
   }
 }
 
