@@ -135,6 +135,21 @@ export function StickyNavShell({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
+  // VM-494 round 3. Publish the effective nav height to consumers that
+  // need to compensate for Headroom hide: scroll-padding-top (anchor
+  // landings) and Section5SnapBridge (Space/PageDown target math).
+  // Section sizing math intentionally keeps using --vm-nav-h so the
+  // chassis does not reflow as the header animates.
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--vm-nav-effective-h',
+      hidden ? '0px' : '75px',
+    );
+    return () => {
+      document.documentElement.style.removeProperty('--vm-nav-effective-h');
+    };
+  }, [hidden]);
+
   return (
     <StickyNavShellContext.Provider value={{ registerDrawerCloser }}>
       <header

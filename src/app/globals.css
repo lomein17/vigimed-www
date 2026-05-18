@@ -226,7 +226,7 @@
 /* Global anchor-scroll offset for the sticky nav band (VM-430) */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--vm-nav-h);
+  scroll-padding-top: var(--vm-nav-effective-h, var(--vm-nav-h));
 }
 
 /* =======================================================================

@@ -99,7 +99,6 @@ import { easeOutCubic } from '@/lib/easing';
  */
 export function Section5SnapBridge() {
   useEffect(() => {
-    const NAV_H = 75;
     const DURATION_MS = 600;
     let animating = false;
 
@@ -154,6 +153,14 @@ export function Section5SnapBridge() {
       }
       if (e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) return;
       if (e.code !== 'Space' && e.code !== 'PageDown') return;
+
+      // Effective nav height tracks StickyNavShell's Headroom hide state
+      // via --vm-nav-effective-h (VM-494 round 3). Fall back to 75 when
+      // the shell is not mounted (e.g., on the bare layout).
+      const effNavRaw = getComputedStyle(document.documentElement)
+        .getPropertyValue('--vm-nav-effective-h')
+        .trim();
+      const NAV_H = effNavRaw ? parseInt(effNavRaw, 10) || 75 : 75;
 
       const section5 = document.querySelector<HTMLElement>(
         '.vm-segment-faq-section',
