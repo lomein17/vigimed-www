@@ -12,7 +12,7 @@ export const header: HeaderContent = {
           name: 'Sistemas Hospitalarios',
           slug: '/mx-es/sistemas-hospitalarios',
           valueProp:
-            'Lo que funciona en su hospital insignia, replicado con la misma rigurosidad en cada unidad de su red.',
+            'Lo que distingue a su hospital insignia, replicado en cada unidad de su red.',
           image: {
             src: '/subsegments/mx_systems.jpeg',
             alt: 'Sistemas Hospitalarios',
@@ -22,7 +22,7 @@ export const header: HeaderContent = {
           name: 'Centros Médicos',
           slug: '/mx-es/centros-medicos',
           valueProp:
-            'Cuando un incidente llega a redes sociales o a una demanda, ya es tarde. VigiMed lo captura cuando ocurre.',
+            'Si un incidente es desatendido, suele multiplicarse. VigiMed lo captura cuando ocurre.',
           image: {
             src: '/subsegments/mx_private.jpeg',
             alt: 'Centros Médicos',

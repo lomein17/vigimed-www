@@ -495,7 +495,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               style={{
                 whiteSpace: 'pre-line',
                 fontStyle: 'italic',
-                fontSize: 15,
+                fontSize: 16,
                 fontWeight: 400,
                 color: 'rgba(255,255,255,0.72)',
                 marginTop: 0,
