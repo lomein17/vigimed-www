@@ -412,6 +412,18 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },
+    // VM-513 mobile-fork: shortened eyebrow + heading for the <lg
+    // composition. Desktop strings (eyebrow, heading, headingFrame) stay
+    // authoritative at >=lg and continue rendering unchanged.
+    mobileEyebrow: {
+      'mx-es': 'VIGIMED EN LA PRÁCTICA',
+      'us-en': '[us-en pending]',
+    },
+    mobileHeading: {
+      'mx-es':
+        'Quiebre de protocolo en campana, turno nocturno.\nCohorte sin exposición.',
+      'us-en': '[us-en pending]',
+    },
     tabCount: 4,
     tabDefault: 1,
     tabs: [
@@ -439,6 +451,12 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
         body: {
           'mx-es':
             'VigiMed detectó la posición de la ventana frontal fuera de protocolo en turno nocturno y escaló al Jefe de Calidad antes del siguiente muestreo del lote. La cohorte del turno quedó sin exposición y el evento entró al expediente institucional de bioseguridad con cadena de decisión técnica trazable, lista para la próxima cédula de acreditación ISO 15189.',
+          'us-en': '[us-en pending]',
+        },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Posición de la ventana frontal fuera de protocolo detectada en turno nocturno. Escaló al Jefe de Calidad antes del siguiente muestreo. Cohorte del turno sin exposición.',
           'us-en': '[us-en pending]',
         },
         quote: {
@@ -472,6 +490,12 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
         body: {
           'mx-es':
             'VigiMed entregó al Director Técnico la cadena del evento al cierre del lote: posición de la ventana frontal al segundo, técnico identificado, muestra trazada de recepción a procesamiento, cohorte sin exposición, contaminación al bench adjacente evitada. La decisión sobre la liberación del lote quedó documentada sin reconstrucción retrospectiva.',
+          'us-en': '[us-en pending]',
+        },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Cadena entregada al cierre del lote: ventana frontal al segundo, técnico identificado, muestra trazada, cohorte sin exposición, contaminación al bench adjacente evitada. Decisión técnica documentada.',
           'us-en': '[us-en pending]',
         },
         quote: {
@@ -509,6 +533,12 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
             'VigiMed sostuvo la continuidad operativa del turno nocturno sin interrupción del lote. El Director de Operaciones recibió la cadena consolidada al cierre del turno: evento detectado, escalación documentada, decisión técnica adoptada, lote procesado dentro del compromiso institucional. La evidencia operativa quedó alineada al programa de bioseguridad institucional y disponible para la posición ante el cliente referente sin reconstrucción del expediente del lote.',
           'us-en': '[us-en pending]',
         },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Continuidad operativa del turno nocturno sostenida sin interrupción del lote. Cadena consolidada al cierre del turno, alineada al programa de bioseguridad, disponible ante el cliente referente.',
+          'us-en': '[us-en pending]',
+        },
         quote: {
           'mx-es':
             '"El cliente referente no pregunta si tuvimos un evento; pregunta si lo manejamos en el momento o si nos enteramos al día siguiente."',
@@ -541,6 +571,12 @@ export const laboratoriosClinicosFillMxEs: ChassisFill = {
         body: {
           'mx-es':
             'VigiMed entregó a la Dirección General el reporte consolidado del evento: detección, cadena técnica documentada, cohorte sin exposición, contaminación cruzada evitada. La institución sostuvo la posición ante COFEPRIS, EMA, cliente referente y responsable sanitario con expediente íntegro, sin reconstrucción retrospectiva.',
+          'us-en': '[us-en pending]',
+        },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Reporte consolidado entregado a Dirección General: detección, cadena técnica, cohorte sin exposición, contaminación cruzada evitada. Posición ante COFEPRIS, EMA y cliente referente sostenida sin reconstrucción.',
           'us-en': '[us-en pending]',
         },
         quote: {

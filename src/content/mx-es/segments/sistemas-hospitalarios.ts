@@ -364,6 +364,18 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },
+    // VM-513 mobile-fork: shortened eyebrow + heading for the <lg
+    // composition. Desktop strings (eyebrow, heading, headingFrame) stay
+    // authoritative at >=lg and continue rendering unchanged.
+    mobileEyebrow: {
+      'mx-es': 'VIGIMED EN LA PRÁCTICA',
+      'us-en': '[us-en pending]',
+    },
+    mobileHeading: {
+      'mx-es':
+        'Dos bacteriemias en hospitales distintos.\nContenido antes del tercer paciente.',
+      'us-en': '[us-en pending]',
+    },
     tabCount: 4,
     tabDefault: 1,
     tabs: [
@@ -389,6 +401,12 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         body: {
           'mx-es':
             'VigiMed detectó la primera bacteriemia asociada a catéter venoso central en el Hospital y la registró como señal con cepa y antibiograma confirmados. Tres semanas después, una segunda bacteriemia en otro Hospital coincidió en tiempo, lugar y persona con la primera. La señal escaló a vigilancia de red antes de que un tercer paciente se infectara, y el evento entró al registro corporativo como patrón de bacteriemia documentado entre hospitales.',
+          'us-en': '[us-en pending]',
+        },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Primera bacteriemia registrada como señal con cepa confirmada. Tres semanas después, segunda bacteriemia en otro Hospital correlacionada. Escaló a vigilancia de red antes del tercer paciente.',
           'us-en': '[us-en pending]',
         },
         quote: {
@@ -429,6 +447,12 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
             'VigiMed mapeó la cadena de evidencia del brote contra los estándares MOCEBPASS aplicables a la red. El patrón documentado en dos hospitales se consolidó como hallazgo institucional con trazabilidad por cada unidad, y la Subdirección presentó el Plan de Mejora corporativo en la conferencia de apertura del auditor sin reconstruir evidencia entre hospitales.',
           'us-en': '[us-en pending]',
         },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Cadena de evidencia mapeada contra estándares MOCEBPASS de red. Patrón en dos hospitales consolidado como hallazgo institucional con trazabilidad por unidad, listo para auditor sin reconstrucción.',
+          'us-en': '[us-en pending]',
+        },
         quote: {
           'mx-es':
             '"Sin la consolidación, llegamos al auditor con dos expedientes que no se hablan entre sí. Con la cadena documentada por red, el hallazgo se presenta como un solo evento institucional ya resuelto."',
@@ -463,6 +487,12 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
             'VigiMed comparó el manejo del catéter venoso central en cada hospital de la red contra el patrón documentado del brote. La Dirección Médica identificó la variación de práctica clínica que explicó la asociación epidemiológica, emitió el criterio corporativo actualizado para inserción y mantenimiento de catéter, y dejó documentada la tendencia de bacteriemias por trimestre antes del siguiente comité médico de red.',
           'us-en': '[us-en pending]',
         },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Variación de práctica clínica identificada como causa de la asociación epidemiológica. Criterio corporativo de inserción y mantenimiento de catéter emitido antes del comité médico de red.',
+          'us-en': '[us-en pending]',
+        },
         quote: {
           'mx-es':
             '"El brote no fue un accidente. Fue una variación de práctica clínica que ya estaba ocurriendo en otros hospitales sin que nadie la viera como tendencia hasta que VigiMed la trazó."',
@@ -495,6 +525,12 @@ export const sistemasHospitalariosFillMxEs: ChassisFill = {
         body: {
           'mx-es':
             'VigiMed elevó el patrón de bacteriemias al consejo corporativo con la cadena de evidencia ya consolidada por hospital, por servicio y por trimestre. La Dirección General firmó el criterio institucional actualizado como estándar de red ante consejo y reguladores, sin que el segundo hospital quedara expuesto como caso aislado ni que el tercer paciente entrara al expediente.',
+          'us-en': '[us-en pending]',
+        },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Patrón elevado al consejo corporativo con cadena consolidada por hospital, servicio y trimestre. Criterio firmado como estándar de red ante consejo y reguladores, sin segundo hospital expuesto.',
           'us-en': '[us-en pending]',
         },
         quote: {

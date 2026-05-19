@@ -123,6 +123,10 @@ export interface RoleTabWithChain
   // Single prose body block (VM-448 S55 FIX 2). Replaces prior result +
   // step pair. 50-word hard cap enforced at fixture-author time.
   readonly body: Paired<string>;
+  // Mobile-only fork per VM-513: shortened body authored for the <lg
+  // scroll-snap carousel card. Absent => render `body` as the mobile
+  // copy too. 50-word soft target enforced at fixture-author time.
+  readonly mobileBody?: Paired<string>;
   // Verbatim regulatory citation rendered above the chip rail. Italic at
   // low saturation, smaller type than body. Optional at chassis level;
   // segments that do not author citation copy render only the chip rail.
@@ -302,6 +306,11 @@ export type Section3WithChainSlots =
       readonly eyebrow: Paired<string>;
       readonly heading: Paired<string>;
       readonly headingFrame?: Paired<RichParagraph>;
+      // VM-513 mobile-only fork: shortened eyebrow + heading authored
+      // for the <lg stepper-plus-carousel composition. Absent => mobile
+      // falls back to the desktop eyebrow / heading.
+      readonly mobileEyebrow?: Paired<string>;
+      readonly mobileHeading?: Paired<string>;
       readonly tabCount: 3;
       readonly tabDefault: 1 | 2 | 3;
       readonly tabs: readonly [
@@ -315,6 +324,11 @@ export type Section3WithChainSlots =
       readonly eyebrow: Paired<string>;
       readonly heading: Paired<string>;
       readonly headingFrame?: Paired<RichParagraph>;
+      // VM-513 mobile-only fork: shortened eyebrow + heading authored
+      // for the <lg stepper-plus-carousel composition. Absent => mobile
+      // falls back to the desktop eyebrow / heading.
+      readonly mobileEyebrow?: Paired<string>;
+      readonly mobileHeading?: Paired<string>;
       readonly tabCount: 4;
       readonly tabDefault: 1 | 2 | 3 | 4;
       readonly tabs: readonly [

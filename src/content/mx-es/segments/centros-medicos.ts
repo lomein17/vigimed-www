@@ -361,6 +361,18 @@ export const centrosMedicosFillMxEs: ChassisFill = {
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },
+    // VM-513 mobile-fork: shortened eyebrow + heading for the <lg
+    // composition. Desktop strings (eyebrow, heading, headingFrame) stay
+    // authoritative at >=lg and continue rendering unchanged.
+    mobileEyebrow: {
+      'mx-es': 'VIGIMED EN LA PRÁCTICA',
+      'us-en': '[us-en pending]',
+    },
+    mobileHeading: {
+      'mx-es':
+        'Brecha de campo estéril detectada en el momento.\nLa infección, evitada.',
+      'us-en': '[us-en pending]',
+    },
     tabCount: 4,
     tabDefault: 1,
     tabs: [
@@ -378,6 +390,12 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         body: {
           'mx-es':
             'VigiMed detectó el ingreso de personal sin vestimenta estéril al quirófano cardiotorácico en tiempo real. La señal escaló a la jefatura antes del cierre del campo. La infección que ese paciente habría desarrollado en siete días no ocurrió, y el evento entró al registro institucional como señal documentada.',
+          'us-en': '[us-en pending]',
+        },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Ingreso de personal sin vestimenta estéril al quirófano cardiotorácico detectado en el momento. La señal escaló antes del cierre del campo. La infección no ocurrió.',
           'us-en': '[us-en pending]',
         },
         quote: {
@@ -420,6 +438,12 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             'La señal del primer evento no quedó aislada. VigiMed consolidó el patrón de quiebres de campo estéril en quirófano cardiotorácico a lo largo del trimestre, y la tendencia ya estaba documentada cuando la revisión institucional la pidió. Una sola evidencia, leída por todos los marcos concurrentes.',
           'us-en': '[us-en pending]',
         },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Patrón de quiebres de campo estéril consolidado durante el trimestre. Tendencia documentada antes de la revisión institucional. Una sola evidencia, leída por todos los marcos.',
+          'us-en': '[us-en pending]',
+        },
         quote: {
           'mx-es':
             '"Sin tendencia documentada, llego a junta con tres reportes en tres formatos distintos y dedico la primera hora a explicar de dónde sale cada cifra."',
@@ -453,6 +477,12 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             'La tendencia llegó al comité clínico ya cruzada con resultados de paciente y causa raíz. El criterio institucional sobre acceso al quirófano cardiotorácico se firmó en una sola sesión: protocolo de doble verificación al cierre de campo, vinculante para todo el servicio.',
           'us-en': '[us-en pending]',
         },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Tendencia llegó al comité clínico cruzada con resultados de paciente. Criterio institucional sobre acceso al quirófano cardiotorácico firmado en una sesión: doble verificación al cierre de campo.',
+          'us-en': '[us-en pending]',
+        },
         quote: {
           'mx-es':
             '"Sin criterio derivado de tendencia documentada, el comité abre la sesión alineando interpretación. Salimos con acuerdos individuales que el siguiente caso vuelve a discutir."',
@@ -483,6 +513,12 @@ export const centrosMedicosFillMxEs: ChassisFill = {
         body: {
           'mx-es':
             'El criterio firmado por el comité subió al consejo como estándar institucional con respaldo en VigiMed Insights: la cadena completa, desde la señal de quiebre hasta el cambio operativo, documentada como evidencia de respuesta. La posición ante aseguradora y CONAMED se sostuvo antes de cualquier llamada.',
+          'us-en': '[us-en pending]',
+        },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Criterio firmado por comité subió al consejo como estándar institucional. La cadena, desde la señal al cambio operativo, quedó como evidencia de respuesta ante aseguradora y CONAMED.',
           'us-en': '[us-en pending]',
         },
         quote: {

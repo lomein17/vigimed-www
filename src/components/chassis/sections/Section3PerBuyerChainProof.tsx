@@ -16,9 +16,9 @@
 //
 // Active-tab state is lifted to the top component so both the desktop
 // tab strip and the chain-anchor rail consume the same source of truth.
-// On mobile the accordion tracks its own most-recently-toggled-open
-// state independently and drives the single chain rail rendered below
-// the entire accordion.
+// On mobile (VM-513) the same state is driven by an IntersectionObserver
+// over a scroll-snap carousel; the shared 5-step stepper rendered above
+// the carousel reflects the centered card's chainTiers.
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
@@ -35,6 +35,14 @@ import {
   type Section3WithChainSlots,
 } from '@/lib/chassis/slots';
 import { RichText } from '../primitives/RichText';
+
+// VM-513 mobile §3 fork. Fixed-string frame line rendered below the
+// mobile eyebrow + heading on the chain branch only. Locked per spec:
+// no fixture knob, single string per locale; us-en pending.
+const SECTION3_MOBILE_FRAME: Record<Locale, string> = {
+  'mx-es': 'Cada rol cubre un tramo de la cadena.',
+  'us-en': '[us-en pending]',
+};
 
 export function Section3PerBuyerChainProof({
   locale,
@@ -60,47 +68,88 @@ function SectionHeader({
   locale: Locale;
   fill: Section3Slots;
 }) {
+  const isChain = 'chain' in fill;
   const headingFrame =
-    'chain' in fill && fill.headingFrame
-      ? fill.headingFrame[locale]
-      : null;
+    isChain && fill.headingFrame ? fill.headingFrame[locale] : null;
+  // VM-513 mobile fork on the chain branch only. The flat branch
+  // (hospitales-publicos) continues to render the legacy composition
+  // at all widths.
+  const mobileEyebrow = isChain
+    ? fill.mobileEyebrow?.[locale] ?? fill.eyebrow[locale]
+    : null;
+  const mobileHeading = isChain
+    ? fill.mobileHeading?.[locale] ?? fill.heading[locale]
+    : null;
   return (
     // VM-448 S56 FIX 2: header wrapping div widens at >=1280px to
     // match .vm-section-3-heading-frame so the title does not wrap
     // to four lines while the frame line below it sits wider. Class
     // drives the responsive breakpoint instead of inline style.
     <div className="vm-section-3-header" style={{ marginBottom: 48 }}>
-      <p
-        className="font-ui text-brand-500"
-        style={{
-          fontSize: 12,
-          fontWeight: 500,
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          marginBottom: 16,
-        }}
-      >
-        {fill.eyebrow[locale]}
-      </p>
-      <h2
-        id="segment-section-3-heading"
-        className="font-display text-text-on-dark"
-        style={{
-          fontSize: 'var(--text-h2)',
-          letterSpacing: '-0.01em',
-          lineHeight: 1.1,
-          fontWeight: 500,
-          // S56 FIX 2: render explicit \n in heading copy as a line
-          // break (e.g. break after "momento.").
-          whiteSpace: 'pre-line',
-        }}
-      >
-        {fill.heading[locale]}
-      </h2>
-      {headingFrame ? (
-        <p className="vm-section-3-heading-frame font-body">
-          <RichText segments={headingFrame} />
+      <div className={isChain ? 'hidden lg:block' : undefined}>
+        <p
+          className="font-ui text-brand-500"
+          style={{
+            fontSize: 12,
+            fontWeight: 500,
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            marginBottom: 16,
+          }}
+        >
+          {fill.eyebrow[locale]}
         </p>
+        <h2
+          id="segment-section-3-heading"
+          className="font-display text-text-on-dark"
+          style={{
+            fontSize: 'var(--text-h2)',
+            letterSpacing: '-0.01em',
+            lineHeight: 1.1,
+            fontWeight: 500,
+            // S56 FIX 2: render explicit \n in heading copy as a line
+            // break (e.g. break after "momento.").
+            whiteSpace: 'pre-line',
+          }}
+        >
+          {fill.heading[locale]}
+        </h2>
+        {headingFrame ? (
+          <p className="vm-section-3-heading-frame font-body">
+            <RichText segments={headingFrame} />
+          </p>
+        ) : null}
+      </div>
+      {isChain ? (
+        <div className="lg:hidden">
+          <p
+            className="font-ui text-brand-500"
+            style={{
+              fontSize: 12,
+              fontWeight: 500,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              marginBottom: 16,
+            }}
+          >
+            {mobileEyebrow}
+          </p>
+          <h2
+            className="font-display text-text-on-dark"
+            style={{
+              fontSize: 'var(--text-h2)',
+              letterSpacing: '-0.01em',
+              lineHeight: 1.1,
+              fontWeight: 500,
+              whiteSpace: 'pre-line',
+            }}
+          >
+            {mobileHeading}
+          </h2>
+          <p className="vm-section-3-mobile-frame">
+            {SECTION3_MOBILE_FRAME[locale]}
+          </p>
+        </div>
       ) : null}
     </div>
   );
@@ -301,14 +350,16 @@ function ChainBranch({
           chain={fill.chain}
         />
 
-        {/* Mobile: accordion + single chain rail below. */}
+        {/* Mobile (VM-513): shared stepper above a scroll-snap
+            carousel of persona cards. IntersectionObserver inside
+            ChainMobile keeps the stepper synchronized with the
+            currently centered card. */}
         <ChainMobile
           tabs={tabs}
           activeIndex={activeMobile}
           setActiveIndex={setActiveMobile}
           locale={locale}
           chain={fill.chain}
-          initialIndex={initialIndex}
         />
       </div>
     </section>
@@ -411,115 +462,143 @@ function ChainDesktop({
   );
 }
 
+// VM-513: mobile §3 chain branch renders a shared 5-step stepper above
+// a horizontal scroll-snap carousel of persona cards. IntersectionObserver
+// watches the carousel and pushes the currently centered card's index to
+// ChainBranch via setActiveIndex, which in turn re-highlights the
+// stepper through the active card's chainTiers. Initial scrollLeft of
+// 0 reveals card 1 and fires the observer on mount, so no scroll-into-
+// view shim is needed; tabDefault is implicitly 1 on every with-chain
+// fixture today.
 function ChainMobile({
   tabs,
   activeIndex,
   setActiveIndex,
   locale,
   chain,
-  initialIndex,
 }: {
   tabs: readonly RoleTabWithChain[];
   activeIndex: number;
   setActiveIndex: (i: number) => void;
   locale: Locale;
   chain: ChainAnchor;
-  initialIndex: number;
 }) {
+  const carouselRef = useRef<HTMLDivElement>(null);
   const activeTab = tabs[activeIndex] ?? tabs[0];
+
+  useEffect(() => {
+    const root = carouselRef.current;
+    if (!root) return;
+    const cards = Array.from(
+      root.querySelectorAll<HTMLElement>('[data-index]'),
+    );
+    if (cards.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        let best: IntersectionObserverEntry | null = null;
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          if (!best || entry.intersectionRatio > best.intersectionRatio)
+            best = entry;
+        }
+        if (!best) return;
+        const raw = best.target.getAttribute('data-index');
+        const idx = raw === null ? NaN : Number(raw);
+        if (!Number.isFinite(idx)) return;
+        setActiveIndex(idx);
+      },
+      { root, threshold: [0.55, 0.7, 0.85] },
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, [setActiveIndex]);
+
   if (!activeTab) return null;
+  const activeChainTiers = new Set(activeTab.chainTiers);
+
   return (
     <div className="vm-section-3-mobile-chain">
-      <ul className="vm-section-3-accordion">
-        {tabs.map((tab, i) => {
-          const triggerLabel = tab.labelMobile?.[locale] ?? tab.label[locale];
+      <div className="vm-section-3-mobile-stepper">
+        {CHAIN_TIER_ORDER.map((tierId) => {
+          const isActive = activeChainTiers.has(tierId);
           return (
-            <ChainAccordionItem
-              key={tab.label[locale]}
-              tab={tab}
-              locale={locale}
-              index={i}
-              triggerLabel={triggerLabel}
-              defaultOpen={i === initialIndex}
-              onOpen={() => setActiveIndex(i)}
-            />
+            <div
+              key={tierId}
+              className="vm-section-3-mobile-step"
+              data-tier={tierId}
+              data-active={isActive ? '' : undefined}
+            >
+              <span
+                className="vm-section-3-mobile-step-dot"
+                aria-hidden="true"
+              />
+              <span className="vm-section-3-mobile-step-label">
+                {chain.tiers[tierId].label[locale]}
+              </span>
+            </div>
           );
         })}
-      </ul>
-      <ChainAnchorRail
-        chain={chain}
-        activeChainTiers={activeTab.chainTiers}
-        locale={locale}
-      />
-    </div>
-  );
-}
+      </div>
 
-function ChainAccordionItem({
-  tab,
-  locale,
-  index,
-  triggerLabel,
-  defaultOpen,
-  onOpen,
-}: {
-  tab: RoleTabWithChain;
-  locale: Locale;
-  index: number;
-  triggerLabel: string;
-  defaultOpen: boolean;
-  onOpen: () => void;
-}) {
-  const [open, setOpen] = useState(defaultOpen);
-  const triggerId = `vm-section-3-acc-trigger-${index}`;
-  const panelId = `vm-section-3-acc-panel-${index}`;
-
-  const toggle = () => {
-    setOpen((prev) => {
-      const next = !prev;
-      if (next) onOpen();
-      return next;
-    });
-  };
-
-  return (
-    <li className="vm-section-3-acc-item">
-      <button
-        id={triggerId}
-        type="button"
-        className="vm-section-3-acc-trigger vm-section-3-acc-trigger-chain"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={toggle}
+      <div
+        className="vm-section-3-mobile-carousel"
+        ref={carouselRef}
+        aria-label="Persona chain carousel"
       >
-        <span className="vm-section-3-acc-label-stack">
-          <span className="vm-section-3-tab-tier">{tab.tier[locale]}</span>
-          {tab.headshot ? (
-            <Image
-              className="vm-section-3-tab-headshot"
-              src={tab.headshot}
-              alt={tab.label[locale]}
-              width={72}
-              height={72}
-            />
-          ) : null}
-          <span className="vm-section-3-tab-role">{triggerLabel}</span>
+        {tabs.map((tab, i) => {
+          const roleLabel = tab.labelMobile?.[locale] ?? tab.label[locale];
+          const cardBody = tab.mobileBody?.[locale] ?? tab.body[locale];
+          return (
+            <article
+              key={tab.label[locale]}
+              className="vm-section-3-mobile-card"
+              data-index={i}
+            >
+              <div className="vm-section-3-mobile-card-head">
+                {tab.headshot ? (
+                  <Image
+                    className="vm-section-3-mobile-card-port"
+                    src={tab.headshot}
+                    alt=""
+                    width={52}
+                    height={52}
+                  />
+                ) : null}
+                <div>
+                  <span className="vm-section-3-mobile-card-tier">
+                    {tab.tier[locale]}
+                  </span>
+                  <span className="vm-section-3-mobile-card-role">
+                    {roleLabel}
+                  </span>
+                </div>
+              </div>
+              <p className="vm-section-3-mobile-card-body">{cardBody}</p>
+              <blockquote className="vm-section-3-mobile-card-quote">
+                {tab.quote[locale]}
+              </blockquote>
+              <p className="vm-section-3-mobile-card-reg">
+                {tab.regulatory[locale]}
+              </p>
+            </article>
+          );
+        })}
+      </div>
+
+      <div className="vm-section-3-mobile-dots">
+        {tabs.map((_, i) => (
+          <span
+            key={i}
+            className="vm-section-3-mobile-dot"
+            data-active={i === activeIndex ? '' : undefined}
+            aria-hidden="true"
+          />
+        ))}
+        <span className="vm-section-3-mobile-count">
+          {activeIndex + 1} / {tabs.length}
         </span>
-        <span className="vm-section-3-acc-icon" aria-hidden="true">
-          {open ? '−' : '+'}
-        </span>
-      </button>
-      {open ? (
-        <div
-          id={panelId}
-          role="region"
-          aria-labelledby={triggerId}
-          className="vm-section-3-acc-panel"
-        >
-          <RoleTabContent tab={tab} locale={locale} />
-        </div>
-      ) : null}
-    </li>
+      </div>
+    </div>
   );
 }
 

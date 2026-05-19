@@ -375,6 +375,18 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
       ],
       'us-en': [{ text: '[us-en pending]' }],
     },
+    // VM-513 mobile-fork: shortened eyebrow + heading for the <lg
+    // composition. Desktop strings (eyebrow, heading, headingFrame) stay
+    // authoritative at >=lg and continue rendering unchanged.
+    mobileEyebrow: {
+      'mx-es': 'VIGIMED EN LA PRÁCTICA',
+      'us-en': '[us-en pending]',
+    },
+    mobileHeading: {
+      'mx-es':
+        'Intento de sustracción detectado en primer punto.\nDevuelto a su madre antes del segundo.',
+      'us-en': '[us-en pending]',
+    },
     tabCount: 4,
     tabDefault: 1,
     tabs: [
@@ -402,6 +414,12 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         body: {
           'mx-es':
             'VigiMed detectó el paso del recién nacido por el punto de control del cunero sin pulsera materno-neonatal validada ni acompañamiento autorizado. La señal escaló a seguridad antes del segundo perímetro. El recién nacido regresó con su madre, la cohorte materno-neonatal verificada intacta, y el evento entró al registro como Código Rosa con cadena trazable por turno.',
+          'us-en': '[us-en pending]',
+        },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Paso del recién nacido sin pulsera materno-neonatal validada detectado en el punto de control. La señal escaló a seguridad antes del segundo perímetro. El recién nacido regresó con su madre.',
           'us-en': '[us-en pending]',
         },
         quote: {
@@ -434,6 +452,12 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         body: {
           'mx-es':
             'VigiMed entregó al Director Médico la cadena completa del evento al cierre del intento: identificación del recién nacido validada en el punto de control, decisión institucional de activación de Código Rosa adoptada y documentada, protocolo de cierre de accesos institucionales aplicado, cohorte materno-neonatal verificada al cierre. La decisión clínica institucional quedó firmada al expediente, lista para la junta clínica y para la comunicación a la familia sin reconstrucción retrospectiva.',
+          'us-en': '[us-en pending]',
+        },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Cadena entregada al cierre del intento: identificación validada, Código Rosa activado, accesos cerrados, cohorte verificada. La decisión institucional quedó firmada al expediente sin reconstrucción retrospectiva.',
           'us-en': '[us-en pending]',
         },
         quote: {
@@ -477,6 +501,12 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
             'VigiMed sostuvo la trazabilidad de la activación de Código Rosa desde la primera señal en el punto de control hasta el cierre institucional del evento. Cada decisión quedó documentada contra el criterio del Programa Hospital Seguro y alineada a las Acciones Esenciales para la Seguridad del Paciente. El Comité de Emergencias y Desastres recibió la evidencia consolidada antes de la siguiente reunión, disponible para la próxima visita de acreditación institucional sin reconstrucción del expediente operativo.',
           'us-en': '[us-en pending]',
         },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Trazabilidad sostenida desde la primera señal hasta el cierre institucional, alineada al Programa Hospital Seguro. El Comité de Emergencias recibió la evidencia consolidada antes de la siguiente reunión.',
+          'us-en': '[us-en pending]',
+        },
         quote: {
           'mx-es':
             '"La acreditación se gana o se pierde por lo que se puede demostrar el día que llega la visita, no por lo que recordamos haber hecho."',
@@ -508,6 +538,12 @@ export const clinicasDeMaternidadFillMxEs: ChassisFill = {
         body: {
           'mx-es':
             'VigiMed entregó a la Dirección General el reporte institucional consolidado del evento: punto de detección, cadena de decisión documentada, protocolo aplicado, cohorte materno-neonatal verificada al cierre. La institución sostuvo la posición ante la familia con cronología verificable al segundo, ante la autoridad sanitaria con expediente íntegro al momento del requerimiento, y ante cualquier reclamación posterior con criterio institucional firmado, sin reconstrucción retrospectiva.',
+          'us-en': '[us-en pending]',
+        },
+        // VM-513 mobile-fork.
+        mobileBody: {
+          'mx-es':
+            'Reporte consolidado entregado a Dirección General: detección, cadena documentada, cohorte verificada al cierre. La posición ante familia, autoridad sanitaria y cualquier reclamación quedó sostenida sin reconstrucción.',
           'us-en': '[us-en pending]',
         },
         quote: {
