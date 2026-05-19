@@ -1249,6 +1249,37 @@ h1, h2, h3 {
   }
 }
 
+/* VM-510: Fix mobile body-level horizontal overflow on segment pages.
+ * The §5.8 / VM-504 chassis-wide rule makes every segment section a
+ * `display: flex; flex-direction: column` container, which makes the inner
+ * `<div class="mx-auto" style="max-width: 1200px">` a flex item with default
+ * `min-width: auto`. That auto value resolves to descendant intrinsic
+ * min-content on the inline axis. The persona-tabs strip
+ * (`.vm-section-2-persona-tabs`, `overflow-x: auto`) is a BLOCK descendant
+ * of `.mx-auto`, not a direct flex item, so its `overflow-x: auto` does NOT
+ * reset its min-content contribution to the ancestor flex item, propagating
+ * a ~1117 px min-content up the chain and forcing `.mx-auto` to compute
+ * 436 px inside a 361 px section content area on a 393 viewport.
+ *
+ * `min-width: 0` removes the auto-inflation; `width: 100%` anchors the
+ * preferred cross-axis size to the container instead of content max-content.
+ * The inline `max-width: 1200px` still caps desktop, so the rule is safe
+ * at all widths. Applied mobile-only here to match the project convention
+ * (every other mobile-cleanup fix is scoped this way) and to keep the
+ * intent legible. Defensive across §2 through Final CTA so any future wide
+ * scroller in §3/§4/FAQ/Final CTA does not regress the same way.
+ */
+@media (max-width: 1023.98px) {
+  .vm-segment-section-2 > .mx-auto,
+  .vm-segment-section-3 > .mx-auto,
+  .vm-segment-section-4 > .mx-auto,
+  .vm-segment-faq-section > .mx-auto,
+  .vm-segment-final-cta-section > .mx-auto {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
 /* =======================================================================
  * VM-498: Mobile hero play/pause toggle + mobile content layer
  * -----------------------------------------------------------------------
