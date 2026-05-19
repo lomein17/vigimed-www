@@ -510,6 +510,7 @@ h1, h2, h3 {
 
   .vm-pim-scene {
     max-height: 38svh;
+    max-width: calc(38svh * 16 / 9);
   }
 
   .vm-pim-caption {
