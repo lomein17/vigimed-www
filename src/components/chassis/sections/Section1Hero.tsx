@@ -53,6 +53,14 @@ import { RichText } from '../primitives/RichText';
 // VM-456 closed the conversion-path triplet on segment pages (Hero
 // primary CTA removed; Sticky + Final CTA pill remain). ctaLabel stays
 // in the signature for downstream call-site stability but is unused.
+//
+// VM-508 mobile fork: below 1024px the chassis renders full-bleed image
+// + vertical navy veil + H1/claim anchored at top: 62%, mirroring the
+// Home Hero mobile pattern (HeroMedia.tsx §5.6). The desktop block
+// (>=1024px) is byte-for-byte preserved from VM-459 v1.16. CSS lives
+// in globals.css under the §1398 .vm-segment-hero-section block and
+// the new max-width: 1023.98px fork appended after the asset-bed lg
+// rule.
 
 export function Section1Hero({
   locale,
@@ -68,90 +76,123 @@ export function Section1Hero({
 
   return (
     <section
-      aria-labelledby="segment-hero-headline"
+      aria-labelledby="segment-hero-headline-mobile segment-hero-headline-desktop"
       className="vm-segment-hero-section relative overflow-hidden"
     >
-      <div
-        className="relative z-10 w-full"
-        style={{
-          // VM-445 UAT 2026-05-07: clamp anchor preserved verbatim per
-          // VM-457 brief §2.1 so Hero left edge aligns with Home Hero.
-          // VM-459 D-S58: paddingRight mirrors paddingLeft for bilateral
-          // symmetry per Palantir composition reference. Cross-section
-          // width drift accepted per WF-S58-1.
-          paddingLeft: 'clamp(var(--site-gutter), 15vw, 208px)',
-          paddingRight: 'clamp(var(--site-gutter), 15vw, 208px)',
-        }}
-      >
-        <div className="vm-segment-hero-content-frame">
-          <div className="vm-segment-hero-title-claim-row">
-            <div className="vm-segment-hero-title-col">
-              <h1
-                id="segment-hero-headline"
-                className="font-display text-text-on-dark"
-                style={{
-                  fontSize: 'var(--text-page-title)',
-                  fontWeight: 400,
-                  letterSpacing: '-0.02em',
-                  lineHeight: 1.08,
-                }}
-              >
-                <RichText segments={fill.pageTitle[locale]} />
-              </h1>
+      <div className="hidden lg:block w-full">
+        <div
+          className="relative z-10 w-full"
+          style={{
+            // VM-445 UAT 2026-05-07: clamp anchor preserved verbatim per
+            // VM-457 brief §2.1 so Hero left edge aligns with Home Hero.
+            // VM-459 D-S58: paddingRight mirrors paddingLeft for bilateral
+            // symmetry per Palantir composition reference. Cross-section
+            // width drift accepted per WF-S58-1.
+            paddingLeft: 'clamp(var(--site-gutter), 15vw, 208px)',
+            paddingRight: 'clamp(var(--site-gutter), 15vw, 208px)',
+          }}
+        >
+          <div className="vm-segment-hero-content-frame">
+            <div className="vm-segment-hero-title-claim-row">
+              <div className="vm-segment-hero-title-col">
+                <h1
+                  id="segment-hero-headline-desktop"
+                  className="font-display text-text-on-dark"
+                  style={{
+                    fontSize: 'var(--text-page-title)',
+                    fontWeight: 400,
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1.08,
+                  }}
+                >
+                  <RichText segments={fill.pageTitle[locale]} />
+                </h1>
+              </div>
+              <div className="vm-segment-hero-claim-col">
+                <p
+                  className="font-body text-text-on-dark lg:ml-auto"
+                  style={{
+                    fontSize: 'var(--text-page-claim)',
+                    fontWeight: 400,
+                    lineHeight: 1.3,
+                    // VM-466 corrective 3 / 5 / 6: 27ch (was 30ch in
+                    // corrective 1, 28ch in corrective 3, 26ch in
+                    // corrective 5) so Spanish body text wraps at ~34-35
+                    // chars per line. Empirical 1ch = ~1.29 actual chars
+                    // in this body font; corrective 6 nudged 26ch->27ch
+                    // after corrective 5 wrapped too tight.
+                    maxWidth: '27ch',
+                  }}
+                >
+                  <RichText segments={fill.claim[locale]} />
+                </p>
+              </div>
             </div>
-            <div className="vm-segment-hero-claim-col">
-              <p
-                className="font-body text-text-on-dark lg:ml-auto"
-                style={{
-                  fontSize: 'var(--text-page-claim)',
-                  fontWeight: 400,
-                  lineHeight: 1.3,
-                  // VM-466 corrective 3 / 5 / 6: 27ch (was 30ch in
-                  // corrective 1, 28ch in corrective 3, 26ch in
-                  // corrective 5) so Spanish body text wraps at ~34-35
-                  // chars per line. Empirical 1ch = ~1.29 actual chars
-                  // in this body font; corrective 6 nudged 26ch->27ch
-                  // after corrective 5 wrapped too tight.
-                  maxWidth: '27ch',
-                }}
-              >
-                <RichText segments={fill.claim[locale]} />
-              </p>
-            </div>
-          </div>
 
-          <div className="vm-segment-hero-asset-bed" aria-hidden="true">
-            {fill.image ? (
-              <picture>
-                <source
-                  media="(min-width: 1024px)"
-                  srcSet={fill.image.desktop}
-                />
-                <img
-                  src={fill.image.mobile}
-                  alt=""
+            <div className="vm-segment-hero-asset-bed" aria-hidden="true">
+              {fill.image ? (
+                <picture>
+                  <source
+                    media="(min-width: 1024px)"
+                    srcSet={fill.image.desktop}
+                  />
+                  <img
+                    src={fill.image.mobile}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </picture>
+              ) : hasVideo ? (
+                <video
+                  autoPlay
+                  muted
+                  playsInline
+                  loop
+                  preload="metadata"
+                  poster={fill.video.poster}
                   className="absolute inset-0 w-full h-full object-cover"
-                />
-              </picture>
-            ) : hasVideo ? (
-              <video
-                autoPlay
-                muted
-                playsInline
-                loop
-                preload="metadata"
-                poster={fill.video.poster}
-                className="absolute inset-0 w-full h-full object-cover"
-              >
-                <source
-                  src={fill.video.desktop}
-                  type="video/mp4"
-                  media="(min-width: 768px)"
-                />
-                <source src={fill.video.mobile} type="video/mp4" />
-              </video>
-            ) : null}
+                >
+                  <source
+                    src={fill.video.desktop}
+                    type="video/mp4"
+                    media="(min-width: 768px)"
+                  />
+                  <source src={fill.video.mobile} type="video/mp4" />
+                </video>
+              ) : null}
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div className="lg:hidden absolute inset-0">
+        {fill.image ? (
+          <picture>
+            <source
+              media="(min-width: 1024px)"
+              srcSet={fill.image.desktop}
+            />
+            <img
+              src={fill.image.mobile}
+              alt=""
+              className="vm-segment-hero-media-mobile"
+            />
+          </picture>
+        ) : null}
+        <div
+          aria-hidden="true"
+          className="vm-segment-hero-veil-mobile"
+        />
+        <div className="vm-segment-hero-content-mobile">
+          <h1
+            id="segment-hero-headline-mobile"
+            className="vm-segment-hero-headline-mobile font-display text-text-on-dark"
+          >
+            <RichText segments={fill.pageTitle[locale]} />
+          </h1>
+          <p className="vm-segment-hero-claim-mobile font-body">
+            <RichText segments={fill.claim[locale]} />
+          </p>
         </div>
       </div>
     </section>

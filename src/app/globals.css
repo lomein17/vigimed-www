@@ -146,7 +146,7 @@
    * para Centros Médicos" wrapping gracefully at 320px mobile without
    * overflow. One-line amber-name fit at desktop widths >=1024px is
    * preserved once the amber span is forced to its own line (see
-   * #segment-hero-headline rule below). Clamp handles fluid scaling
+   * #segment-hero-headline-desktop rule below). Clamp handles fluid scaling
    * 320px to 1920px; no breakpoint overrides needed. Does NOT cascade
    * to Home Hero (Home uses utility classes, not the token chain). */
   --text-page-title: clamp(1.75rem, 2.9vw, 4.25rem);
@@ -1505,13 +1505,13 @@ h1, h2, h3 {
    * own line at desktop widths so the H1 always renders as two lines
    * ("VigiMed para" / amber name), preventing mid-name wrap when the
    * segment name is long (e.g. "Clínicas de Maternidad", "Sistemas
-   * Hospitalarios"). H1-scoped via #segment-hero-headline so other
+   * Hospitalarios"). H1-scoped via #segment-hero-headline-desktop so other
    * .text-brand-amber spans in S2/S3 keep their inline rendering.
    * Below 1024px the columns stack and natural wrap is preserved.
    * VM-466 corrective 3: amber span scales +6.25% em-relative to lift
    * the segment name above the "VigiMed para" prefix without disturbing
    * the prefix's H1 base size. */
-  #segment-hero-headline .text-brand-amber {
+  #segment-hero-headline-desktop .text-brand-amber {
     display: block;
     white-space: nowrap;
     font-size: 1.0625em;
@@ -1544,6 +1544,80 @@ h1, h2, h3 {
      * its left/right edges align with the title-claim row by
      * construction. Reservation math (450px) and aspect (21:9) live
      * on the content-frame rule. */
+  }
+}
+
+/* VM-508: mobile fork — full-bleed image + vertical navy veil +
+ * H1/claim anchored at top: 62%. Mirrors Home Hero mobile (VM-487 /
+ * VM-493 / HeroMedia.tsx §5.6). Hides desktop asset-bed; mobile
+ * picture, veil, and content layer above the section background.
+ * --vm-segment-hero-pos (default center center) is the focal-point
+ * override hook for per-segment follow-ups if UAT surfaces clipping. */
+@media (max-width: 1023.98px) {
+  .vm-segment-hero-section .vm-segment-hero-asset-bed {
+    display: none;
+  }
+
+  .vm-segment-hero-media-mobile {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--vm-segment-hero-pos, center center);
+    filter: saturate(0.6);
+    z-index: 1;
+  }
+
+  .vm-segment-hero-veil-mobile {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 22, 40, 0) 0%,
+      rgba(10, 22, 40, 0) 28%,
+      rgba(10, 22, 40, 0.35) 60%,
+      rgba(10, 22, 40, 0.88) 100%
+    );
+  }
+
+  .vm-segment-hero-content-mobile {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    top: 62%;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 0 24px 28px;
+  }
+
+  .vm-segment-hero-headline-mobile {
+    font-size: 22px;
+    line-height: 1.18;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    text-wrap: pretty;
+    color: #FFFFFF;
+  }
+
+  /* Mobile re-declare so the amber segment name renders on its own
+   * line at every mobile width, paralleling the desktop rule (now
+   * #segment-hero-headline-desktop .text-brand-amber). */
+  .vm-segment-hero-headline-mobile .text-brand-amber {
+    display: block;
+  }
+
+  .vm-segment-hero-claim-mobile {
+    font-size: 20px;
+    line-height: 1.36;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    text-wrap: pretty;
+    color: rgba(255, 255, 255, 0.92);
   }
 }
 
