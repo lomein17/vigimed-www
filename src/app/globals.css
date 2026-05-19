@@ -1618,7 +1618,11 @@ h1, h2, h3 {
     position: absolute;
     inset-inline: 0;
     bottom: 0;
-    top: 62%;
+    /* VM-512 r1: was 62% under VM-508; nudged to 66% on UAT 2026-05-19 to
+     * push the H1 + claim stack into the visual lower band of the hero
+     * section in portrait. Landscape override (38% to 55%) lives in the
+     * max-height: 500px block below. */
+    top: 66%;
     z-index: 3;
     display: flex;
     flex-direction: column;
@@ -1672,7 +1676,11 @@ h1, h2, h3 {
     min-height: 100svh;
   }
   .vm-segment-hero-content-mobile {
-    top: 38%;
+    /* VM-512 r1: was 38% in the base VM-512 commit; raised to 55% on UAT
+     * 2026-05-19. On 430svh landscape that lands the H1 at y≈236px with
+     * ~46px of buffer above the 28px bottom padding; content sits in
+     * the visual lower-middle band instead of the top third. */
+    top: 55%;
   }
 }
 

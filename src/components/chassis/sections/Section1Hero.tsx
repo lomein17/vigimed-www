@@ -72,6 +72,11 @@ import { RichText } from '../primitives/RichText';
 // the H1 + claim inside the ~430svh iPhone-landscape envelope.
 // clinicas-de-maternidad/hero.webp is a single-segment desktop asset
 // refresh; the other four desktop heroes are intentionally untouched.
+//
+// VM-512 r1: portrait content anchor nudged 62% to 66% and landscape
+// 38% to 55% on UAT; clinicas-de-maternidad-only object-position override
+// to 10% center lives in that route's page.tsx via the
+// --vm-segment-hero-pos custom property.
 
 export function Section1Hero({
   locale,
