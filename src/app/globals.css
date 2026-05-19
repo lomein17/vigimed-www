@@ -1224,10 +1224,10 @@ h1, h2, h3 {
  * (.vm-hero-section, .vm-segment-hero-section) are intentionally
  * excluded; scroll-snap at >=1024px is above the gate and untouched.
  * Same selector specificity as the chassis rule; source order resolves.
+ * VM-507 A.4: PIM split out below onto 100dvh; see rationale at that rule.
  * ======================================================================= */
 @media (max-width: 1023.98px) {
   .vm-capabilities-section,
-  .vm-pim-section,
   .vm-moat-integrations-section,
   .vm-final-cta-section,
   .vm-segment-section-2,
@@ -1236,6 +1236,16 @@ h1, h2, h3 {
   .vm-segment-faq-section,
   .vm-segment-final-cta-section {
     min-height: 100svh;
+  }
+  /* VM-507 A.4: PIM uses dvh instead of svh because its navy-against-
+   * warm seams expose the svh shortfall when Safari retracts chrome on
+   * scroll (visible viewport grows from svh to lvh, section stays svh,
+   * warm band leaks at the seam). dvh tracks the visible viewport
+   * dynamically and keeps the flex-centered content visually centered
+   * through chrome state changes. Other sections-after-Hero have less
+   * dramatic seam contrast and stay on svh. */
+  .vm-pim-section {
+    min-height: 100dvh;
   }
 }
 
@@ -1247,34 +1257,36 @@ h1, h2, h3 {
  * just below the StickyNav band on first viewport. Mobile content
  * block lives at top:62% of the section; desktop >= md is untouched.
  * ======================================================================= */
-.vm-hero-playpause {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 20;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    background 150ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+@media (max-width: 1023.98px) {
+  .vm-hero-playpause {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 20;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background 150ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .vm-hero-playpause:hover { background: rgba(0, 0, 0, 0.72); }
+  .vm-hero-playpause:active { transform: scale(0.96); }
+  .vm-hero-playpause__play,
+  .vm-hero-playpause__pause { display: block; }
+  .vm-hero-playpause__pause { display: none; }
+  .vm-hero-playpause[data-state="playing"] .vm-hero-playpause__play { display: none; }
+  .vm-hero-playpause[data-state="playing"] .vm-hero-playpause__pause { display: block; }
 }
-.vm-hero-playpause:hover { background: rgba(0, 0, 0, 0.72); }
-.vm-hero-playpause:active { transform: scale(0.96); }
-.vm-hero-playpause__play,
-.vm-hero-playpause__pause { display: block; }
-.vm-hero-playpause__pause { display: none; }
-.vm-hero-playpause[data-state="playing"] .vm-hero-playpause__play { display: none; }
-.vm-hero-playpause[data-state="playing"] .vm-hero-playpause__pause { display: block; }
 
 /* =======================================================================
  * VM-498 r2: Mobile hero video crop focal point

@@ -4,7 +4,6 @@ import type { MouseEvent } from 'react';
 import { easeInOutCubic } from '@/lib/easing';
 
 const SCROLL_DURATION_MS = 1000;
-const SCROLL_OFFSET_PX = 96;
 
 export function HeroCta({
   label,
@@ -26,8 +25,18 @@ export function HeroCta({
       return;
     }
 
+    // VM-507 A.5.1: read the effective nav offset published by StickyNavShell
+    // (--vm-nav-effective-h = 0px when nav auto-hidden, 75px when visible).
+    // Matches the html { scroll-padding-top: ... } math used by native hash
+    // anchors so the programmatic scroll lands at the same place as the
+    // footer's <a href="#final-cta"> link.
+    const navOffsetRaw = getComputedStyle(document.documentElement)
+      .getPropertyValue('--vm-nav-effective-h')
+      .trim();
+    const navOffset = parseFloat(navOffsetRaw) || 75;
+
     const targetY =
-      el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET_PX;
+      el.getBoundingClientRect().top + window.scrollY - navOffset;
     const startY = window.scrollY;
     const distance = targetY - startY;
     const startTime = performance.now();

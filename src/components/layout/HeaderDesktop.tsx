@@ -492,7 +492,7 @@ export function HeaderDesktop({ locale, header, navOrder }: HeaderDesktopProps) 
               is deleted; the pathname change closes the drawer via the
               usePathname() effect above. */}
           <Link
-            href={`/${locale}/#final-cta`}
+            href={`/${locale}#final-cta`}
             className="font-ui text-text-on-dark cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
             style={{
               fontSize: 14,

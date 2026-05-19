@@ -31,7 +31,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
         aria-hidden="true"
         viewBox="0 0 1200 880"
         preserveAspectRatio="xMidYMid meet"
-        className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full pointer-events-none"
+        className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full pointer-events-none hidden lg:block"
       >
         <defs>
           <linearGradient id="pulseLine" x1="0" x2="1">
