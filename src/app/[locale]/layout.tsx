@@ -9,11 +9,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 };
 
+// VM-511: minimumScale=1 blocks iOS Safari pinch-zoom below 1× so it
+// can't expose the empty page background outside the document bounds
+// (most visible in landscape on iPhone).
 // VM-494 A.2: viewport-fit=cover so env(safe-area-inset-top) resolves
 // to the device notch on iOS. Consumed by HeaderMobile to push chrome
 // below the inset while the navy band stays flush to the screen edge.
 export const viewport: Viewport = {
   viewportFit: 'cover',
+  minimumScale: 1,
 };
 
 // Site typography (spec c3ea98927c84 §4.2, post-repositioning).
