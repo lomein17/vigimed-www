@@ -1652,6 +1652,30 @@ h1, h2, h3 {
   }
 }
 
+/* VM-512: iPhone-landscape composition fork. The VM-508 mobile fork
+ * anchors content at top: 62% inside a `.vm-segment-hero-section` that
+ * inherits the chassis-wide `min-height: calc(100svh - var(--vm-nav-h))`.
+ * On short viewports (iPhone landscape: 375–430px tall) that leaves only
+ * ~80px for a 2-line H1 + 14px gap + multi-line claim and the content
+ * overflows past `bottom: 0` into the next section. The gate matches the
+ * actual failure condition (height-limited viewport) rather than
+ * orientation, which would falsely fire on hypothetical squat tablets and
+ * reads less self-documenting. Effect: drops the 75px nav reservation
+ * (the StickyNav auto-hides past 80px scroll per VM-499 and is overlay-
+ * positioned anyway, so the section height math no longer needs to
+ * reserve it) and raises the content anchor to top: 38%, which on 430svh
+ * lands the H1 at y≈163px (well below the 75px nav band, ~239px of
+ * stacking room above the 28px bottom padding). Portrait widths (svh
+ * ≥667) are above the gate and stay on the VM-508 composition. */
+@media (max-width: 1023.98px) and (max-height: 500px) {
+  .vm-segment-hero-section {
+    min-height: 100svh;
+  }
+  .vm-segment-hero-content-mobile {
+    top: 38%;
+  }
+}
+
 /* §E FAQ section (VM-451 UAT r1). Sibling to .vm-segment-final-cta-section
  * so spacebar/keyboard scroll anchors the FAQ to viewport top with full-
  * screen min-height, parallel to every other chassis section. Same navy

@@ -61,6 +61,17 @@ import { RichText } from '../primitives/RichText';
 // in globals.css under the §1398 .vm-segment-hero-section block and
 // the new max-width: 1023.98px fork appended after the asset-bed lg
 // rule.
+//
+// VM-512 mobile fork polish: mobile sources upgraded from 960×412 (or
+// 1024×439 on centros) to ~1280×720 16:9 to match the Home Hero mobile
+// video upscale ratio at DPR 3 (3.55× on iPhone Pro Max portrait). The
+// landscape-truncation failure is fixed in globals.css via a new
+// @media (max-width: 1023.98px) and (max-height: 500px) block that drops
+// the 75px nav reservation on the hero section and raises the content
+// anchor from top: 62% to top: 38%, restoring usable vertical space for
+// the H1 + claim inside the ~430svh iPhone-landscape envelope.
+// clinicas-de-maternidad/hero.webp is a single-segment desktop asset
+// refresh; the other four desktop heroes are intentionally untouched.
 
 export function Section1Hero({
   locale,
