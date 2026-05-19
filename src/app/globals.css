@@ -506,7 +506,6 @@ h1, h2, h3 {
 
 @media (max-width: 767.98px) {
   .vm-pim-section {
-    min-height: 100svh;
     padding-top: 32px;
     padding-bottom: 32px;
     display: flex;
@@ -1232,6 +1231,38 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* =======================================================================
+ * VM-504: Mobile / iPhone-landscape — restore full-viewport min-height
+ *         on sections-after-Hero.
+ * -----------------------------------------------------------------------
+ * The chassis-wide rule above reserves 75px for the sticky nav. That's
+ * correct for Hero (first section, nav still visible while Hero is in
+ * view) but wrong for every later section: below `lg:` the StickyNavShell
+ * auto-hides past 80px scroll (VM-494; gate widened from md: to lg: in
+ * VM-499 for iPhone landscape), so by the time these sections enter view
+ * the visible viewport is the full 100svh, not 100svh - var(--vm-nav-h).
+ * Subtracting 75px leaves a band of the adjacent surface visible inside
+ * the section seam, loudest on the navy-warm-navy-warm sequence around
+ * PIM. Gate matches VM-499's lg chrome boundary so the fix reaches all
+ * landscape widths where auto-hide is active (667/852/932). Heroes
+ * (.vm-hero-section, .vm-segment-hero-section) are intentionally
+ * excluded; scroll-snap at >=1024px is above the gate and untouched.
+ * Same selector specificity as the chassis rule; source order resolves.
+ * ======================================================================= */
+@media (max-width: 1023.98px) {
+  .vm-capabilities-section,
+  .vm-pim-section,
+  .vm-moat-integrations-section,
+  .vm-final-cta-section,
+  .vm-segment-section-2,
+  .vm-segment-section-3,
+  .vm-segment-section-4,
+  .vm-segment-faq-section,
+  .vm-segment-final-cta-section {
+    min-height: 100svh;
+  }
 }
 
 /* =======================================================================
