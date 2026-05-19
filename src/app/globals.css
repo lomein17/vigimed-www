@@ -3568,7 +3568,7 @@ h1, h2, h3 {
 
 .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-question {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 @media (min-width: 1024px) {
@@ -3613,29 +3613,36 @@ h1, h2, h3 {
   font-size: 18px;
 }
 
-/* VM-509: Segment §E (withStep) mobile redesign.
+/* VM-509 (r2): Segment §E (withStep) mobile redesign.
  * Mobile-only (< lg). Desktop and the `basic` branch (hospitales-publicos)
  * are unaffected. Selectors all scope to [data-faq-kind='withStep'] and
  * the entire block is inside (max-width: 1023.98px).
  *
  * Closed state: question (amber) only. MÁS toggle on its own row,
  * right-aligned below the question, giving the Q full card width.
- * Open state: preview (summary) revealed in row 1 below the question.
- * The full .vm-faq-answer paragraph is desktop-only on the withStep
- * branch. On mobile the preview IS the disclosed content.
+ * Open state: Q (row 1) -> MÁS (row 2) -> preview (row 3 below MÁS).
+ * The full .vm-faq-answer paragraph stays desktop-only on the withStep
+ * branch; on mobile the preview IS the disclosed content.
  *
- * Mechanism: trigger flex-wraps; content forced to flex: 1 1 100%;
- * toggle wraps to second row with margin-left: auto. Preview gated
- * on the cell's [data-open] attribute. Answer-wrap hidden entirely
- * on mobile so the existing grid-rows animation does not fire and
- * the answer text is not visible. Whole card stays clickable. The
- * .vm-faq-trigger <button> still wraps both rows. */
+ * Mechanism: .vm-faq-content uses display: contents on mobile so its
+ * children (Q, preview) lift into the trigger's flex layout alongside
+ * .vm-faq-toggle. Q takes flex: 1 1 100% so the toggle wraps to row 2
+ * with margin-left: auto. When open, .vm-faq-preview gets `order: 1`
+ * + `flex-basis: 100%` so it wraps to row 3 below the toggle. The
+ * cyan-rail clearance (20px) that previously sat on .vm-faq-content
+ * moves to .vm-faq-trigger because content's padding becomes inert
+ * under display: contents. Whole card stays clickable; the
+ * .vm-faq-trigger <button> still wraps every flex child in the DOM. */
 @media (max-width: 1023.98px) {
   .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-trigger {
     flex-wrap: wrap;
     align-items: flex-start;
+    padding-left: 20px;
   }
   .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-content {
+    display: contents;
+  }
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-question {
     flex: 1 1 100%;
   }
   .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-toggle {
@@ -3650,6 +3657,8 @@ h1, h2, h3 {
     .vm-faq-cell[data-open='true']
     .vm-faq-preview {
     display: block;
+    order: 1;
+    flex-basis: 100%;
     margin-top: 16px;
   }
   .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-answer-wrap {
