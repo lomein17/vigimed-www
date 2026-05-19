@@ -40,7 +40,7 @@ export const FAQ_STEP_LABELS: Record<
 // line. us-en values are placeholder until segment fixtures are authored
 // for the second locale.
 export const FAQ_EYEBROW = {
-  'mx-es': 'FAQ · DETALLE OPERATIVO',
+  'mx-es': 'PREGUNTAS FRECUENTES',
   'us-en': '[us-en pending]',
 } as const satisfies Record<Locale, string>;
 

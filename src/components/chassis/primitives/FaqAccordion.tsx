@@ -236,6 +236,22 @@ function FaqCarouselMobile({
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
 
+  // VM-515 r2: chip strip dedups by step. Unique steps in first-
+  // appearance order, each carrying the items[] index of the first
+  // card at that step. Cards (dots, counter, scroll-snap) stay on
+  // items.length; only the chip strip collapses. Centros-medicos
+  // ships two `step: 6` items, so DOCUMENTAR renders once and is
+  // active for both cards.
+  const chips: {
+    item: Extract<FaqItem, { kind: 'withStep' }>;
+    firstIdx: number;
+  }[] = [];
+  items.forEach((it, idx) => {
+    if (it.kind !== 'withStep') return;
+    if (chips.some((c) => c.item.step === it.step)) return;
+    chips.push({ item: it, firstIdx: idx });
+  });
+
   useEffect(() => {
     const root = carouselRef.current;
     if (!root) return;
@@ -283,17 +299,25 @@ function FaqCarouselMobile({
 
   function onChipKeyDown(e: KeyboardEvent<HTMLButtonElement>) {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-    const last = items.length - 1;
-    const cur = activeIdx;
+    if (chips.length === 0) return;
+    const last = chips.length - 1;
+    const activeItem = items[activeIdx];
+    const curChipIdx = chips.findIndex(
+      (c) =>
+        activeItem?.kind === 'withStep' && activeItem.step === c.item.step,
+    );
+    const cur = curChipIdx === -1 ? 0 : curChipIdx;
     let next: number | null = null;
     if (e.key === 'ArrowLeft') next = cur === 0 ? last : cur - 1;
     if (e.key === 'ArrowRight') next = cur === last ? 0 : cur + 1;
     if (e.key === 'Home') next = 0;
     if (e.key === 'End') next = last;
     if (next === null) return;
+    const nextChip = chips[next];
+    if (!nextChip) return;
     e.preventDefault();
-    setActiveIdx(next);
-    scrollToCard(next);
+    setActiveIdx(nextChip.firstIdx);
+    scrollToCard(nextChip.firstIdx);
     const strip = e.currentTarget.closest<HTMLElement>('[data-faq-strip]');
     strip
       ?.querySelector<HTMLButtonElement>(`[data-chip-idx="${next}"]`)
@@ -301,6 +325,7 @@ function FaqCarouselMobile({
   }
 
   const total = items.length;
+  const activeItem = items[activeIdx];
 
   return (
     <div className="vm-faq-mobile">
@@ -310,29 +335,29 @@ function FaqCarouselMobile({
         data-faq-strip
         className="vm-faq-chipstrip"
       >
-        {items.map((item, i) => {
-          if (item.kind !== 'withStep') return null;
-          const isActive = i === activeIdx;
+        {chips.map((chip, chipIdx) => {
+          const isActive =
+            activeItem?.kind === 'withStep' &&
+            activeItem.step === chip.item.step;
           return (
             <button
-              key={`${item.question[locale]}-${i}`}
+              key={`${chip.item.step}-${chipIdx}`}
               type="button"
               role="tab"
-              data-chip-idx={i}
+              data-chip-idx={chipIdx}
               data-active={isActive ? 'true' : undefined}
-              aria-controls={`vm-faq-card-${i}`}
+              aria-controls={`vm-faq-card-${chip.firstIdx}`}
               aria-selected={isActive}
               tabIndex={isActive ? 0 : -1}
               className="vm-faq-chip"
               onClick={() => {
-                setActiveIdx(i);
-                scrollToCard(i);
+                setActiveIdx(chip.firstIdx);
+                scrollToCard(chip.firstIdx);
               }}
               onKeyDown={onChipKeyDown}
             >
-              <span className="vm-faq-chip__num">{padded(i + 1)}</span>
               <span className="vm-faq-chip__label">
-                {FAQ_STEP_LABELS[item.step][locale]}
+                {FAQ_STEP_LABELS[chip.item.step][locale]}
               </span>
             </button>
           );

@@ -750,7 +750,7 @@ export const centrosMedicosFillMxEs: ChassisFill = {
   // ---------------------------------------------------------------------------
   section5: {
     faqHeading: {
-      'mx-es': 'El detalle, en seis preguntas.',
+      'mx-es': 'Detalles relevantes relacionados a su suscripción y uso.',
       'us-en': '[us-en pending]',
     },
     faqCount: 6,

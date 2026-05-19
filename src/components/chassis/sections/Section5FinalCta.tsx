@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import type { Locale } from '@/lib/i18n';
 import type { Section5Slots } from '@/lib/chassis/slots';
 import {
@@ -24,6 +26,12 @@ import { MeetingRequestForm } from '@/components/shared/MeetingRequestForm';
 // the eyebrow and the closing-CTA anchor are gated to withStep segments
 // only; the basic branch (hospitales-publicos) stays byte-for-byte on
 // pre-VM-515 main.
+//
+// VM-515 r2: the closing-CTA row navigates client-side to the Home
+// Final CTA at /${locale}/#final-cta, mirroring the existing
+// Section5CtaPill variant='light' precedent. Section §F lives on the
+// segment page but defers conversion to the single Home Final CTA
+// destination site-wide.
 
 export function Section5FinalCta({
   locale,
@@ -72,10 +80,14 @@ export function Section5FinalCta({
             defaultOpen={fill.faqDefaultOpen}
             motionStagger={fill.faqMotionStagger ?? false}
           />
-          {/* VM-515: mobile-only closing-CTA row. Anchor scroll honors
-              html { scroll-padding-top } keyed to --vm-nav-effective-h. */}
+          {/* VM-515 r2: mobile-only closing-CTA row routes client-side
+              to the Home Final CTA at /${locale}/#final-cta, mirroring
+              Section5CtaPill variant='light'. */}
           {isWithStep ? (
-            <a href="#segment-final-cta" className="vm-faq-closing-cta lg:hidden">
+            <Link
+              href={`/${locale}/#final-cta`}
+              className="vm-faq-closing-cta lg:hidden"
+            >
               <span className="vm-faq-closing-cta__icon" aria-hidden="true">
                 <svg
                   width="14"
@@ -108,7 +120,7 @@ export function Section5FinalCta({
                   <path d="M3 1.5 7 5 3 8.5" />
                 </svg>
               </span>
-            </a>
+            </Link>
           ) : null}
           {fill.faqClosingLine ? (
             <p className="vm-faq-closing-line hidden lg:block">

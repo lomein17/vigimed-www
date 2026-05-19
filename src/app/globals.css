@@ -4405,13 +4405,6 @@ h1, h2, h3 {
     outline: 2px solid var(--color-brand-amber);
     outline-offset: 2px;
   }
-  .vm-faq-chip__num {
-    font-variant-numeric: tabular-nums;
-    color: rgba(255, 255, 255, 0.45);
-  }
-  .vm-faq-chip[data-active='true'] .vm-faq-chip__num {
-    color: var(--color-brand-amber);
-  }
   .vm-faq-chip__label {
     white-space: nowrap;
   }
