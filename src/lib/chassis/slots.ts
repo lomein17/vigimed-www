@@ -219,6 +219,10 @@ export interface HeroSlots {
 export interface UcCard {
   readonly name: Paired<string>;
   readonly framing: Paired<string>;
+  // VM-514 mobile-only fork: shortened framing authored for the <lg
+  // scroll-snap carousel card. Absent => render `framing` as the mobile
+  // copy too. ~25-30 word soft target enforced at fixture-author time.
+  readonly mobileFraming?: Paired<string>;
 }
 
 // Persona key for the Section 2 persona-matrix variant (VM-447 D-S52-2).
@@ -252,6 +256,10 @@ export interface PersonaUcSet {
 export interface Section2FlatUcSlots {
   readonly eyebrow: Paired<string>;
   readonly heading: Paired<string>;
+  // VM-514 mobile-only fork: shortened heading authored for the <lg
+  // pill-picker + scroll-snap-carousel composition. Absent => mobile
+  // falls back to the desktop heading.
+  readonly mobileHeading?: Paired<string>;
   readonly framing?: Paired<RichParagraph>;
   readonly pressures: readonly Paired<string>[];
   readonly ucEyebrow: Paired<string>;
@@ -262,6 +270,10 @@ export interface Section2FlatUcSlots {
 export interface Section2PersonaMatrixSlots {
   readonly eyebrow: Paired<string>;
   readonly heading: Paired<string>;
+  // VM-514 mobile-only fork: shortened heading authored for the <lg
+  // pill-picker + scroll-snap-carousel composition. Absent => mobile
+  // falls back to the desktop heading.
+  readonly mobileHeading?: Paired<string>;
   readonly framing?: Paired<RichParagraph>;
   readonly pressures?: readonly Paired<string>[];
   readonly ucByPersona: Readonly<Record<PersonaKey, PersonaUcSet>>;

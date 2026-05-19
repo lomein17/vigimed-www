@@ -27,38 +27,72 @@ export function Section2OperationalReality({
   return (
     <section
       id="segment-section-2"
-      aria-labelledby="segment-section-2-heading"
+      aria-labelledby="segment-section-2-heading-mobile segment-section-2-heading-desktop"
       className="vm-segment-section-2"
     >
       <div className="mx-auto" style={{ maxWidth: 1200 }}>
-        {/* Section header */}
+        {/* Section header. VM-514 forks the heading into desktop + mobile
+            siblings so the mobile copy can read fill.mobileHeading
+            (falling back to fill.heading) and the CSS in globals.css can
+            tighten font-size at <lg without touching the desktop render.
+            Both ids exist in the DOM at all times; aria-labelledby on the
+            section references both. Eyebrow is duplicated inside each
+            sibling so each wrapper is self-contained. */}
         <div style={{ marginBottom: 48 }}>
-          <p
-            className="font-ui text-brand-500"
-            style={{
-              fontSize: 12,
-              fontWeight: 500,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              marginBottom: 16,
-            }}
-          >
-            {fill.eyebrow[locale]}
-          </p>
-          <h2
-            id="segment-section-2-heading"
-            className="font-display text-navy-800"
-            style={{
-              fontSize: 'var(--text-h2)',
-              letterSpacing: '-0.01em',
-              lineHeight: 1.1,
-              fontWeight: 500,
-              color: '#0A1628',
-              whiteSpace: 'pre-line',
-            }}
-          >
-            {fill.heading[locale]}
-          </h2>
+          <div className="hidden lg:block">
+            <p
+              className="font-ui text-brand-500"
+              style={{
+                fontSize: 12,
+                fontWeight: 500,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                marginBottom: 16,
+              }}
+            >
+              {fill.eyebrow[locale]}
+            </p>
+            <h2
+              id="segment-section-2-heading-desktop"
+              className="vm-section-2-heading font-display text-navy-800"
+              style={{
+                letterSpacing: '-0.01em',
+                lineHeight: 1.1,
+                fontWeight: 500,
+                color: '#0A1628',
+                whiteSpace: 'pre-line',
+              }}
+            >
+              {fill.heading[locale]}
+            </h2>
+          </div>
+          <div className="lg:hidden">
+            <p
+              className="font-ui text-brand-500"
+              style={{
+                fontSize: 12,
+                fontWeight: 500,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                marginBottom: 16,
+              }}
+            >
+              {fill.eyebrow[locale]}
+            </p>
+            <h2
+              id="segment-section-2-heading-mobile"
+              className="vm-section-2-heading font-display text-navy-800"
+              style={{
+                letterSpacing: '-0.01em',
+                lineHeight: 1.1,
+                fontWeight: 500,
+                color: '#0A1628',
+                whiteSpace: 'pre-line',
+              }}
+            >
+              {fill.mobileHeading?.[locale] ?? fill.heading[locale]}
+            </h2>
+          </div>
         </div>
 
         {/* VM-457 D-S57-4: optional framing paragraph below the section
@@ -76,7 +110,7 @@ export function Section2OperationalReality({
         {fill.framing ? (
           <div style={{ maxWidth: 980, marginBottom: 48 }}>
             <p
-              className="font-body"
+              className="vm-section-2-framing font-body"
               style={{
                 color: '#0A1628',
                 lineHeight: 1.5,
