@@ -389,7 +389,7 @@ function FaqCarouselMobile({
             >
               <header className="vm-faq-card__head">
                 <span className="vm-faq-card__step">
-                  PASO {item.step} · {FAQ_STEP_LABELS[item.step][locale]}
+                  {FAQ_STEP_LABELS[item.step][locale]}
                 </span>
                 <span className="vm-faq-card__counter">
                   {padded(i + 1)} / {padded(total)}
