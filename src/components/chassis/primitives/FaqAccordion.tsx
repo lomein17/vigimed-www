@@ -236,12 +236,15 @@ function FaqCarouselMobile({
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
 
-  // VM-515 r2: chip strip dedups by step. Unique steps in first-
-  // appearance order, each carrying the items[] index of the first
-  // card at that step. Cards (dots, counter, scroll-snap) stay on
-  // items.length; only the chip strip collapses. Centros-medicos
-  // ships two `step: 6` items, so DOCUMENTAR renders once and is
-  // active for both cards.
+  // chips dedup by step, then sort ascending by step number per Pablo
+  // r3 UAT — chip strip reads as the operational chain (DESPLEGAR →
+  // DETECTAR → CONFIRMAR → COORDINAR → DOCUMENTAR), independent of
+  // fixture authoring order. Each chip carries the items[] index of
+  // the first card at that step, so chip-tap and roving-arrow still
+  // scroll to the correct card. Cards (dots, counter, scroll-snap)
+  // stay on items.length in source order; only the chip strip
+  // collapses and re-sorts. Centros-medicos ships two `step: 6`
+  // items, so DOCUMENTAR renders once and is active for both cards.
   const chips: {
     item: Extract<FaqItem, { kind: 'withStep' }>;
     firstIdx: number;
@@ -251,6 +254,7 @@ function FaqCarouselMobile({
     if (chips.some((c) => c.item.step === it.step)) return;
     chips.push({ item: it, firstIdx: idx });
   });
+  chips.sort((a, b) => a.item.step - b.item.step);
 
   useEffect(() => {
     const root = carouselRef.current;
