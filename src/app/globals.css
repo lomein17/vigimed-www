@@ -3613,6 +3613,50 @@ h1, h2, h3 {
   font-size: 18px;
 }
 
+/* VM-509: Segment §E (withStep) mobile redesign.
+ * Mobile-only (< lg). Desktop and the `basic` branch (hospitales-publicos)
+ * are unaffected. Selectors all scope to [data-faq-kind='withStep'] and
+ * the entire block is inside (max-width: 1023.98px).
+ *
+ * Closed state: question (amber) only. MÁS toggle on its own row,
+ * right-aligned below the question, giving the Q full card width.
+ * Open state: preview (summary) revealed in row 1 below the question.
+ * The full .vm-faq-answer paragraph is desktop-only on the withStep
+ * branch. On mobile the preview IS the disclosed content.
+ *
+ * Mechanism: trigger flex-wraps; content forced to flex: 1 1 100%;
+ * toggle wraps to second row with margin-left: auto. Preview gated
+ * on the cell's [data-open] attribute. Answer-wrap hidden entirely
+ * on mobile so the existing grid-rows animation does not fire and
+ * the answer text is not visible. Whole card stays clickable. The
+ * .vm-faq-trigger <button> still wraps both rows. */
+@media (max-width: 1023.98px) {
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-trigger {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-content {
+    flex: 1 1 100%;
+  }
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-toggle {
+    margin-left: auto;
+    margin-top: 14px;
+    padding-right: 4px;
+  }
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-preview {
+    display: none;
+  }
+  .vm-segment-faq-section[data-faq-kind='withStep']
+    .vm-faq-cell[data-open='true']
+    .vm-faq-preview {
+    display: block;
+    margin-top: 16px;
+  }
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-answer-wrap {
+    display: none;
+  }
+}
+
 /* Sticky CTA (Slot Map v1.1 §9 / Brief §6.2 Sticky mechanic).
  * Desktop renders the right-rail card at >=1024; mobile renders the
  * bottom bar at <1024. Visibility toggles via data-visible: opacity
