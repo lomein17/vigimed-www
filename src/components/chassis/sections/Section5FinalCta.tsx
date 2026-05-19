@@ -20,7 +20,10 @@ import { MeetingRequestForm } from '@/components/shared/MeetingRequestForm';
 // VM-515: §E mobile-only eyebrow above the heading and tappable closing
 // CTA row replacing the orphaned closing line on <lg. Desktop renders
 // the existing .vm-faq-closing-line via hidden lg:block. The carousel
-// itself lives in FaqAccordion via the withStep structural fork.
+// itself lives in FaqAccordion via the withStep structural fork. Both
+// the eyebrow and the closing-CTA anchor are gated to withStep segments
+// only; the basic branch (hospitales-publicos) stays byte-for-byte on
+// pre-VM-515 main.
 
 export function Section5FinalCta({
   locale,
@@ -33,6 +36,7 @@ export function Section5FinalCta({
   ctaLabel: string;
   variant: 'home' | 'segment';
 }) {
+  const isWithStep = fill.faqItems[0]?.kind === 'withStep';
   return (
     <>
       {/* VM-453 AC6: bridges Space/PageDown advance from §D to §E when
@@ -52,9 +56,11 @@ export function Section5FinalCta({
       >
         <div className="mx-auto" style={{ maxWidth: 1200 }}>
           {/* VM-515: mobile-only eyebrow above the section heading. */}
-          <span className="vm-faq-eyebrow lg:hidden">
-            {FAQ_EYEBROW[locale]}
-          </span>
+          {isWithStep ? (
+            <span className="vm-faq-eyebrow lg:hidden">
+              {FAQ_EYEBROW[locale]}
+            </span>
+          ) : null}
           {fill.faqHeading ? (
             <h3 id="segment-faq-heading" className="vm-faq-heading">
               {fill.faqHeading[locale]}
@@ -68,40 +74,42 @@ export function Section5FinalCta({
           />
           {/* VM-515: mobile-only closing-CTA row. Anchor scroll honors
               html { scroll-padding-top } keyed to --vm-nav-effective-h. */}
-          <a href="#segment-final-cta" className="vm-faq-closing-cta lg:hidden">
-            <span className="vm-faq-closing-cta__icon" aria-hidden="true">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M2 3.5h10a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H6l-3 2.5v-2.5H2a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1Z" />
-              </svg>
-            </span>
-            <span className="vm-faq-closing-cta__text">
-              <strong>{FAQ_CLOSING_CTA_LEAD[locale]}</strong>
-              <small>{FAQ_CLOSING_CTA_SUB[locale]}</small>
-            </span>
-            <span className="vm-faq-closing-cta__chev" aria-hidden="true">
-              <svg
-                width="10"
-                height="10"
-                viewBox="0 0 10 10"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M3 1.5 7 5 3 8.5" />
-              </svg>
-            </span>
-          </a>
+          {isWithStep ? (
+            <a href="#segment-final-cta" className="vm-faq-closing-cta lg:hidden">
+              <span className="vm-faq-closing-cta__icon" aria-hidden="true">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M2 3.5h10a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H6l-3 2.5v-2.5H2a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1Z" />
+                </svg>
+              </span>
+              <span className="vm-faq-closing-cta__text">
+                <strong>{FAQ_CLOSING_CTA_LEAD[locale]}</strong>
+                <small>{FAQ_CLOSING_CTA_SUB[locale]}</small>
+              </span>
+              <span className="vm-faq-closing-cta__chev" aria-hidden="true">
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M3 1.5 7 5 3 8.5" />
+                </svg>
+              </span>
+            </a>
+          ) : null}
           {fill.faqClosingLine ? (
             <p className="vm-faq-closing-line hidden lg:block">
               {fill.faqClosingLine[locale]}

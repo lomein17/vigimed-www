@@ -4347,8 +4347,10 @@ h1, h2, h3 {
   }
 
   /* Mobile-only sizing override on the section heading. Desktop is
-   * unchanged because this rule sits inside the <lg media query. */
-  .vm-segment-faq-section .vm-faq-heading {
+   * unchanged because this rule sits inside the <lg media query.
+   * Scoped to withStep so the basic branch keeps its pre-VM-515
+   * mobile heading treatment. */
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-heading {
     font-size: 22px;
     line-height: 1.18;
     margin: 0 0 24px;
@@ -4623,7 +4625,7 @@ h1, h2, h3 {
     padding-top: 28px;
     padding-bottom: 36px;
   }
-  .vm-segment-faq-section .vm-faq-heading {
+  .vm-segment-faq-section[data-faq-kind='withStep'] .vm-faq-heading {
     font-size: 20px;
     margin-bottom: 16px;
   }
