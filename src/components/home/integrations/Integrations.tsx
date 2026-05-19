@@ -21,8 +21,8 @@ export function Integrations({ locale }: { locale: Locale }) {
         <h2 id="integrations-heading" className="vm-integrations-h2">
           {integrations.h2}
         </h2>
-        <IntegrationsMarquee tiles={integrations.tiles} className="md:hidden" />
-        <div className="hidden md:block">
+        <IntegrationsMarquee tiles={integrations.tiles} className="lg:hidden" />
+        <div className="hidden lg:block">
           <IntegrationsMagnetic>
             <div className="vm-integrations-grid">
               {integrations.tiles.map((tile) => (

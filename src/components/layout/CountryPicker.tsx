@@ -52,12 +52,12 @@ export function CountryPicker({
   return (
     <div
       ref={containerRef}
-      className="font-ui inline-flex flex-col items-start md:items-end justify-end h-9 gap-1"
+      className="font-ui inline-flex flex-col items-start lg:items-end justify-end h-9 gap-1"
     >
       {open ? (
         <a
           href={otherHrefBase}
-          className="text-[11px] md:text-xs text-text-on-dark hover:text-brand-500 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+          className="text-[11px] lg:text-xs text-text-on-dark hover:text-brand-500 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
         >
           {otherLabel}
         </a>
@@ -74,7 +74,7 @@ export function CountryPicker({
             setOpen((prev) => !prev);
           }
         }}
-        className="text-[11px] md:text-xs text-text-on-dark-muted hover:text-text-on-dark transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 cursor-pointer bg-transparent border-0 p-0"
+        className="text-[11px] lg:text-xs text-text-on-dark-muted hover:text-text-on-dark transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 cursor-pointer bg-transparent border-0 p-0"
       >
         {currentLabel}
       </button>

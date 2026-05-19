@@ -164,15 +164,6 @@
 }
 
 /* Responsive H1, H2, gutter, section-y (§4.2 and §4.4) */
-@media (min-width: 768px) {
-  :root {
-    --text-h1: 2.833rem;
-    --text-h2: 2.5rem;
-    --site-gutter: 1.5rem;
-    --site-section: 4rem;
-  }
-}
-
 @media (min-width: 1024px) {
   :root {
     --text-h1: 3.583rem;
@@ -343,7 +334,7 @@ h1, h2, h3 {
   display: none;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 1023.98px) {
   .vm-capability-card {
     min-height: auto;
     aspect-ratio: auto;
@@ -423,7 +414,7 @@ h1, h2, h3 {
   margin: 0 auto 14px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-pim-headline {
     font-size: 48px;
     margin-bottom: 18px;
@@ -441,7 +432,7 @@ h1, h2, h3 {
   margin: 0 auto 28px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-pim-frame {
     font-size: 20px;
     margin-bottom: 40px;
@@ -504,7 +495,7 @@ h1, h2, h3 {
   margin: 16px auto 40px;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 1023.98px) {
   .vm-pim-section {
     padding-top: 32px;
     padding-bottom: 32px;
@@ -562,7 +553,7 @@ h1, h2, h3 {
   margin-bottom: 48px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-moat-header {
     margin-bottom: 64px;
   }
@@ -590,12 +581,6 @@ h1, h2, h3 {
   margin: 0 auto;
 }
 
-@media (min-width: 768px) {
-  .vm-moat-h2 {
-    font-size: 40px;
-  }
-}
-
 @media (min-width: 1024px) {
   .vm-moat-h2 {
     font-size: 48px;
@@ -608,7 +593,7 @@ h1, h2, h3 {
   gap: 48px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-moat-grid {
     grid-template-columns: 1fr 1fr;
     gap: 80px;
@@ -641,7 +626,7 @@ h1, h2, h3 {
   margin: 0 0 16px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-moat-claim-heading {
     font-size: 24px;
   }
@@ -656,7 +641,7 @@ h1, h2, h3 {
   margin: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-moat-body {
     font-size: 17px;
   }
@@ -726,12 +711,6 @@ h1, h2, h3 {
   margin: 0 auto 32px;
 }
 
-@media (min-width: 768px) {
-  .vm-integrations-h2 {
-    font-size: 26px;
-  }
-}
-
 @media (min-width: 1024px) {
   .vm-integrations-h2 {
     font-size: 28px;
@@ -751,7 +730,7 @@ h1, h2, h3 {
   margin: 0 auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-integrations-grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
@@ -775,7 +754,7 @@ h1, h2, h3 {
   scale: 1;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-integrations-tile {
     border-radius: 16px;
     padding: 24px;
@@ -893,7 +872,7 @@ h1, h2, h3 {
  * tail and the Integrations marquee runs flush against the next navy
  * Final CTA section. Restore symmetric breathing room on both inner
  * edges at < md only; >= md geometry stays unchanged. */
-@media (max-width: 767.98px) {
+@media (max-width: 1023.98px) {
   .vm-moat-integrations-section .vm-moat-section {
     padding-top: 48px;
   }
@@ -942,7 +921,7 @@ h1, h2, h3 {
   gap: 48px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-final-cta-grid {
     grid-template-columns: 1fr 1fr;
     gap: 80px;
@@ -971,12 +950,6 @@ h1, h2, h3 {
   margin: 0;
 }
 
-@media (min-width: 768px) {
-  .vm-final-cta-h2 {
-    font-size: 40px;
-  }
-}
-
 @media (min-width: 1024px) {
   .vm-final-cta-h2 {
     font-size: 48px;
@@ -993,7 +966,7 @@ h1, h2, h3 {
   margin: 16px 0 32px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-final-cta-frame {
     font-size: 17px;
   }
@@ -1008,7 +981,7 @@ h1, h2, h3 {
   gap: 24px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-final-cta-ladder {
     gap: 32px;
   }
@@ -1046,7 +1019,7 @@ h1, h2, h3 {
   margin: 2px 0 4px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-final-cta-step-h {
     font-size: 20px;
   }
@@ -1061,7 +1034,7 @@ h1, h2, h3 {
   margin: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-final-cta-step-b {
     font-size: 15px;
   }
@@ -1073,7 +1046,7 @@ h1, h2, h3 {
   padding: 24px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-final-cta-card {
     padding: 32px;
   }
@@ -1624,7 +1597,7 @@ h1, h2, h3 {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1023.98px) {
   .vm-segment-final-cta-section.vm-segment-final-cta-section--segment {
     padding-top: 72px;
     padding-bottom: 72px;
@@ -1635,7 +1608,7 @@ h1, h2, h3 {
   font-size: 32px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1023.98px) {
   .vm-segment-final-cta-heading {
     font-size: 24px;
   }
@@ -1666,7 +1639,7 @@ h1, h2, h3 {
   gap: 32px 48px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-pressure-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -1686,7 +1659,7 @@ h1, h2, h3 {
   letter-spacing: -0.01em;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-pressure-number {
     font-size: 40px;
   }
@@ -1698,7 +1671,7 @@ h1, h2, h3 {
   line-height: 1.55;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-pressure-text {
     font-size: 17px;
   }
@@ -1968,7 +1941,7 @@ h1, h2, h3 {
   gap: 8px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-3-desktop {
     display: block;
   }
@@ -2120,7 +2093,7 @@ h1, h2, h3 {
   margin: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-3-result {
     font-size: 26px;
   }
@@ -2148,7 +2121,7 @@ h1, h2, h3 {
   margin: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-3-body {
     font-size: 16px;
   }
@@ -2175,7 +2148,7 @@ h1, h2, h3 {
   margin: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-3-quote {
     font-size: 19px;
     padding-left: 24px;
@@ -2459,13 +2432,13 @@ h1, h2, h3 {
   gap: 32px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-3-mobile-chain {
     display: none;
   }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 1023.98px) {
   .vm-section-3-desktop {
     display: none;
   }
@@ -2522,7 +2495,7 @@ h1, h2, h3 {
   letter-spacing: 0.01em;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-3-citation {
     font-size: 13px;
   }
@@ -2590,7 +2563,7 @@ h1, h2, h3 {
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-4-header {
     margin-bottom: 44px;
   }
@@ -2670,7 +2643,7 @@ h1, h2, h3 {
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-4-zone-a {
     margin-bottom: 96px;
   }
@@ -2686,7 +2659,7 @@ h1, h2, h3 {
   grid-template-columns: 1fr 1fr;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-stat-strip {
     grid-template-columns: repeat(4, 1fr);
     padding: 32px 0;
@@ -2707,7 +2680,7 @@ h1, h2, h3 {
   border-left: 1px solid rgba(10, 22, 40, 0.12);
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 1023.98px) {
   .vm-stat-strip-cell:nth-child(odd) + .vm-stat-strip-cell {
     border-left: 1px solid rgba(10, 22, 40, 0.12);
   }
@@ -2728,7 +2701,7 @@ h1, h2, h3 {
   color: #0A1628;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-stat-strip-value {
     font-size: 32px;
   }
@@ -2751,7 +2724,7 @@ h1, h2, h3 {
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-4-zone-b {
     margin-bottom: 96px;
   }
@@ -2785,7 +2758,7 @@ h1, h2, h3 {
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-4-pim-frame-line {
     font-size: 17px;
   }
@@ -2835,7 +2808,7 @@ h1, h2, h3 {
   padding-bottom: 24px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-segment-section-4--variant-regulatory-document {
     padding-top: 32px;
     padding-bottom: 32px;
@@ -2859,7 +2832,7 @@ h1, h2, h3 {
   margin-bottom: 16px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-a {
     margin-bottom: 18px;
   }
@@ -2875,7 +2848,7 @@ h1, h2, h3 {
   margin-bottom: 20px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-segment-section-4--variant-regulatory-document .vm-section-4-zone-b {
     margin-bottom: 28px;
   }
@@ -2911,7 +2884,7 @@ h1, h2, h3 {
   gap: 12px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-section-4-obligation-grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
@@ -2999,7 +2972,7 @@ h1, h2, h3 {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-acta {
     padding: 28px;
   }
@@ -3083,7 +3056,7 @@ h1, h2, h3 {
   gap: 18px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-acta-clauses {
     grid-template-columns: 1fr 1fr;
     column-gap: 36px;
@@ -3111,7 +3084,7 @@ h1, h2, h3 {
   gap: 6px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-acta-evidence {
     flex-direction: row;
     align-items: baseline;
@@ -3159,7 +3132,7 @@ h1, h2, h3 {
   line-height: 1.15;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .vm-acta-seal {
     top: 76px;
     right: 20px;

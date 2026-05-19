@@ -79,7 +79,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
                 {capabilities.heading}
               </h2>
             </div>
-            <div className="max-w-[940px] mx-auto hidden md:block">
+            <div className="max-w-[940px] mx-auto hidden lg:block">
               <p
                 className="font-body"
                 style={{ color: '#2B2B2B', lineHeight: 1.6, fontSize: '1.0625rem' }}
@@ -92,7 +92,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
 
         <CapabilitiesAutoReveal>
           <div
-            className="mx-auto grid grid-cols-1 md:grid-cols-5 gap-4"
+            className="mx-auto grid grid-cols-1 lg:grid-cols-5 gap-4"
             style={{ maxWidth: 1140 }}
           >
             {capabilities.cards.map((card) => (

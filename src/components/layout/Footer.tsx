@@ -20,18 +20,18 @@ export function Footer({ locale }: { locale: Locale }) {
   return (
     <footer data-site-footer className="bg-navy-900 text-text-on-dark">
       <div className="brand-line" aria-hidden="true" />
-      <div className="max-w-[1280px] mx-auto px-gutter pt-12 pb-6 md:pt-16 md:pb-8 font-ui">
-        <div className="flex flex-col gap-8 md:flex-row md:justify-end md:gap-24">
+      <div className="max-w-[1280px] mx-auto px-gutter pt-12 pb-6 lg:pt-16 lg:pb-8 font-ui">
+        <div className="flex flex-col gap-8 lg:flex-row lg:justify-end lg:gap-24">
           {columns.map((col) => (
             <nav
               key={col.heading}
               aria-label={col.heading}
-              className="md:min-w-[200px]"
+              className="lg:min-w-[200px]"
             >
-              <h2 className="text-[12px] md:text-[13px] font-medium tracking-[0.04em] uppercase text-text-on-dark text-right mb-4 md:mb-5">
+              <h2 className="text-[12px] lg:text-[13px] font-medium tracking-[0.04em] uppercase text-text-on-dark text-right mb-4 lg:mb-5">
                 {col.heading}
               </h2>
-              <ul className="flex flex-col gap-2.5 md:gap-3 text-right text-[13px] md:text-sm">
+              <ul className="flex flex-col gap-2.5 lg:gap-3 text-right text-[13px] lg:text-sm">
                 {col.links.map((item) => (
                   <li key={item.label}>
                     {item.route !== undefined ? (
@@ -71,17 +71,17 @@ export function Footer({ locale }: { locale: Locale }) {
 
         <div
           aria-hidden="true"
-          className="h-[3px] bg-brand-pulse mt-12 mb-5 md:mt-16 md:mb-6"
+          className="h-[3px] bg-brand-pulse mt-12 mb-5 lg:mt-16 lg:mb-6"
         />
 
-        <div className="flex flex-col gap-3 text-left text-[11px] md:flex md:flex-row md:items-end md:gap-4 md:text-xs text-text-on-dark-muted">
+        <div className="flex flex-col gap-3 text-left text-[11px] lg:flex lg:flex-row lg:items-end lg:gap-4 lg:text-xs text-text-on-dark-muted">
           <p>
             {copyright.prefix}
-            <br className="md:hidden" />
+            <br className="lg:hidden" />
             {' '}
             {copyright.suffix}
           </p>
-          <p className="md:mx-auto md:text-center">
+          <p className="lg:mx-auto lg:text-center">
             {legalLinks[0].slug !== undefined ? (
               <Link
                 href={legalLinks[0].slug}
@@ -120,7 +120,7 @@ export function Footer({ locale }: { locale: Locale }) {
               // Skipping the client CountryPicker keeps the off-locale
               // label and route code out of the RSC payload.
               <div className="font-ui inline-flex items-end h-9">
-                <span className="text-[11px] md:text-xs text-text-on-dark-muted">
+                <span className="text-[11px] lg:text-xs text-text-on-dark-muted">
                   {shared.localeSelector.currentLabel}
                 </span>
               </div>

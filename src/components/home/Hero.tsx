@@ -69,7 +69,7 @@ export function Hero({ locale }: { locale: Locale }) {
           <div className="max-w-[1100px]">
             <h1
               id="hero-headline-desktop"
-              className="text-text-on-dark text-[2.333rem] md:text-[2.833rem] lg:text-[3.583rem]"
+              className="text-text-on-dark text-[2.333rem] lg:text-[3.583rem]"
               style={{
                 letterSpacing: '-0.015em',
                 lineHeight: 1.08,
@@ -82,7 +82,7 @@ export function Hero({ locale }: { locale: Locale }) {
             </h1>
           </div>
 
-          <div className="max-w-[684px] md:max-w-[706px] lg:max-w-[739px]">
+          <div className="max-w-[684px] lg:max-w-[739px]">
             <p
               className="font-body"
               style={{ color: '#D8DCE4', lineHeight: 1.6, fontSize: '1.2292rem' }}
