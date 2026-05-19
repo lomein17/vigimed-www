@@ -69,6 +69,11 @@ export type FaqItem =
       readonly question: Paired<string>;
       readonly preview: Paired<string>;
       readonly answer: Paired<string>;
+      // VM-515 mobile-only fork: per-paragraph answer authored for the
+      // <lg chip-strip + scroll-snap-carousel composition. Inline
+      // <strong>...</strong> honored at render time. Absent => mobile
+      // falls back to [preview, answer] rendering.
+      readonly mobileAnswer?: Paired<readonly string[]>;
     };
 
 // Slot Map v1.1 §3 video: looping video asset bed

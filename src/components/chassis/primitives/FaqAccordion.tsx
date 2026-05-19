@@ -13,21 +13,33 @@
 //                with 90deg rotation; answer expands via
 //                grid-template-rows 0fr -> 1fr.
 //
-// Layout: flex columns in .vm-faq-grid (UAT r2). Mobile collapses to a
-// single column via `display: contents` on .vm-faq-column so items flow
-// in source order 1-6. At >=1024px the grid becomes a flex row with two
-// .vm-faq-column children, each a vertical flex column with independent
-// row heights so opening a cell in col A does not push col B's cells
-// down. Replaces the prior CSS grid, where row heights were the max of
-// each row's cells and asymmetric expansion left dead whitespace.
+// Layout: flex columns in .vm-faq-grid (UAT r2). At >=1024px the grid
+// becomes a flex row with two .vm-faq-column children, each a vertical
+// flex column with independent row heights so opening a cell in col A
+// does not push col B's cells down.
+//
+// VM-515 mobile fork (<lg, withStep only): the desktop accordion is
+// wrapped `hidden lg:block`; a sibling FaqCarouselMobile renders the
+// chip-strip + scroll-snap Q&A carousel below `lg`. The `basic` branch
+// (hospitales-publicos) renders the legacy accordion at all widths --
+// FaqCarouselMobile is opt-in via the `withStep` discriminator. The
+// removed §5.11 mobile-hide rule (`.vm-faq-answer-wrap { display: none }`
+// inside `@media (max-width: 1023.98px)`) lives in globals.css and goes
+// away in the same commit that lands the carousel.
 //
 // Keyboard: each cell's trigger is a native button (Enter/Space toggle).
 // defaultOpen seeds initial state to the 1-indexed item; 'none' opens
 // none. motionStagger ships as a prop but the stagger animation logic
 // stays out of this ticket per Pablo D-Pablo-2026-05-11.
 
-import { useState } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+} from 'react';
 
+import { FAQ_STEP_LABELS } from '@/lib/chassis/constants';
 import type { FaqItem } from '@/lib/chassis/slots';
 import type { Locale } from '@/lib/i18n';
 
@@ -44,9 +56,8 @@ export function FaqAccordion(props: {
   // chassis bump; no current consumer until the follow-on patch lands.
   void props.motionStagger;
   // UAT r2: split items into two halves and render each half inside its
-  // own .vm-faq-column so columns flow independently at >=1024px. Mobile
-  // collapses both columns to source order via `display: contents` in
-  // CSS. With 6 items: colA = items[0..2], colB = items[3..5].
+  // own .vm-faq-column so columns flow independently at >=1024px. With
+  // 6 items: colA = items[0..2], colB = items[3..5].
   const half = Math.ceil(items.length / 2);
   const colA = items.slice(0, half);
   const colB = items.slice(half);
@@ -59,15 +70,34 @@ export function FaqAccordion(props: {
       initiallyOpen={defaultOpen !== 'none' && defaultOpen - 1 === globalIndex}
     />
   );
+
+  // VM-515: only the withStep branch gets the mobile carousel fork.
+  // The `basic` branch keeps the legacy stacked accordion on mobile,
+  // matching hospitales-publicos byte-for-byte.
+  const allWithStep =
+    items.length > 0 && items.every((it) => it.kind === 'withStep');
+
   return (
-    <div className="vm-faq-grid">
-      <div className="vm-faq-column">
-        {colA.map((item, i) => renderCell(item, i))}
+    <>
+      <div className={allWithStep ? 'hidden lg:block' : undefined}>
+        <div className="vm-faq-grid">
+          <div className="vm-faq-column">
+            {colA.map((item, i) => renderCell(item, i))}
+          </div>
+          <div className="vm-faq-column">
+            {colB.map((item, i) => renderCell(item, half + i))}
+          </div>
+        </div>
       </div>
-      <div className="vm-faq-column">
-        {colB.map((item, i) => renderCell(item, half + i))}
-      </div>
-    </div>
+      {allWithStep ? (
+        <div className="lg:hidden">
+          <FaqCarouselMobile
+            items={items as readonly FaqItem[]}
+            locale={locale}
+          />
+        </div>
+      ) : null}
+    </>
   );
 }
 
@@ -169,6 +199,213 @@ function FaqAccordionItem({
           <p className="vm-faq-answer">{item.answer[locale]}</p>
         </div>
       </div>
+    </div>
+  );
+}
+
+// VM-515 mobile fork (<lg, withStep only). Chip-strip + scroll-snap
+// carousel of Q&A cards. IntersectionObserver root = .vm-faq-carousel
+// keeps chip/dot/counter active state synchronized with the centered
+// card; chip-tap and roving-arrow keyboard handler scroll the carousel
+// to the matching card. Wiring lifted verbatim from §5.14 ChainMobile
+// (threshold + highest-ratio winner) and §5.15 Section2PersonaMatrix
+// (roving-arrow shape: Left/Right wrap, Home/End jump, Up/Down no-op,
+// meta/ctrl/alt pass through). Honors prefers-reduced-motion: reduce.
+
+const CHIP_STRIP_ARIA_LABEL: Record<Locale, string> = {
+  'mx-es': 'Ver pregunta',
+  'us-en': '[us-en pending]',
+};
+
+const CAROUSEL_ARIA_LABEL: Record<Locale, string> = {
+  'mx-es': 'Preguntas frecuentes',
+  'us-en': '[us-en pending]',
+};
+
+function padded(n: number): string {
+  return String(n).padStart(2, '0');
+}
+
+function FaqCarouselMobile({
+  items,
+  locale,
+}: {
+  items: readonly FaqItem[];
+  locale: Locale;
+}) {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    const root = carouselRef.current;
+    if (!root) return;
+    const cards = Array.from(
+      root.querySelectorAll<HTMLElement>('[data-index]'),
+    );
+    if (cards.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        let best: IntersectionObserverEntry | null = null;
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          if (!best || entry.intersectionRatio > best.intersectionRatio)
+            best = entry;
+        }
+        if (!best) return;
+        const raw = best.target.getAttribute('data-index');
+        const idx = raw === null ? NaN : Number(raw);
+        if (!Number.isFinite(idx)) return;
+        setActiveIdx(idx);
+      },
+      { root, threshold: [0.55, 0.7, 0.85] },
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, []);
+
+  function scrollToCard(idx: number) {
+    const root = carouselRef.current;
+    if (!root) return;
+    const target = root.querySelector<HTMLElement>(
+      `.vm-faq-card[data-index="${idx}"]`,
+    );
+    if (!target) return;
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // The -24 cancels scroll-padding-left so the card lands flush at
+    // the start of the visual gutter, matching the snap point.
+    root.scrollTo({
+      left: target.offsetLeft - 24,
+      behavior: reduced ? 'instant' : 'smooth',
+    });
+  }
+
+  function onChipKeyDown(e: KeyboardEvent<HTMLButtonElement>) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const last = items.length - 1;
+    const cur = activeIdx;
+    let next: number | null = null;
+    if (e.key === 'ArrowLeft') next = cur === 0 ? last : cur - 1;
+    if (e.key === 'ArrowRight') next = cur === last ? 0 : cur + 1;
+    if (e.key === 'Home') next = 0;
+    if (e.key === 'End') next = last;
+    if (next === null) return;
+    e.preventDefault();
+    setActiveIdx(next);
+    scrollToCard(next);
+    const strip = e.currentTarget.closest<HTMLElement>('[data-faq-strip]');
+    strip
+      ?.querySelector<HTMLButtonElement>(`[data-chip-idx="${next}"]`)
+      ?.focus();
+  }
+
+  const total = items.length;
+
+  return (
+    <div className="vm-faq-mobile">
+      <div
+        role="tablist"
+        aria-label={CHIP_STRIP_ARIA_LABEL[locale]}
+        data-faq-strip
+        className="vm-faq-chipstrip"
+      >
+        {items.map((item, i) => {
+          if (item.kind !== 'withStep') return null;
+          const isActive = i === activeIdx;
+          return (
+            <button
+              key={`${item.question[locale]}-${i}`}
+              type="button"
+              role="tab"
+              data-chip-idx={i}
+              data-active={isActive ? 'true' : undefined}
+              aria-controls={`vm-faq-card-${i}`}
+              aria-selected={isActive}
+              tabIndex={isActive ? 0 : -1}
+              className="vm-faq-chip"
+              onClick={() => {
+                setActiveIdx(i);
+                scrollToCard(i);
+              }}
+              onKeyDown={onChipKeyDown}
+            >
+              <span className="vm-faq-chip__num">{padded(i + 1)}</span>
+              <span className="vm-faq-chip__label">
+                {FAQ_STEP_LABELS[item.step][locale]}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div
+        ref={carouselRef}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label={CAROUSEL_ARIA_LABEL[locale]}
+        className="vm-faq-carousel"
+      >
+        {items.map((item, i) => {
+          if (item.kind !== 'withStep') return null;
+          const paragraphs =
+            item.mobileAnswer?.[locale] ??
+            ([item.preview[locale], item.answer[locale]] as readonly string[]);
+          return (
+            <article
+              key={`${item.question[locale]}-${i}`}
+              id={`vm-faq-card-${i}`}
+              role="tabpanel"
+              data-index={i}
+              className="vm-faq-card"
+            >
+              <header className="vm-faq-card__head">
+                <span className="vm-faq-card__step">
+                  PASO {item.step} · {FAQ_STEP_LABELS[item.step][locale]}
+                </span>
+                <span className="vm-faq-card__counter">
+                  {padded(i + 1)} / {padded(total)}
+                </span>
+              </header>
+              <h4 className="vm-faq-card__q">{item.question[locale]}</h4>
+              <hr className="vm-faq-card__divider" />
+              <div className="vm-faq-card__a">
+                {paragraphs.map((para, pIdx) => {
+                  let cls: string | undefined;
+                  if (paragraphs.length === 1) {
+                    cls = 'vm-faq-card__a-lead';
+                  } else if (pIdx === 0) {
+                    cls = 'vm-faq-card__a-lead';
+                  } else if (pIdx === paragraphs.length - 1) {
+                    cls = 'vm-faq-card__a-accent';
+                  }
+                  return (
+                    <p
+                      key={pIdx}
+                      className={cls}
+                      dangerouslySetInnerHTML={{ __html: para }}
+                    />
+                  );
+                })}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div className="vm-faq-dots">
+        {items.map((_, i) => (
+          <span
+            key={i}
+            className="vm-faq-dot"
+            data-active={i === activeIdx ? 'true' : undefined}
+            aria-hidden="true"
+          />
+        ))}
+      </div>
+      <p className="vm-faq-count" aria-live="polite">
+        <b>{padded(activeIdx + 1)}</b> / {padded(total)}
+      </p>
     </div>
   );
 }

@@ -778,6 +778,15 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             'VigiMed instala cámaras dedicadas en áreas críticas: quirófanos, salas de procedimientos, recuperación, neonatología, otras áreas de mayor riesgo según el perfil de su institución. La detección cubre eventos de seguridad del paciente y de calidad de la atención que ocurren dentro del campo de visión configurado, no consultas, no áreas administrativas, no espacios privados del paciente. La selección de áreas se hace con su institución durante la configuración inicial, no con un catálogo fijo.',
           'us-en': '[us-en pending]',
         },
+        // VM-515 mobile-fork: per-paragraph answer for the <lg carousel.
+        mobileAnswer: {
+          'mx-es': [
+            '<strong>Cámaras dedicadas en áreas críticas.</strong> Quirófanos, procedimientos, recuperación, neonatología. Las áreas se definen <strong>con su institución</strong>, no por catálogo fijo.',
+            '<strong>Ven:</strong> eventos de seguridad y calidad dentro del campo de visión configurado.',
+            '<strong>No ven:</strong> consultas, áreas administrativas, espacios privados del paciente.',
+          ],
+          'us-en': ['[us-en pending]'],
+        },
       },
       {
         kind: 'withStep',
@@ -796,6 +805,15 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es':
             'Cada detección pasa por un analista entrenado en el Centro de Revisión de Eventos de VigiMed antes de que llegue una alerta a su institución. El CRE opera 24/7 y existe precisamente para eliminar falsos positivos: el equipo clínico recibe eventos verificados, no señales crudas. La confirmación humana es lo que convierte la detección en evidencia accionable, no un paso opcional ni un proceso automatizado.',
           'us-en': '[us-en pending]',
+        },
+        // VM-515 mobile-fork: per-paragraph answer for the <lg carousel.
+        mobileAnswer: {
+          'mx-es': [
+            '<strong>Cada detección pasa por un analista humano</strong> antes de generar una alerta a su institución.',
+            'El Centro de Revisión de Eventos opera <strong>24/7</strong> y existe para eliminar falsos positivos.',
+            'Su equipo clínico recibe eventos verificados, no señales crudas.',
+          ],
+          'us-en': ['[us-en pending]'],
         },
       },
       {
@@ -816,6 +834,15 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             'La matriz de coordinación, quién es notificado, en qué canal, en qué momento, se configura con su institución por área crítica y por tipo de evento; no es una regla global ni un protocolo del vendor. Cada coordinación queda registrada con tiempo de respuesta y persona que actuó, de manera que su institución puede ajustar la matriz cuando el patrón muestre que está mal calibrada. La coordinación no interrumpe el flujo clínico; lo documenta.',
           'us-en': '[us-en pending]',
         },
+        // VM-515 mobile-fork: per-paragraph answer for the <lg carousel.
+        mobileAnswer: {
+          'mx-es': [
+            '<strong>La matriz la define su institución</strong>, por área crítica y por tipo de evento. No es regla global ni protocolo del vendor.',
+            'Cada coordinación queda registrada con <strong>tiempo de respuesta y persona que actuó</strong>. La matriz se ajusta cuando el patrón muestre que está mal calibrada.',
+            'La coordinación no interrumpe el flujo clínico; lo documenta.',
+          ],
+          'us-en': ['[us-en pending]'],
+        },
       },
       {
         kind: 'withStep',
@@ -834,6 +861,15 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es':
             'Es el momento, justamente porque su institución está saturada. VigiMed es un servicio gestionado: la instalación, la red, las cámaras, y la operación del Centro de Revisión de Eventos los opera VigiMed, no su área de sistemas ni su equipo de calidad. La evidencia documentada empieza a producirse desde la primera semana, sin retirar a ningún equipo de sus transiciones actuales. El equipo nuevo de calidad llega a un sistema que ya está produciendo tendencia, no a uno que está empezando.',
           'us-en': '[us-en pending]',
+        },
+        // VM-515 mobile-fork: per-paragraph answer for the <lg carousel.
+        mobileAnswer: {
+          'mx-es': [
+            'Es el momento, justamente porque su institución está saturada.',
+            'VigiMed es un <strong>servicio gestionado</strong>: instalación, red, cámaras y operación del CRE las opera VigiMed, no su área de sistemas ni su equipo de calidad.',
+            'La evidencia documentada empieza <strong>desde la primera semana</strong>, sin retirar a ningún equipo de sus transiciones actuales.',
+          ],
+          'us-en': ['[us-en pending]'],
         },
       },
       {
@@ -854,6 +890,15 @@ export const centrosMedicosFillMxEs: ChassisFill = {
             'La institución llega a la conversación regulatoria con criterio firmado y respuesta documentada, no con reconstrucción retrospectiva. Los datos son de su institución; VigiMed los procesa bajo contrato de tratamiento, no los reutiliza, no los comparte con terceros, ni los hace disponibles a procesos jurídicos sin instrucción de su institución. Ante aseguradora, CONAMED, o consejo, la pregunta deja de ser qué ocurrió y se vuelve cómo respondió la institución.',
           'us-en': '[us-en pending]',
         },
+        // VM-515 mobile-fork: per-paragraph answer for the <lg carousel.
+        mobileAnswer: {
+          'mx-es': [
+            'La institución llega a la conversación regulatoria con <strong>criterio firmado y respuesta documentada</strong>, no con reconstrucción retrospectiva.',
+            'Los datos son de su institución; VigiMed los procesa bajo contrato y <strong>no los comparte sin instrucción</strong>.',
+            'Ante aseguradora, CONAMED o consejo, la pregunta deja de ser qué ocurrió y se vuelve cómo respondió la institución.',
+          ],
+          'us-en': ['[us-en pending]'],
+        },
       },
       {
         kind: 'withStep',
@@ -872,6 +917,15 @@ export const centrosMedicosFillMxEs: ChassisFill = {
           'mx-es':
             'La auditoría revisa el expediente clínico. VigiMed prepara evidencia para revisión de su equipo operativo, y la deposita ahí, no en un sistema paralelo. Cada evento crítico queda confirmado por un humano, documentado en el formato que su institución usa, y disponible como tendencia institucional cuando el evaluador la pida. El equipo de calidad llega a la auditoría leyendo, no reconstruyendo.',
           'us-en': '[us-en pending]',
+        },
+        // VM-515 mobile-fork: per-paragraph answer for the <lg carousel.
+        mobileAnswer: {
+          'mx-es': [
+            '<strong>La auditoría revisa el expediente clínico.</strong> VigiMed deposita evidencia ahí, no en un sistema paralelo.',
+            'Cada evento crítico queda <strong>confirmado por un humano</strong>, documentado en el formato que su institución usa, y disponible como tendencia institucional cuando el evaluador la pida.',
+            'Su equipo llega a la auditoría leyendo, no reconstruyendo.',
+          ],
+          'us-en': ['[us-en pending]'],
         },
       },
     ],

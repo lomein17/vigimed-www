@@ -33,6 +33,27 @@ export const FAQ_STEP_LABELS: Record<
   8: { 'mx-es': 'ESCALAR', 'us-en': '[us-en pending]' },
 } as const;
 
+// VM-515: §5 FAQ withStep mobile redesign chassis constants. Locale-aware
+// strings rendered by every withStep segment on mobile (<lg). FAQ_EYEBROW
+// sits above the section heading; FAQ_CLOSING_CTA_LEAD + FAQ_CLOSING_CTA_SUB
+// populate the tappable closing-CTA row replacing the orphaned closing
+// line. us-en values are placeholder until segment fixtures are authored
+// for the second locale.
+export const FAQ_EYEBROW = {
+  'mx-es': 'FAQ · DETALLE OPERATIVO',
+  'us-en': '[us-en pending]',
+} as const satisfies Record<Locale, string>;
+
+export const FAQ_CLOSING_CTA_LEAD = {
+  'mx-es': '¿Otra duda? Hablemos.',
+  'us-en': '[us-en pending]',
+} as const satisfies Record<Locale, string>;
+
+export const FAQ_CLOSING_CTA_SUB = {
+  'mx-es': '30 minutos con el equipo que diseña VigiMed.',
+  'us-en': '[us-en pending]',
+} as const satisfies Record<Locale, string>;
+
 // Slot Map v1.1 §9.2 Sticky.render.start / Sticky.render.end
 export const STICKY_RENDER_TRIGGERS = {
   start: 'section2.top',
