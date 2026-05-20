@@ -53,7 +53,7 @@ export function StickyNav({ locale }: { locale: Locale }) {
         navOrder={navOrder}
         secondaryNav={secondaryNav}
       />
-      <div aria-hidden="true" className="relative z-[32] h-[3px] bg-brand-pulse" />
+      <div aria-hidden="true" className="hidden lg:block relative z-[32] h-[3px] bg-brand-pulse" />
     </StickyNavShell>
   );
 }

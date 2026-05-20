@@ -22,16 +22,16 @@ interface HeaderMobileProps {
 type Pane = 'closed' | 'L1' | 'L2';
 
 const HEADER_HEIGHT_PX = 72;
-const DIVIDER_HEIGHT_PX = 3;
-// VM-494 A.2: SHEET_TOP grew from the bare 75px constant to include
-// env(safe-area-inset-top) so the drawer sheet sits below the notch on
-// iOS while the navy header band stays flush to the screen edge.
-const SHEET_TOP = `calc(${HEADER_HEIGHT_PX + DIVIDER_HEIGHT_PX}px + env(safe-area-inset-top, 0px))`;
+// VM-520 r2: the mobile chrome no longer carries a brand-pulse divider
+// (StickyNav hides it at < lg). SHEET_TOP matches the navy band's bottom
+// edge exactly. env(safe-area-inset-top) keeps the sheet below the iOS
+// notch while the navy band stays flush to the screen edge.
+const SHEET_TOP = `calc(${HEADER_HEIGHT_PX}px + env(safe-area-inset-top, 0px))`;
 // Hide translate must clear top: SHEET_TOP, not just the sheet's own
 // height. translateY(-100%) shifts by the element's height only, leaving
 // the bottom edge at top: SHEET_TOP. The extra offset moves the bottom
 // edge to y=0 so the drawer never paints over the chrome row.
-const SHEET_HIDE_TRANSFORM = `translateY(calc(-100% - ${HEADER_HEIGHT_PX + DIVIDER_HEIGHT_PX}px - env(safe-area-inset-top, 0px)))`;
+const SHEET_HIDE_TRANSFORM = `translateY(calc(-100% - ${HEADER_HEIGHT_PX}px - env(safe-area-inset-top, 0px)))`;
 
 const OPEN_TRANSITION = 'transform 240ms cubic-bezier(0.32, 0.72, 0, 1)';
 const CLOSE_TRANSITION = 'transform 200ms cubic-bezier(0.4, 0, 1, 1)';
@@ -349,7 +349,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
             className="flex flex-col"
             style={{
               minHeight: '100%',
-              paddingTop: 18,
+              paddingTop: 10,
               paddingRight: 18,
               paddingLeft: 18,
               paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 64px))',
@@ -451,7 +451,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
             className="flex flex-col"
             style={{
               minHeight: '100%',
-              paddingTop: 18,
+              paddingTop: 10,
               paddingRight: 18,
               paddingLeft: 18,
               paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 96px))',

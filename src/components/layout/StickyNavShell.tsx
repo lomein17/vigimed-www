@@ -140,12 +140,24 @@ export function StickyNavShell({ children }: { children: React.ReactNode }) {
   // landings) and Section5SnapBridge (Space/PageDown target math).
   // Section sizing math intentionally keeps using --vm-nav-h so the
   // chassis does not reflow as the header animates.
+  //
+  // VM-520 r2: the published value is now viewport-aware. The mobile
+  // chrome no longer carries a 3px brand-pulse divider, so the band is
+  // 72px below lg and 75px at lg+. A matchMedia listener keeps the
+  // value live across device-rotation and resize.
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      '--vm-nav-effective-h',
-      hidden ? '0px' : '75px',
-    );
+    const mq = window.matchMedia('(max-width: 1023.98px)');
+    const apply = () => {
+      const navH = mq.matches ? 72 : 75;
+      document.documentElement.style.setProperty(
+        '--vm-nav-effective-h',
+        hidden ? '0px' : `${navH}px`,
+      );
+    };
+    apply();
+    mq.addEventListener('change', apply);
     return () => {
+      mq.removeEventListener('change', apply);
       document.documentElement.style.removeProperty('--vm-nav-effective-h');
     };
   }, [hidden]);

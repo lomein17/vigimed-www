@@ -120,9 +120,10 @@
   --brand-gradient: linear-gradient(90deg, #20A2E2 0%, #2FBBF7 50%, #20A2E2 100%);
   --brand-pulse: linear-gradient(90deg, transparent 0%, #20A2E2 20%, #2FBBF7 50%, #20A2E2 80%, transparent 100%);
 
-  /* StickyNav in-flow band: 72px nav grid + 3px brand-pulse line. Used to
-   * subtract nav height from full-viewport sections and as the scroll-snap
-   * top offset (VM-422 round 2). */
+  /* StickyNav in-flow band: 72px on mobile (no divider) / 75px on lg+
+   * (72px nav grid + 3px brand-pulse line). Used to subtract nav height
+   * from full-viewport sections and as the scroll-snap top offset
+   * (VM-422 round 2, VM-520 r2). */
   --vm-nav-h: 75px;
 
   /* Footer measured height (VM-456 UAT r3). Updated at runtime by
@@ -161,6 +162,16 @@
    * Mirrors the --text-page-title pattern for chassis symmetry. Does
    * NOT cascade to other claim/body prose surfaces. */
   --text-page-claim: clamp(1rem, 1.5vw, 1.375rem);
+}
+
+/* VM-520 r2: mobile chrome no longer carries the 3px brand-pulse divider,
+ * so --vm-nav-h collapses from 75px to 72px below lg. Keeps Section5SnapBridge
+ * math, scroll-padding-top, and full-viewport section sizing aligned with
+ * the actual sticky band height. */
+@media (max-width: 1023.98px) {
+  :root {
+    --vm-nav-h: 72px;
+  }
 }
 
 /* Responsive H1, H2, gutter, section-y (§4.2 and §4.4) */
@@ -5117,25 +5128,40 @@ h1, h2, h3 {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  /* Fit-to-viewport: 3-up flex row, no horizontal scroll. */
+  /* VM-520 r2: restore VM-519 spec carousel — 320px cards, scroll-snap,
+   * image absorbs vertical via flex:1 1 auto. The cards row itself flexes
+   * to fill remaining L2-pane vertical so cards have a defined cross-axis
+   * extent for the image's flex sizing to resolve against. */
   .vm-drawer-l2-cards {
     flex-direction: row;
     gap: 14px;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+    scroll-padding-left: 18px;
+    scrollbar-width: none;
+    margin: 0 -18px;
+    padding: 0 18px 6px;
   }
+  .vm-drawer-l2-cards::-webkit-scrollbar { display: none; }
 
-  /* Equal-width distribution; min-width:0 per flex-min-width-zero rule. */
   .vm-drawer-l2-card {
-    flex: 1 1 0;
-    min-width: 0;
+    flex: 0 0 auto;
+    width: 320px;
+    height: 100%;
+    scroll-snap-align: start;
   }
   .vm-drawer-l2-card__title {
     font-size: 17px;
     margin: 0 2px 8px;
   }
   .vm-drawer-l2-card__image {
-    width: 100%;
-    height: 140px;
     aspect-ratio: auto;
+    flex: 1 1 auto;
+    min-height: 0;
   }
   .vm-drawer-l2-card__vp {
     left: 14px;
