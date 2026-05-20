@@ -418,7 +418,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               paddingTop: 18,
               paddingRight: 18,
               paddingLeft: 18,
-              paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 64px))',
+              paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 96px))',
             }}
           >
             <button
