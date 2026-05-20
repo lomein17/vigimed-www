@@ -5117,33 +5117,26 @@ h1, h2, h3 {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  /* Fit-to-viewport: 3-up flex row, no horizontal scroll. */
+  /* Carousel: portrait-equivalent cards laid out horizontally, one
+     visible at a time with peek of next. Scroll-snap mandatory. */
   .vm-drawer-l2-cards {
     flex-direction: row;
     gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+    scroll-padding-left: 18px;
+    scrollbar-width: none;
+    margin: 0 -18px;
+    padding: 0 18px 6px;
   }
+  .vm-drawer-l2-cards::-webkit-scrollbar { display: none; }
 
-  /* Equal-width distribution; min-width:0 per flex-min-width-zero rule. */
+  /* Fixed-width cards matching portrait card width. Image, title,
+     vp overlay, and CTA inherit portrait values from the base rules. */
   .vm-drawer-l2-card {
-    flex: 1 1 0;
-    min-width: 0;
+    flex: 0 0 auto;
+    width: 340px;
+    scroll-snap-align: start;
   }
-  .vm-drawer-l2-card__title {
-    font-size: 17px;
-    margin: 0 2px 8px;
-  }
-  .vm-drawer-l2-card__image {
-    width: 100%;
-    height: 140px;
-    aspect-ratio: auto;
-  }
-  .vm-drawer-l2-card__vp {
-    left: 14px;
-    right: 14px;
-    bottom: 12px;
-    font-size: 12.5px;
-    line-height: 1.42;
-  }
-  .vm-drawer-l2-card__cta-row { padding: 8px 2px 0; }
-  .vm-drawer-l2-card__cta { font-size: 12px; font-weight: 600; }
 }
