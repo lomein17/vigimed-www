@@ -5097,6 +5097,7 @@ h1, h2, h3 {
     align-items: center;
     gap: 10px;
     padding: 4px 0 8px;
+    flex-shrink: 0;
   }
   .vm-drawer-l2-landscape-title-row__icon {
     width: 24px; height: 24px;
@@ -5132,7 +5133,10 @@ h1, h2, h3 {
    * (16:10) on image div for bulletproof dynamic sizing per
    * feedback_aspect_ratio_carousel_no_resolve. Drawer panel scrolls
    * vertically when card content (~260px tall) exceeds available L2 pane
-   * vertical. */
+   * vertical.
+   * VM-520 r4: flex-shrink: 0 on title row + cards container so the L2
+   * pane overflows the drawer panel intentionally and drawer panel
+   * scroll engages for CTA reach. */
   .vm-drawer-l2-cards {
     flex-direction: row;
     gap: 14px;
@@ -5144,6 +5148,7 @@ h1, h2, h3 {
     scrollbar-width: none;
     margin: 0 -18px;
     padding: 0 18px 6px;
+    flex-shrink: 0;
   }
   .vm-drawer-l2-cards::-webkit-scrollbar { display: none; }
 

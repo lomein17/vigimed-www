@@ -352,7 +352,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               paddingTop: 10,
               paddingRight: 18,
               paddingLeft: 18,
-              paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 64px))',
+              paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 16px))',
             }}
           >
             <div className="flex flex-col" style={{ gap: 10 }}>
@@ -454,7 +454,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               paddingTop: 10,
               paddingRight: 18,
               paddingLeft: 18,
-              paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 96px))',
+              paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 16px))',
             }}
           >
             <div className="vm-drawer-l2-portrait-header">
