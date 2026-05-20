@@ -2089,11 +2089,10 @@ h1, h2, h3 {
 }
 
 @media (max-width: 1023.98px) {
-  /* Mobile heading tightens (CSS only). */
-  .vm-section-2-heading {
-    font-size: 24px;
-    line-height: 1.22;
-    letter-spacing: -0.012em;
+  /* Inline whiteSpace: 'pre-line' on the framing <p> requires !important
+   * to be overridden from CSS. See Section2OperationalReality.tsx:118. */
+  .vm-section-2-framing {
+    white-space: normal !important;
   }
 
   /* Hide the legacy strip + 2-col grid on mobile only. Desktop preserved. */
@@ -2166,7 +2165,6 @@ h1, h2, h3 {
     margin: 0 calc(var(--site-gutter) * -1);
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    touch-action: pan-x;
   }
   .vm-section-2-uc-carousel::-webkit-scrollbar { display: none; }
   .vm-section-2-uc-card {
@@ -2239,9 +2237,6 @@ h1, h2, h3 {
 /* Landscape phone (short-viewport-guarded so iPad landscape >=1024 falls
  * back to portrait styling above). */
 @media (max-width: 1023.98px) and (orientation: landscape) and (max-height: 500px) {
-  .vm-section-2-heading {
-    font-size: 20px;
-  }
   /* Inline fontSize / lineHeight on the framing <p> require !important
    * to be overridden from CSS. See VM-514 comment block above. */
   .vm-section-2-framing {
@@ -2972,7 +2967,6 @@ h1, h2, h3 {
     margin: 0 calc(var(--site-gutter) * -1);
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    touch-action: pan-x;
   }
   .vm-section-3-mobile-carousel::-webkit-scrollbar { display: none; }
 
@@ -3789,12 +3783,6 @@ h1, h2, h3 {
  * and never silently clips, instead of a max-height ceiling. */
 @media (max-width: 1023.98px) {
   .vm-segment-section-4--variant-regulatory-document
-    .vm-section-4-header-heading {
-    font-size: 24px;
-    line-height: 1.22;
-    margin-bottom: 14px;
-  }
-  .vm-segment-section-4--variant-regulatory-document
     .vm-section-4-header-frame {
     font-size: 14.5px;
     line-height: 1.55;
@@ -3909,12 +3897,6 @@ h1, h2, h3 {
 
 @media (max-width: 1023.98px) and (orientation: landscape)
    and (max-height: 500px) {
-  .vm-segment-section-4--variant-regulatory-document
-    .vm-section-4-header-heading {
-    font-size: 20px;
-    line-height: 1.20;
-    margin-bottom: 10px;
-  }
   .vm-segment-section-4--variant-regulatory-document
     .vm-section-4-header-frame {
     font-size: 13px;
@@ -4535,7 +4517,6 @@ h1, h2, h3 {
     scrollbar-width: none;
     margin: 0 calc(var(--site-gutter) * -1) 14px;
     padding: 2px var(--site-gutter) 6px;
-    touch-action: pan-x;
   }
   .vm-faq-chipstrip::-webkit-scrollbar {
     display: none;
@@ -4587,7 +4568,6 @@ h1, h2, h3 {
     padding: 4px var(--site-gutter) 18px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    touch-action: pan-x;
   }
   .vm-faq-carousel::-webkit-scrollbar {
     display: none;

@@ -39,6 +39,11 @@ export function CapabilitiesAutoReveal({ children }: { children: ReactNode }) {
       return;
     }
 
+    if (window.matchMedia('(max-width: 1023.98px)').matches) {
+      hasPlayed = true;
+      return;
+    }
+
     const container = containerRef.current;
     if (container === null) return;
 
