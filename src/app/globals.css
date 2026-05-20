@@ -5141,6 +5141,11 @@ h1, h2, h3 {
     font-size: 17px;
     margin: 0 2px 8px;
   }
+  .vm-drawer-l2-card__image {
+    width: 320px;
+    height: 200px;
+    aspect-ratio: auto;
+  }
   .vm-drawer-l2-card__vp {
     left: 14px;
     right: 14px;
