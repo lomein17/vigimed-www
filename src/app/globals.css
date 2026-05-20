@@ -5010,7 +5010,7 @@ h1, h2, h3 {
 }
 .vm-drawer-l2-card__title {
   margin: 0 2px 8px;
-  font-family: var(--vm-font-display);
+  font-family: var(--font-display);
   font-size: 18px;
   font-weight: 500;
   line-height: 1.22;
@@ -5060,7 +5060,7 @@ h1, h2, h3 {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-family: var(--vm-font-ui);
+  font-family: var(--font-ui);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -5095,7 +5095,7 @@ h1, h2, h3 {
     flex-shrink: 0;
   }
   .vm-drawer-l2-landscape-title-row__domain {
-    font-family: var(--vm-font-ui);
+    font-family: var(--font-ui);
     font-size: 11px; font-weight: 600;
     letter-spacing: 0.10em;
     color: #2FBBF7;
@@ -5109,7 +5109,7 @@ h1, h2, h3 {
   .vm-drawer-l2-landscape-title-row__question {
     flex: 1 1 auto;
     min-width: 0;
-    font-family: var(--vm-font-body);
+    font-family: var(--font-body);
     font-style: italic;
     font-size: 12.5px; line-height: 1.32;
     color: rgba(255, 255, 255, 0.78);
@@ -5119,7 +5119,7 @@ h1, h2, h3 {
   }
   .vm-drawer-l2-landscape-title-row__counter {
     flex: 0 0 auto;
-    font-family: var(--vm-font-mono);
+    font-family: var(--font-mono);
     font-size: 11px; letter-spacing: 0.04em;
     color: rgba(255, 255, 255, 0.55);
     white-space: nowrap;
