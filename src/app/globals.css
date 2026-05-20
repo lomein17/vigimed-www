@@ -359,6 +359,54 @@ h1, h2, h3 {
 }
 
 /* =======================================================================
+ * VM-518: Capabilities mobile-landscape composition fork
+ * -----------------------------------------------------------------------
+ * Portrait phone stacks the five capability cards vertically (single
+ * column from base Tailwind `grid-cols-1`). Landscape phone rotates to a
+ * 5-up horizontal row to use the available width and avoid vertical
+ * scroll. Pulse-line svg (Tailwind `hidden lg:block`) is re-shown via a
+ * (0,2,1) selector that outranks `.hidden`. Inline H2 font-size and
+ * CapabilityCard icon/h3/reveal sizes require !important to beat their
+ * style attributes (precedent: §2 framing block at line 2240+).
+ * Desktop (>=1024px) is untouched.
+ * ======================================================================= */
+@media (max-width: 1023.98px) and (orientation: landscape) and (max-height: 500px) {
+  .vm-capabilities-section {
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+  .vm-capabilities-section header {
+    margin-bottom: 14px;
+  }
+  .vm-capabilities-section h2 {
+    font-size: 20px !important;
+    line-height: 1.18 !important;
+  }
+  .vm-capabilities-section .grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 10px !important;
+  }
+  .vm-capability-front {
+    gap: 6px;
+    padding: 14px 12px 16px;
+  }
+  .vm-capability-front svg:first-child {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .vm-capability-front h3 {
+    font-size: 14px !important;
+  }
+  .vm-capability-front__reveal-mobile {
+    font-size: 10.5px !important;
+    line-height: 1.42 !important;
+  }
+  .vm-capabilities-section > svg[viewBox] {
+    display: block;
+  }
+}
+
+/* =======================================================================
  * Problem-in-motion section (VM-359)
  * -----------------------------------------------------------------------
  * Navy full-bleed section with a 16:9 scene container and two
@@ -519,6 +567,56 @@ h1, h2, h3 {
 }
 
 /* =======================================================================
+ * VM-518: PIM mobile-landscape composition fork
+ * -----------------------------------------------------------------------
+ * Portrait phone keeps the centered single-column stack with the 16:9
+ * scene capped at 38svh. Landscape phone splits the inner into a
+ * two-column grid: eyebrow + headline + frame + caption on the left,
+ * scene on the right. The portrait scene caps (max-height: 38svh,
+ * max-width: calc(38svh * 16 / 9)) must be reset so column width
+ * derives the scene height via the base aspect-ratio: 16/9. The
+ * banner state machine, reduced-motion loop, and video timing are
+ * untouched; `.vm-pim-banner` is absolutely positioned within
+ * `.vm-pim-scene` and tracks the new dimensions automatically.
+ * Desktop (>=1024px) is untouched.
+ * ======================================================================= */
+@media (max-width: 1023.98px) and (orientation: landscape) and (max-height: 500px) {
+  .vm-pim-section {
+    padding: 18px 28px;
+  }
+  .vm-pim-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: center;
+    column-gap: 28px;
+    width: 100%;
+    max-width: 1280px;
+  }
+  .vm-pim-eyebrow,
+  .vm-pim-headline,
+  .vm-pim-frame,
+  .vm-pim-caption {
+    grid-column: 1;
+    text-align: left;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .vm-pim-scene {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    max-height: none;
+    max-width: none;
+    width: 100%;
+    margin: 0;
+  }
+  .vm-pim-eyebrow  { margin-bottom: 6px; }
+  .vm-pim-headline { font-size: 20px; line-height: 1.16; margin: 0 0 8px; }
+  .vm-pim-frame    { font-size: 13px; line-height: 1.45; margin: 0 0 10px; }
+  .vm-pim-caption  { font-size: 11px; line-height: 1.4; margin: 8px 0 0; }
+}
+
+/* =======================================================================
  * Moat section (VM-366)
  * -----------------------------------------------------------------------
  * Off-white Home-arc section at position 5 (after Problem-in-motion).
@@ -645,6 +743,42 @@ h1, h2, h3 {
 @media (min-width: 1024px) {
   .vm-moat-body {
     font-size: 17px;
+  }
+}
+
+/* =======================================================================
+ * VM-518: Moat mobile-landscape composition fork
+ * -----------------------------------------------------------------------
+ * Portrait phone stacks the two claim columns vertically with the H2
+ * carrying its unconditional <br/> between h2Line1 and h2Line2.
+ * Landscape phone collapses the <br/> so the headline reads as one
+ * sentence, sets the grid to two columns side-by-side, and tightens the
+ * claim heading and body sizes to fit the shorter viewport. The
+ * `.vm-moat-body` rule applies to the lg:hidden mobileBody node that
+ * renders below the lg breakpoint. Desktop (>=1024px) is untouched.
+ * ======================================================================= */
+@media (max-width: 1023.98px) and (orientation: landscape) and (max-height: 500px) {
+  .vm-moat-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .vm-moat-h2 {
+    font-size: 22px;
+  }
+  .vm-moat-h2 br {
+    display: none;
+  }
+  .vm-moat-header {
+    margin-bottom: 16px;
+  }
+  .vm-moat-claim-heading {
+    font-size: 17px;
+    line-height: 1.22;
+    margin-bottom: 8px;
+  }
+  .vm-moat-body {
+    font-size: 13px;
+    line-height: 1.48;
   }
 }
 
@@ -1333,6 +1467,60 @@ h1, h2, h3 {
 @media (max-width: 1023px) {
   .vm-hero-video {
     object-position: 75% center;
+  }
+}
+
+/* =======================================================================
+ * VM-518: Mobile-landscape Hero composition fork
+ * -----------------------------------------------------------------------
+ * Portrait phone keeps the bottom-anchored full-width content strip with
+ * a vertical veil. Landscape phone (max-width: 1023.98px, orientation:
+ * landscape, max-height: 500px) rotates the composition: a horizontal
+ * dark-left veil clears the right two-thirds of the frame so the hero
+ * video subject reads, and the content stack sits left-anchored along
+ * the bottom strip at ~64% width with tighter typography that keeps the
+ * CTA inside the section bottom edge. Desktop (>=1024px) is untouched.
+ * The base portrait rules below replace inline styles previously held in
+ * HeroMedia.tsx so the landscape sub-block can override via class
+ * selectors without inline-style specificity wins.
+ * ======================================================================= */
+.vm-hero-veil-mobile {
+  background: linear-gradient(180deg,
+    rgba(10,22,40,0)    0%,
+    rgba(10,22,40,0)    28%,
+    rgba(10,22,40,0.35) 60%,
+    rgba(10,22,40,0.88) 100%);
+}
+
+.vm-hero-content-mobile {
+  top: 62%;
+}
+
+@media (max-width: 1023.98px) and (orientation: landscape) and (max-height: 500px) {
+  .vm-hero-veil-mobile {
+    background: linear-gradient(90deg,
+      rgba(10,22,40,0.82) 0%,
+      rgba(10,22,40,0.62) 30%,
+      rgba(10,22,40,0.10) 70%,
+      rgba(10,22,40,0)    100%);
+  }
+  .vm-hero-content-mobile {
+    top: auto;
+    inset-inline: auto;
+    left: 0;
+    right: auto;
+    bottom: 0;
+    width: 64%;
+    padding: 0 22px 22px 56px;
+    gap: 10px;
+  }
+  .vm-hero-content-mobile h1 {
+    font-size: 22px !important;
+    line-height: 1.18 !important;
+  }
+  .vm-hero-content-mobile p {
+    font-size: 14px !important;
+    line-height: 1.42 !important;
   }
 }
 

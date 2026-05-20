@@ -114,11 +114,7 @@ export function HeroMedia({
 
       <div
         aria-hidden="true"
-        className="lg:hidden absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(180deg, rgba(10,22,40,0) 0%, rgba(10,22,40,0) 28%, rgba(10,22,40,0.35) 60%, rgba(10,22,40,0.88) 100%)',
-        }}
+        className="vm-hero-veil-mobile lg:hidden absolute inset-0"
       />
 
       <button
@@ -151,10 +147,7 @@ export function HeroMedia({
         </svg>
       </button>
 
-      <div
-        className="lg:hidden absolute inset-x-0 bottom-0 z-10 flex flex-col items-start gap-3 px-6 pb-7"
-        style={{ top: '62%' }}
-      >
+      <div className="vm-hero-content-mobile lg:hidden absolute inset-x-0 bottom-0 z-10 flex flex-col items-start gap-3 px-6 pb-7">
         <h1
           id="hero-headline-mobile"
           style={{
