@@ -316,7 +316,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               paddingTop: 18,
               paddingRight: 18,
               paddingLeft: 18,
-              paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 24px)',
+              paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 64px))',
             }}
           >
             <div className="flex flex-col" style={{ gap: 10 }}>
@@ -418,7 +418,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               paddingTop: 18,
               paddingRight: 18,
               paddingLeft: 18,
-              paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 24px)',
+              paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 64px))',
             }}
           >
             <button

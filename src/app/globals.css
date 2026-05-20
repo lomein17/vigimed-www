@@ -5054,7 +5054,7 @@ h1, h2, h3 {
 .vm-drawer-l2-card__cta-row {
   display: flex;
   justify-content: flex-end;
-  padding: 10px 2px 0;
+  padding: 10px 2px 8px;
 }
 .vm-drawer-l2-card__cta {
   display: inline-flex;
@@ -5134,7 +5134,10 @@ h1, h2, h3 {
   /* Card landscape overrides */
   .vm-drawer-l2-card {
     flex: 0 0 auto;
-    width: 320px;
+    /* Peek formula: fit ~2 full cards plus a ~40px peek of card 3.
+       Sheet has 18px outer padding on each side; gap is 14px. */
+    width: min(320px, calc((100vw - 18px * 2 - 14px * 2 - 40px) / 2));
+    min-width: 260px;
     scroll-snap-align: start;
   }
   .vm-drawer-l2-card__title {
@@ -5142,8 +5145,8 @@ h1, h2, h3 {
     margin: 0 2px 8px;
   }
   .vm-drawer-l2-card__image {
-    width: 320px;
-    height: 200px;
+    width: 100%;
+    height: 180px;
     aspect-ratio: auto;
   }
   .vm-drawer-l2-card__vp {
