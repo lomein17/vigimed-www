@@ -156,9 +156,6 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
   const [lastPath, setLastPath] = useState(pathname);
   const sheetId = useId();
   const triggerRef = useRef<HTMLButtonElement | null>(null);
-  const cardsRef = useRef<HTMLDivElement | null>(null);
-  const [activeMobile, setActiveMobile] = useState(0);
-  const [prevParentKey, setPrevParentKey] = useState(activeParentKey);
 
   const isOpen = pane !== 'closed';
 
@@ -170,11 +167,6 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
     if (activeParentKey !== null) {
       setActiveParentKey(null);
     }
-  }
-
-  if (prevParentKey !== activeParentKey) {
-    setPrevParentKey(activeParentKey);
-    setActiveMobile(0);
   }
 
   // VM-494 A.3 (preserved): hand the shell a closer so a scroll-down
@@ -210,38 +202,6 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
     };
   }, [pane]);
 
-  // VM-519 A.5: IO-driven N / total counter for landscape carousel.
-  // Pattern parity with sections 5.14, 5.15, 5.16, 5.18. Gated by
-  // matchMedia so portrait never wires the observer up.
-  useEffect(() => {
-    if (!isOpen || pane !== 'L2') return;
-    if (typeof window === 'undefined') return;
-    const mq = window.matchMedia(
-      '(max-width: 1023.98px) and (orientation: landscape) and (max-height: 500px)',
-    );
-    if (!mq.matches) return;
-
-    const root = cardsRef.current;
-    if (!root) return;
-    const cards = Array.from(root.querySelectorAll('.vm-drawer-l2-card'));
-    if (cards.length === 0) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length === 0) return;
-        const top = visible.reduce((a, b) =>
-          b.intersectionRatio > a.intersectionRatio ? b : a,
-        );
-        const idx = cards.indexOf(top.target as Element);
-        if (idx >= 0) setActiveMobile(idx);
-      },
-      { root, threshold: [0.55, 0.7, 0.85] },
-    );
-    cards.forEach((c) => io.observe(c));
-    return () => io.disconnect();
-  }, [isOpen, pane, activeParentKey]);
-
   const visibleParents = navOrder.flatMap((key) => {
     const parent = header.nav[key];
     return parent ? [{ key, parent }] : [];
@@ -249,9 +209,6 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
 
   const activeParent = activeParentKey ? header.nav[activeParentKey] : undefined;
   const backLabel = locale === 'mx-es' ? 'VOLVER' : 'BACK';
-  const totalCards = activeParent
-    ? activeParent.subsegments.filter((s) => s.image).length
-    : 0;
 
   return (
     <div
@@ -354,7 +311,13 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
         {pane === 'L1' && (
           <div
             className="flex flex-col"
-            style={{ minHeight: '100%', padding: 18 }}
+            style={{
+              minHeight: '100%',
+              paddingTop: 18,
+              paddingRight: 18,
+              paddingLeft: 18,
+              paddingBottom: 'calc(80px + env(safe-area-inset-bottom, 0px))',
+            }}
           >
             <div className="flex flex-col" style={{ gap: 10 }}>
               {visibleParents.map(({ key, parent }) => (
@@ -455,7 +418,7 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               paddingTop: 18,
               paddingRight: 18,
               paddingLeft: 18,
-              paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))',
+              paddingBottom: 'calc(80px + env(safe-area-inset-bottom, 0px))',
             }}
           >
             <button
@@ -548,12 +511,9 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               <span className="vm-drawer-l2-landscape-title-row__question">
                 {activeParent.drawerQuestion}
               </span>
-              <span className="vm-drawer-l2-landscape-title-row__counter">
-                <b>{activeMobile + 1}</b> / {totalCards}
-              </span>
             </div>
 
-            <div className="vm-drawer-l2-cards" ref={cardsRef}>
+            <div className="vm-drawer-l2-cards">
               {activeParent.subsegments.map((sub) => {
                 if (!sub.image) return null;
                 return (

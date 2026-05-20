@@ -5117,25 +5117,11 @@ h1, h2, h3 {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .vm-drawer-l2-landscape-title-row__counter {
-    flex: 0 0 auto;
-    font-family: var(--font-mono);
-    font-size: 11px; letter-spacing: 0.04em;
-    color: rgba(255, 255, 255, 0.55);
-    white-space: nowrap;
-  }
-  .vm-drawer-l2-landscape-title-row__counter b {
-    color: #fff; font-weight: 600;
-  }
-
   /* Carousel: vertical stack flips to horizontal scroller */
   .vm-drawer-l2-cards {
-    flex: 1 1 auto;
-    min-height: 0;
     flex-direction: row;
     gap: 14px;
     overflow-x: auto;
-    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
     scroll-padding-left: 18px;
@@ -5149,17 +5135,11 @@ h1, h2, h3 {
   .vm-drawer-l2-card {
     flex: 0 0 auto;
     width: 320px;
-    height: 100%;
     scroll-snap-align: start;
   }
   .vm-drawer-l2-card__title {
     font-size: 17px;
     margin: 0 2px 8px;
-  }
-  .vm-drawer-l2-card__image {
-    aspect-ratio: auto;
-    flex: 1 1 auto;
-    min-height: 0;
   }
   .vm-drawer-l2-card__vp {
     left: 14px;
