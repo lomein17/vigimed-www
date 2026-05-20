@@ -156,6 +156,9 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
   const [lastPath, setLastPath] = useState(pathname);
   const sheetId = useId();
   const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const cardsRef = useRef<HTMLDivElement | null>(null);
+  const [activeMobile, setActiveMobile] = useState(0);
+  const [prevParentKey, setPrevParentKey] = useState(activeParentKey);
 
   const isOpen = pane !== 'closed';
 
@@ -169,11 +172,10 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
     }
   }
 
-  const closeSheet = useCallback(() => {
-    setPane('closed');
-    setActiveParentKey(null);
-    requestAnimationFrame(() => triggerRef.current?.focus());
-  }, []);
+  if (prevParentKey !== activeParentKey) {
+    setPrevParentKey(activeParentKey);
+    setActiveMobile(0);
+  }
 
   // VM-494 A.3 (preserved): hand the shell a closer so a scroll-down
   // hide while the drawer is open closes the drawer first; the hide
@@ -186,22 +188,6 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
       return true;
     }, [pane]),
   );
-
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return;
-      event.preventDefault();
-      if (pane === 'L2') {
-        setPane('L1');
-        setActiveParentKey(null);
-        return;
-      }
-      closeSheet();
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [isOpen, pane, closeSheet]);
 
   // VM-495 R1: lock body scroll while drawer is open. The VM-494
   // Headroom listener registered via useRegisterDrawerCloser fires on
@@ -224,6 +210,38 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
     };
   }, [pane]);
 
+  // VM-519 A.5: IO-driven N / total counter for landscape carousel.
+  // Pattern parity with sections 5.14, 5.15, 5.16, 5.18. Gated by
+  // matchMedia so portrait never wires the observer up.
+  useEffect(() => {
+    if (!isOpen || pane !== 'L2') return;
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia(
+      '(max-width: 1023.98px) and (orientation: landscape) and (max-height: 500px)',
+    );
+    if (!mq.matches) return;
+
+    const root = cardsRef.current;
+    if (!root) return;
+    const cards = Array.from(root.querySelectorAll('.vm-drawer-l2-card'));
+    if (cards.length === 0) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length === 0) return;
+        const top = visible.reduce((a, b) =>
+          b.intersectionRatio > a.intersectionRatio ? b : a,
+        );
+        const idx = cards.indexOf(top.target as Element);
+        if (idx >= 0) setActiveMobile(idx);
+      },
+      { root, threshold: [0.55, 0.7, 0.85] },
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, [isOpen, pane, activeParentKey]);
+
   const visibleParents = navOrder.flatMap((key) => {
     const parent = header.nav[key];
     return parent ? [{ key, parent }] : [];
@@ -231,6 +249,9 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
 
   const activeParent = activeParentKey ? header.nav[activeParentKey] : undefined;
   const backLabel = locale === 'mx-es' ? 'VOLVER' : 'BACK';
+  const totalCards = activeParent
+    ? activeParent.subsegments.filter((s) => s.image).length
+    : 0;
 
   return (
     <div
@@ -462,50 +483,71 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               </span>
             </button>
 
-            <div
-              className="flex items-center"
-              style={{ gap: 12, marginBottom: 14 }}
-            >
-              <span
-                className="inline-flex items-center justify-center bg-[rgba(32,162,226,0.10)]"
+            <div className="vm-drawer-l2-portrait-header">
+              <div
+                className="flex items-center"
+                style={{ gap: 12, marginBottom: 14 }}
+              >
+                <span
+                  className="inline-flex items-center justify-center bg-[rgba(32,162,226,0.10)]"
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: 8,
+                    flexShrink: 0,
+                  }}
+                >
+                  <ParentIcon parentKey={activeParentKey} size={22} />
+                </span>
+                <h2
+                  className="font-display text-text-on-dark"
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 500,
+                    letterSpacing: '-0.01em',
+                    margin: 0,
+                  }}
+                >
+                  {activeParent.drawerName}
+                </h2>
+              </div>
+
+              <p
+                className="font-ui"
                 style={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: 8,
-                  flexShrink: 0,
+                  whiteSpace: 'pre-line',
+                  fontStyle: 'italic',
+                  fontSize: 16,
+                  fontWeight: 400,
+                  color: 'rgba(255,255,255,0.72)',
+                  marginTop: 0,
+                  marginBottom: 16,
                 }}
               >
-                <ParentIcon parentKey={activeParentKey} size={22} />
-              </span>
-              <h2
-                className="font-display text-text-on-dark"
-                style={{
-                  fontSize: 22,
-                  fontWeight: 500,
-                  letterSpacing: '-0.01em',
-                  margin: 0,
-                }}
-              >
-                {activeParent.drawerName}
-              </h2>
+                {activeParent.drawerQuestion}
+              </p>
             </div>
 
-            <p
-              className="font-ui"
-              style={{
-                whiteSpace: 'pre-line',
-                fontStyle: 'italic',
-                fontSize: 16,
-                fontWeight: 400,
-                color: 'rgba(255,255,255,0.72)',
-                marginTop: 0,
-                marginBottom: 16,
-              }}
-            >
-              {activeParent.drawerQuestion}
-            </p>
+            <div className="vm-drawer-l2-landscape-title-row">
+              <span className="vm-drawer-l2-landscape-title-row__icon">
+                <ParentIcon parentKey={activeParentKey} size={16} />
+              </span>
+              <span className="vm-drawer-l2-landscape-title-row__domain">
+                {activeParent.drawerName.toUpperCase()}
+              </span>
+              <span
+                className="vm-drawer-l2-landscape-title-row__sep"
+                aria-hidden="true"
+              />
+              <span className="vm-drawer-l2-landscape-title-row__question">
+                {activeParent.drawerQuestion}
+              </span>
+              <span className="vm-drawer-l2-landscape-title-row__counter">
+                <b>{activeMobile + 1}</b> / {totalCards}
+              </span>
+            </div>
 
-            <div className="flex flex-col" style={{ gap: 16 }}>
+            <div className="vm-drawer-l2-cards" ref={cardsRef}>
               {activeParent.subsegments.map((sub) => {
                 if (!sub.image) return null;
                 return (
@@ -516,76 +558,27 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
                       setPane('closed');
                       setActiveParentKey(null);
                     }}
-                    className="group block bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.10)] hover:bg-[rgba(32,162,226,0.06)] hover:border-[rgba(32,162,226,0.30)] focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
-                    style={{
-                      borderRadius: 10,
-                      overflow: 'hidden',
-                      textDecoration: 'none',
-                      transition: 'background-color 150ms ease-out, border-color 150ms ease-out',
-                    }}
+                    className="vm-drawer-l2-card group"
                   >
-                    <Image
-                      src={sub.image.src}
-                      alt={sub.image.alt}
-                      width={400}
-                      height={250}
-                      sizes="(max-width: 430px) 100vw, 400px"
-                      style={{
-                        width: '100%',
-                        height: 'auto',
-                        aspectRatio: '16 / 10',
-                        objectFit: 'cover',
-                        display: 'block',
-                      }}
-                    />
-                    <div
-                      className="flex flex-col"
-                      style={{
-                        padding: '16px 16px 14px',
-                        gap: 8,
-                      }}
-                    >
-                      <h3
-                        className="font-display text-text-on-dark"
-                        style={{
-                          fontSize: 18,
-                          fontWeight: 500,
-                          letterSpacing: '-0.005em',
-                          margin: 0,
-                        }}
-                      >
-                        {sub.name}
-                      </h3>
+                    <h3 className="vm-drawer-l2-card__title">{sub.name}</h3>
+                    <div className="vm-drawer-l2-card__image">
+                      <Image
+                        src={sub.image.src}
+                        alt={sub.image.alt}
+                        fill
+                        sizes="(max-width: 430px) 100vw, (max-width: 1023px) 360px, 400px"
+                        style={{ objectFit: 'cover' }}
+                      />
                       {sub.valueProp ? (
-                        <p
-                          className="font-ui"
-                          style={{
-                            whiteSpace: 'pre-line',
-                            fontSize: 15,
-                            fontWeight: 400,
-                            lineHeight: 1.5,
-                            color: 'rgba(255,255,255,0.72)',
-                            margin: 0,
-                          }}
-                        >
-                          {sub.valueProp}
-                        </p>
+                        <p className="vm-drawer-l2-card__vp">{sub.valueProp}</p>
                       ) : null}
-                      <span
-                        className="font-ui inline-flex items-center"
-                        style={{
-                          alignSelf: 'flex-end',
-                          gap: 6,
-                          fontSize: 13,
-                          fontWeight: 500,
-                          color: '#2FBBF7',
-                        }}
-                      >
+                    </div>
+                    <div className="vm-drawer-l2-card__cta-row">
+                      <span className="vm-drawer-l2-card__cta">
                         {header.cardCta}
                         <span
                           aria-hidden="true"
-                          className="inline-flex items-center group-hover:translate-x-[2px]"
-                          style={{ transition: 'transform 150ms ease-out' }}
+                          className="vm-drawer-l2-card__cta-chev"
                         >
                           <ChevronRightSmall />
                         </span>

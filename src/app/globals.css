@@ -4984,3 +4984,188 @@ h1, h2, h3 {
     margin: 4px 0 14px;
   }
 }
+
+/* =======================================================================
+ * VM-519: Mobile drawer L2 cards
+ *
+ * Card structure for HeaderMobile.tsx L2 pane. Default (portrait) rules
+ * sit at the same specificity as the landscape @media override; source
+ * order wins, no !important. The cards-container class replaces an
+ * inline-style + Tailwind-class div so the landscape gate can flip
+ * flex-direction and gap cleanly. Pattern parity with sections 5.14,
+ * 5.15, 5.16, 5.18 for the IO counter.
+ * ======================================================================= */
+
+.vm-drawer-l2-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.vm-drawer-l2-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.vm-drawer-l2-card__title {
+  margin: 0 2px 8px;
+  font-family: var(--vm-font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: -0.006em;
+  color: var(--color-text-on-dark);
+  text-align: left;
+}
+.vm-drawer-l2-card__image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.vm-drawer-l2-card__image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 22, 40, 0.92) 0%,
+    rgba(10, 22, 40, 0.78) 18%,
+    rgba(10, 22, 40, 0.45) 32%,
+    rgba(10, 22, 40, 0.08) 50%,
+    rgba(10, 22, 40, 0)    100%
+  );
+  pointer-events: none;
+}
+.vm-drawer-l2-card__vp {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+  z-index: 2;
+}
+.vm-drawer-l2-card__cta-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 2px 0;
+}
+.vm-drawer-l2-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--vm-font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #2FBBF7;
+}
+.vm-drawer-l2-card__cta-chev {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 150ms ease-out;
+}
+.vm-drawer-l2-card:hover .vm-drawer-l2-card__cta-chev,
+.vm-drawer-l2-card:focus-visible .vm-drawer-l2-card__cta-chev {
+  transform: translateX(2px);
+}
+
+.vm-drawer-l2-landscape-title-row { display: none; }
+
+@media (max-width: 1023.98px) and (orientation: landscape) and (max-height: 500px) {
+  .vm-drawer-l2-portrait-header { display: none; }
+
+  .vm-drawer-l2-landscape-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0 8px;
+  }
+  .vm-drawer-l2-landscape-title-row__icon {
+    width: 24px; height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(32, 162, 226, 0.10);
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .vm-drawer-l2-landscape-title-row__domain {
+    font-family: var(--vm-font-ui);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.10em;
+    color: #2FBBF7;
+    flex-shrink: 0;
+  }
+  .vm-drawer-l2-landscape-title-row__sep {
+    width: 1px; height: 14px;
+    background: rgba(255, 255, 255, 0.16);
+    flex-shrink: 0;
+  }
+  .vm-drawer-l2-landscape-title-row__question {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: var(--vm-font-body);
+    font-style: italic;
+    font-size: 12.5px; line-height: 1.32;
+    color: rgba(255, 255, 255, 0.78);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .vm-drawer-l2-landscape-title-row__counter {
+    flex: 0 0 auto;
+    font-family: var(--vm-font-mono);
+    font-size: 11px; letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.55);
+    white-space: nowrap;
+  }
+  .vm-drawer-l2-landscape-title-row__counter b {
+    color: #fff; font-weight: 600;
+  }
+
+  /* Carousel: vertical stack flips to horizontal scroller */
+  .vm-drawer-l2-cards {
+    flex-direction: row;
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+    scroll-padding-left: 18px;
+    scrollbar-width: none;
+    margin: 0 -18px;
+    padding: 0 18px 6px;
+  }
+  .vm-drawer-l2-cards::-webkit-scrollbar { display: none; }
+
+  /* Card landscape overrides */
+  .vm-drawer-l2-card {
+    flex: 0 0 auto;
+    width: 320px;
+    height: 100%;
+    scroll-snap-align: start;
+  }
+  .vm-drawer-l2-card__title {
+    font-size: 17px;
+    margin: 0 2px 8px;
+  }
+  .vm-drawer-l2-card__image {
+    aspect-ratio: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .vm-drawer-l2-card__vp {
+    left: 14px;
+    right: 14px;
+    bottom: 12px;
+    font-size: 12.5px;
+    line-height: 1.42;
+  }
+  .vm-drawer-l2-card__cta-row { padding: 8px 2px 0; }
+  .vm-drawer-l2-card__cta { font-size: 12px; font-weight: 600; }
+}
