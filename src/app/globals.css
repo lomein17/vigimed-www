@@ -567,53 +567,53 @@ h1, h2, h3 {
 }
 
 /* =======================================================================
- * VM-518: PIM mobile-landscape composition fork
+ * VM-518 r1: PIM mobile-landscape composition fork (revised)
  * -----------------------------------------------------------------------
- * Portrait phone keeps the centered single-column stack with the 16:9
- * scene capped at 38svh. Landscape phone splits the inner into a
- * two-column grid: eyebrow + headline + frame + caption on the left,
- * scene on the right. The portrait scene caps (max-height: 38svh,
- * max-width: calc(38svh * 16 / 9)) must be reset so column width
- * derives the scene height via the base aspect-ratio: 16/9. The
- * banner state machine, reduced-motion loop, and video timing are
- * untouched; `.vm-pim-banner` is absolutely positioned within
- * `.vm-pim-scene` and tracks the new dimensions automatically.
- * Desktop (>=1024px) is untouched.
+ * Revised after UAT: the prior 2-column grid composition fought the
+ * scene's 16/9 intrinsic height through grid row-distribution, spreading
+ * the copy stack across the section. Replaced with a vertical layout
+ * that keeps the portrait reading order; the scene grows from the
+ * portrait 265px postcard cap to a 480px cap (~1.8x wider, ~3.3x area)
+ * while the copy compresses just enough to fit the 393px section height
+ * with section padding 14 / 18. Horizontal padding intentionally falls
+ * back to var(--site-gutter) (16px below lg). The banner state machine,
+ * reduced-motion loop, and video timing are untouched; .vm-pim-banner
+ * is absolutely positioned within .vm-pim-scene and tracks the new
+ * dimensions automatically. Desktop (>=1024px) is untouched.
  * ======================================================================= */
 @media (max-width: 1023.98px) and (orientation: landscape) and (max-height: 500px) {
   .vm-pim-section {
-    padding: 18px 28px;
+    padding-top: 14px;
+    padding-bottom: 18px;
   }
-  .vm-pim-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-    align-items: center;
-    column-gap: 28px;
-    width: 100%;
-    max-width: 1280px;
+  .vm-pim-eyebrow {
+    margin-bottom: 5px;
   }
-  .vm-pim-eyebrow,
-  .vm-pim-headline,
-  .vm-pim-frame,
-  .vm-pim-caption {
-    grid-column: 1;
-    text-align: left;
-    max-width: none;
-    margin-left: 0;
-    margin-right: 0;
+  .vm-pim-headline {
+    font-size: 16px;
+    line-height: 1.18;
+    margin: 0 auto 5px;
+    max-width: 720px;
+  }
+  .vm-pim-frame {
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0 auto 8px;
+    max-width: 720px;
   }
   .vm-pim-scene {
-    grid-column: 2;
-    grid-row: 1 / -1;
+    /* Override the portrait 38svh cap; let the scene grow to its own
+     * 480px width with native 16:9 aspect-ratio. */
     max-height: none;
-    max-width: none;
+    max-width: 480px;
     width: 100%;
-    margin: 0;
+    margin: 0 auto;
   }
-  .vm-pim-eyebrow  { margin-bottom: 6px; }
-  .vm-pim-headline { font-size: 20px; line-height: 1.16; margin: 0 0 8px; }
-  .vm-pim-frame    { font-size: 13px; line-height: 1.45; margin: 0 0 10px; }
-  .vm-pim-caption  { font-size: 11px; line-height: 1.4; margin: 8px 0 0; }
+  .vm-pim-caption {
+    font-size: 10px;
+    line-height: 1.4;
+    margin: 6px auto 0;
+  }
 }
 
 /* =======================================================================
