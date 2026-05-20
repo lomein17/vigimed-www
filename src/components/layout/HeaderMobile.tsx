@@ -450,7 +450,13 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
         {pane === 'L2' && activeParent && activeParentKey && (
           <div
             className="flex flex-col"
-            style={{ minHeight: '100%', padding: 18 }}
+            style={{
+              minHeight: '100%',
+              paddingTop: 18,
+              paddingRight: 18,
+              paddingLeft: 18,
+              paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))',
+            }}
           >
             <button
               type="button"
