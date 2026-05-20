@@ -221,39 +221,75 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
         minHeight: `calc(${HEADER_HEIGHT_PX}px + env(safe-area-inset-top, 0px))`,
       }}
     >
-      <Link
-        href={hrefFor(locale, 'home')}
-        className="flex items-center focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
-        aria-label="VigiMed"
-      >
-        <Image
-          src="/brand/vigimed-wordmark-on-dark.png"
-          alt="VigiMed"
-          width={400}
-          height={132}
-          priority
-          className="w-[120px] h-auto"
-        />
-      </Link>
+      {pane === 'closed' ? (
+        <Link
+          href={hrefFor(locale, 'home')}
+          className="flex items-center focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
+          aria-label="VigiMed"
+        >
+          <Image
+            src="/brand/vigimed-wordmark-on-dark.png"
+            alt="VigiMed"
+            width={400}
+            height={132}
+            priority
+            className="w-[120px] h-auto"
+          />
+        </Link>
+      ) : pane === 'L2' ? (
+        <button
+          type="button"
+          onClick={() => {
+            setActiveParentKey(null);
+            setPane('L1');
+          }}
+          className="inline-flex items-center cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
+          style={{
+            gap: 6,
+            padding: '6px 4px',
+            background: 'transparent',
+            border: 0,
+            minHeight: 44,
+          }}
+          aria-label={backLabel}
+        >
+          <ChevronLeftSmall />
+          <span
+            className="font-ui"
+            style={{
+              fontSize: 12,
+              fontWeight: 500,
+              letterSpacing: '0.08em',
+              color: '#2FBBF7',
+            }}
+          >
+            {backLabel}
+          </span>
+        </button>
+      ) : (
+        <span aria-hidden="true" />
+      )}
 
       <div className="flex items-center" style={{ gap: 12 }}>
-        {/* VM-456 D-S56-1: header CTA always routes to the Home Final
-            CTA on the active locale. The pathname change closes the
-            drawer via the usePathname() effect above. */}
-        <Link
-          href={`/${locale}#final-cta`}
-          className="font-ui text-text-on-dark cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
-          style={{
-            fontSize: 12,
-            fontWeight: 500,
-            background: '#20A2E2',
-            border: 0,
-            padding: '8px 14px',
-            borderRadius: 6,
-          }}
-        >
-          {header.cta.demoMobile}
-        </Link>
+        {pane === 'closed' && (
+          // VM-456 D-S56-1: header CTA always routes to the Home Final
+          // CTA on the active locale. The pathname change closes the
+          // drawer via the usePathname() effect above.
+          <Link
+            href={`/${locale}#final-cta`}
+            className="font-ui text-text-on-dark cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
+            style={{
+              fontSize: 12,
+              fontWeight: 500,
+              background: '#20A2E2',
+              border: 0,
+              padding: '8px 14px',
+              borderRadius: 6,
+            }}
+          >
+            {header.cta.demoMobile}
+          </Link>
+        )}
         <button
           ref={triggerRef}
           type="button"
@@ -421,37 +457,6 @@ export function HeaderMobile({ locale, header, navOrder, secondaryNav }: HeaderM
               paddingBottom: 'max(40px, calc(env(safe-area-inset-bottom, 0px) + max(0px, 100lvh - 100svh) + 96px))',
             }}
           >
-            <button
-              type="button"
-              onClick={() => {
-                setActiveParentKey(null);
-                setPane('L1');
-              }}
-              className="inline-flex items-center cursor-pointer focus:outline-none focus-visible:[outline:2px_solid_#20A2E2] focus-visible:outline-offset-2"
-              style={{
-                gap: 6,
-                padding: '6px 4px 16px',
-                background: 'transparent',
-                border: 0,
-                minHeight: 44,
-                alignSelf: 'flex-start',
-              }}
-              aria-label={backLabel}
-            >
-              <ChevronLeftSmall />
-              <span
-                className="font-ui"
-                style={{
-                  fontSize: 12,
-                  fontWeight: 500,
-                  letterSpacing: '0.08em',
-                  color: '#2FBBF7',
-                }}
-              >
-                {backLabel}
-              </span>
-            </button>
-
             <div className="vm-drawer-l2-portrait-header">
               <div
                 className="flex items-center"
