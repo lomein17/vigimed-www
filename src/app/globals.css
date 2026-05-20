@@ -5121,6 +5121,7 @@ h1, h2, h3 {
      visible at a time with peek of next. Scroll-snap mandatory. */
   .vm-drawer-l2-cards {
     flex-direction: row;
+    align-items: flex-start;
     gap: 14px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -5138,5 +5139,13 @@ h1, h2, h3 {
     flex: 0 0 auto;
     width: 340px;
     scroll-snap-align: start;
+  }
+  /* Explicit dimensions: aspect-ratio alone fails to resolve a height
+     in this flex/overflow scroller context because the div has no
+     non-absolute children. 213px = 16/10 of 340px card width. */
+  .vm-drawer-l2-card__image {
+    width: 100%;
+    height: 213px;
+    aspect-ratio: auto;
   }
 }
