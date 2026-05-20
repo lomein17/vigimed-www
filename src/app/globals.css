@@ -5054,7 +5054,7 @@ h1, h2, h3 {
 .vm-drawer-l2-card__cta-row {
   display: flex;
   justify-content: flex-end;
-  padding: 10px 2px 8px;
+  padding: 10px 2px 0;
 }
 .vm-drawer-l2-card__cta {
   display: inline-flex;
@@ -5117,11 +5117,9 @@ h1, h2, h3 {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  /* Carousel: portrait-equivalent cards laid out horizontally, one
-     visible at a time with peek of next. Scroll-snap mandatory. */
+  /* Carousel: vertical stack flips to horizontal scroller */
   .vm-drawer-l2-cards {
     flex-direction: row;
-    align-items: flex-start;
     gap: 14px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -5133,19 +5131,28 @@ h1, h2, h3 {
   }
   .vm-drawer-l2-cards::-webkit-scrollbar { display: none; }
 
-  /* Fixed-width cards matching portrait card width. Image, title,
-     vp overlay, and CTA inherit portrait values from the base rules. */
+  /* Card landscape overrides */
   .vm-drawer-l2-card {
     flex: 0 0 auto;
-    width: 340px;
+    width: 320px;
     scroll-snap-align: start;
   }
-  /* Explicit dimensions: aspect-ratio alone fails to resolve a height
-     in this flex/overflow scroller context because the div has no
-     non-absolute children. 213px = 16/10 of 340px card width. */
+  .vm-drawer-l2-card__title {
+    font-size: 17px;
+    margin: 0 2px 8px;
+  }
   .vm-drawer-l2-card__image {
-    width: 100%;
-    height: 213px;
+    width: 320px;
+    height: 200px;
     aspect-ratio: auto;
   }
+  .vm-drawer-l2-card__vp {
+    left: 14px;
+    right: 14px;
+    bottom: 12px;
+    font-size: 12.5px;
+    line-height: 1.42;
+  }
+  .vm-drawer-l2-card__cta-row { padding: 8px 2px 0; }
+  .vm-drawer-l2-card__cta { font-size: 12px; font-weight: 600; }
 }
